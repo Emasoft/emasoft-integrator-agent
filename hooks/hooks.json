@@ -1,0 +1,32 @@
+{
+  "description": "Integrator Agent hooks - branch protection, quality gates, issue closure enforcement",
+  "_note": "Hook data is passed via stdin as JSON. Scripts read from stdin, not env vars.",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "_id": "int-branch-protection",
+        "_description": "Blocks direct push to main/master branches",
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ${CLAUDE_PLUGIN_ROOT}/scripts/int_pre_push_hook.py",
+            "timeout": 30
+          }
+        ]
+      },
+      {
+        "_id": "int-issue-closure-gate",
+        "_description": "Blocks premature issue closure - requires merged PR, checkboxes, evidence, TDD",
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ${CLAUDE_PLUGIN_ROOT}/scripts/int_pre_issue_close_hook.py",
+            "timeout": 60
+          }
+        ]
+      }
+    ]
+  }
+}

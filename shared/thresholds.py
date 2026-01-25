@@ -1,0 +1,33 @@
+"""
+thresholds.py - Shared constants for Integrator Agent.
+
+These thresholds configure behavior for quality gates,
+testing, and integration workflows.
+"""
+
+# Code review thresholds
+MAX_PR_SIZE_LINES = 500
+MAX_FILES_PER_PR = 20
+REVIEW_TIMEOUT_SECONDS = 300
+
+# Quality gate configuration
+MIN_TEST_COVERAGE_PERCENT = 80
+MAX_LINTER_WARNINGS = 0
+MAX_TYPE_ERRORS = 0
+
+# Branch protection
+PROTECTED_BRANCHES = frozenset(["main", "master", "release/*"])
+
+# Issue closure requirements
+REQUIRE_MERGED_PR = True
+REQUIRE_ALL_CHECKBOXES = True
+REQUIRE_TEST_EVIDENCE = True
+REQUIRE_TDD_COMPLIANCE = True
+
+# GitHub integration
+GH_API_TIMEOUT_SECONDS = 30
+GH_MAX_RETRIES = 3
+
+# CI/CD thresholds
+CI_CHECK_TIMEOUT_SECONDS = 600
+MAX_CI_RETRIES = 2

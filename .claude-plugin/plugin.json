@@ -1,0 +1,26 @@
+{
+  "name": "integrator-agent",
+  "version": "1.0.0",
+  "description": "Quality gates, testing, merging, release candidates - ensures code quality before integration",
+  "author": {
+    "name": "Emasoft",
+    "email": "713559+Emasoft@users.noreply.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Emasoft/integrator-agent"
+  },
+  "license": "MIT",
+  "engines": {
+    "claude-code": ">=1.0.0"
+  },
+  "agents": [
+    "./agents/int-main.md",
+    "./agents/int-code-reviewer.md",
+    "./agents/int-pr-evaluator.md",
+    "./agents/int-integration-verifier.md",
+    "./agents/int-bug-investigator.md",
+    "./agents/int-github-sync.md"
+  ],
+  "skills": "./skills/"
+}
