@@ -1,4 +1,4 @@
-# int-shared
+# eia-shared
 
 Shared reference documents used across multiple Integrator Agent skills.
 

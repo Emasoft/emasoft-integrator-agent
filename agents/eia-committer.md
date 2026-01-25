@@ -236,12 +236,12 @@ Timestamp: 2025-01-08T14:32:00Z
 
 ### Files
 - ADDED: agents/experimenter.md
-- MODIFIED: agents/int-router.md (lines 145-152) - added experimenter to agent list
-- MODIFIED: skills/int-router/references/agent-invocation.md (lines 613-660) - added invocation docs
+- MODIFIED: agents/eia-router.md (lines 145-152) - added experimenter to agent list
+- MODIFIED: skills/eia-router/references/agent-invocation.md (lines 613-660) - added invocation docs
 
 ### Symbols
 - ADDED: agent definition `experimenter` with role "experimental validation"
-- MODIFIED: `int-router` agent list - added `experimenter` entry
+- MODIFIED: `eia-router` agent list - added `experimenter` entry
 
 ## WHY Changed
 
@@ -275,7 +275,7 @@ Timestamp: 2025-01-08T15:45:00Z
 ## WHAT Changed
 
 ### Files
-- MODIFIED: skills/int-router/references/core-concepts.md (line 119)
+- MODIFIED: skills/eia-router/references/core-concepts.md (line 119)
 
 ### Symbols
 - RENAMED: agent reference `sync-coordinator` → `planner`

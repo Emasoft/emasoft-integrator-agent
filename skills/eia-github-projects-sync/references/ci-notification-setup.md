@@ -24,7 +24,7 @@ The webhook handler receives GitHub events (CI status, PR changes, issue updates
 **Local Development (using ngrok):**
 ```bash
 # Start webhook handler
-cd ~/.claude/skills/integrator-agent/skills/int-github-projects-sync/scripts
+cd ~/.claude/skills/integrator-agent/skills/eia-github-projects-sync/scripts
 python ci_webhook_handler.py --port 9000
 
 # In another terminal, expose with ngrok

@@ -245,8 +245,8 @@ See [Scripts and Automation](references/scripts-guide.md) for detailed usage.
 
 This skill integrates with other Integrator Agent skills:
 
-- **[int-github-projects-sync](../int-github-projects-sync/SKILL.md)** - Link worktrees to GitHub issues, synchronize development status with project boards
-- **[int-verification-patterns](../int-verification-patterns/SKILL.md)** - Apply verification patterns to worktree isolation tests
+- **[eia-github-projects-sync](../eia-github-projects-sync/SKILL.md)** - Link worktrees to GitHub issues, synchronize development status with project boards
+- **[eia-verification-patterns](../eia-verification-patterns/SKILL.md)** - Apply verification patterns to worktree isolation tests
 
 ## Troubleshooting Quick Reference
 
@@ -284,12 +284,12 @@ This skill integrates with other Integrator Agent skills:
 1. Read [Review Worktree Isolation](references/review-worktree-isolation.md)
 2. Follow [Testing Worktree Isolation](references/testing-worktree-isolation.md)
 3. Use [Docker Worktree Testing](references/docker-worktree-testing.md)
-4. Apply [int-verification-patterns](../int-verification-patterns/SKILL.md)
+4. Apply [eia-verification-patterns](../eia-verification-patterns/SKILL.md)
 
 ### For Automation
 1. Review [Scripts and Automation](references/scripts-guide.md)
 2. Use provided Python scripts for common operations
-3. Integrate with [int-github-projects-sync](../int-github-projects-sync/SKILL.md)
+3. Integrate with [eia-github-projects-sync](../eia-github-projects-sync/SKILL.md)
 4. Set up automated validation with `registry_validate.py`
 
 ### For Troubleshooting

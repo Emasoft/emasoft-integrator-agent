@@ -242,7 +242,7 @@ Parse all outputs, extract metrics, and identify patterns in failures.
 
 Write structured report to `pr-evaluation-report-${PR_NUMBER}.md`.
 
-**For report templates and examples, see:** [pr-evaluator-report-templates.md](../skills/int-code-review-patterns/references/pr-evaluator-report-templates.md)
+**For report templates and examples, see:** [pr-evaluator-report-templates.md](../skills/eia-code-review-patterns/references/pr-evaluator-report-templates.md)
 
 ### Step 7: Generate Structured Data Output
 
@@ -324,7 +324,7 @@ After receiving your evaluation, orchestrator may:
 ### Scenarios and Troubleshooting
 
 **For common scenarios, troubleshooting guides, and best practices, see:**
-[pr-evaluator-scenarios.md](../skills/int-code-review-patterns/references/pr-evaluator-scenarios.md)
+[pr-evaluator-scenarios.md](../skills/eia-code-review-patterns/references/pr-evaluator-scenarios.md)
 
 Contents:
 - Scenario 1: All Tests Pass
@@ -342,7 +342,7 @@ Contents:
 ### Evaluation Checklist
 
 **For the complete evaluation checklist, see:**
-[pr-evaluator-checklist.md](../skills/int-code-review-patterns/references/pr-evaluator-checklist.md)
+[pr-evaluator-checklist.md](../skills/eia-code-review-patterns/references/pr-evaluator-checklist.md)
 
 Contents:
 - Pre-Evaluation Setup

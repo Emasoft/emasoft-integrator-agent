@@ -278,9 +278,9 @@ Details: docs_dev/github-sync-20250131-143022.log
 
 ## See Also
 
-- **Skill Reference**: `../skills/int-github-projects-sync/SKILL.md` - Complete GitHub Projects V2 synchronization skill
+- **Skill Reference**: `../skills/eia-github-projects-sync/SKILL.md` - Complete GitHub Projects V2 synchronization skill
 - **GitHub Docs**: [GitHub Projects V2 GraphQL Schema](https://docs.github.com/en/graphql/reference/objects#projectv2)
 - **GitHub CLI**: [gh CLI Documentation](https://cli.github.com/manual/)
-- **GraphQL Queries**: `../skills/int-github-projects-sync/references/graphql-queries.md` - Query library and examples
-- **Status Management**: `../skills/int-github-projects-sync/references/status-management.md` - Issue lifecycle and NO STALE policy
-- **Label Taxonomy**: `../skills/int-github-projects-sync/references/label-taxonomy.md` - Label classification system
+- **GraphQL Queries**: `../skills/eia-github-projects-sync/references/graphql-queries.md` - Query library and examples
+- **Status Management**: `../skills/eia-github-projects-sync/references/status-management.md` - Issue lifecycle and NO STALE policy
+- **Label Taxonomy**: `../skills/eia-github-projects-sync/references/label-taxonomy.md` - Label classification system

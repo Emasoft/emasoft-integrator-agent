@@ -28,7 +28,7 @@ When merging 5+ worktrees:
 
 ```bash
 # 1. Create plan
-python skills/int-worktree-management/scripts/merge_safeguard.py \
+python skills/eia-worktree-management/scripts/merge_safeguard.py \
     --plan --output merge-plan.json
 
 # 2. Iterate through merge order
@@ -36,7 +36,7 @@ for worktree in $(jq -r '.merge_order[]' merge-plan.json); do
     echo "=== Processing $worktree ==="
 
     # Validate
-    python skills/int-worktree-management/scripts/merge_safeguard.py \
+    python skills/eia-worktree-management/scripts/merge_safeguard.py \
         --validate "$worktree"
 
     if [ $? -ne 0 ]; then
@@ -119,7 +119,7 @@ pytest
 for worktree in worktrees/*; do
     if [ -d "$worktree/.git" ]; then
         echo "Rebasing $(basename $worktree)..."
-        python skills/int-worktree-management/scripts/merge_safeguard.py \
+        python skills/eia-worktree-management/scripts/merge_safeguard.py \
             --rebase "$worktree"
 
         if [ $? -ne 0 ]; then
@@ -143,7 +143,7 @@ failed=0
 
 for worktree in worktrees/*; do
     if [ -d "$worktree/.git" ]; then
-        python skills/int-worktree-management/scripts/merge_safeguard.py \
+        python skills/eia-worktree-management/scripts/merge_safeguard.py \
             --validate "$worktree" > /dev/null 2>&1
 
         if [ $? -ne 0 ]; then
@@ -171,7 +171,7 @@ echo "All worktrees validated successfully"
 
 ```bash
 # Before `gh pr create`:
-python skills/int-worktree-management/scripts/merge_safeguard.py \
+python skills/eia-worktree-management/scripts/merge_safeguard.py \
     --validate worktrees/my-feature
 
 # Fix any issues, then create PR
@@ -184,7 +184,7 @@ Keep worktrees synchronized to minimize conflicts:
 ```bash
 # Daily workflow
 git checkout main && git pull
-python skills/int-worktree-management/scripts/merge_safeguard.py \
+python skills/eia-worktree-management/scripts/merge_safeguard.py \
     --rebase worktrees/my-feature
 ```
 
@@ -193,7 +193,7 @@ python skills/int-worktree-management/scripts/merge_safeguard.py \
 If file conflicts detected:
 
 ```bash
-python skills/int-worktree-management/scripts/merge_safeguard.py --conflicts
+python skills/eia-worktree-management/scripts/merge_safeguard.py --conflicts
 
 # Output shows src/api.py modified in 2 worktrees
 # → Coordinate with other developer
@@ -222,7 +222,7 @@ done
 
 **Symptom:**
 ```bash
-python skills/int-worktree-management/scripts/merge_safeguard.py \
+python skills/eia-worktree-management/scripts/merge_safeguard.py \
     --rebase worktrees/feature-auth
 
 # ✗ Rebase failed: CONFLICT (content): Merge conflict in src/api.py
@@ -271,9 +271,9 @@ File Conflicts:
 gh pr merge 123
 
 # 2. Rebase feature-B and feature-C
-python skills/int-worktree-management/scripts/merge_safeguard.py \
+python skills/eia-worktree-management/scripts/merge_safeguard.py \
     --rebase worktrees/feature-B
-python skills/int-worktree-management/scripts/merge_safeguard.py \
+python skills/eia-worktree-management/scripts/merge_safeguard.py \
     --rebase worktrees/feature-C
 
 # 3. Test both
@@ -284,7 +284,7 @@ cd worktrees/feature-C && npm test
 gh pr merge 124
 
 # 5. Rebase feature-C again
-python skills/int-worktree-management/scripts/merge_safeguard.py \
+python skills/eia-worktree-management/scripts/merge_safeguard.py \
     --rebase worktrees/feature-C
 ```
 
@@ -294,11 +294,11 @@ python skills/int-worktree-management/scripts/merge_safeguard.py \
 
 ```bash
 # Creating new worktree
-python skills/int-worktree-management/scripts/worktree_create.py \
+python skills/eia-worktree-management/scripts/worktree_create.py \
     --name feature-api-v3
 
 # Immediately check status
-python skills/int-worktree-management/scripts/merge_safeguard.py \
+python skills/eia-worktree-management/scripts/merge_safeguard.py \
     --check worktrees/feature-api-v3
 
 # Should show: Status: clean (newly created)
@@ -308,7 +308,7 @@ python skills/int-worktree-management/scripts/merge_safeguard.py \
 
 ```bash
 # Before removing worktree, ensure changes merged
-python skills/int-worktree-management/scripts/merge_safeguard.py \
+python skills/eia-worktree-management/scripts/merge_safeguard.py \
     --validate worktrees/feature-old
 
 # If not merged, create PR first
@@ -316,7 +316,7 @@ cd worktrees/feature-old
 gh pr create --fill
 
 # After PR merged, safe to remove
-python skills/int-worktree-management/scripts/worktree_remove.py \
+python skills/eia-worktree-management/scripts/worktree_remove.py \
     --name feature-old
 ```
 
