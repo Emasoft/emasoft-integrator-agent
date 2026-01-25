@@ -20,7 +20,9 @@
     "./agents/int-pr-evaluator.md",
     "./agents/int-integration-verifier.md",
     "./agents/int-bug-investigator.md",
-    "./agents/int-github-sync.md"
+    "./agents/int-github-sync.md",
+    "./agents/int-committer.md",
+    "./agents/int-screenshot-analyzer.md"
   ],
   "skills": "./skills/"
 }

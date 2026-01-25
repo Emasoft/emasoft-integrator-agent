@@ -1,0 +1,35 @@
+{
+  "_comment": "Multi-user GitHub identities configuration. Copy to identities.json and customize.",
+  "_usage": "This file defines GitHub identities for multi-user workflows. Each identity has SSH, Git, and gh CLI settings.",
+
+  "identities": {
+    "primary": {
+      "description": "Repository owner / reviewer identity",
+      "github_username": "your-primary-username",
+      "git_name": "Your Name",
+      "git_email": "12345678+your-primary-username@users.noreply.github.com",
+      "ssh_key_path": "~/.ssh/id_ed25519",
+      "ssh_host_alias": "github.com"
+    },
+    "secondary": {
+      "description": "Developer / worker agent identity",
+      "github_username": "your-secondary-username",
+      "git_name": "Secondary User",
+      "git_email": "87654321+your-secondary-username@users.noreply.github.com",
+      "ssh_key_path": "~/.ssh/id_ed25519_secondary",
+      "ssh_host_alias": "github-secondary"
+    }
+  },
+
+  "defaults": {
+    "active_identity": "primary",
+    "ssh_key_type": "ed25519",
+    "git_protocol": "ssh"
+  },
+
+  "_notes": {
+    "git_email": "Use GitHub's noreply email: Settings > Emails > 'Keep my email addresses private'",
+    "ssh_host_alias": "Must match the Host entry in ~/.ssh/config",
+    "ssh_key_path": "Tilde (~) is expanded to home directory automatically"
+  }
+}
