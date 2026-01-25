@@ -1,4 +1,4 @@
-# Integrator Agent (int-)
+# Integrator Agent (eia-)
 
 **Version**: 1.0.0
 
@@ -20,41 +20,41 @@ The Integrator Agent handles **quality gates, testing, merging, and release cand
 
 | Agent | Description |
 |-------|-------------|
-| `int-main.md` | Main integrator agent |
-| `int-code-reviewer.md` | Reviews code for quality |
-| `int-pr-evaluator.md` | Evaluates PR readiness |
-| `int-integration-verifier.md` | Verifies integration success |
-| `int-bug-investigator.md` | Investigates reported bugs |
-| `int-github-sync.md` | Syncs GitHub state |
+| `eia-main.md` | Main integrator agent |
+| `eia-code-reviewer.md` | Reviews code for quality |
+| `eia-pr-evaluator.md` | Evaluates PR readiness |
+| `eia-integration-verifier.md` | Verifies integration success |
+| `eia-bug-investigator.md` | Investigates reported bugs |
+| `eia-github-sync.md` | Syncs GitHub state |
 
 ### Skills
 
 | Skill | Description |
 |-------|-------------|
-| `int-github-integration` | GitHub API integration |
-| `int-github-pr-workflow` | PR workflow patterns |
-| `int-github-pr-checks` | PR check patterns |
-| `int-github-pr-merge` | PR merge strategies |
-| `int-github-pr-context` | PR context management |
-| `int-github-issue-operations` | Issue CRUD operations |
-| `int-github-kanban-core` | Kanban board patterns |
-| `int-github-projects-sync` | Projects sync |
-| `int-github-project-workflow` | Project workflow |
-| `int-github-thread-management` | Thread management |
-| `int-code-review-patterns` | Code review patterns |
-| `int-multilanguage-pr-review` | Multi-language reviews |
-| `int-tdd-enforcement` | TDD enforcement |
-| `int-ci-failure-patterns` | CI failure patterns |
-| `int-worktree-management` | Git worktree management |
-| `int-git-worktree-operations` | Worktree operations |
-| `int-shared` | Shared utilities |
+| `eia-github-integration` | GitHub API integration |
+| `eia-github-pr-workflow` | PR workflow patterns |
+| `eia-github-pr-checks` | PR check patterns |
+| `eia-github-pr-merge` | PR merge strategies |
+| `eia-github-pr-context` | PR context management |
+| `eia-github-issue-operations` | Issue CRUD operations |
+| `eia-github-kanban-core` | Kanban board patterns |
+| `eia-github-projects-sync` | Projects sync |
+| `eia-github-project-workflow` | Project workflow |
+| `eia-github-thread-management` | Thread management |
+| `eia-code-review-patterns` | Code review patterns |
+| `eia-multilanguage-pr-review` | Multi-language reviews |
+| `eia-tdd-enforcement` | TDD enforcement |
+| `eia-ci-failure-patterns` | CI failure patterns |
+| `eia-worktree-management` | Git worktree management |
+| `eia-git-worktree-operations` | Worktree operations |
+| `eia-shared` | Shared utilities |
 
 ### Hooks
 
 | Hook | Event | Description |
 |------|-------|-------------|
-| `int-branch-protection` | PreToolUse | Block pushes to main/master |
-| `int-issue-closure-gate` | PreToolUse | Verify before issue closure |
+| `eia-branch-protection` | PreToolUse | Block pushes to main/master |
+| `eia-issue-closure-gate` | PreToolUse | Verify before issue closure |
 
 ## Quality Gates
 
@@ -85,5 +85,5 @@ claude --plugin-dir ./OUTPUT_SKILLS/integrator-agent
 
 ```bash
 cd OUTPUT_SKILLS/integrator-agent
-uv run python scripts/int_validate_plugin.py --verbose
+uv run python scripts/eia_validate_plugin.py --verbose
 ```

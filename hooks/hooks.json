@@ -4,25 +4,25 @@
   "hooks": {
     "PreToolUse": [
       {
-        "_id": "int-branch-protection",
+        "_id": "eia-branch-protection",
         "_description": "Blocks direct push to main/master branches",
         "matcher": "Bash",
         "hooks": [
           {
             "type": "command",
-            "command": "python3 ${CLAUDE_PLUGIN_ROOT}/scripts/int_pre_push_hook.py",
+            "command": "python3 ${CLAUDE_PLUGIN_ROOT}/scripts/eia_pre_push_hook.py",
             "timeout": 30
           }
         ]
       },
       {
-        "_id": "int-issue-closure-gate",
+        "_id": "eia-issue-closure-gate",
         "_description": "Blocks premature issue closure - requires merged PR, checkboxes, evidence, TDD",
         "matcher": "Bash",
         "hooks": [
           {
             "type": "command",
-            "command": "python3 ${CLAUDE_PLUGIN_ROOT}/scripts/int_pre_issue_close_hook.py",
+            "command": "python3 ${CLAUDE_PLUGIN_ROOT}/scripts/eia_pre_issue_close_hook.py",
             "timeout": 60
           }
         ]

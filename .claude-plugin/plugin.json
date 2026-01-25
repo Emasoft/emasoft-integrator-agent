@@ -15,14 +15,14 @@
     "claude-code": ">=1.0.0"
   },
   "agents": [
-    "./agents/int-main.md",
-    "./agents/int-code-reviewer.md",
-    "./agents/int-pr-evaluator.md",
-    "./agents/int-integration-verifier.md",
-    "./agents/int-bug-investigator.md",
-    "./agents/int-github-sync.md",
-    "./agents/int-committer.md",
-    "./agents/int-screenshot-analyzer.md"
+    "./agents/eia-main.md",
+    "./agents/eia-code-reviewer.md",
+    "./agents/eia-pr-evaluator.md",
+    "./agents/eia-integration-verifier.md",
+    "./agents/eia-bug-investigator.md",
+    "./agents/eia-github-sync.md",
+    "./agents/eia-committer.md",
+    "./agents/eia-screenshot-analyzer.md"
   ],
   "skills": "./skills/"
 }
