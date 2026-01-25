@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-atlas_get_pr_context.py - Get full PR context including metadata, files, and status.
+int_get_pr_context.py - Get full PR context including metadata, files, and status.
 
 Usage:
-    python3 atlas_get_pr_context.py --pr NUMBER [--repo OWNER/REPO] [--verbose]
+    python3 int_get_pr_context.py --pr NUMBER [--repo OWNER/REPO] [--verbose]
 
 Exit codes (standardized):
     0 - Success, JSON output to stdout

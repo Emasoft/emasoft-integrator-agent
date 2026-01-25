@@ -1,10 +1,10 @@
 ---
-name: ao-git-worktree-operations
+name: int-git-worktree-operations
 description: Teaches parallel PR processing using git worktrees for isolated, concurrent development across multiple pull requests without branch switching overhead.
 license: Apache-2.0
 metadata:
   version: 1.0.0
-  author: atlas-orchestrator
+  author: integrator-agent
   tags:
     - git
     - worktree
@@ -165,37 +165,37 @@ This skill includes Python scripts for common worktree operations:
 
 | Script | Purpose | When to Use |
 |--------|---------|-------------|
-| `atlas_create_worktree.py` | Create worktree for a PR | Starting work on a new PR |
-| `atlas_list_worktrees.py` | List all active worktrees | Before creating new worktree, status check |
-| `atlas_cleanup_worktree.py` | Safely remove a worktree | After PR is merged/closed |
-| `atlas_verify_worktree_isolation.py` | Check for isolation violations | Before committing, periodically |
-| `atlas_worktree_commit_push.py` | Commit and push changes | Ready to update remote |
+| `int_create_worktree.py` | Create worktree for a PR | Starting work on a new PR |
+| `int_list_worktrees.py` | List all active worktrees | Before creating new worktree, status check |
+| `int_cleanup_worktree.py` | Safely remove a worktree | After PR is merged/closed |
+| `int_verify_worktree_isolation.py` | Check for isolation violations | Before committing, periodically |
+| `int_worktree_commit_push.py` | Commit and push changes | Ready to update remote |
 
 ### Script Usage Examples
 
 **Creating a worktree for PR #123:**
 ```bash
-python scripts/atlas_create_worktree.py --pr 123 --base-path /tmp/worktrees
+python scripts/int_create_worktree.py --pr 123 --base-path /tmp/worktrees
 ```
 
 **Listing all worktrees:**
 ```bash
-python scripts/atlas_list_worktrees.py --repo-path /path/to/main/repo
+python scripts/int_list_worktrees.py --repo-path /path/to/main/repo
 ```
 
 **Verifying isolation:**
 ```bash
-python scripts/atlas_verify_worktree_isolation.py --worktree-path /tmp/worktrees/pr-123
+python scripts/int_verify_worktree_isolation.py --worktree-path /tmp/worktrees/pr-123
 ```
 
 **Committing and pushing:**
 ```bash
-python scripts/atlas_worktree_commit_push.py --worktree-path /tmp/worktrees/pr-123 --message "Fix issue"
+python scripts/int_worktree_commit_push.py --worktree-path /tmp/worktrees/pr-123 --message "Fix issue"
 ```
 
 **Cleaning up a worktree:**
 ```bash
-python scripts/atlas_cleanup_worktree.py --worktree-path /tmp/worktrees/pr-123
+python scripts/int_cleanup_worktree.py --worktree-path /tmp/worktrees/pr-123
 ```
 
 ---

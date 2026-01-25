@@ -1,10 +1,10 @@
 ---
-name: ao-github-pr-checks
+name: int-github-pr-checks
 description: Monitor and interpret GitHub Pull Request CI/CD check statuses, wait for check completion, and retrieve detailed check information for orchestration decisions.
 license: Apache-2.0
 metadata:
   version: 1.0.0
-  author: atlas-orchestrator
+  author: integrator-agent
   tags:
     - github
     - ci-cd

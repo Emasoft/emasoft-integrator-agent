@@ -33,7 +33,7 @@ python3 scripts/kanban_check_completion.py OWNER REPO PROJECT_NUMBER
 **Solution:**
 ```bash
 # Verify hook is configured
-cat .claude/plugins/atlas-orchestrator/hooks/hooks.json | jq '.hooks.Stop'
+cat .claude/plugins/integrator-agent/hooks/hooks.json | jq '.hooks.Stop'
 
 # Make script executable
 chmod +x scripts/stop_hook.sh

@@ -1,5 +1,5 @@
 ---
-name: ao-committer
+name: int-committer
 description: Creates detailed, searchable git commits with comprehensive WHAT and WHY documentation
 type: specialized
 trigger: "When git commits need detailed WHAT/WHY documentation, dual-git handling, or decision archaeology support"
@@ -87,7 +87,7 @@ Specialized agent responsible for creating detailed, searchable git commits with
 - Decisions: ADR-042
 
 ---
-Committed by: Atlas Orchestrator (committer agent)
+Committed by: Integrator Agent (committer agent)
 Timestamp: [ISO 8601]
 ```
 
@@ -119,7 +119,7 @@ Used for:
 - Design decisions (ADRs)
 - Internal templates
 - Sensitive requirements
-- Atlas memory files (if configured)
+- Integrator memory files (if configured)
 
 Location: `/project-root/.design/.git/` or configured path
 
@@ -156,7 +156,7 @@ Before committing, verify target git exists:
 | Remove | `[REMOVE]` | Intentional removal of files/features |
 | Rename | `[RENAME]` | File or symbol renaming |
 | Config | `[CONFIG]` | Configuration changes |
-| Memory | `[MEMORY]` | Atlas memory file updates |
+| Memory | `[MEMORY]` | Integrator memory file updates |
 
 ## Searchability Requirements
 
@@ -223,7 +223,7 @@ TDD requirements, acceptance criteria, and API contract sections.
 - Decisions: ADR-015 (Template Consolidation)
 
 ---
-Committed by: Atlas Orchestrator (committer agent)
+Committed by: Integrator Agent (committer agent)
 Timestamp: 2025-01-08T14:32:00Z
 ```
 
@@ -236,12 +236,12 @@ Timestamp: 2025-01-08T14:32:00Z
 
 ### Files
 - ADDED: agents/experimenter.md
-- MODIFIED: agents/ao-atlas-router.md (lines 145-152) - added experimenter to agent list
-- MODIFIED: skills/ao-atlas-router/references/agent-invocation.md (lines 613-660) - added invocation docs
+- MODIFIED: agents/int-router.md (lines 145-152) - added experimenter to agent list
+- MODIFIED: skills/int-router/references/agent-invocation.md (lines 613-660) - added invocation docs
 
 ### Symbols
 - ADDED: agent definition `experimenter` with role "experimental validation"
-- MODIFIED: `atlas-router` agent list - added `experimenter` entry
+- MODIFIED: `int-router` agent list - added `experimenter` entry
 
 ## WHY Changed
 
@@ -263,7 +263,7 @@ agent fills this gap by running isolated Docker-based experiments.
 - Decisions: ADR-023 (Experimentation Strategy)
 
 ---
-Committed by: Atlas Orchestrator (committer agent)
+Committed by: Integrator Agent (committer agent)
 Timestamp: 2025-01-08T15:45:00Z
 ```
 
@@ -275,7 +275,7 @@ Timestamp: 2025-01-08T15:45:00Z
 ## WHAT Changed
 
 ### Files
-- MODIFIED: skills/ao-atlas-router/references/core-concepts.md (line 119)
+- MODIFIED: skills/int-router/references/core-concepts.md (line 119)
 
 ### Symbols
 - RENAMED: agent reference `sync-coordinator` → `planner`
@@ -305,11 +305,11 @@ architecture design, making it the correct agent for this workflow step.
 - Issues: #891 (Audit: non-existent agent references)
 
 ---
-Committed by: Atlas Orchestrator (committer agent)
+Committed by: Integrator Agent (committer agent)
 Timestamp: 2025-01-08T16:20:00Z
 ```
 
-## Integration with Atlas Workflow
+## Integration with Integrator Workflow
 
 ### When Committer is Invoked
 
@@ -323,7 +323,7 @@ Timestamp: 2025-01-08T16:20:00Z
 
 ```python
 Task(
-  subagent_type="atlas:committer",
+  subagent_type="int:committer",
   prompt="""You are the committer agent for the Atlas orchestrator.
 ROLE: Create detailed, searchable git commits with WHAT and WHY documentation.
 CONSTRAINTS: READ-ONLY for code. Only commits, never modifies content.
@@ -334,7 +334,7 @@ TASK: Commit the following changes.
 Target git: design
 Changes:
 - ADDED: specs/auth-service-module-spec.md
-- MODIFIED: .claude/atlas/progress.md (updated task status)
+- MODIFIED: .claude/integrator/progress.md (updated task status)
 
 Rationale: Created module specification for auth-service after planner completed
 architecture design. This enables delegation to remote agents.

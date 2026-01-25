@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-atlas_github_pr_gate.py - PR approval gates enforcement.
+int_github_pr_gate.py - PR approval gates enforcement.
 
-Verifies PRs meet Atlas requirements before merge:
+Verifies PRs meet Integrator requirements before merge:
 - Linked to approved spec (for feature PRs)
 - All tests passing
 - Required reviews present
@@ -13,19 +13,19 @@ Uses gh CLI for GitHub operations.
 
 Usage:
     # Check if PR is ready to merge
-    python atlas_github_pr_gate.py check --pr 123
+    python int_github_pr_gate.py check --pr 123
 
     # Check specific gates only
-    python atlas_github_pr_gate.py check --pr 123 --gates spec,tests,reviews
+    python int_github_pr_gate.py check --pr 123 --gates spec,tests,reviews
 
     # Get detailed report
-    python atlas_github_pr_gate.py report --pr 123
+    python int_github_pr_gate.py report --pr 123
 
     # Block PR with reason
-    python atlas_github_pr_gate.py block --pr 123 --reason "Needs approved spec"
+    python int_github_pr_gate.py block --pr 123 --reason "Needs approved spec"
 
     # Approve PR (add approval label)
-    python atlas_github_pr_gate.py approve --pr 123
+    python int_github_pr_gate.py approve --pr 123
 
 Dependencies: Python 3.8+, gh CLI
 """
@@ -38,7 +38,7 @@ import sys
 from pathlib import Path
 from typing import Optional
 
-from atlas_github_pr_gate_checks import (
+from int_github_pr_gate_checks import (
     GateResult,
     PRInfo,
     check_draft_gate,
@@ -294,7 +294,7 @@ def cmd_report(args: argparse.Namespace) -> int:
 def cmd_block(args: argparse.Namespace) -> int:
     """Handle block command - add blocking label and comment."""
     comment = (
-        f"**PR Blocked**\n\nReason: {args.reason}\n\n*Added by Atlas gate checker*"
+        f"**PR Blocked**\n\nReason: {args.reason}\n\n*Added by Integrator gate checker*"
     )
 
     success = True
@@ -338,11 +338,11 @@ Gates:
   issues     - Linked to issues (recommended)
 
 Examples:
-  python atlas_github_pr_gate.py check --pr 123
-  python atlas_github_pr_gate.py check --pr 123 --gates tests,reviews
-  python atlas_github_pr_gate.py report --pr 123
-  python atlas_github_pr_gate.py report --pr 123 --comment
-  python atlas_github_pr_gate.py block --pr 123 --reason "Needs spec"
+  python int_github_pr_gate.py check --pr 123
+  python int_github_pr_gate.py check --pr 123 --gates tests,reviews
+  python int_github_pr_gate.py report --pr 123
+  python int_github_pr_gate.py report --pr 123 --comment
+  python int_github_pr_gate.py block --pr 123 --reason "Needs spec"
         """,
     )
 

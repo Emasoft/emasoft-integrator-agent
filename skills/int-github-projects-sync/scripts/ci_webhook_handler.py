@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""GitHub CI webhook handler for atlas-orchestrator.
+"""GitHub CI webhook handler for integrator-agent.
 
 Receives GitHub webhook events and forwards relevant notifications
 to the orchestrator via AI Maestro messaging.

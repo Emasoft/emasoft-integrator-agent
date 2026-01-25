@@ -1,5 +1,5 @@
 ---
-name: ao-bug-investigator
+name: int-bug-investigator
 model: claude-sonnet-4-20250514
 description: Investigates and reproduces bugs with systematic debugging approach
 type: task-agent

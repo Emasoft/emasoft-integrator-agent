@@ -11,7 +11,7 @@
 7. [When handling multiple repositories](#advanced-multiple-repositories)
 8. [When integrating CI events with project sync](#integration-with-project-sync)
 
-Configure GitHub webhooks to send CI events to the atlas-orchestrator.
+Configure GitHub webhooks to send CI events to the integrator-agent.
 
 ## Overview
 
@@ -24,7 +24,7 @@ The webhook handler receives GitHub events (CI status, PR changes, issue updates
 **Local Development (using ngrok):**
 ```bash
 # Start webhook handler
-cd ~/.claude/skills/atlas-orchestrator/skills/ao-github-projects-sync/scripts
+cd ~/.claude/skills/integrator-agent/skills/int-github-projects-sync/scripts
 python ci_webhook_handler.py --port 9000
 
 # In another terminal, expose with ngrok

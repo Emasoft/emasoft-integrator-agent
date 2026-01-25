@@ -1,5 +1,5 @@
 ---
-name: ao-multilanguage-pr-review
+name: int-multilanguage-pr-review
 description: Review pull requests in repositories containing multiple programming languages and targeting multiple platforms. Teaches language detection, routing reviews to appropriate checkers, and coordinating cross-language concerns.
 license: Apache-2.0
 version: 1.0.0
@@ -115,7 +115,7 @@ See [cross-platform-testing.md](references/cross-platform-testing.md):
 START: New PR to review
   |
   v
-[1] Run atlas_detect_pr_languages.py to identify languages
+[1] Run int_detect_pr_languages.py to identify languages
   |
   v
 [2] For each detected language:
@@ -145,7 +145,7 @@ START: New PR to review
   +---> Multiple OS targets? ---> Read cross-platform-testing.md
   |
   v
-[5] Run atlas_get_language_linters.py for each language to get linter commands
+[5] Run int_get_language_linters.py for each language to get linter commands
   |
   v
 [6] Execute all linters and compile results
@@ -159,30 +159,30 @@ END
 
 ## Included Scripts
 
-### atlas_detect_pr_languages.py
+### int_detect_pr_languages.py
 Detects programming languages in a PR's changed files.
 
 **Usage**:
 ```bash
 # Detect languages in PR #123
-python scripts/atlas_detect_pr_languages.py --repo owner/repo --pr 123
+python scripts/int_detect_pr_languages.py --repo owner/repo --pr 123
 
 # Detect languages in local diff
-python scripts/atlas_detect_pr_languages.py --diff-file changes.diff
+python scripts/int_detect_pr_languages.py --diff-file changes.diff
 ```
 
 **Output**: JSON with language breakdown and file counts.
 
-### atlas_get_language_linters.py
+### int_get_language_linters.py
 Returns recommended linters and commands for a given language.
 
 **Usage**:
 ```bash
 # Get linters for Python
-python scripts/atlas_get_language_linters.py --language python
+python scripts/int_get_language_linters.py --language python
 
 # Get linters for multiple languages
-python scripts/atlas_get_language_linters.py --languages python,javascript,rust
+python scripts/int_get_language_linters.py --languages python,javascript,rust
 ```
 
 **Output**: JSON with linter names, install commands, and run commands.
@@ -193,7 +193,7 @@ When reviewing a PR in a multilanguage repository:
 
 ```bash
 # Step 1: Detect languages in the PR
-python scripts/atlas_detect_pr_languages.py --repo myorg/myrepo --pr 456
+python scripts/int_detect_pr_languages.py --repo myorg/myrepo --pr 456
 
 # Example output:
 # {
@@ -206,7 +206,7 @@ python scripts/atlas_detect_pr_languages.py --repo myorg/myrepo --pr 456
 # }
 
 # Step 2: Get linters for detected languages
-python scripts/atlas_get_language_linters.py --languages python,typescript,bash
+python scripts/int_get_language_linters.py --languages python,typescript,bash
 
 # Example output:
 # {
@@ -239,7 +239,7 @@ python scripts/atlas_get_language_linters.py --languages python,typescript,bash
 **Solution**: Check .gitattributes for linguist overrides. Some files may be marked with `linguist-language` or `linguist-detectable=false`.
 
 ### Problem: Linter fails to run
-**Solution**: Ensure the linter is installed. Use atlas_get_language_linters.py to get install commands.
+**Solution**: Ensure the linter is installed. Use int_get_language_linters.py to get install commands.
 
 ### Problem: Too many linting errors
 **Solution**: For legacy codebases, consider using `--fix` flags where available (ruff --fix, eslint --fix) and reviewing the automated fixes.
@@ -249,7 +249,7 @@ python scripts/atlas_get_language_linters.py --languages python,typescript,bash
 
 ## Checklist: Multilanguage PR Review
 
-- [ ] Detect all languages in the PR using atlas_detect_pr_languages.py
+- [ ] Detect all languages in the PR using int_detect_pr_languages.py
 - [ ] Read the review patterns document for each detected language
 - [ ] Run appropriate linters for each language
 - [ ] Check for cross-language interface changes

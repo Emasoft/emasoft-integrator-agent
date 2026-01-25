@@ -6,8 +6,8 @@ This script checks for isolation violations where files may have been accidental
 written to the main repository or other worktrees instead of the assigned worktree.
 
 Usage:
-    python atlas_verify_worktree_isolation.py --worktree-path /tmp/worktrees/pr-123
-    python atlas_verify_worktree_isolation.py -w /tmp/worktrees/pr-123 --main-repo /path/to/repo
+    python int_verify_worktree_isolation.py --worktree-path /tmp/worktrees/pr-123
+    python int_verify_worktree_isolation.py -w /tmp/worktrees/pr-123 --main-repo /path/to/repo
 """
 
 import argparse

@@ -330,7 +330,7 @@ python scripts/port_allocate.py --service web-staging --worktree your-worktree
 
 ## Summary
 
-Port management in Atlas Orchestrator provides:
+Port management in Integrator Agent provides:
 
 1. **Centralized Registry** - All port allocations tracked in `.atlas/worktrees/ports.json`
 2. **Automatic Allocation** - Functions to allocate and release ports programmatically

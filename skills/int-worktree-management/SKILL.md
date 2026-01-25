@@ -1,5 +1,5 @@
 ---
-name: ao-worktree-management
+name: int-worktree-management
 description: >-
   Manage Git worktrees for parallel development with registry tracking and port allocation.
   Enables multiple development contexts in the same repository without switching branches.
@@ -14,11 +14,11 @@ metadata:
 context: fork
 ---
 
-# Worktree Management for Atlas Orchestrator
+# Worktree Management for Integrator Agent
 
 ## Overview
 
-This skill teaches how to manage Git worktrees within the Atlas Orchestrator system. A worktree is an isolated Git working directory that allows you to work on multiple branches simultaneously without switching branches or creating separate clones.
+This skill teaches how to manage Git worktrees within the Integrator Agent system. A worktree is an isolated Git working directory that allows you to work on multiple branches simultaneously without switching branches or creating separate clones.
 
 **Key Features:**
 - **Worktree Registry**: Centralized tracking at `~/.atlas/worktree-registry.json`
@@ -243,10 +243,10 @@ See [Scripts and Automation](references/scripts-guide.md) for detailed usage.
 
 ## Related Skills
 
-This skill integrates with other Atlas Orchestrator skills:
+This skill integrates with other Integrator Agent skills:
 
-- **[ao-github-projects-sync](../ao-github-projects-sync/SKILL.md)** - Link worktrees to GitHub issues, synchronize development status with project boards
-- **[ao-verification-patterns](../ao-verification-patterns/SKILL.md)** - Apply verification patterns to worktree isolation tests
+- **[int-github-projects-sync](../int-github-projects-sync/SKILL.md)** - Link worktrees to GitHub issues, synchronize development status with project boards
+- **[int-verification-patterns](../int-verification-patterns/SKILL.md)** - Apply verification patterns to worktree isolation tests
 
 ## Troubleshooting Quick Reference
 
@@ -284,12 +284,12 @@ This skill integrates with other Atlas Orchestrator skills:
 1. Read [Review Worktree Isolation](references/review-worktree-isolation.md)
 2. Follow [Testing Worktree Isolation](references/testing-worktree-isolation.md)
 3. Use [Docker Worktree Testing](references/docker-worktree-testing.md)
-4. Apply [ao-verification-patterns](../ao-verification-patterns/SKILL.md)
+4. Apply [int-verification-patterns](../int-verification-patterns/SKILL.md)
 
 ### For Automation
 1. Review [Scripts and Automation](references/scripts-guide.md)
 2. Use provided Python scripts for common operations
-3. Integrate with [ao-github-projects-sync](../ao-github-projects-sync/SKILL.md)
+3. Integrate with [int-github-projects-sync](../int-github-projects-sync/SKILL.md)
 4. Set up automated validation with `registry_validate.py`
 
 ### For Troubleshooting

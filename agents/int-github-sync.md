@@ -1,5 +1,5 @@
 ---
-name: ao-github-sync
+name: int-github-sync
 model: opus
 description: Synchronizes GitHub issues, PRs, and project boards
 type: local-helper
@@ -9,7 +9,7 @@ auto_skills:
   - github-projects-sync
 memory_requirements: medium
 trigger: When GitHub issues/PRs need synchronization, project board needs updating, or orchestrator assigns GitHub management task
-skill_reference: ao-github-projects-sync
+skill_reference: int-github-projects-sync
 ---
 
 # GitHub Projects V2 Bidirectional Sync Agent
@@ -278,9 +278,9 @@ Details: docs_dev/github-sync-20250131-143022.log
 
 ## See Also
 
-- **Skill Reference**: `../skills/ao-github-projects-sync/SKILL.md` - Complete GitHub Projects V2 synchronization skill
+- **Skill Reference**: `../skills/int-github-projects-sync/SKILL.md` - Complete GitHub Projects V2 synchronization skill
 - **GitHub Docs**: [GitHub Projects V2 GraphQL Schema](https://docs.github.com/en/graphql/reference/objects#projectv2)
 - **GitHub CLI**: [gh CLI Documentation](https://cli.github.com/manual/)
-- **GraphQL Queries**: `../skills/ao-github-projects-sync/references/graphql-queries.md` - Query library and examples
-- **Status Management**: `../skills/ao-github-projects-sync/references/status-management.md` - Issue lifecycle and NO STALE policy
-- **Label Taxonomy**: `../skills/ao-github-projects-sync/references/label-taxonomy.md` - Label classification system
+- **GraphQL Queries**: `../skills/int-github-projects-sync/references/graphql-queries.md` - Query library and examples
+- **Status Management**: `../skills/int-github-projects-sync/references/status-management.md` - Issue lifecycle and NO STALE policy
+- **Label Taxonomy**: `../skills/int-github-projects-sync/references/label-taxonomy.md` - Label classification system

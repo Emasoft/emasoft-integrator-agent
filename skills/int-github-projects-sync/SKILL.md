@@ -1,6 +1,6 @@
 ---
-name: ao-github-projects-sync
-description: Manages team tasks through GitHub Projects V2, enabling ATLAS-ORCHESTRATOR to track features, bugs, PRs, and issues with automatic CI integration. Provides GraphQL API operations for issue creation, status updates, and project synchronization across remote developer agents.
+name: int-github-projects-sync
+description: Manages team tasks through GitHub Projects V2, enabling INTEGRATOR-AGENT to track features, bugs, PRs, and issues with automatic CI integration. Provides GraphQL API operations for issue creation, status updates, and project synchronization across remote developer agents.
 license: Apache-2.0
 compatibility: "Requires GitHub CLI authentication, GitHub Projects V2 enabled repository, GraphQL API access, Python 3.8+, and AI Maestro integration for notifications"
 metadata:
@@ -14,7 +14,7 @@ context: fork
 
 ## Overview
 
-The GitHub Projects Sync skill enables the ATLAS-ORCHESTRATOR to manage team tasks through GitHub Projects V2. This is the OFFICIAL task management interface for coordinating work across remote developer agents.
+The GitHub Projects Sync skill enables the INTEGRATOR-AGENT to manage team tasks through GitHub Projects V2. This is the OFFICIAL task management interface for coordinating work across remote developer agents.
 
 **Critical Distinction**:
 - **GitHub Projects** = Team/Project tasks (features, bugs, PRs, issues)

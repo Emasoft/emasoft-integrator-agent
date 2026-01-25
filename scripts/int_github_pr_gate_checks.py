@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-atlas_github_pr_gate_checks.py - Gate check functions for PR validation.
+int_github_pr_gate_checks.py - Gate check functions for PR validation.
 
-Contains individual gate check implementations used by atlas_github_pr_gate.py.
+Contains individual gate check implementations used by int_github_pr_gate.py.
 Each check function validates a specific aspect of PR readiness.
 
-This module is imported by atlas_github_pr_gate.py and should not be run directly.
+This module is imported by int_github_pr_gate.py and should not be run directly.
 """
 
 from __future__ import annotations
@@ -102,8 +102,8 @@ def check_spec_gate(pr: PRInfo, project_root: Path) -> GateResult:
     result.details.append(f"Referenced spec: {spec_uuid}")
 
     # Try to find and validate spec status
-    # Use atlas_design_search.py to check
-    search_script = Path(__file__).parent / "atlas_design_search.py"
+    # Use int_design_search.py to check
+    search_script = Path(__file__).parent / "int_design_search.py"
     if search_script.exists():
         cmd = [
             "python3",

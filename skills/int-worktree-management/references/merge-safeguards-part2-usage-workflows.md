@@ -8,7 +8,7 @@ Before opening a PR, verify the worktree can merge cleanly:
 
 ```bash
 cd /atlas-root
-python skills/ao-worktree-management/scripts/merge_safeguard.py \
+python skills/int-worktree-management/scripts/merge_safeguard.py \
     --check worktrees/feature-api-v2
 
 # Output:
@@ -29,7 +29,7 @@ python skills/ao-worktree-management/scripts/merge_safeguard.py \
 When multiple PRs are ready, create a merge plan:
 
 ```bash
-python skills/ao-worktree-management/scripts/merge_safeguard.py --plan
+python skills/int-worktree-management/scripts/merge_safeguard.py --plan
 
 # Output:
 # === MERGE PLAN ===
@@ -58,7 +58,7 @@ Follow the plan:
 
 ```bash
 # Validate
-python skills/ao-worktree-management/scripts/merge_safeguard.py \
+python skills/int-worktree-management/scripts/merge_safeguard.py \
     --validate worktrees/feature-api-v2
 
 # Merge PR on GitHub
@@ -73,7 +73,7 @@ git pull
 
 ```bash
 # Rebase second worktree
-python skills/ao-worktree-management/scripts/merge_safeguard.py \
+python skills/int-worktree-management/scripts/merge_safeguard.py \
     --rebase worktrees/feature-auth
 
 # If conflicts occur:
@@ -84,14 +84,14 @@ git add .
 git rebase --continue
 
 # Rebase third worktree
-python skills/ao-worktree-management/scripts/merge_safeguard.py \
+python skills/int-worktree-management/scripts/merge_safeguard.py \
     --rebase worktrees/feature-dashboard
 ```
 
 #### Step 3: Validate After Rebase
 
 ```bash
-python skills/ao-worktree-management/scripts/merge_safeguard.py \
+python skills/int-worktree-management/scripts/merge_safeguard.py \
     --validate worktrees/feature-auth
 # ✓ Worktree feature-auth is ready for merge
 
@@ -104,7 +104,7 @@ gh pr merge 124 --squash
 See which files are modified across multiple worktrees:
 
 ```bash
-python skills/ao-worktree-management/scripts/merge_safeguard.py --conflicts
+python skills/int-worktree-management/scripts/merge_safeguard.py --conflicts
 
 # Output:
 # === FILE CONFLICTS ===

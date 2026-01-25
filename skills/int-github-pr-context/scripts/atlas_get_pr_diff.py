@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-atlas_get_pr_diff.py - Get PR diff with optional filtering.
+int_get_pr_diff.py - Get PR diff with optional filtering.
 
 Usage:
-    python3 atlas_get_pr_diff.py --pr NUMBER [--repo OWNER/REPO] [--stat] [--files FILE...]
+    python3 int_get_pr_diff.py --pr NUMBER [--repo OWNER/REPO] [--stat] [--files FILE...]
 
 Exit codes (standardized):
     0 - Success, diff text or JSON stats to stdout

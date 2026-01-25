@@ -6,8 +6,8 @@ This script stages all changes, commits with a message, and pushes to the remote
 branch. It includes safety checks and returns structured status information.
 
 Usage:
-    python atlas_worktree_commit_push.py --worktree-path /tmp/worktrees/pr-123 --message "Fix bug"
-    python atlas_worktree_commit_push.py -w /tmp/worktrees/pr-123 -m "Update" --push
+    python int_worktree_commit_push.py --worktree-path /tmp/worktrees/pr-123 --message "Fix bug"
+    python int_worktree_commit_push.py -w /tmp/worktrees/pr-123 -m "Update" --push
 """
 
 import argparse

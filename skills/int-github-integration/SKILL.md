@@ -1,5 +1,5 @@
 ---
-name: ao-github-integration
+name: int-github-integration
 description: Complete bidirectional synchronization between Agent tasks and GitHub Projects V2, with standardized 9-label system, pull request workflow automation, and comprehensive issue tracking for orchestrator-driven development.
 license: Apache-2.0
 compatibility: Requires GitHub CLI version 2.14 or higher, GitHub account with write permissions to target repositories, and basic Git knowledge.

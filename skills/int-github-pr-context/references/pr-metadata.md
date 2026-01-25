@@ -1,6 +1,6 @@
 # PR Metadata Reference
 
-This document explains how to retrieve and interpret GitHub Pull Request metadata using the atlas-orchestrator scripts.
+This document explains how to retrieve and interpret GitHub Pull Request metadata using the integrator-agent scripts.
 
 ## Table of Contents
 
@@ -24,7 +24,7 @@ This document explains how to retrieve and interpret GitHub Pull Request metadat
 
 ## 1. PR Metadata JSON Structure
 
-When you run `atlas_get_pr_context.py`, the script returns a JSON object containing comprehensive PR metadata. This section explains each field.
+When you run `int_get_pr_context.py`, the script returns a JSON object containing comprehensive PR metadata. This section explains each field.
 
 ### 1.1 Core Identification Fields
 
@@ -97,7 +97,7 @@ Information about who created the PR and who is responsible for it.
 
 ```bash
 # Using jq to extract author login
-python3 atlas_get_pr_context.py --pr 123 | jq -r '.author.login'
+python3 int_get_pr_context.py --pr 123 | jq -r '.author.login'
 ```
 
 ### 1.3 Branch and Merge Information
@@ -241,13 +241,13 @@ The PR description is stored in the `body` field, which contains markdown text.
 
 ```bash
 # Get just the title
-python3 atlas_get_pr_context.py --pr 123 | jq -r '.title'
+python3 int_get_pr_context.py --pr 123 | jq -r '.title'
 
 # Get the description/body
-python3 atlas_get_pr_context.py --pr 123 | jq -r '.body'
+python3 int_get_pr_context.py --pr 123 | jq -r '.body'
 
 # Get both formatted
-python3 atlas_get_pr_context.py --pr 123 | jq -r '"Title: \(.title)\n\nDescription:\n\(.body)"'
+python3 int_get_pr_context.py --pr 123 | jq -r '"Title: \(.title)\n\nDescription:\n\(.body)"'
 ```
 
 **Example Output:**
@@ -275,15 +275,15 @@ Understanding which branches are involved is essential for context.
 
 ```bash
 # Get source branch (where changes are)
-python3 atlas_get_pr_context.py --pr 123 | jq -r '.headRefName'
+python3 int_get_pr_context.py --pr 123 | jq -r '.headRefName'
 # Output: feature/user-auth
 
 # Get target branch (where changes will go)
-python3 atlas_get_pr_context.py --pr 123 | jq -r '.baseRefName'
+python3 int_get_pr_context.py --pr 123 | jq -r '.baseRefName'
 # Output: main
 
 # Get both in context
-python3 atlas_get_pr_context.py --pr 123 | jq -r '"\(.headRefName) → \(.baseRefName)"'
+python3 int_get_pr_context.py --pr 123 | jq -r '"\(.headRefName) → \(.baseRefName)"'
 # Output: feature/user-auth → main
 ```
 
@@ -291,7 +291,7 @@ python3 atlas_get_pr_context.py --pr 123 | jq -r '"\(.headRefName) → \(.baseRe
 
 ```bash
 # Check if PR is from a fork
-python3 atlas_get_pr_context.py --pr 123 | jq -r '
+python3 int_get_pr_context.py --pr 123 | jq -r '
   if .headRepository.owner != .baseRepository.owner
   then "Fork PR: \(.headRepository.owner)/\(.headRepository.name):\(.headRefName) → \(.baseRepository.owner)/\(.baseRepository.name):\(.baseRefName)"
   else "Same-repo PR: \(.headRefName) → \(.baseRefName)"
@@ -304,13 +304,13 @@ Before attempting to merge, always check the merge status.
 
 ```bash
 # Quick merge status check
-python3 atlas_get_pr_context.py --pr 123 | jq -r '.mergeable'
+python3 int_get_pr_context.py --pr 123 | jq -r '.mergeable'
 
 # Detailed merge state
-python3 atlas_get_pr_context.py --pr 123 | jq -r '.mergeStateStatus'
+python3 int_get_pr_context.py --pr 123 | jq -r '.mergeStateStatus'
 
 # Full merge readiness report
-python3 atlas_get_pr_context.py --pr 123 | jq -r '
+python3 int_get_pr_context.py --pr 123 | jq -r '
   "Mergeable: \(.mergeable)
    State: \(.mergeStateStatus)
    Draft: \(.isDraft)
@@ -334,7 +334,7 @@ Get a clear picture of review status.
 
 ```bash
 # List all reviewers and their states
-python3 atlas_get_pr_context.py --pr 123 | jq -r '
+python3 int_get_pr_context.py --pr 123 | jq -r '
   .reviews[] | "\(.author.login): \(.state)"'
 
 # Example output:
@@ -342,11 +342,11 @@ python3 atlas_get_pr_context.py --pr 123 | jq -r '
 # security-team: CHANGES_REQUESTED
 
 # List pending review requests
-python3 atlas_get_pr_context.py --pr 123 | jq -r '
+python3 int_get_pr_context.py --pr 123 | jq -r '
   .reviewRequests[].login'
 
 # Get summary
-python3 atlas_get_pr_context.py --pr 123 | jq -r '
+python3 int_get_pr_context.py --pr 123 | jq -r '
   "Approvals: \([.reviews[] | select(.state == "APPROVED")] | length)
    Changes Requested: \([.reviews[] | select(.state == "CHANGES_REQUESTED")] | length)
    Pending Requests: \(.reviewRequests | length)"'
@@ -361,7 +361,7 @@ python3 atlas_get_pr_context.py --pr 123 | jq -r '
 A PR is ready to merge when all these conditions are met:
 
 ```bash
-python3 atlas_get_pr_context.py --pr 123 | jq -r '
+python3 int_get_pr_context.py --pr 123 | jq -r '
   {
     not_draft: (.isDraft == false),
     no_conflicts: (.mergeable == "MERGEABLE"),
@@ -378,11 +378,11 @@ python3 atlas_get_pr_context.py --pr 123 | jq -r '
 
 ```bash
 # Get pending reviewers
-python3 atlas_get_pr_context.py --pr 123 | jq -r '
+python3 int_get_pr_context.py --pr 123 | jq -r '
   "Waiting for review from: \(.reviewRequests | map(.login) | join(", "))"'
 
 # Get reviewers who requested changes (need re-review)
-python3 atlas_get_pr_context.py --pr 123 | jq -r '
+python3 int_get_pr_context.py --pr 123 | jq -r '
   "Need to address changes from: \([.reviews[] | select(.state == "CHANGES_REQUESTED") | .author.login] | join(", "))"'
 ```
 
@@ -390,15 +390,15 @@ python3 atlas_get_pr_context.py --pr 123 | jq -r '
 
 ```bash
 # List all labels
-python3 atlas_get_pr_context.py --pr 123 | jq -r '.labels[].name'
+python3 int_get_pr_context.py --pr 123 | jq -r '.labels[].name'
 
 # Check for specific label
-python3 atlas_get_pr_context.py --pr 123 | jq -r '
+python3 int_get_pr_context.py --pr 123 | jq -r '
   if any(.labels[]; .name == "needs-review")
   then "Has needs-review label"
   else "Does not have needs-review label"
   end'
 
 # Get labels as comma-separated list
-python3 atlas_get_pr_context.py --pr 123 | jq -r '.labels | map(.name) | join(", ")'
+python3 int_get_pr_context.py --pr 123 | jq -r '.labels | map(.name) | join(", ")'
 ```

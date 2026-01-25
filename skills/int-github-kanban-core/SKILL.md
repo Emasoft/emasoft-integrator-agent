@@ -1,6 +1,6 @@
 ---
-name: ao-github-kanban-core
-description: "Positions GitHub Projects V2 Kanban as THE SINGLE SOURCE OF TRUTH for Atlas orchestration. Every module is an issue, every assignment is an assignee, every status is a column. The orchestrator NEVER tracks work outside the board."
+name: int-github-kanban-core
+description: "Positions GitHub Projects V2 Kanban as THE SINGLE SOURCE OF TRUTH for Integrator orchestration. Every module is an issue, every assignment is an assignee, every status is a column. The orchestrator NEVER tracks work outside the board."
 license: Apache-2.0
 compatibility: "Requires GitHub CLI authentication, GitHub Projects V2 enabled repository, GraphQL API access, Python 3.8+"
 metadata:

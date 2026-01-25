@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Atlas Sync GitHub Issues Script
+Integrator Sync GitHub Issues Script
 
 Syncs modules with GitHub Issues:
 - Creates issues for new modules
@@ -8,8 +8,8 @@ Syncs modules with GitHub Issues:
 - Closes issues for removed/completed modules
 
 Usage:
-    python3 atlas_sync_github_issues.py
-    python3 atlas_sync_github_issues.py --dry-run
+    python3 int_sync_github_issues.py
+    python3 int_sync_github_issues.py --dry-run
 """
 
 import argparse

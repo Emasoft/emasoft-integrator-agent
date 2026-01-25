@@ -1,5 +1,5 @@
 ---
-name: ao-github-pr-merge
+name: int-github-pr-merge
 description: >
   PR merge operations including merge execution, auto-merge configuration,
   merge readiness verification, and merge state checking using GraphQL as
@@ -7,7 +7,7 @@ description: >
 license: Apache-2.0
 metadata:
   version: "1.0.0"
-  author: atlas-orchestrator
+  author: integrator-agent
   category: github-workflow
   tags:
     - github

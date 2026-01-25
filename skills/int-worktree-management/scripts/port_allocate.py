@@ -12,7 +12,7 @@ Port Ranges:
 - debug: 5555-5564 (10 ports)
 
 Registry Location:
-- Default: ~/.atlas-orchestrator/port-registry.json
+- Default: ~/.integrator-agent/port-registry.json
 - Environment variable: ATLAS_PORT_REGISTRY
 
 Usage Examples:

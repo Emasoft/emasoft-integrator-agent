@@ -1,5 +1,5 @@
 ---
-name: ao-code-reviewer
+name: int-code-reviewer
 model: opus
 description: Reviews code changes for quality, security, and best practices
 type: evaluator
@@ -32,7 +32,7 @@ The Code Reviewer Agent is triggered in the following scenarios:
 
 - **When code changes need review**: A pull request has been created and requires quality assessment before merging
 - **When PR quality assessment required**: The orchestrator assigns a code review task as part of the development workflow
-- **When orchestrator assigns code review task**: Explicit task assignment from the Atlas Orchestrator with PR metadata and specifications
+- **When orchestrator assigns code review task**: Explicit task assignment from the Integrator Agent with PR metadata and specifications
 
 ## IRON RULES
 

@@ -317,7 +317,7 @@ git worktree list
 **Step 5: Update Registry**
 ```bash
 # If using worktree registry, sync it
-cd /path/to/atlas-orchestrator/registry
+cd /path/to/integrator-agent/registry
 python registry_validate.py --fix
 ```
 

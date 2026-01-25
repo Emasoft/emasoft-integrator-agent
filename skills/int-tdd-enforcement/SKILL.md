@@ -1,5 +1,5 @@
 ---
-name: ao-tdd-enforcement
+name: int-tdd-enforcement
 description: Enforces Test-Driven Development (TDD) discipline through the RED-GREEN-REFACTOR cycle. Implements the Iron Law - no production code can be written without a failing test that justifies its existence. The orchestrator ENFORCES TDD discipline on remote agents but NEVER writes tests or code itself. Orchestrator verifies remote agents follow TDD, reviews PRs to ensure TDD was followed, and rejects work that violates TDD principles. All actual test writing and code implementation is performed by Remote Developer Agents via AI Maestro.
 license: Apache-2.0
 compatibility: Requires understanding of TDD principles, RED-GREEN-REFACTOR cycle, test frameworks, and version control. Works with any programming language that supports automated testing.

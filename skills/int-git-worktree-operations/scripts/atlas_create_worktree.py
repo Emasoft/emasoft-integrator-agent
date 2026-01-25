@@ -6,8 +6,8 @@ This script fetches the PR branch from the remote and creates an isolated
 worktree directory for parallel PR processing.
 
 Usage:
-    python atlas_create_worktree.py --pr 123 --base-path /tmp/worktrees
-    python atlas_create_worktree.py --pr 123 --repo /path/to/repo --base-path /tmp/worktrees
+    python int_create_worktree.py --pr 123 --base-path /tmp/worktrees
+    python int_create_worktree.py --pr 123 --repo /path/to/repo --base-path /tmp/worktrees
 """
 
 import argparse

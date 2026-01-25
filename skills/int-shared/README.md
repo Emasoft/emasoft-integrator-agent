@@ -1,6 +1,6 @@
-# ao-shared
+# int-shared
 
-Shared reference documents used across multiple Atlas Orchestrator skills.
+Shared reference documents used across multiple Integrator Agent skills.
 
 ## Contents
 
@@ -9,4 +9,4 @@ Shared reference documents used across multiple Atlas Orchestrator skills.
 
 ## Usage
 
-This skill is referenced by other AO skills when they need shared protocols or reference documents.
+This skill is referenced by other Integrator Agent skills when they need shared protocols or reference documents.

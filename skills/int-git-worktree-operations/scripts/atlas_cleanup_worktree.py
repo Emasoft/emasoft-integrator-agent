@@ -6,8 +6,8 @@ This script checks for uncommitted changes, verifies commits are pushed,
 then removes the worktree and prunes stale entries.
 
 Usage:
-    python atlas_cleanup_worktree.py --worktree-path /tmp/worktrees/pr-123
-    python atlas_cleanup_worktree.py --worktree-path /tmp/worktrees/pr-123 --force
+    python int_cleanup_worktree.py --worktree-path /tmp/worktrees/pr-123
+    python int_cleanup_worktree.py --worktree-path /tmp/worktrees/pr-123 --force
 """
 
 import argparse

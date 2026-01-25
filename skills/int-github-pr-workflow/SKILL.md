@@ -1,10 +1,10 @@
 ---
-name: ao-orchestrator-pr-workflow
+name: int-github-pr-workflow
 description: Defines when and how the orchestrator coordinates PR review work, including delegation rules, verification workflows, and completion criteria.
 license: Apache-2.0
 metadata:
   version: 1.0.0
-  author: Atlas Orchestrator Team
+  author: Integrator Agent Team
   category: workflow
   tags:
     - pr-review

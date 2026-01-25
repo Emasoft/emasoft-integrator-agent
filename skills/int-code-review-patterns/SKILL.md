@@ -1,5 +1,5 @@
 ---
-name: ao-code-review-patterns
+name: int-code-review-patterns
 description: Teaches a two-stage code review methodology with confidence scoring, enabling rapid identification of critical issues while maintaining comprehensive multi-dimensional analysis across 8 review dimensions. Balances speed with thoroughness for both quick validation and in-depth examination.
 license: Apache-2.0
 compatibility: Requires intermediate software development experience and familiarity with code review basics. Designed for reviewers analyzing pull requests with 1-30+ file changes using an 8-dimensional evaluation framework.

@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-atlas_get_pr_files.py - Get list of changed files in a PR.
+int_get_pr_files.py - Get list of changed files in a PR.
 
 Usage:
-    python3 atlas_get_pr_files.py --pr NUMBER [--repo OWNER/REPO] [--include-patch]
+    python3 int_get_pr_files.py --pr NUMBER [--repo OWNER/REPO] [--include-patch]
 
 Exit codes (standardized):
     0 - Success, JSON array output to stdout

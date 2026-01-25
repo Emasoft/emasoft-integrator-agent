@@ -1,5 +1,5 @@
 ---
-name: ao-screenshot-analyzer
+name: int-screenshot-analyzer
 model: opus
 description: Analyzes screenshots and images on behalf of orchestrator to protect context memory
 type: local-helper

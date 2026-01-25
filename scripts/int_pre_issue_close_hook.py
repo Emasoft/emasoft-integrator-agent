@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-atlas_pre_issue_close_hook.py - GitHub issue closure gate with TDD enforcement.
+int_pre_issue_close_hook.py - GitHub issue closure gate with TDD enforcement.
 
 Prevents premature GitHub issue closure by verifying:
 1. PR exists and is linked to issue
@@ -16,11 +16,11 @@ NO external dependencies - Python 3.8+ stdlib only.
 
 Usage:
     # As PreToolUse hook (stdin JSON):
-    echo '{"tool_input":{"command":"gh issue close 42"}}' | python3 atlas_pre_issue_close_hook.py
+    echo '{"tool_input":{"command":"gh issue close 42"}}' | python3 int_pre_issue_close_hook.py
 
     # Direct invocation (for testing):
-    python3 atlas_pre_issue_close_hook.py <issue_number>
-    python3 atlas_pre_issue_close_hook.py 42
+    python3 int_pre_issue_close_hook.py <issue_number>
+    python3 int_pre_issue_close_hook.py 42
 
 Exit codes:
     0 - All checks passed (or non-matching command - allow)
@@ -314,8 +314,8 @@ def main() -> int:
             formatter_class=argparse.RawDescriptionHelpFormatter,
             epilog="""
 Examples:
-    python3 atlas_pre_issue_close_hook.py 42
-    python3 atlas_pre_issue_close_hook.py 123
+    python3 int_pre_issue_close_hook.py 42
+    python3 int_pre_issue_close_hook.py 123
             """,
         )
         parser.add_argument("issue_number", help="GitHub issue number to check")

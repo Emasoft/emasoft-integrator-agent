@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-atlas_pre_push_hook.py - Branch Protection for Git Push Operations.
+int_pre_push_hook.py - Branch Protection for Git Push Operations.
 
 Prevents direct pushes to main/master branch and enforces feature branch workflow.
 Validates branch naming conventions and provides guidance for proper git workflow.
@@ -13,10 +13,10 @@ NO external dependencies - Python 3.8+ stdlib only.
 
 Usage:
     # As PreToolUse hook (stdin JSON):
-    echo '{"tool_input":{"command":"git push"}}' | python3 atlas_pre_push_hook.py
+    echo '{"tool_input":{"command":"git push"}}' | python3 int_pre_push_hook.py
 
     # Direct invocation (for testing):
-    python3 atlas_pre_push_hook.py --command "git push origin main"
+    python3 int_pre_push_hook.py --command "git push origin main"
 
 Exit codes:
     0 - Allow (non-push command OR valid feature branch)

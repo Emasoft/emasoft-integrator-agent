@@ -1,5 +1,5 @@
 ---
-name: ao-integration-verifier
+name: int-integration-verifier
 model: claude-opus-4-5-20251101
 description: Verifies feature integration and cross-component compatibility
 type: evaluator

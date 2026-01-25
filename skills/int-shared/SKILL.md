@@ -1,6 +1,6 @@
 ---
-name: ao-shared
-description: Shared reference documents used across multiple Atlas Orchestrator skills.
+name: int-shared
+description: Shared reference documents used across multiple Integrator Agent skills.
 license: Apache-2.0
 metadata:
   author: Anthropic
@@ -10,7 +10,7 @@ context: fork
 
 # Shared References
 
-This skill provides shared reference documents that are used across multiple Atlas Orchestrator skills.
+This skill provides shared reference documents that are used across multiple Integrator Agent skills.
 
 ## Reference Documents
 

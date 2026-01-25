@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-atlas_github_lifecycle_core.py - Core utilities and data structures for GitHub lifecycle automation.
+int_github_lifecycle_core.py - Core utilities and data structures for GitHub lifecycle automation.
 
 This module provides:
 - Data classes for issues, documents, and validation results
@@ -8,7 +8,7 @@ This module provides:
 - Frontmatter parsing and content sanitization
 - Constants for validation
 
-Part of the Atlas GitHub Lifecycle Automation suite.
+Part of the Integrator GitHub Lifecycle Automation suite.
 """
 
 import json

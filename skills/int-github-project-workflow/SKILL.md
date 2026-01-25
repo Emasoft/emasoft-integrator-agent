@@ -1,5 +1,5 @@
 ---
-name: ao-github-project-workflow
+name: int-github-project-workflow
 description: Track multi-developer work using GitHub Projects boards, issues with acceptance criteria, and Kanban workflows.
 agent: api-coordinator
 context: fork

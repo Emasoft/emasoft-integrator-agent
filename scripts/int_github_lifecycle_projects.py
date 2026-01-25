@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-atlas_github_lifecycle_projects.py - Project and PR operations for GitHub lifecycle automation.
+int_github_lifecycle_projects.py - Project and PR operations for GitHub lifecycle automation.
 
 This module provides functions for:
 - Linking PRs to issues
@@ -8,7 +8,7 @@ This module provides functions for:
 - Moving issues between project columns
 - Listing project statuses
 
-Part of the Atlas GitHub Lifecycle Automation suite.
+Part of the Integrator GitHub Lifecycle Automation suite.
 """
 
 import json
@@ -16,7 +16,7 @@ import re
 import sys
 from typing import Optional
 
-from atlas_github_lifecycle_core import (
+from int_github_lifecycle_core import (
     run_gh_command,
     get_repo_info,
 )

@@ -199,7 +199,7 @@ The registry was not updated when worktrees were created or destroyed. This can 
 **Step 1: Run Registry Validation**
 ```bash
 # Navigate to the registry directory
-cd /path/to/atlas-orchestrator/registry
+cd /path/to/integrator-agent/registry
 
 # Run validation script in dry-run mode
 python registry_validate.py --dry-run
@@ -297,7 +297,7 @@ lsof -ti:8080 | xargs kill
 **Step 3: Reallocate Port**
 ```bash
 # Use the registry script to allocate a new port
-cd /path/to/atlas-orchestrator/registry
+cd /path/to/integrator-agent/registry
 
 # Reallocate port for the worktree
 python registry_allocate_port.py --worktree my-feature --new-port

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-atlas_github_lifecycle.py - GitHub Issue Lifecycle Automation for Atlas.
+int_github_lifecycle.py - GitHub Issue Lifecycle Automation for Integrator.
 
 Automates the full issue lifecycle: create → link PR → move cards → close.
 Designed to save orchestrator tokens by handling GitHub operations via CLI.
@@ -17,39 +17,39 @@ Uses gh CLI for authentication (must be logged in via `gh auth login`).
 
 Usage:
     # Create issue from spec
-    python atlas_github_lifecycle.py create --spec docs/design/specs/auth.md --project 1
+    python int_github_lifecycle.py create --spec docs/design/specs/auth.md --project 1
 
     # Attach design document to existing issue
-    python atlas_github_lifecycle.py attach --issue 234 --document docs/design/specs/auth.md
+    python int_github_lifecycle.py attach --issue 234 --document docs/design/specs/auth.md
 
     # Bulk attach documents to issue
-    python atlas_github_lifecycle.py attach --issue 234 --documents docs/design/specs/*.md
+    python int_github_lifecycle.py attach --issue 234 --documents docs/design/specs/*.md
 
     # Link PR to issue
-    python atlas_github_lifecycle.py link-pr --issue 234 --pr 456
+    python int_github_lifecycle.py link-pr --issue 234 --pr 456
 
     # Move project card
-    python atlas_github_lifecycle.py move --issue 234 --status "In Progress"
+    python int_github_lifecycle.py move --issue 234 --status "In Progress"
 
     # Verify closure requirements
-    python atlas_github_lifecycle.py verify-close --issue 234
+    python int_github_lifecycle.py verify-close --issue 234
 
     # Validate frontmatter (single file)
-    python atlas_github_lifecycle.py validate --file docs/design/specs/auth.md
+    python int_github_lifecycle.py validate --file docs/design/specs/auth.md
 
     # Validate frontmatter (directory)
-    python atlas_github_lifecycle.py validate --dir docs/design/specs --strict
+    python int_github_lifecycle.py validate --dir docs/design/specs --strict
 
     # Validate with JSON output
-    python atlas_github_lifecycle.py validate --dir docs/design --json
+    python int_github_lifecycle.py validate --dir docs/design --json
 
 Dependencies: Python 3.8+, gh CLI (authenticated)
 
 Module Structure:
-- atlas_github_lifecycle.py (this file): CLI entry point
-- atlas_github_lifecycle_core.py: Data classes, utilities, constants
-- atlas_github_lifecycle_issues.py: Issue operations and validation
-- atlas_github_lifecycle_projects.py: Project and PR operations
+- int_github_lifecycle.py (this file): CLI entry point
+- int_github_lifecycle_core.py: Data classes, utilities, constants
+- int_github_lifecycle_issues.py: Issue operations and validation
+- int_github_lifecycle_projects.py: Project and PR operations
 """
 
 import argparse
@@ -58,10 +58,10 @@ import sys
 from pathlib import Path
 
 # Import core utilities
-from atlas_github_lifecycle_core import check_gh_auth, validate_frontmatter
+from int_github_lifecycle_core import check_gh_auth, validate_frontmatter
 
 # Import issue operations
-from atlas_github_lifecycle_issues import (
+from int_github_lifecycle_issues import (
     create_issue_from_spec,
     attach_document_to_issue,
     attach_multiple_documents,
@@ -71,7 +71,7 @@ from atlas_github_lifecycle_issues import (
 )
 
 # Import project operations
-from atlas_github_lifecycle_projects import (
+from int_github_lifecycle_projects import (
     link_pr_to_issue,
     move_issue_in_project,
     list_project_statuses,
@@ -85,30 +85,30 @@ __all__ = [
 def main() -> int:
     """Main entry point."""
     parser = argparse.ArgumentParser(
-        description="GitHub Issue Lifecycle Automation for Atlas",
+        description="GitHub Issue Lifecycle Automation for Integrator",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
   # Create issue from spec
-  python atlas_github_lifecycle.py create --spec docs/design/specs/auth.md
+  python int_github_lifecycle.py create --spec docs/design/specs/auth.md
 
   # Attach document to issue
-  python atlas_github_lifecycle.py attach --issue 234 --document docs/design/specs/auth.md
+  python int_github_lifecycle.py attach --issue 234 --document docs/design/specs/auth.md
 
   # Attach multiple documents
-  python atlas_github_lifecycle.py attach --issue 234 --documents docs/design/specs/auth.md docs/design/plans/impl.md
+  python int_github_lifecycle.py attach --issue 234 --documents docs/design/specs/auth.md docs/design/plans/impl.md
 
   # Link PR to issue
-  python atlas_github_lifecycle.py link-pr --issue 234 --pr 456
+  python int_github_lifecycle.py link-pr --issue 234 --pr 456
 
   # Move issue in project
-  python atlas_github_lifecycle.py move --issue 234 --project 1 --status "In Progress"
+  python int_github_lifecycle.py move --issue 234 --project 1 --status "In Progress"
 
   # Verify closure requirements
-  python atlas_github_lifecycle.py verify-close --issue 234
+  python int_github_lifecycle.py verify-close --issue 234
 
   # Search issues by UUID
-  python atlas_github_lifecycle.py search --query "PROJ-SPEC-20250108"
+  python int_github_lifecycle.py search --query "PROJ-SPEC-20250108"
         """,
     )
 

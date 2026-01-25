@@ -1,10 +1,10 @@
 ---
-name: ao-github-thread-management
+name: int-github-thread-management
 description: Manage GitHub PR review threads - resolve, unresolve, reply, and track comment conversations. CRITICAL - replying to a thread does NOT automatically resolve it.
 license: Apache-2.0
 metadata:
   version: "1.0.0"
-  author: "Atlas Orchestrator"
+  author: "Integrator Agent"
   tags:
     - github
     - pull-request

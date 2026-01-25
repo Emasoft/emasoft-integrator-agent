@@ -5,9 +5,9 @@ This script analyzes changed files in a GitHub PR or local diff
 and returns a breakdown of languages present.
 
 Usage:
-    python atlas_detect_pr_languages.py --repo owner/repo --pr 123
-    python atlas_detect_pr_languages.py --diff-file changes.diff
-    python atlas_detect_pr_languages.py --files file1.py file2.ts file3.rs
+    python int_detect_pr_languages.py --repo owner/repo --pr 123
+    python int_detect_pr_languages.py --diff-file changes.diff
+    python int_detect_pr_languages.py --files file1.py file2.ts file3.rs
 """
 
 from __future__ import annotations

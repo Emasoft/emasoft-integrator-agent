@@ -22,7 +22,7 @@
 
 ## Overview
 
-Port management in Atlas Orchestrator ensures that services running in different worktrees do not conflict by attempting to use the same network port. This reference document explains the complete port allocation system, including registry structure, allocation functions, CLI commands, and conflict resolution strategies.
+Port management in Integrator Agent ensures that services running in different worktrees do not conflict by attempting to use the same network port. This reference document explains the complete port allocation system, including registry structure, allocation functions, CLI commands, and conflict resolution strategies.
 
 ### What is a Port?
 
