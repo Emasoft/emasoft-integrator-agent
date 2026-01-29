@@ -38,7 +38,7 @@ All scripts import from `shared/cross_platform.py`:
 - `get_free_port()` - Find next available port in range
 
 ### Directory Operations
-- `get_atlas_dir()` - Platform-appropriate config directory location
+- `get_eia_dir()` - Platform-appropriate config directory location
 - `ensure_dir_exists()` - Create directory with proper permissions
 
 ### Process Operations
@@ -59,7 +59,7 @@ Scripts also import threshold configuration from `shared/thresholds.py`:
 Registry stored in `%LOCALAPPDATA%\design\` rather than `~/design/`:
 ```python
 # Windows path resolution
-atlas_dir = os.path.join(os.environ.get('LOCALAPPDATA', ''), 'design')
+eia_dir = os.path.join(os.environ.get('LOCALAPPDATA', ''), 'design')
 ```
 
 ### File Locking
@@ -87,7 +87,7 @@ os.rename(temp_file, target)
 ### Registry Location
 Registry stored in `~/design/`:
 ```python
-atlas_dir = os.path.expanduser('~/design')
+eia_dir = os.path.expanduser('~/design')
 ```
 
 ### File Locking

@@ -6,19 +6,19 @@
 
 ## 4.5 Automated Verification Script Usage
 
-### Using atlas_verify_worktree_isolation.py
+### Using eia_verify_worktree_isolation.py
 
 This script performs comprehensive isolation verification.
 
 **Basic usage:**
 ```bash
-python scripts/atlas_verify_worktree_isolation.py \
+python scripts/eia_verify_worktree_isolation.py \
     --worktree-path /tmp/worktrees/pr-123
 ```
 
 **With main repo check:**
 ```bash
-python scripts/atlas_verify_worktree_isolation.py \
+python scripts/eia_verify_worktree_isolation.py \
     --worktree-path /tmp/worktrees/pr-123 \
     --main-repo /path/to/main-repo
 ```
@@ -26,7 +26,7 @@ python scripts/atlas_verify_worktree_isolation.py \
 **Check all worktrees:**
 ```bash
 for wt in /tmp/worktrees/*/; do
-    python scripts/atlas_verify_worktree_isolation.py \
+    python scripts/eia_verify_worktree_isolation.py \
         --worktree-path "$wt" \
         --main-repo /path/to/main-repo
 done
@@ -67,7 +67,7 @@ done
 **Before commit:**
 ```bash
 # Verify before committing
-python scripts/atlas_verify_worktree_isolation.py -w /tmp/worktrees/pr-123
+python scripts/eia_verify_worktree_isolation.py -w /tmp/worktrees/pr-123
 if [ $? -ne 0 ]; then
     echo "Isolation violation detected, aborting commit"
     exit 1
@@ -78,7 +78,7 @@ git -C /tmp/worktrees/pr-123 commit -m "Safe commit"
 **Before cleanup:**
 ```bash
 # Verify before removal
-python scripts/atlas_verify_worktree_isolation.py -w /tmp/worktrees/pr-123
+python scripts/eia_verify_worktree_isolation.py -w /tmp/worktrees/pr-123
 if [ $? -eq 0 ]; then
     git worktree remove /tmp/worktrees/pr-123
 else

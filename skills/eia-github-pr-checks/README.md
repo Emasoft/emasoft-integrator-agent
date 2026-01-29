@@ -13,11 +13,11 @@ Monitor and interpret GitHub Pull Request CI/CD check statuses, wait for check c
 
 | Task | Command |
 |------|---------|
-| Get all check statuses | `python scripts/atlas_get_pr_checks.py --pr 123` |
-| Get required checks only | `python scripts/atlas_get_pr_checks.py --pr 123 --required-only` |
-| Quick merge readiness | `python scripts/atlas_get_pr_checks.py --pr 123 --summary-only` |
-| Wait for completion | `python scripts/atlas_wait_for_checks.py --pr 123 --timeout 600` |
-| Investigate failure | `python scripts/atlas_get_check_details.py --pr 123 --check "build"` |
+| Get all check statuses | `python scripts/eia_get_pr_checks.py --pr 123` |
+| Get required checks only | `python scripts/eia_get_pr_checks.py --pr 123 --required-only` |
+| Quick merge readiness | `python scripts/eia_get_pr_checks.py --pr 123 --summary-only` |
+| Wait for completion | `python scripts/eia_wait_for_checks.py --pr 123 --timeout 600` |
+| Investigate failure | `python scripts/eia_get_check_details.py --pr 123 --check "build"` |
 
 ## Check Conclusions
 

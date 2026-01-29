@@ -15,28 +15,28 @@ Manage GitHub Pull Request review threads - resolve, unresolve, reply to comment
 
 | Script | Purpose |
 |--------|---------|
-| `atlas_get_review_threads.py` | List all review threads (optionally unresolved only) |
-| `atlas_get_thread_by_id.py` | Get a single thread by its GraphQL ID |
-| `atlas_resolve_thread.py` | Resolve a single thread |
-| `atlas_unresolve_thread.py` | Unresolve (reopen) a resolved thread |
-| `atlas_resolve_threads_batch.py` | Resolve multiple threads in one API call |
-| `atlas_reply_to_thread.py` | Reply to a thread (optional `--and-resolve`) |
-| `atlas_get_unaddressed_comments.py` | Find comments without replies |
+| `eia_get_review_threads.py` | List all review threads (optionally unresolved only) |
+| `eia_get_thread_by_id.py` | Get a single thread by its GraphQL ID |
+| `eia_resolve_thread.py` | Resolve a single thread |
+| `eia_unresolve_thread.py` | Unresolve (reopen) a resolved thread |
+| `eia_resolve_threads_batch.py` | Resolve multiple threads in one API call |
+| `eia_reply_to_thread.py` | Reply to a thread (optional `--and-resolve`) |
+| `eia_get_unaddressed_comments.py` | Find comments without replies |
 
 ### Common Commands
 
 ```bash
 # Get unresolved threads
-python3 scripts/atlas_get_review_threads.py --owner OWNER --repo REPO --pr 123 --unresolved-only
+python3 scripts/eia_get_review_threads.py --owner OWNER --repo REPO --pr 123 --unresolved-only
 
 # Reply and resolve in one command
-python3 scripts/atlas_reply_to_thread.py --thread-id PRRT_xxx --body "Fixed" --and-resolve
+python3 scripts/eia_reply_to_thread.py --thread-id PRRT_xxx --body "Fixed" --and-resolve
 
 # Batch resolve after large refactor
-python3 scripts/atlas_resolve_threads_batch.py --thread-ids "PRRT_aaa,PRRT_bbb"
+python3 scripts/eia_resolve_threads_batch.py --thread-ids "PRRT_aaa,PRRT_bbb"
 
 # Reopen a resolved thread for further discussion
-python3 scripts/atlas_unresolve_thread.py --thread-id PRRT_xxx
+python3 scripts/eia_unresolve_thread.py --thread-id PRRT_xxx
 ```
 
 ## Documentation

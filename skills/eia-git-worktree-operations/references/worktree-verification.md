@@ -40,7 +40,7 @@ This document is organized into four parts for easier reference:
 [worktree-verification-part3-automated-manual.md](worktree-verification-part3-automated-manual.md)
 
 - 4.5 Automated verification script usage
-  - Using atlas_verify_worktree_isolation.py
+  - Using eia_verify_worktree_isolation.py
   - Interpreting Script Output
   - Integrating Verification into Workflow
 - 4.6 Manual verification when scripts fail
@@ -88,7 +88,7 @@ git -C /tmp/worktrees/pr-123 log @{u}..HEAD --oneline
 git -C /path/to/main-repo status --porcelain
 
 # Verify isolation with script
-python scripts/atlas_verify_worktree_isolation.py \
+python scripts/eia_verify_worktree_isolation.py \
     --worktree-path /tmp/worktrees/pr-123 \
     --main-repo /path/to/main-repo
 ```

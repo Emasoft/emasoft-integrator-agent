@@ -13,25 +13,25 @@ Comprehensive PR merge operations using GraphQL as the authoritative source of t
 
 | Script | Purpose |
 |--------|---------|
-| `atlas_test_pr_merged.py` | Check if PR is merged (GraphQL) |
-| `atlas_test_pr_merge_ready.py` | Verify all merge requirements |
-| `atlas_merge_pr.py` | Execute merge with strategy |
-| `atlas_set_auto_merge.py` | Enable/disable auto-merge |
+| `eia_test_pr_merged.py` | Check if PR is merged (GraphQL) |
+| `eia_test_pr_merge_ready.py` | Verify all merge requirements |
+| `eia_merge_pr.py` | Execute merge with strategy |
+| `eia_set_auto_merge.py` | Enable/disable auto-merge |
 
 ## Quick Start
 
 ```bash
 # Check if merged
-python scripts/atlas_test_pr_merged.py --pr 123 --repo owner/repo
+python scripts/eia_test_pr_merged.py --pr 123 --repo owner/repo
 
 # Check readiness
-python scripts/atlas_test_pr_merge_ready.py --pr 123 --repo owner/repo
+python scripts/eia_test_pr_merge_ready.py --pr 123 --repo owner/repo
 
 # Squash merge and delete branch
-python scripts/atlas_merge_pr.py --pr 123 --repo owner/repo --strategy squash --delete-branch
+python scripts/eia_merge_pr.py --pr 123 --repo owner/repo --strategy squash --delete-branch
 
 # Enable auto-merge
-python scripts/atlas_set_auto_merge.py --pr 123 --repo owner/repo --enable --merge-method SQUASH
+python scripts/eia_set_auto_merge.py --pr 123 --repo owner/repo --enable --merge-method SQUASH
 ```
 
 ## Critical Note

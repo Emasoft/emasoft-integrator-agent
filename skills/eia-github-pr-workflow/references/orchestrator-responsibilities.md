@@ -23,14 +23,14 @@ The orchestrator is the coordination layer between the user, GitHub, and special
 **Definition**: Periodically check the state of all relevant PRs to identify what actions are needed.
 
 **Implementation**:
-1. Run the `atlas_orchestrator_pr_poll.py` script every 10-15 minutes
+1. Run the `eia_orchestrator_pr_poll.py` script every 10-15 minutes
 2. Parse the output to identify PRs needing attention
 3. Prioritize based on urgency and user preferences
 4. Queue actions for delegation
 
 **Example polling command**:
 ```bash
-python scripts/atlas_orchestrator_pr_poll.py --repo owner/repo
+python scripts/eia_orchestrator_pr_poll.py --repo owner/repo
 ```
 
 **What to monitor**:

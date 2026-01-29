@@ -36,13 +36,13 @@ The orchestrator **NEVER** does direct work on PRs. It orchestrates, delegates, 
 
 ## Scripts
 
-- `scripts/atlas_orchestrator_pr_poll.py` - Survey all open PRs and prioritize actions
+- `scripts/eia_orchestrator_pr_poll.py` - Survey all open PRs and prioritize actions
   ```bash
-  python scripts/atlas_orchestrator_pr_poll.py --repo owner/repo
+  python scripts/eia_orchestrator_pr_poll.py --repo owner/repo
   ```
-- `scripts/atlas_verify_pr_completion.py` - Verify all completion criteria for a PR
+- `scripts/eia_verify_pr_completion.py` - Verify all completion criteria for a PR
   ```bash
-  python scripts/atlas_verify_pr_completion.py --repo owner/repo --pr 123
+  python scripts/eia_verify_pr_completion.py --repo owner/repo --pr 123
   ```
 
 ## References

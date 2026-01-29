@@ -127,7 +127,7 @@ export WORKTREE_ROOT="/tmp/worktrees/pr-123"
 
 Run the verification script periodically:
 ```bash
-python scripts/atlas_verify_worktree_isolation.py \
+python scripts/eia_verify_worktree_isolation.py \
     --worktree-path /tmp/worktrees/pr-123 \
     --main-repo /path/to/main-repo
 ```

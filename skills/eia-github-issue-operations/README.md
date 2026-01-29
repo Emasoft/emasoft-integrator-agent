@@ -20,11 +20,11 @@ Comprehensive GitHub Issue management using `gh` CLI - create issues, manage lab
 
 | Script | Purpose |
 |--------|---------|
-| `atlas_get_issue_context.py` | Get issue metadata (title, state, labels, assignees, milestone) |
-| `atlas_create_issue.py` | Create new issue with optional labels/assignee |
-| `atlas_set_issue_labels.py` | Add, remove, or set labels (supports `--auto-create`) |
-| `atlas_set_issue_milestone.py` | Assign issue to milestone |
-| `atlas_post_issue_comment.py` | Post comment (supports idempotent markers) |
+| `eia_get_issue_context.py` | Get issue metadata (title, state, labels, assignees, milestone) |
+| `eia_create_issue.py` | Create new issue with optional labels/assignee |
+| `eia_set_issue_labels.py` | Add, remove, or set labels (supports `--auto-create`) |
+| `eia_set_issue_milestone.py` | Assign issue to milestone |
+| `eia_post_issue_comment.py` | Post comment (supports idempotent markers) |
 
 ## Key Features
 

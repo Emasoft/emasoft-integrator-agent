@@ -44,10 +44,10 @@ The REST API and `gh pr view` can return stale data. GraphQL queries against the
 
 | Operation | Script | Purpose |
 |-----------|--------|---------|
-| Check if merged | `atlas_test_pr_merged.py` | Verify PR merge status via GraphQL |
-| Check readiness | `atlas_test_pr_merge_ready.py` | Verify all merge requirements met |
-| Execute merge | `atlas_merge_pr.py` | Merge with specified strategy |
-| Auto-merge | `atlas_set_auto_merge.py` | Enable/disable auto-merge |
+| Check if merged | `eia_test_pr_merged.py` | Verify PR merge status via GraphQL |
+| Check readiness | `eia_test_pr_merge_ready.py` | Verify all merge requirements met |
+| Execute merge | `eia_merge_pr.py` | Merge with specified strategy |
+| Auto-merge | `eia_set_auto_merge.py` | Enable/disable auto-merge |
 
 ## Decision Tree for PR Merge Operations
 
@@ -55,14 +55,14 @@ The REST API and `gh pr view` can return stale data. GraphQL queries against the
 START: Need to merge a PR
     │
     ├─► Is PR already merged?
-    │   Run: atlas_test_pr_merged.py --pr <number> --repo <owner/repo>
+    │   Run: eia_test_pr_merged.py --pr <number> --repo <owner/repo>
     │       │
     │       ├─► Exit 1 (merged) → STOP: PR already merged
     │       │
     │       └─► Exit 0 (not merged) → Continue
     │
     ├─► Is PR ready to merge?
-    │   Run: atlas_test_pr_merge_ready.py --pr <number> --repo <owner/repo>
+    │   Run: eia_test_pr_merge_ready.py --pr <number> --repo <owner/repo>
     │       │
     │       ├─► Exit 0 (ready) → Proceed to merge
     │       │
@@ -77,20 +77,20 @@ START: Need to merge a PR
     ├─► Should merge now or auto-merge?
     │       │
     │       ├─► Merge now:
-    │       │   Run: atlas_merge_pr.py --pr <number> --repo <owner/repo> \
+    │       │   Run: eia_merge_pr.py --pr <number> --repo <owner/repo> \
     │       │        --strategy <merge|squash|rebase> [--delete-branch]
     │       │
     │       └─► Auto-merge when ready:
-    │           Run: atlas_set_auto_merge.py --pr <number> --repo <owner/repo> \
+    │           Run: eia_set_auto_merge.py --pr <number> --repo <owner/repo> \
     │                --enable --merge-method <MERGE|SQUASH|REBASE>
     │
     └─► Verify merge completed:
-        Run: atlas_test_pr_merged.py --pr <number> --repo <owner/repo>
+        Run: eia_test_pr_merged.py --pr <number> --repo <owner/repo>
 ```
 
 ## When to Use Each Script
 
-### atlas_test_pr_merged.py
+### eia_test_pr_merged.py
 
 Use BEFORE attempting any merge operation to avoid:
 - Duplicate merge attempts
@@ -99,49 +99,49 @@ Use BEFORE attempting any merge operation to avoid:
 
 ```bash
 # Check if PR #123 in owner/repo is merged
-python scripts/atlas_test_pr_merged.py --pr 123 --repo owner/repo
+python scripts/eia_test_pr_merged.py --pr 123 --repo owner/repo
 ```
 
-### atlas_test_pr_merge_ready.py
+### eia_test_pr_merge_ready.py
 
 Use to understand WHY a PR cannot be merged:
 
 ```bash
 # Full readiness check
-python scripts/atlas_test_pr_merge_ready.py --pr 123 --repo owner/repo
+python scripts/eia_test_pr_merge_ready.py --pr 123 --repo owner/repo
 
 # Skip CI check (emergency merge)
-python scripts/atlas_test_pr_merge_ready.py --pr 123 --repo owner/repo --ignore-ci
+python scripts/eia_test_pr_merge_ready.py --pr 123 --repo owner/repo --ignore-ci
 
 # Skip unresolved threads check
-python scripts/atlas_test_pr_merge_ready.py --pr 123 --repo owner/repo --ignore-threads
+python scripts/eia_test_pr_merge_ready.py --pr 123 --repo owner/repo --ignore-threads
 ```
 
-### atlas_merge_pr.py
+### eia_merge_pr.py
 
 Use to execute the actual merge:
 
 ```bash
 # Squash merge and delete branch
-python scripts/atlas_merge_pr.py --pr 123 --repo owner/repo --strategy squash --delete-branch
+python scripts/eia_merge_pr.py --pr 123 --repo owner/repo --strategy squash --delete-branch
 
 # Regular merge commit
-python scripts/atlas_merge_pr.py --pr 123 --repo owner/repo --strategy merge
+python scripts/eia_merge_pr.py --pr 123 --repo owner/repo --strategy merge
 
 # Rebase merge
-python scripts/atlas_merge_pr.py --pr 123 --repo owner/repo --strategy rebase
+python scripts/eia_merge_pr.py --pr 123 --repo owner/repo --strategy rebase
 ```
 
-### atlas_set_auto_merge.py
+### eia_set_auto_merge.py
 
 Use when PR needs to wait for CI or reviews:
 
 ```bash
 # Enable auto-merge with squash
-python scripts/atlas_set_auto_merge.py --pr 123 --repo owner/repo --enable --merge-method SQUASH
+python scripts/eia_set_auto_merge.py --pr 123 --repo owner/repo --enable --merge-method SQUASH
 
 # Disable auto-merge
-python scripts/atlas_set_auto_merge.py --pr 123 --repo owner/repo --disable
+python scripts/eia_set_auto_merge.py --pr 123 --repo owner/repo --disable
 ```
 
 ## Reference Documents
@@ -213,18 +213,18 @@ See [references/auto-merge.md](references/auto-merge.md):
 
 ```bash
 # 1. Verify not already merged
-python scripts/atlas_test_pr_merged.py --pr 123 --repo owner/repo
+python scripts/eia_test_pr_merged.py --pr 123 --repo owner/repo
 # Exit 0 means not merged, continue
 
 # 2. Check readiness
-python scripts/atlas_test_pr_merge_ready.py --pr 123 --repo owner/repo
+python scripts/eia_test_pr_merge_ready.py --pr 123 --repo owner/repo
 # Exit 0 means ready
 
 # 3. Merge with squash
-python scripts/atlas_merge_pr.py --pr 123 --repo owner/repo --strategy squash --delete-branch
+python scripts/eia_merge_pr.py --pr 123 --repo owner/repo --strategy squash --delete-branch
 
 # 4. Verify merge completed
-python scripts/atlas_test_pr_merged.py --pr 123 --repo owner/repo
+python scripts/eia_test_pr_merged.py --pr 123 --repo owner/repo
 # Exit 1 confirms merged
 ```
 
@@ -232,20 +232,20 @@ python scripts/atlas_test_pr_merged.py --pr 123 --repo owner/repo
 
 ```bash
 # 1. Enable auto-merge (will merge when CI passes and reviews approved)
-python scripts/atlas_set_auto_merge.py --pr 123 --repo owner/repo --enable --merge-method SQUASH
+python scripts/eia_set_auto_merge.py --pr 123 --repo owner/repo --enable --merge-method SQUASH
 
 # 2. Later, check if merged
-python scripts/atlas_test_pr_merged.py --pr 123 --repo owner/repo
+python scripts/eia_test_pr_merged.py --pr 123 --repo owner/repo
 ```
 
 ### Workflow 3: Emergency Merge (Skip CI)
 
 ```bash
 # 1. Check readiness ignoring CI
-python scripts/atlas_test_pr_merge_ready.py --pr 123 --repo owner/repo --ignore-ci
+python scripts/eia_test_pr_merge_ready.py --pr 123 --repo owner/repo --ignore-ci
 
 # 2. If ready (exit 0), merge
-python scripts/atlas_merge_pr.py --pr 123 --repo owner/repo --strategy merge
+python scripts/eia_merge_pr.py --pr 123 --repo owner/repo --strategy merge
 ```
 
 ## Exit Codes (Standardized)
@@ -266,25 +266,25 @@ All scripts use standardized exit codes for consistent error handling:
 
 | Script | Exit 5 (Idempotency) | Exit 6 (Not Mergeable) |
 |--------|---------------------|------------------------|
-| atlas_test_pr_merged.py | PR already merged | N/A |
-| atlas_test_pr_merge_ready.py | N/A | Any blocking condition (see JSON for details) |
-| atlas_merge_pr.py | PR already merged | Conflicts, closed, not approved |
-| atlas_set_auto_merge.py | PR already merged | Cannot enable auto-merge |
+| eia_test_pr_merged.py | PR already merged | N/A |
+| eia_test_pr_merge_ready.py | N/A | Any blocking condition (see JSON for details) |
+| eia_merge_pr.py | PR already merged | Conflicts, closed, not approved |
+| eia_set_auto_merge.py | PR already merged | Cannot enable auto-merge |
 
 ## Troubleshooting
 
 ### PR shows as not merged but merge failed
 
-1. Run `atlas_test_pr_merged.py` to get authoritative state
+1. Run `eia_test_pr_merged.py` to get authoritative state
 2. Check GraphQL output for actual merge state
-3. If truly not merged, check `atlas_test_pr_merge_ready.py` for blockers
+3. If truly not merged, check `eia_test_pr_merge_ready.py` for blockers
 
 ### Auto-merge not triggering
 
 1. Verify repository has auto-merge enabled in settings
 2. Check branch protection rules allow auto-merge
 3. Verify required status checks are configured
-4. Use `atlas_test_pr_merge_ready.py` to see blocking reasons
+4. Use `eia_test_pr_merge_ready.py` to see blocking reasons
 
 ### Merge state showing UNKNOWN
 
@@ -304,10 +304,10 @@ All scripts are in the `scripts/` directory of this skill:
 
 ```
 scripts/
-├── atlas_test_pr_merged.py      # Check if PR is merged
-├── atlas_test_pr_merge_ready.py # Check merge eligibility
-├── atlas_merge_pr.py            # Execute merge
-└── atlas_set_auto_merge.py      # Enable/disable auto-merge
+├── eia_test_pr_merged.py      # Check if PR is merged
+├── eia_test_pr_merge_ready.py # Check merge eligibility
+├── eia_merge_pr.py            # Execute merge
+└── eia_set_auto_merge.py      # Enable/disable auto-merge
 ```
 
 Each script outputs JSON to stdout for easy parsing by automation tools.

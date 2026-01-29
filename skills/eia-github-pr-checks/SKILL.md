@@ -37,10 +37,10 @@ This skill enables agents to monitor, interpret, and wait for GitHub Pull Reques
 
 | Scenario | Script to Use |
 |----------|---------------|
-| Get current status of all PR checks | `atlas_get_pr_checks.py` |
-| Wait for all checks to finish | `atlas_wait_for_checks.py` |
-| Investigate a specific failing check | `atlas_get_check_details.py` |
-| Quick check if PR is mergeable | `atlas_get_pr_checks.py --summary-only` |
+| Get current status of all PR checks | `eia_get_pr_checks.py` |
+| Wait for all checks to finish | `eia_wait_for_checks.py` |
+| Investigate a specific failing check | `eia_get_check_details.py` |
+| Quick check if PR is mergeable | `eia_get_pr_checks.py --summary-only` |
 
 ## Decision Tree: Which Script Do I Need?
 
@@ -48,23 +48,23 @@ This skill enables agents to monitor, interpret, and wait for GitHub Pull Reques
 START: What do you need to know about PR checks?
 │
 ├─► "What is the current status of all checks?"
-│   └─► Use: atlas_get_pr_checks.py --pr <number>
+│   └─► Use: eia_get_pr_checks.py --pr <number>
 │       Returns: List of all checks with their conclusions
 │
 ├─► "Are all required checks passing?"
-│   └─► Use: atlas_get_pr_checks.py --pr <number> --required-only
+│   └─► Use: eia_get_pr_checks.py --pr <number> --required-only
 │       Returns: Status of only required checks
 │
 ├─► "I need to wait until checks complete"
-│   └─► Use: atlas_wait_for_checks.py --pr <number> --timeout <seconds>
+│   └─► Use: eia_wait_for_checks.py --pr <number> --timeout <seconds>
 │       Returns: Final status after all checks complete or timeout
 │
 ├─► "Why did a specific check fail?"
-│   └─► Use: atlas_get_check_details.py --pr <number> --check <name>
+│   └─► Use: eia_get_check_details.py --pr <number> --check <name>
 │       Returns: Detailed check info including logs URL
 │
 └─► "Is this PR ready to merge?"
-    └─► Use: atlas_get_pr_checks.py --pr <number> --summary-only
+    └─► Use: eia_get_pr_checks.py --pr <number> --summary-only
         Returns: Simple pass/fail summary
 ```
 
@@ -84,23 +84,23 @@ START: What do you need to know about PR checks?
 
 ## Scripts Reference
 
-### 1. atlas_get_pr_checks.py
+### 1. eia_get_pr_checks.py
 
 **Purpose**: Retrieve all check statuses for a Pull Request.
 
 **Usage**:
 ```bash
 # Get all checks for PR #123
-python atlas_get_pr_checks.py --pr 123
+python eia_get_pr_checks.py --pr 123
 
 # Get only required checks
-python atlas_get_pr_checks.py --pr 123 --required-only
+python eia_get_pr_checks.py --pr 123 --required-only
 
 # Get summary only (pass/fail count)
-python atlas_get_pr_checks.py --pr 123 --summary-only
+python eia_get_pr_checks.py --pr 123 --summary-only
 
 # Specify repository (if not in git directory)
-python atlas_get_pr_checks.py --pr 123 --repo owner/repo
+python eia_get_pr_checks.py --pr 123 --repo owner/repo
 ```
 
 **Output Format**:
@@ -125,20 +125,20 @@ python atlas_get_pr_checks.py --pr 123 --repo owner/repo
 }
 ```
 
-### 2. atlas_wait_for_checks.py
+### 2. eia_wait_for_checks.py
 
 **Purpose**: Poll and wait for all PR checks to complete.
 
 **Usage**:
 ```bash
 # Wait up to 10 minutes for checks
-python atlas_wait_for_checks.py --pr 123 --timeout 600
+python eia_wait_for_checks.py --pr 123 --timeout 600
 
 # Wait only for required checks
-python atlas_wait_for_checks.py --pr 123 --required-only --timeout 300
+python eia_wait_for_checks.py --pr 123 --required-only --timeout 300
 
 # Custom polling interval (default 30s)
-python atlas_wait_for_checks.py --pr 123 --interval 60
+python eia_wait_for_checks.py --pr 123 --interval 60
 ```
 
 **Output Format**:
@@ -157,17 +157,17 @@ python atlas_wait_for_checks.py --pr 123 --interval 60
 }
 ```
 
-### 3. atlas_get_check_details.py
+### 3. eia_get_check_details.py
 
 **Purpose**: Get detailed information about a specific check.
 
 **Usage**:
 ```bash
 # Get details for a specific check
-python atlas_get_check_details.py --pr 123 --check "build"
+python eia_get_check_details.py --pr 123 --check "build"
 
 # Include logs URL
-python atlas_get_check_details.py --pr 123 --check "test" --include-logs-url
+python eia_get_check_details.py --pr 123 --check "test" --include-logs-url
 ```
 
 **Output Format**:
@@ -281,4 +281,4 @@ All scripts use standardized exit codes for consistent error handling:
 | 5 | Idempotency skip | N/A for these scripts |
 | 6 | Not mergeable | N/A for these scripts |
 
-**Note:** `atlas_wait_for_checks.py` returns exit code 3 on timeout. Check the JSON output's `timed_out` field for details.
+**Note:** `eia_wait_for_checks.py` returns exit code 3 on timeout. Check the JSON output's `timed_out` field for details.

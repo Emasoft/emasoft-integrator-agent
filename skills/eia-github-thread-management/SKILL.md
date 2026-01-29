@@ -48,30 +48,30 @@ START: You need to handle a review thread
 │   ├─► YES: Do you need to explain what was done?
 │   │   │
 │   │   ├─► YES: Reply THEN Resolve (two operations)
-│   │   │       See: scripts/atlas_reply_to_thread.py --and-resolve
+│   │   │       See: scripts/eia_reply_to_thread.py --and-resolve
 │   │   │
 │   │   └─► NO: Just Resolve (no reply needed)
-│   │           See: scripts/atlas_resolve_thread.py
+│   │           See: scripts/eia_resolve_thread.py
 │   │
 │   └─► NO: Is clarification needed from the reviewer?
 │       │
 │       ├─► YES: Reply only (keep thread OPEN)
-│       │       See: scripts/atlas_reply_to_thread.py (without --and-resolve)
+│       │       See: scripts/eia_reply_to_thread.py (without --and-resolve)
 │       │
 │       └─► NO: Leave thread untouched until you address it
 │
 ├─► Q: Do you need to resolve MULTIPLE threads at once?
 │   │
 │   └─► YES: Use batch resolution (1 API call for N threads)
-│           See: scripts/atlas_resolve_threads_batch.py
+│           See: scripts/eia_resolve_threads_batch.py
 │
 └─► Q: Do you need to find threads that still need attention?
     │
     ├─► Find all unresolved threads:
-    │   See: scripts/atlas_get_review_threads.py --unresolved-only
+    │   See: scripts/eia_get_review_threads.py --unresolved-only
     │
     └─► Find comments without any replies:
-        See: scripts/atlas_get_unaddressed_comments.py
+        See: scripts/eia_get_unaddressed_comments.py
 ```
 
 ## Key Concepts
@@ -141,11 +141,11 @@ All scripts are located in the `scripts/` subdirectory and output JSON to stdout
 
 | Script | Purpose | Key Parameters |
 |--------|---------|----------------|
-| `atlas_get_review_threads.py` | List all review threads on a PR | `--owner`, `--repo`, `--pr`, `--unresolved-only` |
-| `atlas_resolve_thread.py` | Resolve a single thread | `--thread-id` |
-| `atlas_resolve_threads_batch.py` | Resolve multiple threads (1 API call) | `--thread-ids` (comma-separated) |
-| `atlas_reply_to_thread.py` | Reply to a thread | `--thread-id`, `--body`, `--and-resolve` |
-| `atlas_get_unaddressed_comments.py` | Find comments without replies | `--owner`, `--repo`, `--pr` |
+| `eia_get_review_threads.py` | List all review threads on a PR | `--owner`, `--repo`, `--pr`, `--unresolved-only` |
+| `eia_resolve_thread.py` | Resolve a single thread | `--thread-id` |
+| `eia_resolve_threads_batch.py` | Resolve multiple threads (1 API call) | `--thread-ids` (comma-separated) |
+| `eia_reply_to_thread.py` | Reply to a thread | `--thread-id`, `--body`, `--and-resolve` |
+| `eia_get_unaddressed_comments.py` | Find comments without replies | `--owner`, `--repo`, `--pr` |
 
 ## Common Workflows
 
@@ -153,17 +153,17 @@ All scripts are located in the `scripts/` subdirectory and output JSON to stdout
 
 ```bash
 # Step 1: Get all unresolved threads
-python3 scripts/atlas_get_review_threads.py --owner OWNER --repo REPO --pr 123 --unresolved-only
+python3 scripts/eia_get_review_threads.py --owner OWNER --repo REPO --pr 123 --unresolved-only
 
 # Step 2: For each thread, make the code change, then resolve
-python3 scripts/atlas_resolve_thread.py --thread-id PRRT_xxxxx
+python3 scripts/eia_resolve_thread.py --thread-id PRRT_xxxxx
 ```
 
 ### Workflow 2: Reply and Resolve in One Command
 
 ```bash
 # When you want to explain what you did AND resolve
-python3 scripts/atlas_reply_to_thread.py \
+python3 scripts/eia_reply_to_thread.py \
   --thread-id PRRT_xxxxx \
   --body "Fixed by using the recommended approach" \
   --and-resolve
@@ -173,7 +173,7 @@ python3 scripts/atlas_reply_to_thread.py \
 
 ```bash
 # When you've addressed multiple comments in one commit
-python3 scripts/atlas_resolve_threads_batch.py \
+python3 scripts/eia_resolve_threads_batch.py \
   --thread-ids "PRRT_aaa,PRRT_bbb,PRRT_ccc"
 ```
 
@@ -181,7 +181,7 @@ python3 scripts/atlas_resolve_threads_batch.py \
 
 ```bash
 # Find comments that haven't received any reply yet
-python3 scripts/atlas_get_unaddressed_comments.py --owner OWNER --repo REPO --pr 123
+python3 scripts/eia_get_unaddressed_comments.py --owner OWNER --repo REPO --pr 123
 ```
 
 ## Troubleshooting
@@ -190,7 +190,7 @@ python3 scripts/atlas_get_unaddressed_comments.py --owner OWNER --repo REPO --pr
 
 **Cause**: The thread ID is incorrect or the thread was deleted.
 
-**Solution**: Re-fetch thread IDs using `atlas_get_review_threads.py`. Thread IDs start with `PRRT_` for review threads.
+**Solution**: Re-fetch thread IDs using `eia_get_review_threads.py`. Thread IDs start with `PRRT_` for review threads.
 
 ### Resolution Appears to Fail Silently
 
@@ -208,20 +208,20 @@ python3 scripts/atlas_get_unaddressed_comments.py --owner OWNER --repo REPO --pr
 
 **Cause**: This is expected behavior! Replying does not resolve.
 
-**Solution**: Use `--and-resolve` flag with `atlas_reply_to_thread.py`, or call `atlas_resolve_thread.py` separately.
+**Solution**: Use `--and-resolve` flag with `eia_reply_to_thread.py`, or call `eia_resolve_thread.py` separately.
 
 ### GraphQL Rate Limiting
 
 **Cause**: Too many API calls in short succession.
 
-**Solution**: Use batch operations (`atlas_resolve_threads_batch.py`) to resolve multiple threads in a single API call instead of individual calls.
+**Solution**: Use batch operations (`eia_resolve_threads_batch.py`) to resolve multiple threads in a single API call instead of individual calls.
 
 ## Script Usage Details
 
-### atlas_get_review_threads.py
+### eia_get_review_threads.py
 
 ```bash
-python3 scripts/atlas_get_review_threads.py \
+python3 scripts/eia_get_review_threads.py \
   --owner <repository_owner> \
   --repo <repository_name> \
   --pr <pull_request_number> \
@@ -230,27 +230,27 @@ python3 scripts/atlas_get_review_threads.py \
 
 **Output**: JSON array of thread objects with `id`, `isResolved`, `path`, `line`, `body` (first comment).
 
-### atlas_resolve_thread.py
+### eia_resolve_thread.py
 
 ```bash
-python3 scripts/atlas_resolve_thread.py --thread-id <PRRT_xxx>
+python3 scripts/eia_resolve_thread.py --thread-id <PRRT_xxx>
 ```
 
 **Output**: JSON object with `success`, `threadId`, `isResolved`.
 
-### atlas_resolve_threads_batch.py
+### eia_resolve_threads_batch.py
 
 ```bash
-python3 scripts/atlas_resolve_threads_batch.py \
+python3 scripts/eia_resolve_threads_batch.py \
   --thread-ids "PRRT_aaa,PRRT_bbb,PRRT_ccc"
 ```
 
 **Output**: JSON object with `results` array containing per-thread success/failure.
 
-### atlas_reply_to_thread.py
+### eia_reply_to_thread.py
 
 ```bash
-python3 scripts/atlas_reply_to_thread.py \
+python3 scripts/eia_reply_to_thread.py \
   --thread-id <PRRT_xxx> \
   --body "Your reply message" \
   [--and-resolve]
@@ -258,10 +258,10 @@ python3 scripts/atlas_reply_to_thread.py \
 
 **Output**: JSON object with `success`, `commentId`, `resolved` (if --and-resolve used).
 
-### atlas_get_unaddressed_comments.py
+### eia_get_unaddressed_comments.py
 
 ```bash
-python3 scripts/atlas_get_unaddressed_comments.py \
+python3 scripts/eia_get_unaddressed_comments.py \
   --owner <repository_owner> \
   --repo <repository_name> \
   --pr <pull_request_number>
@@ -283,4 +283,4 @@ All scripts use standardized exit codes for consistent error handling:
 | 5 | Idempotency skip | Thread already resolved (for resolve scripts) |
 | 6 | Not mergeable | N/A for these scripts |
 
-**Note:** `atlas_resolve_threads_batch.py` returns exit code 0 for partial success. Check the JSON output's `summary.failed` field for individual failures.
+**Note:** `eia_resolve_threads_batch.py` returns exit code 0 for partial success. Check the JSON output's `summary.failed` field for individual failures.

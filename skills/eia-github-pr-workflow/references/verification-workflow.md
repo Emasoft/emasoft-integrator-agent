@@ -36,7 +36,7 @@
 
 Run the verification script:
 ```bash
-python scripts/atlas_verify_pr_completion.py --repo owner/repo --pr 123 --stage pre-review
+python scripts/eia_verify_pr_completion.py --repo owner/repo --pr 123 --stage pre-review
 ```
 
 ### If verification fails
@@ -75,7 +75,7 @@ A review comment is considered "addressed" when:
 ### Automated verification
 
 ```bash
-python scripts/atlas_verify_pr_completion.py --repo owner/repo --pr 123 --stage post-review
+python scripts/eia_verify_pr_completion.py --repo owner/repo --pr 123 --stage post-review
 ```
 
 ---
@@ -272,23 +272,23 @@ Escalate to user immediately when:
 ### Full verification
 
 ```bash
-python scripts/atlas_verify_pr_completion.py --repo owner/repo --pr 123
+python scripts/eia_verify_pr_completion.py --repo owner/repo --pr 123
 ```
 
 ### Stage-specific verification
 
 ```bash
 # Pre-review only
-python scripts/atlas_verify_pr_completion.py --repo owner/repo --pr 123 --stage pre-review
+python scripts/eia_verify_pr_completion.py --repo owner/repo --pr 123 --stage pre-review
 
 # Post-review only
-python scripts/atlas_verify_pr_completion.py --repo owner/repo --pr 123 --stage post-review
+python scripts/eia_verify_pr_completion.py --repo owner/repo --pr 123 --stage post-review
 
 # CI only
-python scripts/atlas_verify_pr_completion.py --repo owner/repo --pr 123 --stage ci
+python scripts/eia_verify_pr_completion.py --repo owner/repo --pr 123 --stage ci
 
 # Merge readiness only
-python scripts/atlas_verify_pr_completion.py --repo owner/repo --pr 123 --stage merge
+python scripts/eia_verify_pr_completion.py --repo owner/repo --pr 123 --stage merge
 ```
 
 ### Output interpretation

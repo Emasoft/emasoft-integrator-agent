@@ -26,13 +26,13 @@ Systematically diagnose and fix CI/CD pipeline failures across all platforms (Li
 ## Quick Start
 
 1. Read [SKILL.md](SKILL.md) for the decision tree
-2. Run diagnostic script: `python scripts/atlas_diagnose_ci_failure.py --log-file ci.log`
+2. Run diagnostic script: `python scripts/eia_diagnose_ci_failure.py --log-file ci.log`
 3. Consult the appropriate reference in `references/`
 
 ## Included Scripts
 
-- `atlas_diagnose_ci_failure.py` - Analyzes CI logs to identify failure patterns
-- `atlas_detect_platform_issue.py` - Scans source code for cross-platform issues
+- `eia_diagnose_ci_failure.py` - Analyzes CI logs to identify failure patterns
+- `eia_detect_platform_issue.py` - Scans source code for cross-platform issues
 
 ## Reference Documents
 

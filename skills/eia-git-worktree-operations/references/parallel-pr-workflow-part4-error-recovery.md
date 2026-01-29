@@ -12,7 +12,7 @@ This document covers:
 
 Run the isolation verification script:
 ```bash
-python scripts/atlas_verify_worktree_isolation.py \
+python scripts/eia_verify_worktree_isolation.py \
     --worktree-path /tmp/worktrees/pr-123 \
     --main-repo /path/to/main-repo \
     --check-git-status

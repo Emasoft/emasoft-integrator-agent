@@ -28,7 +28,7 @@
 **Option 1: Manual polling**
 The orchestrator explicitly runs the poll script:
 ```bash
-python scripts/atlas_orchestrator_pr_poll.py --repo owner/repo
+python scripts/eia_orchestrator_pr_poll.py --repo owner/repo
 ```
 
 **Option 2: Background task**
@@ -73,7 +73,7 @@ Use GitHub webhooks or CLI notifications when available.
 
 | Check | Command | Purpose |
 |-------|---------|---------|
-| Full verification | `atlas_verify_pr_completion.py` | Comprehensive status |
+| Full verification | `eia_verify_pr_completion.py` | Comprehensive status |
 | Unresolved threads | GraphQL query | Detect missed items |
 | Unpushed commits | `git log origin..HEAD` | Detect local work |
 
@@ -248,17 +248,17 @@ The orchestrator should notify the user when significant events occur.
 ### Full poll
 
 ```bash
-python scripts/atlas_orchestrator_pr_poll.py --repo owner/repo
+python scripts/eia_orchestrator_pr_poll.py --repo owner/repo
 ```
 
 ### Filtered poll
 
 ```bash
 # Only PRs needing action
-python scripts/atlas_orchestrator_pr_poll.py --repo owner/repo --filter needs_action
+python scripts/eia_orchestrator_pr_poll.py --repo owner/repo --filter needs_action
 
 # Only specific PR
-python scripts/atlas_orchestrator_pr_poll.py --repo owner/repo --pr 123
+python scripts/eia_orchestrator_pr_poll.py --repo owner/repo --pr 123
 ```
 
 ### Output example

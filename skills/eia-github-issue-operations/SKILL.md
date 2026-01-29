@@ -45,26 +45,26 @@ Before using this skill, ensure:
 Need to work with GitHub Issues?
 │
 ├─► Need issue information?
-│   └─► Use: atlas_get_issue_context.py
+│   └─► Use: eia_get_issue_context.py
 │       Returns: title, body, state, labels, assignees, milestone, comments count, linked PRs
 │
 ├─► Need to create a new issue?
-│   └─► Use: atlas_create_issue.py
+│   └─► Use: eia_create_issue.py
 │       Requires: --title, optional: --body, --labels, --assignee
 │       Returns: issue number and URL
 │
 ├─► Need to manage labels?
-│   ├─► Adding labels? → atlas_set_issue_labels.py --add "label1,label2"
-│   ├─► Removing labels? → atlas_set_issue_labels.py --remove "label1"
-│   └─► Setting exact labels? → atlas_set_issue_labels.py --set "label1,label2"
+│   ├─► Adding labels? → eia_set_issue_labels.py --add "label1,label2"
+│   ├─► Removing labels? → eia_set_issue_labels.py --remove "label1"
+│   └─► Setting exact labels? → eia_set_issue_labels.py --set "label1,label2"
 │       Note: Auto-creates missing labels if they don't exist
 │
 ├─► Need to assign to milestone?
-│   └─► Use: atlas_set_issue_milestone.py
+│   └─► Use: eia_set_issue_milestone.py
 │       Option: --create-if-missing to auto-create milestone
 │
 └─► Need to post a comment?
-    └─► Use: atlas_post_issue_comment.py
+    └─► Use: eia_post_issue_comment.py
         Option: --marker for idempotent comments (won't duplicate)
 ```
 
@@ -139,11 +139,11 @@ Need to work with GitHub Issues?
 
 | Script | Purpose | Required Args | Optional Args | Output |
 |--------|---------|---------------|---------------|--------|
-| `atlas_get_issue_context.py` | Get issue metadata | `--repo`, `--issue` | `--include-comments` | JSON with issue details |
-| `atlas_create_issue.py` | Create new issue | `--repo`, `--title` | `--body`, `--labels`, `--assignee`, `--milestone` | JSON with number, URL |
-| `atlas_set_issue_labels.py` | Manage labels | `--repo`, `--issue` | `--add`, `--remove`, `--set`, `--auto-create` | JSON with updated labels |
-| `atlas_set_issue_milestone.py` | Assign milestone | `--repo`, `--issue`, `--milestone` | `--create-if-missing` | JSON with milestone info |
-| `atlas_post_issue_comment.py` | Post comment | `--repo`, `--issue`, `--body` | `--marker` | JSON with comment ID, URL |
+| `eia_get_issue_context.py` | Get issue metadata | `--repo`, `--issue` | `--include-comments` | JSON with issue details |
+| `eia_create_issue.py` | Create new issue | `--repo`, `--title` | `--body`, `--labels`, `--assignee`, `--milestone` | JSON with number, URL |
+| `eia_set_issue_labels.py` | Manage labels | `--repo`, `--issue` | `--add`, `--remove`, `--set`, `--auto-create` | JSON with updated labels |
+| `eia_set_issue_milestone.py` | Assign milestone | `--repo`, `--issue`, `--milestone` | `--create-if-missing` | JSON with milestone info |
+| `eia_post_issue_comment.py` | Post comment | `--repo`, `--issue`, `--body` | `--marker` | JSON with comment ID, URL |
 
 ## Usage Examples
 
@@ -151,7 +151,7 @@ Need to work with GitHub Issues?
 
 ```bash
 # Get full issue context
-./scripts/atlas_get_issue_context.py --repo owner/repo --issue 123
+./scripts/eia_get_issue_context.py --repo owner/repo --issue 123
 
 # Output:
 {
@@ -170,7 +170,7 @@ Need to work with GitHub Issues?
 
 ```bash
 # Create issue with labels and assignee
-./scripts/atlas_create_issue.py \
+./scripts/eia_create_issue.py \
   --repo owner/repo \
   --title "Implement new feature X" \
   --body "## Description\nFeature details here" \
@@ -188,14 +188,14 @@ Need to work with GitHub Issues?
 
 ```bash
 # Add labels (auto-creates if missing)
-./scripts/atlas_set_issue_labels.py \
+./scripts/eia_set_issue_labels.py \
   --repo owner/repo \
   --issue 123 \
   --add "in-progress,needs-review" \
   --auto-create
 
 # Remove labels
-./scripts/atlas_set_issue_labels.py \
+./scripts/eia_set_issue_labels.py \
   --repo owner/repo \
   --issue 123 \
   --remove "needs-triage"
@@ -205,13 +205,13 @@ Need to work with GitHub Issues?
 
 ```bash
 # Assign to existing milestone
-./scripts/atlas_set_issue_milestone.py \
+./scripts/eia_set_issue_milestone.py \
   --repo owner/repo \
   --issue 123 \
   --milestone "v2.0"
 
 # Create milestone if it doesn't exist
-./scripts/atlas_set_issue_milestone.py \
+./scripts/eia_set_issue_milestone.py \
   --repo owner/repo \
   --issue 123 \
   --milestone "v3.0" \
@@ -222,7 +222,7 @@ Need to work with GitHub Issues?
 
 ```bash
 # Post comment with marker (won't duplicate if marker exists)
-./scripts/atlas_post_issue_comment.py \
+./scripts/eia_post_issue_comment.py \
   --repo owner/repo \
   --issue 123 \
   --body "## Status Update\nTask completed successfully." \
@@ -270,7 +270,7 @@ All scripts use standardized exit codes for consistent error handling:
 | 5 | Idempotency skip | Comment with marker already exists |
 | 6 | Not mergeable | N/A for these scripts |
 
-**Note:** `atlas_post_issue_comment.py` returns exit code 5 when a comment with the specified `--marker` already exists. The JSON output will have `"created": false`.
+**Note:** `eia_post_issue_comment.py` returns exit code 5 when a comment with the specified `--marker` already exists. The JSON output will have `"created": false`.
 
 ## Troubleshooting
 
@@ -309,9 +309,9 @@ gh auth login
 
 This skill integrates with the Integrator Agent workflow:
 
-1. **Task Creation:** When orchestrator receives a new task, use `atlas_create_issue.py` to create a tracking issue
-2. **Progress Updates:** Use `atlas_post_issue_comment.py` with markers to post status updates
-3. **Completion:** Use `atlas_set_issue_labels.py` to mark issues as completed
-4. **Milestone Tracking:** Use `atlas_set_issue_milestone.py` to organize work into releases
+1. **Task Creation:** When orchestrator receives a new task, use `eia_create_issue.py` to create a tracking issue
+2. **Progress Updates:** Use `eia_post_issue_comment.py` with markers to post status updates
+3. **Completion:** Use `eia_set_issue_labels.py` to mark issues as completed
+4. **Milestone Tracking:** Use `eia_set_issue_milestone.py` to organize work into releases
 
 See the main Integrator Agent documentation for workflow integration details.

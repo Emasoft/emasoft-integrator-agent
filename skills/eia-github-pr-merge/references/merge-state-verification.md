@@ -334,11 +334,11 @@ Always verify these conditions before attempting a merge:
 
 ### 1.4.2 Verification Script Usage
 
-Use the provided `atlas_test_pr_merge_ready.py` script:
+Use the provided `eia_test_pr_merge_ready.py` script:
 
 ```bash
 # Full verification
-python scripts/atlas_test_pr_merge_ready.py --pr 123 --repo owner/repo
+python scripts/eia_test_pr_merge_ready.py --pr 123 --repo owner/repo
 
 # JSON output explains any blocking reasons:
 # {

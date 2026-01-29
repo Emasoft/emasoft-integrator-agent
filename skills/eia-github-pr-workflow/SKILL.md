@@ -134,15 +134,15 @@ PR Review Request Received
 
 ## Scripts Reference
 
-### atlas_orchestrator_pr_poll.py
-**Location**: `scripts/atlas_orchestrator_pr_poll.py`
+### eia_orchestrator_pr_poll.py
+**Location**: `scripts/eia_orchestrator_pr_poll.py`
 **Purpose**: Get all open PRs, check status, identify actions needed
 **When to use**: On each polling interval to survey PR landscape
 **Output**: JSON with prioritized action list
 
 ```bash
 # Usage
-python scripts/atlas_orchestrator_pr_poll.py --repo owner/repo
+python scripts/eia_orchestrator_pr_poll.py --repo owner/repo
 
 # Output format
 {
@@ -158,15 +158,15 @@ python scripts/atlas_orchestrator_pr_poll.py --repo owner/repo
 }
 ```
 
-### atlas_verify_pr_completion.py
-**Location**: `scripts/atlas_verify_pr_completion.py`
+### eia_verify_pr_completion.py
+**Location**: `scripts/eia_verify_pr_completion.py`
 **Purpose**: Verify all completion criteria for a specific PR
 **When to use**: Before reporting PR ready, before merge
 **Output**: JSON pass/fail with detailed reasons
 
 ```bash
 # Usage
-python scripts/atlas_verify_pr_completion.py --repo owner/repo --pr 123
+python scripts/eia_verify_pr_completion.py --repo owner/repo --pr 123
 
 # Output format
 {

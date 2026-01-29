@@ -22,10 +22,10 @@ Review pull requests in repositories containing multiple programming languages (
 
 ```bash
 # Detect languages in a PR
-python scripts/atlas_detect_pr_languages.py --repo owner/repo --pr 123
+python scripts/eia_detect_pr_languages.py --repo owner/repo --pr 123
 
 # Get linters for detected languages
-python scripts/atlas_get_language_linters.py --languages python,typescript,rust
+python scripts/eia_get_language_linters.py --languages python,typescript,rust
 ```
 
 ## Key References
