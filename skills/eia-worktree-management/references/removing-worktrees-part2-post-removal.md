@@ -27,28 +27,28 @@
 ### Step 1: Update Registry
 
 **What to do:**
-Remove or mark the worktree entry as deleted in `.atlas/worktree-registry.json`.
+Remove or mark the worktree entry as deleted in `design/worktree-registry.json`.
 
 **Method A - Remove entry (recommended):**
 ```bash
 # Use jq to remove entry
 jq 'del(.worktrees[] | select(.worktree_id == "review-GH-42"))' \
-  .atlas/worktree-registry.json > temp.json && \
-  mv temp.json .atlas/worktree-registry.json
+  design/worktree-registry.json > temp.json && \
+  mv temp.json design/worktree-registry.json
 ```
 
 **Method B - Mark as deleted:**
 ```bash
 # Update status field
 jq '(.worktrees[] | select(.worktree_id == "review-GH-42") | .status) = "deleted"' \
-  .atlas/worktree-registry.json > temp.json && \
-  mv temp.json .atlas/worktree-registry.json
+  design/worktree-registry.json > temp.json && \
+  mv temp.json design/worktree-registry.json
 ```
 
 **Manual method (if jq unavailable):**
 ```bash
 # Edit registry file
-nano .atlas/worktree-registry.json
+nano design/worktree-registry.json
 
 # Remove this block:
 # {
@@ -62,7 +62,7 @@ nano .atlas/worktree-registry.json
 **Verification:**
 ```bash
 # Check entry is gone
-cat .atlas/worktree-registry.json | grep "review-GH-42"
+cat design/worktree-registry.json | grep "review-GH-42"
 # Should return nothing
 ```
 
@@ -80,10 +80,10 @@ Network ports (e.g., 3000, 8000) that were reserved for this worktree's developm
 
 **Option A - Update port tracker:**
 ```bash
-# If using .atlas/port-allocations.json
+# If using design/port-allocations.json
 jq 'del(.allocations["review-GH-42"])' \
-  .atlas/port-allocations.json > temp.json && \
-  mv temp.json .atlas/port-allocations.json
+  design/port-allocations.json > temp.json && \
+  mv temp.json design/port-allocations.json
 ```
 
 **Option B - Manual registry update:**
@@ -163,10 +163,10 @@ send-aimaestro-message.sh code-reviewer-1 \
 
 **Option B - Update agent registry:**
 ```bash
-# If using .atlas/agent-assignments.json
+# If using design/agent-assignments.json
 jq '(.agents[] | select(.agent_id == "code-reviewer-1") | .assigned_worktree) = null' \
-  .atlas/agent-assignments.json > temp.json && \
-  mv temp.json .atlas/agent-assignments.json
+  design/agent-assignments.json > temp.json && \
+  mv temp.json design/agent-assignments.json
 ```
 
 ### Step 5: Document Removal
@@ -180,7 +180,7 @@ jq '(.agents[] | select(.agent_id == "code-reviewer-1") | .assigned_worktree) = 
 ```bash
 # Append to removal log
 echo "$(date -Iseconds) | review-GH-42 | GH-42 merged | removed by orchestrator" \
-  >> .atlas/worktree-removal-log.txt
+  >> design/worktree-removal-log.txt
 ```
 
 **Log format:**
@@ -222,8 +222,8 @@ set -euo pipefail
 
 FORCE=false
 DRY_RUN=false
-REGISTRY_PATH=".atlas/worktree-registry.json"
-LOG_PATH=".atlas/worktree-removal-log.txt"
+REGISTRY_PATH="design/worktree-registry.json"
+LOG_PATH="design/worktree-removal-log.txt"
 
 # Parse arguments
 while [[ $# -gt 0 ]]; do
@@ -408,15 +408,15 @@ Registry shows worktree exists, but `git worktree list` doesn't show it.
 git worktree list > /tmp/actual-worktrees.txt
 
 # Step 2: Compare with registry
-cat .atlas/worktree-registry.json | jq -r '.worktrees[].worktree_id'
+cat design/worktree-registry.json | jq -r '.worktrees[].worktree_id'
 
 # Step 3: Identify orphaned registry entries
 # (Entries in registry but not in git worktree list)
 
 # Step 4: Remove orphaned entries
 jq 'del(.worktrees[] | select(.worktree_id == "orphaned-id"))' \
-  .atlas/worktree-registry.json > temp.json && \
-  mv temp.json .atlas/worktree-registry.json
+  design/worktree-registry.json > temp.json && \
+  mv temp.json design/worktree-registry.json
 ```
 
 **Prevention:**

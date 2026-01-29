@@ -256,40 +256,40 @@ Contents:
 
 This skill includes two Python scripts for automated diagnosis:
 
-### int_diagnose_ci_failure.py
+### atlas_diagnose_ci_failure.py
 
 Analyzes CI failure logs to identify patterns and suggest fixes.
 
 ```bash
 # Analyze a log file
-python scripts/int_diagnose_ci_failure.py --log-file /path/to/ci.log
+python scripts/atlas_diagnose_ci_failure.py --log-file /path/to/ci.log
 
 # Analyze from stdin
-cat ci.log | python scripts/int_diagnose_ci_failure.py --stdin
+cat ci.log | python scripts/atlas_diagnose_ci_failure.py --stdin
 
 # Output as JSON
-python scripts/int_diagnose_ci_failure.py --log-file ci.log --json
+python scripts/atlas_diagnose_ci_failure.py --log-file ci.log --json
 ```
 
-### int_detect_platform_issue.py
+### atlas_detect_platform_issue.py
 
 Scans source code for platform-specific patterns that may cause CI failures.
 
 ```bash
 # Scan a directory
-python scripts/int_detect_platform_issue.py --path /path/to/project
+python scripts/atlas_detect_platform_issue.py --path /path/to/project
 
 # Scan specific file types
-python scripts/int_detect_platform_issue.py --path . --extensions .py .js .sh
+python scripts/atlas_detect_platform_issue.py --path . --extensions .py .js .sh
 
 # Output as JSON
-python scripts/int_detect_platform_issue.py --path . --json
+python scripts/atlas_detect_platform_issue.py --path . --json
 ```
 
 ## Workflow: Diagnosing a CI Failure
 
 1. **Collect the failure log** from the CI system
-2. **Run the diagnostic script**: `python scripts/int_diagnose_ci_failure.py --log-file ci.log`
+2. **Run the diagnostic script**: `python scripts/atlas_diagnose_ci_failure.py --log-file ci.log`
 3. **Follow the decision tree** if the script doesn't identify the pattern
 4. **Read the appropriate reference document** for detailed fix instructions
 5. **Apply the fix** following the documented pattern

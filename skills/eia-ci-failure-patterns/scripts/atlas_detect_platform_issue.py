@@ -6,9 +6,9 @@ This script scans source code for patterns that work on one platform but
 may fail on others (e.g., hardcoded paths, Windows-specific APIs).
 
 Usage:
-    python int_detect_platform_issue.py --path /path/to/project
-    python int_detect_platform_issue.py --path . --extensions .py .js .sh
-    python int_detect_platform_issue.py --path . --json
+    python atlas_detect_platform_issue.py --path /path/to/project
+    python atlas_detect_platform_issue.py --path . --extensions .py .js .sh
+    python atlas_detect_platform_issue.py --path . --json
 """
 
 import argparse

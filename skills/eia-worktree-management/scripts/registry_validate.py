@@ -916,8 +916,8 @@ def main() -> None:
     parser.add_argument(
         "registry",
         nargs="?",
-        default=".atlas/worktrees/registry.json",
-        help="Path to registry file (default: .atlas/worktrees/registry.json)",
+        default="design/worktrees/registry.json",
+        help="Path to registry file (default: design/worktrees/registry.json)",
     )
     parser.add_argument(
         "--fix",

@@ -63,18 +63,18 @@ This organization prevents mixing incompatible services and makes it easier to i
 
 ## Port Registry Structure
 
-The port registry is stored at `.atlas/worktrees/ports.json` relative to your repository root. This file contains all port allocations and range definitions.
+The port registry is stored at `design/worktrees/ports.json` relative to your repository root. This file contains all port allocations and range definitions.
 
 ### Registry File Location
 
 The registry file is located at:
 ```
-<repository-root>/.atlas/worktrees/ports.json
+<repository-root>/design/worktrees/ports.json
 ```
 
 **Example paths:**
-- `/home/user/myproject/.atlas/worktrees/ports.json`
-- `/Users/developer/repos/api-service/.atlas/worktrees/ports.json`
+- `/home/user/myproject/design/worktrees/ports.json`
+- `/Users/developer/repos/api-service/design/worktrees/ports.json`
 
 ### Full Registry Schema
 
@@ -208,11 +208,11 @@ The `metadata` section contains registry-level information.
 If the registry file does not exist, you must create it with the initial structure:
 
 ```bash
-# Create the .atlas/worktrees directory
-mkdir -p .atlas/worktrees
+# Create the design/worktrees directory
+mkdir -p design/worktrees
 
 # Initialize the registry file
-cat > .atlas/worktrees/ports.json << 'EOF'
+cat > design/worktrees/ports.json << 'EOF'
 {
   "ranges": {
     "web": {"start": 8080, "end": 8099, "description": "HTTP web servers"},

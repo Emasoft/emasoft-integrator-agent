@@ -6,9 +6,9 @@ This script parses the output of 'git worktree list' and returns structured
 information about each worktree including path, commit, and branch.
 
 Usage:
-    python int_list_worktrees.py
-    python int_list_worktrees.py --repo-path /path/to/repo
-    python int_list_worktrees.py --format table
+    python atlas_list_worktrees.py
+    python atlas_list_worktrees.py --repo-path /path/to/repo
+    python atlas_list_worktrees.py --format table
 """
 
 import argparse
@@ -88,7 +88,7 @@ def list_worktrees(
     repo_path: str, include_status: bool = False
 ) -> list[dict[str, Any]]:
     """List all worktrees for the repository."""
-    code, stdout, stderr = run_git(["worktree", "list"], cwd=repo_path)
+    code, stdout, _stderr = run_git(["worktree", "list"], cwd=repo_path)
     if code != 0:
         return []
 

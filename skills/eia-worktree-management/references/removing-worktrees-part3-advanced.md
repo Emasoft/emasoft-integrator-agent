@@ -46,7 +46,7 @@ done
 ```bash
 # Remove all worktrees with status "completed"
 jq -r '.worktrees[] | select(.status == "completed") | .worktree_id' \
-  .atlas/worktree-registry.json | while read -r worktree_id; do
+  design/worktree-registry.json | while read -r worktree_id; do
   echo "Removing $worktree_id..."
   ./scripts/cleanup-worktree.sh "$worktree_id"
 done
@@ -59,7 +59,7 @@ done
 CUTOFF=$(date -d '30 days ago' -Iseconds)
 
 jq -r ".worktrees[] | select(.created_at < \"$CUTOFF\") | .worktree_id" \
-  .atlas/worktree-registry.json | while read -r worktree_id; do
+  design/worktree-registry.json | while read -r worktree_id; do
   echo "Removing old worktree: $worktree_id..."
   ./scripts/cleanup-worktree.sh "$worktree_id"
 done
@@ -92,7 +92,7 @@ set -euo pipefail
 # Conditions: merged, closed, completed, older-than-30d
 
 CONDITION="${1:-}"
-REGISTRY_PATH=".atlas/worktree-registry.json"
+REGISTRY_PATH="design/worktree-registry.json"
 
 if [[ -z "$CONDITION" ]]; then
   echo "Usage: $0 <merged|closed|completed|older-than-30d>"
@@ -173,7 +173,7 @@ test -d "${PROJECT_ROOT}/review-GH-42" && echo "EXISTS" || echo "REMOVED"
 
 **Check 3: Registry updated**
 ```bash
-jq '.worktrees[] | select(.worktree_id == "review-GH-42")' .atlas/worktree-registry.json
+jq '.worktrees[] | select(.worktree_id == "review-GH-42")' design/worktree-registry.json
 # Should return nothing
 ```
 
@@ -202,7 +202,7 @@ set -euo pipefail
 # Usage: ./verify-worktree-removal.sh <worktree-id>
 
 WORKTREE_ID="${1:-}"
-REGISTRY_PATH=".atlas/worktree-registry.json"
+REGISTRY_PATH="design/worktree-registry.json"
 
 if [[ -z "$WORKTREE_ID" ]]; then
   echo "Usage: $0 <worktree-id>"
@@ -242,7 +242,7 @@ fi
 
 # Check 4: Removal logged
 echo -n "→ Removal logged... "
-if grep -q "$WORKTREE_ID" .atlas/worktree-removal-log.txt 2>/dev/null; then
+if grep -q "$WORKTREE_ID" design/worktree-removal-log.txt 2>/dev/null; then
   echo "PASS"
 else
   echo "WARN (not logged)"

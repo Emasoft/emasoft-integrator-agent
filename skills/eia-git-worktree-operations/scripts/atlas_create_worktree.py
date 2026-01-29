@@ -6,8 +6,8 @@ This script fetches the PR branch from the remote and creates an isolated
 worktree directory for parallel PR processing.
 
 Usage:
-    python int_create_worktree.py --pr 123 --base-path /tmp/worktrees
-    python int_create_worktree.py --pr 123 --repo /path/to/repo --base-path /tmp/worktrees
+    python atlas_create_worktree.py --pr 123 --base-path /tmp/worktrees
+    python atlas_create_worktree.py --pr 123 --repo /path/to/repo --base-path /tmp/worktrees
 """
 
 import argparse
@@ -46,7 +46,7 @@ def fetch_pr_branch(repo: str, pr_number: int) -> tuple[bool, str]:
 
 def create_worktree(repo: str, worktree_path: str, branch: str) -> tuple[bool, str]:
     """Create a worktree at the specified path. Returns (success, message)."""
-    code, stdout, stderr = run_git(
+    code, _stdout, stderr = run_git(
         ["worktree", "add", worktree_path, branch], cwd=repo
     )
     if code != 0:

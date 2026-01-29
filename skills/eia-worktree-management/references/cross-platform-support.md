@@ -56,10 +56,10 @@ Scripts also import threshold configuration from `shared/thresholds.py`:
 ## Windows-Specific Notes
 
 ### Registry Location
-Registry stored in `%LOCALAPPDATA%\.atlas\` rather than `~/.atlas/`:
+Registry stored in `%LOCALAPPDATA%\design\` rather than `~/design/`:
 ```python
 # Windows path resolution
-atlas_dir = os.path.join(os.environ.get('LOCALAPPDATA', ''), '.atlas')
+atlas_dir = os.path.join(os.environ.get('LOCALAPPDATA', ''), 'design')
 ```
 
 ### File Locking
@@ -85,9 +85,9 @@ os.rename(temp_file, target)
 ## macOS/Linux Notes
 
 ### Registry Location
-Registry stored in `~/.atlas/`:
+Registry stored in `~/design/`:
 ```python
-atlas_dir = os.path.expanduser('~/.atlas')
+atlas_dir = os.path.expanduser('~/design')
 ```
 
 ### File Locking
@@ -119,7 +119,7 @@ chmod +x scripts/*.py
 **Symptom**: `TimeoutError: Could not acquire file lock`
 **Solution**:
 1. Check for zombie processes: `ps aux | grep worktree`
-2. Manually remove lock file if stale: `rm ~/.atlas/.registry.lock`
+2. Manually remove lock file if stale: `rm ~/design/.registry.lock`
 
 ### Path Not Found on Windows
 **Symptom**: `FileNotFoundError` with Unix-style paths

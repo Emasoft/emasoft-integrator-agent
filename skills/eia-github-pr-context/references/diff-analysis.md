@@ -132,11 +132,11 @@ This shows a function being rewritten:
 
 When analyzing a PR, categorizing files by type helps prioritize review effort.
 
-**Using int_get_pr_files.py:**
+**Using atlas_get_pr_files.py:**
 
 ```bash
 # Get all changed files with their extensions
-python3 int_get_pr_files.py --pr 123 | jq -r '
+python3 atlas_get_pr_files.py --pr 123 | jq -r '
   .[] | "\(.filename) (\(.filename | split(".") | last))"'
 ```
 
@@ -154,7 +154,7 @@ python3 int_get_pr_files.py --pr 123 | jq -r '
 **Group Files by Category:**
 
 ```bash
-python3 int_get_pr_files.py --pr 123 | jq -r '
+python3 atlas_get_pr_files.py --pr 123 | jq -r '
   group_by(
     if .filename | test("\\.(py|js|ts|go|rs)$") then "source"
     elif .filename | test("test|spec") then "tests"
@@ -182,7 +182,7 @@ GitHub tracks file renames and copies, which is important for understanding refa
 **Checking for Renames:**
 
 ```bash
-python3 int_get_pr_files.py --pr 123 | jq -r '
+python3 atlas_get_pr_files.py --pr 123 | jq -r '
   .[] | select(.status == "renamed") |
   "\(.previous_filename) → \(.filename) (similarity: \(.similarity // "unknown")%)"'
 ```
@@ -207,7 +207,7 @@ Binary files (images, compiled files, etc.) show differently in diffs.
 **Identifying Binary Files:**
 
 ```bash
-python3 int_get_pr_files.py --pr 123 | jq -r '
+python3 atlas_get_pr_files.py --pr 123 | jq -r '
   .[] | select(.binary == true) | .filename'
 ```
 
@@ -221,7 +221,7 @@ Binary files a/images/logo.png and b/images/logo.png differ
 **Size Change for Binary Files:**
 
 ```bash
-python3 int_get_pr_files.py --pr 123 | jq -r '
+python3 atlas_get_pr_files.py --pr 123 | jq -r '
   .[] | select(.binary == true) |
   "\(.filename): \(.previous_size // 0) → \(.size) bytes"'
 ```
@@ -234,10 +234,10 @@ python3 int_get_pr_files.py --pr 123 | jq -r '
 
 Get a quick overview of change volume.
 
-**Using int_get_pr_diff.py with --stat:**
+**Using atlas_get_pr_diff.py with --stat:**
 
 ```bash
-python3 int_get_pr_diff.py --pr 123 --stat
+python3 atlas_get_pr_diff.py --pr 123 --stat
 ```
 
 **Example Output:**
@@ -258,7 +258,7 @@ python3 int_get_pr_diff.py --pr 123 --stat
 **Per-File Statistics:**
 
 ```bash
-python3 int_get_pr_files.py --pr 123 | jq -r '
+python3 atlas_get_pr_files.py --pr 123 | jq -r '
   .[] | "\(.filename): +\(.additions) -\(.deletions)"' | sort -t: -k2 -rn
 ```
 
@@ -277,7 +277,7 @@ Understand what types of changes are happening.
 
 ```bash
 # Count files by status
-python3 int_get_pr_files.py --pr 123 | jq -r '
+python3 atlas_get_pr_files.py --pr 123 | jq -r '
   group_by(.status) | .[] | "\(.[0].status): \(length) files"'
 ```
 
@@ -293,11 +293,11 @@ deleted: 1 files
 
 ```bash
 # New files only
-python3 int_get_pr_files.py --pr 123 | jq -r '
+python3 atlas_get_pr_files.py --pr 123 | jq -r '
   .[] | select(.status == "added") | .filename'
 
 # Deleted files only
-python3 int_get_pr_files.py --pr 123 | jq -r '
+python3 atlas_get_pr_files.py --pr 123 | jq -r '
   .[] | select(.status == "deleted") | .filename'
 ```
 
@@ -318,7 +318,7 @@ Use heuristics to estimate how complex a PR is to review.
 **Complexity Score Script:**
 
 ```bash
-python3 int_get_pr_files.py --pr 123 | jq -r '
+python3 atlas_get_pr_files.py --pr 123 | jq -r '
   {
     total_changes: (map(.additions + .deletions) | add),
     file_count: length,
@@ -350,31 +350,31 @@ python3 int_get_pr_files.py --pr 123 | jq -r '
 
 Focus on specific parts of the codebase.
 
-**Using int_get_pr_diff.py with --files:**
+**Using atlas_get_pr_diff.py with --files:**
 
 ```bash
 # Get diff for specific files only
-python3 int_get_pr_diff.py --pr 123 --files src/auth.py src/models/user.py
+python3 atlas_get_pr_diff.py --pr 123 --files src/auth.py src/models/user.py
 
 # Get diff for files matching a pattern (use shell expansion or jq filtering)
-python3 int_get_pr_files.py --pr 123 | jq -r '
+python3 atlas_get_pr_files.py --pr 123 | jq -r '
   .[] | select(.filename | test("^src/")) | .filename' |
-  xargs python3 int_get_pr_diff.py --pr 123 --files
+  xargs python3 atlas_get_pr_diff.py --pr 123 --files
 ```
 
 **Filter Files by Pattern:**
 
 ```bash
 # Only Python files
-python3 int_get_pr_files.py --pr 123 | jq -r '
+python3 atlas_get_pr_files.py --pr 123 | jq -r '
   [.[] | select(.filename | test("\\.py$"))] | .[] | .filename'
 
 # Only files in src/ directory
-python3 int_get_pr_files.py --pr 123 | jq -r '
+python3 atlas_get_pr_files.py --pr 123 | jq -r '
   [.[] | select(.filename | startswith("src/"))] | .[] | .filename'
 
 # Exclude test files
-python3 int_get_pr_files.py --pr 123 | jq -r '
+python3 atlas_get_pr_files.py --pr 123 | jq -r '
   [.[] | select(.filename | test("test|spec") | not)] | .[] | .filename'
 ```
 
@@ -397,7 +397,7 @@ Generated files should usually be skipped during review.
 **Filter Out Generated Files:**
 
 ```bash
-python3 int_get_pr_files.py --pr 123 | jq -r '
+python3 atlas_get_pr_files.py --pr 123 | jq -r '
   [.[] | select(
     (.filename | test("lock\\.json$|\\.lock$|node_modules|dist/|build/|\\.min\\.(js|css)$|__pycache__|_pb2\\.py$|\\.pb\\.go$")) | not
   )] | .[] | "\(.filename): +\(.additions) -\(.deletions)"'
@@ -410,7 +410,7 @@ When reviewing large PRs, focus on one area at a time.
 **Group Files by Top-Level Directory:**
 
 ```bash
-python3 int_get_pr_files.py --pr 123 | jq -r '
+python3 atlas_get_pr_files.py --pr 123 | jq -r '
   group_by(.filename | split("/")[0]) |
   .[] |
   {
@@ -434,9 +434,9 @@ docs/: 1 files (+40 -32)
 
 ```bash
 # Get only src/ changes
-FILES=$(python3 int_get_pr_files.py --pr 123 | jq -r '
+FILES=$(python3 atlas_get_pr_files.py --pr 123 | jq -r '
   [.[] | select(.filename | startswith("src/"))] | .[].filename')
-python3 int_get_pr_diff.py --pr 123 --files $FILES
+python3 atlas_get_pr_diff.py --pr 123 --files $FILES
 ```
 
 **Review Order Recommendation:**

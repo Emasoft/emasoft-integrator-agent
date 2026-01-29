@@ -5,8 +5,8 @@ description: Synchronizes GitHub issues, PRs, and project boards
 type: local-helper
 auto_skills:
   - session-memory
-  - github-integration
-  - github-projects-sync
+  - eia-github-integration
+  - eia-github-projects-sync
 memory_requirements: medium
 trigger: When GitHub issues/PRs need synchronization, project board needs updating, or orchestrator assigns GitHub management task
 skill_reference: eia-github-projects-sync

@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-int_get_pr_context.py - Get full PR context including metadata, files, and status.
+atlas_get_pr_context.py - Get full PR context including metadata, files, and status.
 
 Usage:
-    python3 int_get_pr_context.py --pr NUMBER [--repo OWNER/REPO] [--verbose]
+    python3 atlas_get_pr_context.py --pr NUMBER [--repo OWNER/REPO] [--verbose]
 
 Exit codes (standardized):
     0 - Success, JSON output to stdout
@@ -79,7 +79,7 @@ def get_pr_files(pr_number: int, repo: Optional[str]) -> list[dict]:
     if repo:
         cmd.extend(["--repo", repo])
 
-    returncode, stdout, stderr = run_gh_command(cmd)
+    returncode, stdout, _stderr = run_gh_command(cmd)
 
     if returncode != 0:
         return []
@@ -158,9 +158,6 @@ def main() -> int:
     except RuntimeError as e:
         # API error
         print(json.dumps({"error": str(e), "code": "API_ERROR"}))
-        return 3  # API error
-    except json.JSONDecodeError as e:
-        print(json.dumps({"error": f"Failed to parse API response: {e}", "code": "API_ERROR"}))
         return 3  # API error
 
 

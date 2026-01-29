@@ -1,5 +1,5 @@
 {
-  "name": "integrator-agent",
+  "name": "emasoft-integrator-agent",
   "version": "1.0.0",
   "description": "Quality gates, testing, merging, release candidates - ensures code quality before integration",
   "author": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Emasoft/integrator-agent"
+    "url": "https://github.com/Emasoft/emasoft-integrator-agent"
   },
   "license": "MIT",
   "engines": {
@@ -22,7 +22,9 @@
     "./agents/eia-bug-investigator.md",
     "./agents/eia-github-sync.md",
     "./agents/eia-committer.md",
-    "./agents/eia-screenshot-analyzer.md"
+    "./agents/eia-screenshot-analyzer.md",
+    "./agents/eia-debug-specialist.md",
+    "./agents/eia-test-engineer.md"
   ],
   "skills": "./skills/"
 }

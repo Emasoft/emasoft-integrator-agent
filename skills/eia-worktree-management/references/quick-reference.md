@@ -69,12 +69,12 @@ git worktree prune
 
 ### View Registry Contents
 ```bash
-cat ~/.atlas/worktree-registry.json
+cat ~/design/worktree-registry.json
 ```
 
 ### Pretty Print Registry
 ```bash
-cat ~/.atlas/worktree-registry.json | python -m json.tool
+cat ~/design/worktree-registry.json | python -m json.tool
 ```
 
 ### Validate Registry

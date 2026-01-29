@@ -6,8 +6,8 @@ This script checks for isolation violations where files may have been accidental
 written to the main repository or other worktrees instead of the assigned worktree.
 
 Usage:
-    python int_verify_worktree_isolation.py --worktree-path /tmp/worktrees/pr-123
-    python int_verify_worktree_isolation.py -w /tmp/worktrees/pr-123 --main-repo /path/to/repo
+    python atlas_verify_worktree_isolation.py --worktree-path /tmp/worktrees/pr-123
+    python atlas_verify_worktree_isolation.py -w /tmp/worktrees/pr-123 --main-repo /path/to/repo
 """
 
 import argparse
@@ -128,7 +128,7 @@ def find_other_worktrees(main_repo: str, exclude_path: str) -> list[str]:
 
 
 def check_cross_worktree_contamination(
-    worktrees: list[str], current_worktree: str
+    worktrees: list[str], _current_worktree: str
 ) -> list[dict[str, Any]]:
     """Check if other worktrees have unexpected changes."""
     violations = []

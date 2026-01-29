@@ -27,6 +27,18 @@
           }
         ]
       }
+    ],
+    "Stop": [
+      {
+        "_id": "eia-stop-check",
+        "_description": "Blocks exit until all integration work is complete",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ${CLAUDE_PLUGIN_ROOT}/scripts/eia_stop_hook.py"
+          }
+        ]
+      }
     ]
   }
 }

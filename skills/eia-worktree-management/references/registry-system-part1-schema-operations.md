@@ -40,11 +40,11 @@ Without a registry, managing multiple worktrees becomes chaotic. The registry pr
 The registry file is stored at:
 
 ```
-.atlas/worktrees/registry.json
+design/worktrees/registry.json
 ```
 
 **Path explanation:**
-- `.atlas/` - Hidden directory containing Atlas orchestrator metadata
+- `design/` - Hidden directory containing Atlas orchestrator metadata
 - `worktrees/` - Subdirectory dedicated to worktree management
 - `registry.json` - JSON file containing all worktree records
 

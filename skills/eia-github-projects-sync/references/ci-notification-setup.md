@@ -54,7 +54,7 @@ python -c "import secrets; print(secrets.token_hex(32))"
 export GITHUB_WEBHOOK_SECRET="your_generated_secret_here"
 
 # Add to .env file (gitignored)
-echo "GITHUB_WEBHOOK_SECRET=your_generated_secret_here" >> ~/.atlas/.env
+echo "GITHUB_WEBHOOK_SECRET=your_generated_secret_here" >> ~/design/.env
 ```
 
 ### 3. Configure GitHub Webhook
@@ -137,17 +137,17 @@ git push
 
 ### 5. Monitor Webhook Logs
 
-Webhook events are logged to `~/.atlas/webhook_logs/`:
+Webhook events are logged to `~/design/webhook_logs/`:
 
 ```bash
 # View recent webhooks
-ls -lt ~/.atlas/webhook_logs/ | head -10
+ls -lt ~/design/webhook_logs/ | head -10
 
 # Inspect specific event
-cat ~/.atlas/webhook_logs/20260101_123045_workflow_run.json | jq .
+cat ~/design/webhook_logs/20260101_123045_workflow_run.json | jq .
 
 # Monitor in real-time
-tail -f ~/.atlas/webhook_logs/*.json
+tail -f ~/design/webhook_logs/*.json
 ```
 
 ## Event Types and Notifications
@@ -173,7 +173,7 @@ export GITHUB_WEBHOOK_SECRET="your_secret"
 # Optional
 export WEBHOOK_PORT=9000                    # Default: 9000
 export WATCHED_BRANCHES="main,develop,prod" # Default: main,master,develop
-export LOG_DIR="$HOME/.atlas/webhook_logs"  # Default: ~/.atlas/webhook_logs
+export LOG_DIR="$HOME/design/webhook_logs"  # Default: ~/design/webhook_logs
 ```
 
 **Handler Configuration:**
@@ -242,10 +242,10 @@ check-aimaestro-messages.sh
 **Verify event routing:**
 ```bash
 # Check webhook event was logged
-ls -lt ~/.atlas/webhook_logs/ | head -5
+ls -lt ~/design/webhook_logs/ | head -5
 
 # Verify notification was sent
-cat ~/.atlas/webhook_logs/latest.json | jq '.payload_summary'
+cat ~/design/webhook_logs/latest.json | jq '.payload_summary'
 ```
 
 ### Handler Crashes

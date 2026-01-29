@@ -104,7 +104,7 @@ This bypasses the 7-day pending-removal period and removes immediately.
 **Symptom:** JSON parse errors when reading registry
 
 **Solution:**
-1. Restore from backup: `.atlas/worktrees/registry.json.backup`
+1. Restore from backup: `design/worktrees/registry.json.backup`
 2. If no backup, rebuild registry:
    ```bash
    atlas rebuild-registry --scan-worktrees
@@ -128,7 +128,7 @@ This bypasses the 7-day pending-removal period and removes immediately.
 **Symptom:** Registry validation fails with "duplicate ID" error
 
 **Solution:**
-1. Open `.atlas/worktrees/registry.json` in editor
+1. Open `design/worktrees/registry.json` in editor
 2. Find duplicate `id` values
 3. Rename one of them to make unique (follow naming convention)
 4. Validate: `atlas validate-registry`

@@ -12,9 +12,9 @@ Retrieve and analyze GitHub Pull Request context including metadata, diff, and c
 
 | Script | Purpose | Example |
 |--------|---------|---------|
-| `int_get_pr_context.py` | Full metadata & status | `python3 int_get_pr_context.py --pr 123` |
-| `int_get_pr_files.py` | List changed files | `python3 int_get_pr_files.py --pr 123` |
-| `int_get_pr_diff.py` | Get code diff | `python3 int_get_pr_diff.py --pr 123 --stat` |
+| `atlas_get_pr_context.py` | Full metadata & status | `python3 atlas_get_pr_context.py --pr 123` |
+| `atlas_get_pr_files.py` | List changed files | `python3 atlas_get_pr_files.py --pr 123` |
+| `atlas_get_pr_diff.py` | Get code diff | `python3 atlas_get_pr_diff.py --pr 123 --stat` |
 
 ## Prerequisites
 
@@ -29,9 +29,9 @@ github-pr-context/
 ├── SKILL.md              # Full skill documentation
 ├── README.md             # This file
 ├── scripts/              # Python scripts for PR operations
-│   ├── int_get_pr_context.py
-│   ├── int_get_pr_files.py
-│   └── int_get_pr_diff.py
+│   ├── atlas_get_pr_context.py
+│   ├── atlas_get_pr_files.py
+│   └── atlas_get_pr_diff.py
 └── references/           # Detailed reference documentation
     ├── pr-metadata.md    # PR metadata field reference
     └── diff-analysis.md  # Diff interpretation guide

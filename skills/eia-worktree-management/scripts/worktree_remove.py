@@ -61,7 +61,7 @@ class RegistryManager:
             registry_path: Path to registry.json file. If None, uses default location.
         """
         if registry_path is None:
-            # Default: .atlas/worktrees/registry.json in repo root
+            # Default: design/worktrees/registry.json in repo root
             self.registry_path = self._find_registry_path()
         else:
             self.registry_path = registry_path

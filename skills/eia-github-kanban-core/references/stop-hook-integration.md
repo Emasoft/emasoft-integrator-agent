@@ -321,7 +321,7 @@ The stop hook can be configured for different behaviors.
 
 ```bash
 # Set project-specific config
-gh api repos/OWNER/REPO/contents/.atlas/stop-hook-config.json \
+gh api repos/OWNER/REPO/contents/design/config/stop-hook-config.json \
   --method PUT \
   --field message="Update stop hook config" \
   --field content="$(base64 config.json)"

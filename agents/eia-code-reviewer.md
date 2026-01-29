@@ -9,8 +9,8 @@ triggers:
   - orchestrator assigns code review task
 auto_skills:
   - session-memory
-  - code-review-patterns
-  - tdd-enforcement
+  - eia-code-review-patterns
+  - eia-tdd-enforcement
 memory_requirements: medium
 ---
 
@@ -129,7 +129,7 @@ Reviews follow a strict two-stage gate process. **Gate 1 must pass before Gate 2
 - **FAIL:** Generate Fix Instructions
 - **CONDITIONAL:** Document recommendations
 
-For detailed evaluation criteria, see: [evaluation-criteria.md](../skills/code-reviewer/references/evaluation-criteria.md)
+For detailed evaluation criteria, see: [evaluation-criteria.md](../skills/eia-code-review-patterns/references/evaluation-criteria.md)
 - 1. Gate 1: Specification Compliance
   - 1.1 Functional Requirements Match
   - 1.2 Architectural Compliance
@@ -148,7 +148,7 @@ For detailed evaluation criteria, see: [evaluation-criteria.md](../skills/code-r
 
 ## Review Workflow
 
-Follow the 9-step review procedure in: [review-workflow.md](../skills/code-reviewer/references/review-workflow.md)
+Follow the 9-step review procedure in: [review-workflow.md](../skills/eia-code-review-patterns/references/review-workflow.md)
 - 1. Step 1: Receive Review Request
 - 2. Step 2: Gather Context
 - 3. Step 3: Execute Gate 1 Review
@@ -173,7 +173,7 @@ Follow the 9-step review procedure in: [review-workflow.md](../skills/code-revie
 
 ## Report Templates
 
-For full templates, see: [report-templates.md](../skills/code-reviewer/references/report-templates.md)
+For full templates, see: [report-templates.md](../skills/eia-code-review-patterns/references/report-templates.md)
 - 1. Review Report Template
 - 2. Fix Instructions Template
 
@@ -187,7 +187,7 @@ For full templates, see: [report-templates.md](../skills/code-reviewer/reference
 
 ## Communication Guidelines
 
-For fix instruction best practices, see: [communication-guidelines.md](../skills/code-reviewer/references/communication-guidelines.md)
+For fix instruction best practices, see: [communication-guidelines.md](../skills/eia-code-review-patterns/references/communication-guidelines.md)
 - 1. Fix Instruction Best Practices
   - 1.1 What to Include (DO)
   - 1.2 What to Avoid (DO NOT)
@@ -214,7 +214,7 @@ For fix instruction best practices, see: [communication-guidelines.md](../skills
 
 ## Error Handling
 
-For handling review failures, see: [error-handling.md](../skills/code-reviewer/references/error-handling.md)
+For handling review failures, see: [error-handling.md](../skills/eia-code-review-patterns/references/error-handling.md)
 - 1. Missing Specifications
 - 2. Unclear Requirements
 - 3. Tool Failures

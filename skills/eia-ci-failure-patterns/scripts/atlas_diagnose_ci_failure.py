@@ -6,9 +6,9 @@ This script analyzes CI failure logs and identifies likely causes based on
 known patterns across platforms (Linux, macOS, Windows) and languages.
 
 Usage:
-    python int_diagnose_ci_failure.py --log-file /path/to/ci.log
-    cat ci.log | python int_diagnose_ci_failure.py --stdin
-    python int_diagnose_ci_failure.py --log-file ci.log --json
+    python atlas_diagnose_ci_failure.py --log-file /path/to/ci.log
+    cat ci.log | python atlas_diagnose_ci_failure.py --stdin
+    python atlas_diagnose_ci_failure.py --log-file ci.log --json
 """
 
 import argparse

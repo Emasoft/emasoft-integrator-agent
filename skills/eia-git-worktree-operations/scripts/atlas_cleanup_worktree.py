@@ -6,8 +6,8 @@ This script checks for uncommitted changes, verifies commits are pushed,
 then removes the worktree and prunes stale entries.
 
 Usage:
-    python int_cleanup_worktree.py --worktree-path /tmp/worktrees/pr-123
-    python int_cleanup_worktree.py --worktree-path /tmp/worktrees/pr-123 --force
+    python atlas_cleanup_worktree.py --worktree-path /tmp/worktrees/pr-123
+    python atlas_cleanup_worktree.py --worktree-path /tmp/worktrees/pr-123 --force
 """
 
 import argparse
@@ -74,7 +74,7 @@ def remove_worktree(
         args.append("--force")
     args.append(worktree_path)
 
-    code, stdout, stderr = run_git(args, cwd=main_repo)
+    code, _stdout, stderr = run_git(args, cwd=main_repo)
     if code != 0:
         return False, f"Failed to remove worktree: {stderr}"
     return True, "Worktree removed successfully"
@@ -82,7 +82,7 @@ def remove_worktree(
 
 def prune_worktrees(main_repo: str) -> tuple[bool, str]:
     """Prune stale worktree entries. Returns (success, message)."""
-    code, stdout, stderr = run_git(["worktree", "prune"], cwd=main_repo)
+    code, _stdout, stderr = run_git(["worktree", "prune"], cwd=main_repo)
     if code != 0:
         return False, f"Failed to prune worktrees: {stderr}"
     return True, "Stale worktree entries pruned"

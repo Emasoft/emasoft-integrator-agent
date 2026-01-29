@@ -25,7 +25,7 @@ All documents (.md files) shared between agents MUST follow this protocol:
 1. **NEVER embed full document content in AI Maestro messages**
 2. Upload document to GitHub issue as comment attachment
 3. Send AI Maestro message with document URL only
-4. Recipient downloads and stores in `.atlas/received/`
+4. Recipient downloads and stores in `design/received/`
 
 ### Message Format
 
@@ -44,7 +44,7 @@ All documents (.md files) shared between agents MUST follow this protocol:
 ### Storage Structure
 
 ```
-.atlas/received/
+design/received/
   tasks/         # Task delegation documents
   reports/       # Completion and status reports
   acks/          # Acknowledgment documents

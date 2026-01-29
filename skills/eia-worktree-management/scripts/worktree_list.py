@@ -50,7 +50,7 @@ def get_registry_path() -> Path:
     Get the path to the worktree registry file.
 
     Returns:
-        Path to .atlas/worktrees/registry.json
+        Path to design/worktrees/registry.json
     """
     return cast(Path, get_atlas_dir()) / "worktrees" / "registry.json"
 

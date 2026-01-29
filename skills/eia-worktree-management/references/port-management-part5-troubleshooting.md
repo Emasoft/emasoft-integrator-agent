@@ -98,7 +98,7 @@ lsof -i :8080  # Note the PID and command
 kill <PID>
 
 # Option 2: Exclude the port from allocation
-# Edit .atlas/worktrees/ports.json and adjust the range:
+# Edit design/worktrees/ports.json and adjust the range:
 # Change "start": 8080 to "start": 8081
 # This reserves 8080 for the external process
 
@@ -302,7 +302,7 @@ python scripts/port_allocate.py --release <port>
 
 **Solution 2: Expand the port range**
 ```bash
-# Edit .atlas/worktrees/ports.json
+# Edit design/worktrees/ports.json
 # Increase the end port for the range
 
 # Before:
@@ -314,7 +314,7 @@ python scripts/port_allocate.py --release <port>
 
 **Solution 3: Add a new service type**
 ```bash
-# Edit .atlas/worktrees/ports.json
+# Edit design/worktrees/ports.json
 # Add a new range for a specific use case
 
 "ranges": {
@@ -332,7 +332,7 @@ python scripts/port_allocate.py --service web-staging --worktree your-worktree
 
 Port management in Integrator Agent provides:
 
-1. **Centralized Registry** - All port allocations tracked in `.atlas/worktrees/ports.json`
+1. **Centralized Registry** - All port allocations tracked in `design/worktrees/ports.json`
 2. **Automatic Allocation** - Functions to allocate and release ports programmatically
 3. **CLI Tools** - Scripts for common port operations
 4. **Conflict Prevention** - Detects and prevents port conflicts

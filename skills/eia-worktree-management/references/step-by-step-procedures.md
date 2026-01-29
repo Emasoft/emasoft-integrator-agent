@@ -37,18 +37,18 @@ Ensure the Atlas configuration directory is accessible:
 
 ```bash
 # Check if directory exists
-ls -la ~/.atlas/
+ls -la ~/design/
 
 # If not, create it
-mkdir -p ~/.atlas/
+mkdir -p ~/design/
 
 # Verify write permissions
-touch ~/.atlas/.write-test && rm ~/.atlas/.write-test
+touch ~/design/.write-test && rm ~/design/.write-test
 ```
 
 **Requirements:**
-- The `~/.atlas/` directory exists or can be created
-- You have write permissions to `~/.atlas/`
+- The `~/design/` directory exists or can be created
+- You have write permissions to `~/design/`
 - The directory will store the `worktree-registry.json` file
 
 ### Step 1.3: Plan Port Allocation

@@ -11,7 +11,7 @@ trigger:
   - Root cause analysis needed before implementing solution
 auto_skills:
   - session-memory
-  - tdd-enforcement
+  - eia-tdd-enforcement
 memory_requirements: medium
 ---
 

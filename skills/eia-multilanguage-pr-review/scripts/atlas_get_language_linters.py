@@ -5,9 +5,9 @@ This script returns linter recommendations, install commands, and run
 commands for specified programming languages.
 
 Usage:
-    python int_get_language_linters.py --language python
-    python int_get_language_linters.py --languages python,javascript,rust
-    python int_get_language_linters.py --all
+    python atlas_get_language_linters.py --language python
+    python atlas_get_language_linters.py --languages python,javascript,rust
+    python atlas_get_language_linters.py --all
 """
 
 import argparse

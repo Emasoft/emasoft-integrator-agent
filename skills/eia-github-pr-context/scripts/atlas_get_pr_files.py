@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-int_get_pr_files.py - Get list of changed files in a PR.
+atlas_get_pr_files.py - Get list of changed files in a PR.
 
 Usage:
-    python3 int_get_pr_files.py --pr NUMBER [--repo OWNER/REPO] [--include-patch]
+    python3 atlas_get_pr_files.py --pr NUMBER [--repo OWNER/REPO] [--include-patch]
 
 Exit codes (standardized):
     0 - Success, JSON array output to stdout
@@ -66,7 +66,7 @@ def get_pr_diff(pr_number: int, repo: Optional[str]) -> str:
     if repo:
         cmd.extend(["--repo", repo])
 
-    returncode, stdout, stderr = run_gh_command(cmd)
+    returncode, stdout, _stderr = run_gh_command(cmd)
 
     if returncode != 0:
         return ""
@@ -164,9 +164,6 @@ def main() -> int:
     except RuntimeError as e:
         # API error
         print(json.dumps({"error": str(e), "code": "API_ERROR"}))
-        return 3  # API error
-    except json.JSONDecodeError as e:
-        print(json.dumps({"error": f"Failed to parse API response: {e}", "code": "API_ERROR"}))
         return 3  # API error
 
 

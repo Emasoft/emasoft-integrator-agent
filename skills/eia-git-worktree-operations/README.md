@@ -36,20 +36,20 @@ Git worktree management for parallel PR processing. Enables simultaneous work on
 
 | Script | Purpose |
 |--------|---------|
-| `int_create_worktree.py` | Create worktree for a PR |
-| `int_list_worktrees.py` | List all active worktrees |
-| `int_cleanup_worktree.py` | Safely remove a worktree |
-| `int_verify_worktree_isolation.py` | Check isolation violations |
-| `int_worktree_commit_push.py` | Commit and push changes |
+| `atlas_create_worktree.py` | Create worktree for a PR |
+| `atlas_list_worktrees.py` | List all active worktrees |
+| `atlas_cleanup_worktree.py` | Safely remove a worktree |
+| `atlas_verify_worktree_isolation.py` | Check isolation violations |
+| `atlas_worktree_commit_push.py` | Commit and push changes |
 
 ## Quick Start
 
 ```bash
 # Create worktree for PR #123
-python scripts/int_create_worktree.py --pr 123 --base-path /tmp/worktrees
+python scripts/atlas_create_worktree.py --pr 123 --base-path /tmp/worktrees
 
 # Work in /tmp/worktrees/pr-123, then cleanup
-python scripts/int_cleanup_worktree.py --worktree-path /tmp/worktrees/pr-123
+python scripts/atlas_cleanup_worktree.py --worktree-path /tmp/worktrees/pr-123
 ```
 
 See [SKILL.md](SKILL.md) for complete documentation.

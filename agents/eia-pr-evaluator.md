@@ -5,8 +5,8 @@ description: Evaluates pull requests for merge readiness and quality standards
 type: evaluator
 auto_skills:
   - session-memory
-  - code-review-patterns
-  - github-integration
+  - eia-code-review-patterns
+  - eia-github-integration
 memory_requirements: medium
 ---
 

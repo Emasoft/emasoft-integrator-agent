@@ -21,7 +21,7 @@ context: fork
 This skill teaches how to manage Git worktrees within the Integrator Agent system. A worktree is an isolated Git working directory that allows you to work on multiple branches simultaneously without switching branches or creating separate clones.
 
 **Key Features:**
-- **Worktree Registry**: Centralized tracking at `~/.atlas/worktree-registry.json`
+- **Worktree Registry**: Centralized tracking at `~/design/worktree-registry.json`
 - **Port Allocation**: Managed port range 8100-8199 for services running in worktrees
 - **Parallel Development**: Work on multiple features, fixes, or experiments in parallel
 

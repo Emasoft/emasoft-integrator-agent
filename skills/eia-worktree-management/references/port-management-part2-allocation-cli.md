@@ -52,7 +52,7 @@ def allocate_port(service_type: str, worktree_id: str, description: str = "") ->
 ```
 
 **Algorithm:**
-1. Load the registry from `.atlas/worktrees/ports.json`
+1. Load the registry from `design/worktrees/ports.json`
 2. Verify `service_type` exists in `ranges`
 3. Get the start and end port for the service type
 4. Find all currently allocated ports in that range
@@ -80,7 +80,7 @@ print(f"Allocated port: {port}")  # Output: Allocated port: 8080
 ```
 Allocating port for service 'web' in worktree 'feature-login'
 Found available port: 8080
-Updated registry at .atlas/worktrees/ports.json
+Updated registry at design/worktrees/ports.json
 Allocated port: 8080
 ```
 
@@ -106,7 +106,7 @@ def release_port(port: int) -> bool:
 ```
 
 **Algorithm:**
-1. Load the registry from `.atlas/worktrees/ports.json`
+1. Load the registry from `design/worktrees/ports.json`
 2. Search for the port in the allocations array
 3. If found:
    - Remove the allocation entry
@@ -132,7 +132,7 @@ else:
 ```
 Releasing port 8080
 Port 8080 released successfully
-Updated registry at .atlas/worktrees/ports.json
+Updated registry at design/worktrees/ports.json
 ```
 
 ### Function: check_port_available()
@@ -154,7 +154,7 @@ def check_port_available(port: int) -> bool:
 ```
 
 **Algorithm:**
-1. Load the registry from `.atlas/worktrees/ports.json`
+1. Load the registry from `design/worktrees/ports.json`
 2. Check if the port exists in any allocation entry
 3. If found in allocations: Return False
 4. If not found in allocations: Check if port is actually free on the system
@@ -212,7 +212,7 @@ def list_allocated_ports(worktree_id: str) -> List[Dict[str, Any]]:
 ```
 
 **Algorithm:**
-1. Load the registry from `.atlas/worktrees/ports.json`
+1. Load the registry from `design/worktrees/ports.json`
 2. Filter allocations where `worktree` field matches `worktree_id`
 3. Return the filtered list
 
@@ -266,7 +266,7 @@ python scripts/port_allocate.py --service web --worktree review-GH-42 --descript
 ```
 Allocating port for service 'web' in worktree 'review-GH-42'
 Found available port: 8080
-Registry updated: .atlas/worktrees/ports.json
+Registry updated: design/worktrees/ports.json
 Allocated port: 8080
 
 You can start your service with:
@@ -303,7 +303,7 @@ python scripts/port_allocate.py --release 8080
 ```
 Releasing port 8080
 Port 8080 released successfully
-Registry updated: .atlas/worktrees/ports.json
+Registry updated: design/worktrees/ports.json
 ```
 
 **When to Use:**

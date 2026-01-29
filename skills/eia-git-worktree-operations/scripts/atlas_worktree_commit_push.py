@@ -6,8 +6,8 @@ This script stages all changes, commits with a message, and pushes to the remote
 branch. It includes safety checks and returns structured status information.
 
 Usage:
-    python int_worktree_commit_push.py --worktree-path /tmp/worktrees/pr-123 --message "Fix bug"
-    python int_worktree_commit_push.py -w /tmp/worktrees/pr-123 -m "Update" --push
+    python atlas_worktree_commit_push.py --worktree-path /tmp/worktrees/pr-123 --message "Fix bug"
+    python atlas_worktree_commit_push.py -w /tmp/worktrees/pr-123 -m "Update" --push
 """
 
 import argparse
@@ -43,7 +43,7 @@ def has_changes(worktree_path: str) -> bool:
 
 def stage_all_changes(worktree_path: str) -> tuple[bool, str]:
     """Stage all changes in the worktree."""
-    code, stdout, stderr = run_git(["add", "-A"], cwd=worktree_path)
+    code, _stdout, stderr = run_git(["add", "-A"], cwd=worktree_path)
     if code != 0:
         return False, f"Failed to stage changes: {stderr}"
     return True, "Changes staged"
@@ -66,7 +66,7 @@ def commit_changes(worktree_path: str, message: str) -> tuple[bool, str, str | N
 
 def push_changes(worktree_path: str, branch: str) -> tuple[bool, str]:
     """Push changes to remote."""
-    code, stdout, stderr = run_git(["push", "origin", branch], cwd=worktree_path)
+    code, _stdout, stderr = run_git(["push", "origin", branch], cwd=worktree_path)
     if code != 0:
         return False, f"Push failed: {stderr}"
     return True, "Changes pushed to remote"

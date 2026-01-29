@@ -169,7 +169,7 @@ python scripts/ci_webhook_handler.py --port 9000
 ```bash
 export GITHUB_WEBHOOK_SECRET="your_secret"
 export WEBHOOK_PORT=9000
-export LOG_DIR="$HOME/.atlas/webhook_logs"
+export LOG_DIR="$HOME/design/webhook_logs"
 ```
 
 ### Testing

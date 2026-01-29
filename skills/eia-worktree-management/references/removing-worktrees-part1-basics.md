@@ -150,12 +150,12 @@ kill -9 <PID>
 ### Step 4: Check Registry Entry
 
 **What is the registry?**
-A JSON file tracking all active worktrees, their ports, branches, and assigned agents. Located at `.atlas/worktree-registry.json`.
+A JSON file tracking all active worktrees, their ports, branches, and assigned agents. Located at `design/worktree-registry.json`.
 
 **How to check:**
 ```bash
 # View registry entry for this worktree
-cat .atlas/worktree-registry.json | grep -A 10 "review-GH-42"
+cat design/worktree-registry.json | grep -A 10 "review-GH-42"
 ```
 
 **Example registry entry:**
