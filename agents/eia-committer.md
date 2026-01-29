@@ -2,7 +2,10 @@
 name: eia-committer
 description: Creates detailed, searchable git commits with comprehensive WHAT and WHY documentation
 type: specialized
-trigger: "When git commits need detailed WHAT/WHY documentation, dual-git handling, or decision archaeology support"
+triggers:
+  - Git commits need detailed WHAT/WHY documentation
+  - Dual-git handling between public and private repos
+  - Decision archaeology support for commit history
 auto_skills:
   - session-memory
 memory_requirements: low

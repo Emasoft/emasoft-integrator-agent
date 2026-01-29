@@ -8,8 +8,10 @@ auto_skills:
   - eia-github-integration
   - eia-github-projects-sync
 memory_requirements: medium
-trigger: When GitHub issues/PRs need synchronization, project board needs updating, or orchestrator assigns GitHub management task
-skill_reference: eia-github-projects-sync
+triggers:
+  - GitHub issues/PRs need synchronization
+  - Project board needs updating
+  - Orchestrator assigns GitHub management task
 ---
 
 # GitHub Projects V2 Bidirectional Sync Agent

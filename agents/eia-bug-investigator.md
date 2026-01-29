@@ -3,7 +3,7 @@ name: eia-bug-investigator
 model: claude-sonnet-4-20250514
 description: Investigates and reproduces bugs with systematic debugging approach
 type: task-agent
-trigger:
+triggers:
   - Bug report requires investigation and root cause analysis
   - Test failures need systematic debugging
   - Debugging task requires evidence collection

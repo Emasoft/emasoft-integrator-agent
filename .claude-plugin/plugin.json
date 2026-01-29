@@ -16,6 +16,7 @@
   },
   "agents": [
     "./agents/eia-main.md",
+    "./agents/eia-api-coordinator.md",
     "./agents/eia-code-reviewer.md",
     "./agents/eia-pr-evaluator.md",
     "./agents/eia-integration-verifier.md",

@@ -5,8 +5,8 @@ description: Verifies feature integration and cross-component compatibility
 type: evaluator
 auto_skills:
   - session-memory
-  - eia-verification-patterns
   - eia-tdd-enforcement
+  - eia-shared
 memory_requirements: medium
 ---
 

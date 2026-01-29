@@ -37,7 +37,7 @@ import subprocess
 import sys
 from datetime import datetime
 from pathlib import Path
-from typing import Optional
+from typing import Any, Optional
 
 
 def get_log_file() -> Path:
@@ -424,8 +424,8 @@ def main() -> int:
     log("FIRED", "Stop hook triggered - checking for incomplete work", log_file)
 
     # Collect all incomplete work
-    issues = []
-    details = {}
+    issues: list[str] = []
+    details: dict[str, list[dict[str, Any]] | list[str]] = {}
 
     # Check 1: Pending PRs awaiting review
     pending_prs = get_pending_prs(log_file)

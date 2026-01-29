@@ -4,7 +4,7 @@ model: sonnet
 description: Diagnoses CI/CD failures, analyzes logs, and identifies root causes
 version: 1.0.0
 type: task-agent
-trigger:
+triggers:
   - CI/CD pipeline failure requires diagnosis
   - Build or test failures need root cause analysis
   - Platform-specific CI issues need identification
