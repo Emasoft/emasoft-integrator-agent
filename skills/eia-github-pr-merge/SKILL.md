@@ -1,9 +1,10 @@
 ---
 name: eia-github-pr-merge
 description: >
-  PR merge operations including merge execution, auto-merge configuration,
-  merge readiness verification, and merge state checking using GraphQL as
-  the authoritative source of truth.
+  Use when you need to merge pull requests, check merge status, verify merge readiness,
+  or configure auto-merge. Provides PR merge operations including merge execution,
+  auto-merge configuration, merge readiness verification, and merge state checking
+  using GraphQL as the authoritative source of truth.
 license: Apache-2.0
 metadata:
   version: "1.0.0"
@@ -28,7 +29,20 @@ context: fork
 
 # GitHub PR Merge Operations
 
+## Overview
+
 This skill provides comprehensive guidance for merging pull requests, checking merge status, verifying merge readiness, and configuring auto-merge using the GitHub API.
+
+## Prerequisites
+
+- GitHub CLI (`gh`) installed and authenticated
+- Python 3.8+ for running automation scripts
+- Repository write access for merge operations
+- GraphQL API access (included with standard GitHub authentication)
+
+## Instructions
+
+Follow the decision tree below to determine which operation to perform, then use the corresponding script.
 
 ## CRITICAL: GraphQL is the Source of Truth
 
@@ -271,7 +285,33 @@ All scripts use standardized exit codes for consistent error handling:
 | eia_merge_pr.py | PR already merged | Conflicts, closed, not approved |
 | eia_set_auto_merge.py | PR already merged | Cannot enable auto-merge |
 
-## Troubleshooting
+## Examples
+
+### Example 1: Complete PR Merge Workflow
+
+```bash
+# Check if PR is already merged
+python scripts/eia_test_pr_merged.py --pr 123 --repo owner/repo
+# Output: {"merged": false, "state": "OPEN"}
+
+# Check if PR is ready to merge
+python scripts/eia_test_pr_merge_ready.py --pr 123 --repo owner/repo
+# Output: {"ready": true, "merge_state": "MERGEABLE"}
+
+# Execute the merge
+python scripts/eia_merge_pr.py --pr 123 --repo owner/repo --strategy squash --delete-branch
+# Output: {"success": true, "merged_at": "2025-01-30T10:00:00Z"}
+```
+
+### Example 2: Enable Auto-Merge for CI-Pending PR
+
+```bash
+# Enable auto-merge - PR will merge when CI passes
+python scripts/eia_set_auto_merge.py --pr 456 --repo owner/repo --enable --merge-method SQUASH
+# Output: {"auto_merge_enabled": true}
+```
+
+## Error Handling
 
 ### PR shows as not merged but merge failed
 
@@ -311,3 +351,9 @@ scripts/
 ```
 
 Each script outputs JSON to stdout for easy parsing by automation tools.
+
+## Resources
+
+- [references/merge-state-verification.md](references/merge-state-verification.md) - GraphQL merge state verification
+- [references/merge-strategies.md](references/merge-strategies.md) - Merge strategy selection guide
+- [references/auto-merge.md](references/auto-merge.md) - Auto-merge configuration reference

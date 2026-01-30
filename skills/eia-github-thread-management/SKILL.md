@@ -1,6 +1,9 @@
 ---
 name: eia-github-thread-management
-description: Manage GitHub PR review threads - resolve, unresolve, reply, and track comment conversations. CRITICAL - replying to a thread does NOT automatically resolve it.
+description: >
+  Use when managing GitHub PR review threads. Manage GitHub PR review threads - resolve,
+  unresolve, reply, and track comment conversations. CRITICAL - replying to a thread
+  does NOT automatically resolve it.
 license: Apache-2.0
 metadata:
   version: "1.0.0"
@@ -29,7 +32,14 @@ This skill teaches you how to manage GitHub Pull Request review threads. Review 
 
 **CRITICAL UNDERSTANDING**: Replying to a review thread does NOT automatically resolve it. Resolution is a separate GraphQL mutation that must be explicitly called. Many developers assume replying resolves threads - this is incorrect.
 
-## When to Use This Skill
+## Prerequisites
+
+- GitHub CLI (`gh`) installed and authenticated
+- Python 3.8+ for running automation scripts
+- Repository collaborator access (required for resolving threads)
+- GraphQL API access
+
+## Instructions
 
 Use this skill when you need to:
 - Resolve one or more review threads after addressing feedback
@@ -184,7 +194,31 @@ python3 scripts/eia_resolve_threads_batch.py \
 python3 scripts/eia_get_unaddressed_comments.py --owner OWNER --repo REPO --pr 123
 ```
 
-## Troubleshooting
+## Examples
+
+### Example 1: Resolve All Unresolved Threads
+
+```bash
+# Get all unresolved threads
+python3 scripts/eia_get_review_threads.py --owner myorg --repo myrepo --pr 123 --unresolved-only
+# Output: [{"id": "PRRT_abc", "path": "src/main.py", "line": 42, ...}]
+
+# Resolve each thread
+python3 scripts/eia_resolve_thread.py --thread-id PRRT_abc
+# Output: {"success": true, "threadId": "PRRT_abc", "isResolved": true}
+```
+
+### Example 2: Reply and Resolve in One Command
+
+```bash
+python3 scripts/eia_reply_to_thread.py \
+  --thread-id PRRT_xyz \
+  --body "Fixed by refactoring the validation logic" \
+  --and-resolve
+# Output: {"success": true, "commentId": "...", "resolved": true}
+```
+
+## Error Handling
 
 ### "Thread not found" Error
 
@@ -284,3 +318,8 @@ All scripts use standardized exit codes for consistent error handling:
 | 6 | Not mergeable | N/A for these scripts |
 
 **Note:** `eia_resolve_threads_batch.py` returns exit code 0 for partial success. Check the JSON output's `summary.failed` field for individual failures.
+
+## Resources
+
+- [references/thread-resolution-protocol.md](references/thread-resolution-protocol.md) - Thread resolution workflow
+- [references/thread-conversation-tracking.md](references/thread-conversation-tracking.md) - Conversation tracking patterns

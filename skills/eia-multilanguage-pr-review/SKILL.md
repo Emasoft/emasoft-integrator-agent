@@ -1,6 +1,10 @@
 ---
 name: eia-multilanguage-pr-review
-description: Review pull requests in repositories containing multiple programming languages and targeting multiple platforms. Teaches language detection, routing reviews to appropriate checkers, and coordinating cross-language concerns.
+description: >
+  Use when reviewing PRs in multilanguage repositories. Review pull requests in
+  repositories containing multiple programming languages and targeting multiple
+  platforms. Teaches language detection, routing reviews to appropriate checkers,
+  and coordinating cross-language concerns.
 license: Apache-2.0
 version: 1.0.0
 author: Emasoft
@@ -34,6 +38,17 @@ Modern repositories often contain code in multiple programming languages. A sing
 - Bash scripts for automation and CI/CD
 
 Reviewing PRs in such repositories requires understanding which languages are affected and applying the appropriate review standards for each.
+
+## Prerequisites
+
+- GitHub CLI (`gh`) installed and authenticated
+- Python 3.8+ for running detection scripts
+- Language-specific linters installed (ruff, mypy, ESLint, clippy, etc.)
+- Git for local diff analysis
+
+## Instructions
+
+Follow the decision tree in this skill to determine which review patterns to apply based on detected languages.
 
 ## Challenges of Multilanguage Repositories
 
@@ -233,7 +248,36 @@ python scripts/eia_get_language_linters.py --languages python,typescript,bash
 4. **Platform assumptions**: Code working on Linux might fail on macOS due to path handling.
 5. **Different Python versions**: A repo might support Python 3.8-3.12 with different type hint syntax.
 
-## Troubleshooting
+## Examples
+
+### Example 1: Detect Languages and Run Linters
+
+```bash
+# Detect languages in PR
+python scripts/eia_detect_pr_languages.py --repo myorg/myrepo --pr 456
+# Output: {"languages": {"python": {"files": 12}, "typescript": {"files": 5}}}
+
+# Get recommended linters
+python scripts/eia_get_language_linters.py --languages python,typescript
+# Output: {"python": {"linters": ["ruff", "mypy"]}, "typescript": {"linters": ["eslint"]}}
+
+# Run linters for each language
+ruff check src/python/
+eslint src/typescript/
+```
+
+### Example 2: Cross-Language API Review
+
+```bash
+# Detect languages
+python scripts/eia_detect_pr_languages.py --repo myorg/myrepo --pr 789
+
+# If both Python (backend) and TypeScript (frontend) changed,
+# verify API contracts are consistent between them
+# Check OpenAPI/JSON schema compatibility
+```
+
+## Error Handling
 
 ### Problem: Language detection returns unexpected results
 **Solution**: Check .gitattributes for linguist overrides. Some files may be marked with `linguist-language` or `linguist-detectable=false`.
@@ -257,3 +301,13 @@ python scripts/eia_get_language_linters.py --languages python,typescript,bash
 - [ ] Ensure tests exist for new functionality in each language
 - [ ] Check CI configuration covers all affected languages
 - [ ] Verify documentation is updated if public APIs changed
+
+## Resources
+
+- [references/language-detection.md](references/language-detection.md) - Language detection methods
+- [references/python-review-patterns.md](references/python-review-patterns.md) - Python review checklist
+- [references/javascript-review-patterns.md](references/javascript-review-patterns.md) - JavaScript/TypeScript review
+- [references/rust-review-patterns.md](references/rust-review-patterns.md) - Rust review checklist
+- [references/go-review-patterns.md](references/go-review-patterns.md) - Go review checklist
+- [references/shell-review-patterns.md](references/shell-review-patterns.md) - Shell script review
+- [references/cross-platform-testing.md](references/cross-platform-testing.md) - Multi-OS testing

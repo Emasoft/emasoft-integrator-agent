@@ -1,6 +1,6 @@
 ---
 name: eia-design-management
-description: Manage design documents with structured search, validation, and creation workflows using GUUID-based tracking and standardized frontmatter.
+description: Use when managing design documents with structured search, validation, and creation workflows using GUUID-based tracking and standardized frontmatter.
 license: Apache-2.0
 compatibility: Requires Python 3.10 or higher.
 metadata:
@@ -12,7 +12,20 @@ context: fork
 
 # Design Document Management
 
+## Overview
+
 This skill provides comprehensive tooling for managing design documents in the `design/` directory hierarchy. It covers creating documents from templates, searching with structured queries, and validating frontmatter compliance.
+
+## Prerequisites
+
+Before using this skill, ensure:
+1. Python 3.10 or higher is installed
+2. The `design/` directory structure exists in the project root
+3. Write access to the design document directories
+
+## Instructions
+
+Follow the Core Workflow Sequence below to manage design documents effectively.
 
 ## Quick Start
 
@@ -151,7 +164,7 @@ Each reference document focuses on a specific aspect of design management. Read 
 
 ---
 
-## Troubleshooting
+## Error Handling
 
 **Reference:** [references/troubleshooting.md](references/troubleshooting.md)
 
@@ -261,6 +274,36 @@ design/
   architecture/  - System Architecture Documents
   template/      - Reusable Templates
 ```
+
+## Examples
+
+### Example 1: Create a New PDR Document
+
+```bash
+# Create a Product Design Review document
+python scripts/eia_design_create.py --type pdr --title "User Authentication Redesign"
+
+# Output: Created design/pdr/GUUID-20250129-0001-user-authentication-redesign.md
+```
+
+### Example 2: Search and Validate Documents
+
+```bash
+# Find all approved PDRs
+python scripts/eia_design_search.py --type pdr --status approved --format table
+
+# Validate all documents for frontmatter compliance
+python scripts/eia_design_validate.py --all --verbose
+```
+
+## Resources
+
+- [references/uuid-specification.md](references/uuid-specification.md) - GUUID format and generation
+- [references/document-types.md](references/document-types.md) - Six document type categories
+- [references/creating-documents.md](references/creating-documents.md) - Document creation workflow
+- [references/searching-documents.md](references/searching-documents.md) - Query and filter documents
+- [references/validating-documents.md](references/validating-documents.md) - Frontmatter validation
+- [references/troubleshooting.md](references/troubleshooting.md) - Common issues and fixes
 
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: eia-github-issue-operations
-description: Comprehensive GitHub Issue management including creation, labels, milestones, assignees, and comments using gh CLI
+description: Use when managing GitHub Issues including creation, labels, milestones, assignees, and comments using gh CLI.
 license: Apache-2.0
 metadata:
   version: "1.0.0"
@@ -25,7 +25,9 @@ context: fork
 
 This skill provides complete GitHub Issue management capabilities for orchestrator agents. It enables programmatic issue creation, labeling, milestone tracking, assignee management, and comment posting using the `gh` CLI tool.
 
-**When to use this skill:**
+## Instructions
+
+Use this skill when:
 - Creating issues from automated workflows
 - Managing issue labels and categorization
 - Tracking progress via milestones
@@ -145,7 +147,7 @@ Need to work with GitHub Issues?
 | `eia_set_issue_milestone.py` | Assign milestone | `--repo`, `--issue`, `--milestone` | `--create-if-missing` | JSON with milestone info |
 | `eia_post_issue_comment.py` | Post comment | `--repo`, `--issue`, `--body` | `--marker` | JSON with comment ID, URL |
 
-## Usage Examples
+## Examples
 
 ### Get Issue Context
 
@@ -272,7 +274,7 @@ All scripts use standardized exit codes for consistent error handling:
 
 **Note:** `eia_post_issue_comment.py` returns exit code 5 when a comment with the specified `--marker` already exists. The JSON output will have `"created": false`.
 
-## Troubleshooting
+## Error Handling
 
 ### Issue: "gh: command not found"
 
@@ -315,3 +317,9 @@ This skill integrates with the Integrator Agent workflow:
 4. **Milestone Tracking:** Use `eia_set_issue_milestone.py` to organize work into releases
 
 See the main Integrator Agent documentation for workflow integration details.
+
+## Resources
+
+- [references/label-management.md](references/label-management.md) - Label creation and naming conventions
+- [references/issue-templates.md](references/issue-templates.md) - Bug report, feature request, task templates
+- [references/milestone-tracking.md](references/milestone-tracking.md) - Milestone creation and assignment

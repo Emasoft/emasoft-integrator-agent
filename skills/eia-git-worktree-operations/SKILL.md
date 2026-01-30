@@ -1,6 +1,6 @@
 ---
 name: eia-git-worktree-operations
-description: Teaches parallel PR processing using git worktrees for isolated, concurrent development across multiple pull requests without branch switching overhead.
+description: Use when processing multiple PRs in parallel using git worktrees for isolated, concurrent development without branch switching overhead.
 license: Apache-2.0
 metadata:
   version: 1.0.0
@@ -22,6 +22,16 @@ context: fork
 ## Overview
 
 This skill teaches you how to use git worktrees for parallel PR processing. Git worktrees allow you to work on multiple branches simultaneously in separate directories while sharing a single git repository database.
+
+## Prerequisites
+
+Before using this skill, ensure:
+1. Git version 2.15 or higher is installed (`git --version`)
+2. Python 3.9 or higher is available for running scripts
+3. Sufficient disk space for multiple worktree directories
+4. Write access to a directory outside the main repository for worktree paths
+
+## Instructions
 
 ### When to Use This Skill
 
@@ -200,7 +210,38 @@ python scripts/eia_cleanup_worktree.py --worktree-path /tmp/worktrees/pr-123
 
 ---
 
-## Troubleshooting
+## Examples
+
+### Example 1: Create Worktree for a Single PR
+
+```bash
+# Create worktree for PR #123
+python scripts/eia_create_worktree.py --pr 123 --base-path /tmp/worktrees
+
+# Navigate to worktree and work
+cd /tmp/worktrees/pr-123
+# Make changes, commit, push
+
+# Clean up when done
+python scripts/eia_cleanup_worktree.py --worktree-path /tmp/worktrees/pr-123
+```
+
+### Example 2: Process Three PRs in Parallel
+
+```bash
+# Create worktrees for each PR
+python scripts/eia_create_worktree.py --pr 101 --base-path /tmp/worktrees
+python scripts/eia_create_worktree.py --pr 102 --base-path /tmp/worktrees
+python scripts/eia_create_worktree.py --pr 103 --base-path /tmp/worktrees
+
+# Assign each worktree to a different subagent
+# Each agent works in isolation in its own directory
+
+# Verify isolation periodically
+python scripts/eia_verify_worktree_isolation.py --worktree-path /tmp/worktrees/pr-101
+```
+
+## Error Handling
 
 ### Problem: "fatal: branch is already checked out"
 
@@ -233,6 +274,13 @@ python scripts/eia_cleanup_worktree.py --worktree-path /tmp/worktrees/pr-123
 **Solution:** See [parallel-pr-workflow.md](references/parallel-pr-workflow.md) section 2.5 for serialization strategies.
 
 ---
+
+## Resources
+
+- [references/worktree-fundamentals.md](references/worktree-fundamentals.md) - What worktrees are and how they work
+- [references/parallel-pr-workflow.md](references/parallel-pr-workflow.md) - Processing multiple PRs simultaneously
+- [references/worktree-cleanup.md](references/worktree-cleanup.md) - Safe worktree removal procedures
+- [references/worktree-verification.md](references/worktree-verification.md) - Isolation and integrity checks
 
 ## Quick Reference Card
 

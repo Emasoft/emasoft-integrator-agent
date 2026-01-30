@@ -1,6 +1,10 @@
 ---
 name: eia-github-projects-sync
-description: Manages team tasks through GitHub Projects V2, enabling INTEGRATOR-AGENT to track features, bugs, PRs, and issues with automatic CI integration. Provides GraphQL API operations for issue creation, status updates, and project synchronization across remote developer agents.
+description: >
+  Use when managing team tasks through GitHub Projects V2 or synchronizing project state.
+  Manages team tasks through GitHub Projects V2, enabling INTEGRATOR-AGENT to track features,
+  bugs, PRs, and issues with automatic CI integration. Provides GraphQL API operations for
+  issue creation, status updates, and project synchronization across remote developer agents.
 license: Apache-2.0
 compatibility: "Requires GitHub CLI authentication, GitHub Projects V2 enabled repository, GraphQL API access, Python 3.8+, and AI Maestro integration for notifications"
 metadata:
@@ -20,7 +24,15 @@ The GitHub Projects Sync skill enables the INTEGRATOR-AGENT to manage team tasks
 - **GitHub Projects** = Team/Project tasks (features, bugs, PRs, issues)
 - **Claude Tasks** = Orchestrator personal tasks ONLY (reading docs, planning, reviewing)
 
-## When to Use
+## Prerequisites
+
+- GitHub CLI (`gh`) installed and authenticated with `project` scope
+- GitHub Projects V2 enabled repository
+- GraphQL API access
+- Python 3.8+ for automation scripts
+- AI Maestro integration for notifications (optional)
+
+## Instructions
 
 Invoke this skill when:
 - Assigning GitHub issues to remote agents
@@ -338,7 +350,62 @@ github-projects-sync/
 
 ---
 
-## Troubleshooting
+## Examples
+
+### Example 1: Find and Query a Project
+
+```bash
+# List all projects
+gh api graphql -f query='
+  query {
+    repository(owner: "OWNER", name: "REPO") {
+      projectsV2(first: 10) {
+        nodes { id title number }
+      }
+    }
+  }
+'
+
+# Query project items
+gh api graphql -f query='
+  query {
+    node(id: "PVT_kwDO...") {
+      ... on ProjectV2 {
+        items(first: 20) {
+          nodes {
+            id
+            content {
+              ... on Issue { title number state }
+            }
+          }
+        }
+      }
+    }
+  }
+'
+```
+
+### Example 2: Update Issue Status
+
+```bash
+# Move issue to "In Progress" status
+gh api graphql -f query='
+  mutation {
+    updateProjectV2ItemFieldValue(
+      input: {
+        projectId: "PVT_kwDO..."
+        itemId: "PVTI_..."
+        fieldId: "PVTSSF_..."
+        value: { singleSelectOptionId: "..." }
+      }
+    ) {
+      projectV2Item { id }
+    }
+  }
+'
+```
+
+## Error Handling
 
 ### Issue: Cannot find GitHub Project
 
@@ -389,3 +456,12 @@ github-projects-sync/
 2. Claude Tasks are for personal/local tasks, GitHub for shared tasks
 3. Prioritize GitHub as source of truth for team visibility
 4. Use `/orchestration-status` to see unified view
+
+## Resources
+
+- [references/core-operations.md](references/core-operations.md) - Day-to-day operations
+- [references/graphql-queries.md](references/graphql-queries.md) - Complete GraphQL reference
+- [references/status-management.md](references/status-management.md) - Status transition rules
+- [references/label-taxonomy.md](references/label-taxonomy.md) - Label system reference
+- [references/automation-scripts.md](references/automation-scripts.md) - Script documentation
+- [references/error-handling.md](references/error-handling.md) - Error handling patterns

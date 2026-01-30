@@ -1,6 +1,6 @@
 ---
 name: eia-github-kanban-core
-description: "Positions GitHub Projects V2 Kanban as THE SINGLE SOURCE OF TRUTH for Integrator orchestration. Every module is an issue, every assignment is an assignee, every status is a column. The orchestrator NEVER tracks work outside the board."
+description: "Use when orchestrating work via GitHub Projects V2 Kanban as THE SINGLE SOURCE OF TRUTH. Every module is an issue, every assignment is an assignee, every status is a column."
 license: Apache-2.0
 compatibility: "Requires GitHub CLI authentication, GitHub Projects V2 enabled repository, GraphQL API access, Python 3.8+"
 metadata:
@@ -29,7 +29,17 @@ If it's not on the board, it doesn't exist. If the board says "In Progress", it 
 
 This skill establishes GitHub Projects V2 as the absolute center of Atlas orchestration workflow. All planning, tracking, assignment, and completion verification flows through the Kanban board.
 
-## When to Use This Skill
+## Prerequisites
+
+Before using this skill, ensure:
+1. GitHub CLI is installed and authenticated (`gh auth status`)
+2. GitHub Projects V2 is enabled for the repository
+3. GraphQL API access is available
+4. Python 3.8+ for running board management scripts
+
+## Instructions
+
+### When to Use This Skill
 
 Read this skill when:
 - Starting any orchestration session
@@ -206,7 +216,7 @@ Read this when coordinating between AI agents and human developers.
 
 ---
 
-### Troubleshooting ([references/troubleshooting.md](references/troubleshooting.md))
+### Error Handling ([references/troubleshooting.md](references/troubleshooting.md))
 
 Read this when encountering issues with board synchronization or operations.
 
@@ -350,6 +360,41 @@ github-kanban-core/
 ```
 
 ---
+
+## Examples
+
+### Example 1: Get Current Board State
+
+```bash
+# Get full board state with all items
+python3 scripts/kanban_get_board_state.py owner repo 1
+
+# Output: JSON with items grouped by status column (Backlog, Todo, In Progress, etc.)
+```
+
+### Example 2: Move Card and Check Completion
+
+```bash
+# Move issue #42 to In Progress
+python3 scripts/kanban_move_card.py owner repo 1 42 in_progress --reason "Starting work"
+
+# Check if all items are complete (for stop hook)
+python3 scripts/kanban_check_completion.py owner repo 1
+# Exit code 0 = all done, 1 = items pending, 2 = blocked items exist
+```
+
+## Resources
+
+- [references/kanban-as-truth.md](references/kanban-as-truth.md) - Why Kanban is the single source of truth
+- [references/board-column-semantics.md](references/board-column-semantics.md) - Column meanings and requirements
+- [references/issue-to-module-mapping.md](references/issue-to-module-mapping.md) - Module-to-issue 1:1 mapping
+- [references/agent-assignment-via-board.md](references/agent-assignment-via-board.md) - Assignment via issue assignees
+- [references/status-transitions.md](references/status-transitions.md) - Valid state transitions
+- [references/blocking-workflow.md](references/blocking-workflow.md) - Handling blocked items
+- [references/board-queries.md](references/board-queries.md) - GraphQL queries for board state
+- [references/stop-hook-integration.md](references/stop-hook-integration.md) - Stop hook completion checks
+- [references/ai-agent-vs-human-workflow.md](references/ai-agent-vs-human-workflow.md) - Different workflows for AI vs humans
+- [references/troubleshooting.md](references/troubleshooting.md) - Common issues and solutions
 
 ## Related Skills
 

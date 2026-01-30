@@ -1,6 +1,9 @@
 ---
 name: eia-github-pr-workflow
-description: Defines when and how the orchestrator coordinates PR review work, including delegation rules, verification workflows, and completion criteria.
+description: >
+  Use when coordinating PR review work as an orchestrator. Defines when and how
+  the orchestrator coordinates PR review work, including delegation rules,
+  verification workflows, and completion criteria.
 license: Apache-2.0
 metadata:
   version: 1.0.0
@@ -23,6 +26,17 @@ context: fork
 This skill defines the orchestrator's role in coordinating Pull Request review work. The orchestrator is a **coordinator**, not a worker. It monitors PR status, delegates review tasks to specialized subagents, tracks completion, and reports to the user.
 
 **Core Principle**: The orchestrator NEVER does direct work on PRs. It orchestrates, delegates, monitors, and reports.
+
+## Prerequisites
+
+- GitHub CLI (`gh`) installed and authenticated
+- Python 3.8+ for running automation scripts
+- AI Maestro configured for inter-agent communication
+- Access to spawn subagents for delegation
+
+## Instructions
+
+Follow the decision tree below to determine the appropriate action for any PR review request.
 
 ---
 
@@ -211,7 +225,30 @@ PRs from human contributors require different handling. Always escalate to user 
 
 ---
 
-## Troubleshooting
+## Examples
+
+### Example 1: Standard PR Review Coordination
+
+```bash
+# Poll for open PRs requiring action
+python scripts/eia_orchestrator_pr_poll.py --repo owner/repo
+
+# For each PR needing review, delegate to review subagent
+# (orchestrator spawns subagent with appropriate prompt)
+
+# Verify completion before reporting
+python scripts/eia_verify_pr_completion.py --repo owner/repo --pr 123
+```
+
+### Example 2: Verify PR is Ready to Merge
+
+```bash
+python scripts/eia_verify_pr_completion.py --repo owner/repo --pr 123
+# If complete: true, report to user for merge decision
+# If complete: false, identify failing_criteria and delegate fixes
+```
+
+## Error Handling
 
 ### Issue: Subagent not returning results
 **Cause**: Subagent may have crashed or timed out
@@ -232,3 +269,11 @@ PRs from human contributors require different handling. Always escalate to user 
 ### Issue: User not receiving status updates
 **Cause**: Notification not triggered
 **Solution**: Check notification triggers in polling schedule, ensure report step executes
+
+## Resources
+
+- [references/orchestrator-responsibilities.md](references/orchestrator-responsibilities.md) - Orchestrator role definition
+- [references/delegation-rules.md](references/delegation-rules.md) - Subagent delegation patterns
+- [references/verification-workflow.md](references/verification-workflow.md) - Verification procedures
+- [references/completion-criteria.md](references/completion-criteria.md) - PR completion requirements
+- [references/polling-schedule.md](references/polling-schedule.md) - Polling frequency configuration

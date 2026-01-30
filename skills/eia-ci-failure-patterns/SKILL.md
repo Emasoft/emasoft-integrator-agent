@@ -1,6 +1,6 @@
 ---
 name: eia-ci-failure-patterns
-description: Diagnose and fix common CI/CD pipeline failures across all platforms (Linux, macOS, Windows) and languages (Python, JavaScript, Rust, Go). Covers cross-platform issues, exit codes, syntax problems, dependency failures, and GitHub Actions infrastructure patterns.
+description: Use when diagnosing and fixing CI/CD pipeline failures across platforms (Linux, macOS, Windows) and languages (Python, JavaScript, Rust, Go). Covers cross-platform issues, exit codes, syntax problems, dependency failures, and GitHub Actions infrastructure patterns.
 license: Apache-2.0
 metadata:
   version: 1.0.0
@@ -34,7 +34,14 @@ context: fork
 
 This skill teaches you how to systematically diagnose and fix Continuous Integration (CI) failures. CI pipelines fail for predictable reasons that fall into identifiable pattern categories. By recognizing these patterns, you can quickly identify root causes and apply proven fixes.
 
-## When to Use This Skill
+## Prerequisites
+
+Before using this skill, ensure:
+1. Access to CI/CD logs from the failed pipeline
+2. `python3` available in PATH for running diagnostic scripts
+3. Repository access to view workflow files
+
+## Instructions
 
 Use this skill when:
 - A CI workflow fails and you need to diagnose the cause
@@ -296,7 +303,28 @@ python scripts/eia_detect_platform_issue.py --path . --json
 6. **Verify locally** before pushing (where possible)
 7. **Run CI again** to confirm the fix
 
-## Troubleshooting
+## Examples
+
+### Example 1: Diagnosing a Cross-Platform Path Failure
+
+```bash
+# CI log shows: FileNotFoundError: /tmp/build/output.txt
+# Run diagnostic script
+python scripts/eia_diagnose_ci_failure.py --log-file ci.log
+
+# Output identifies cross-platform temp path issue
+# Fix: Use tempfile.gettempdir() instead of hardcoded /tmp
+```
+
+### Example 2: Fixing a Heredoc Syntax Error
+
+```bash
+# CI log shows: syntax error near unexpected token `newline`
+# Cause: Heredoc EOF terminator has trailing whitespace
+# Fix: Ensure EOF is at column 0 with no trailing spaces
+```
+
+## Error Handling
 
 ### The diagnostic script doesn't identify my failure
 
@@ -321,6 +349,17 @@ Check for:
 2. External service dependencies
 3. Time-sensitive tests
 4. Resource exhaustion on shared runners
+
+## Resources
+
+- [references/cross-platform-patterns.md](references/cross-platform-patterns.md) - OS-specific path and behavior differences
+- [references/exit-code-patterns.md](references/exit-code-patterns.md) - Shell exit code handling
+- [references/syntax-patterns.md](references/syntax-patterns.md) - Heredoc and quoting issues
+- [references/dependency-patterns.md](references/dependency-patterns.md) - Import and package issues
+- [references/github-infrastructure-patterns.md](references/github-infrastructure-patterns.md) - Runner and label issues
+- [references/language-specific-patterns.md](references/language-specific-patterns.md) - Python, JS, Rust, Go patterns
+- [references/bot-categories.md](references/bot-categories.md) - PR author classification
+- [references/claude-pr-handling.md](references/claude-pr-handling.md) - Claude Code Action integration
 
 ## See Also
 

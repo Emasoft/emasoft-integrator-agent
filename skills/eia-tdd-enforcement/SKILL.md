@@ -1,6 +1,11 @@
 ---
 name: eia-tdd-enforcement
-description: Enforces Test-Driven Development (TDD) discipline through the RED-GREEN-REFACTOR cycle. Implements the Iron Law - no production code can be written without a failing test that justifies its existence. The orchestrator ENFORCES TDD discipline on remote agents but NEVER writes tests or code itself. Orchestrator verifies remote agents follow TDD, reviews PRs to ensure TDD was followed, and rejects work that violates TDD principles. All actual test writing and code implementation is performed by Remote Developer Agents via AI Maestro.
+description: >
+  Use when enforcing TDD discipline on development workflows. Enforces Test-Driven
+  Development (TDD) discipline through the RED-GREEN-REFACTOR cycle. Implements the
+  Iron Law - no production code can be written without a failing test that justifies
+  its existence. The orchestrator ENFORCES TDD discipline on remote agents but NEVER
+  writes tests or code itself.
 license: Apache-2.0
 compatibility: Requires understanding of TDD principles, RED-GREEN-REFACTOR cycle, test frameworks, and version control. Works with any programming language that supports automated testing.
 metadata:
@@ -15,6 +20,17 @@ context: fork
 ## Overview
 
 This skill enforces Test-Driven Development (TDD) discipline through the RED-GREEN-REFACTOR cycle. It implements the Iron Law: **no production code can be written without a failing test that justifies its existence**.
+
+## Prerequisites
+
+- Understanding of TDD principles and RED-GREEN-REFACTOR cycle
+- Test framework for the target language (pytest, Jest, cargo test, etc.)
+- Version control (Git) for tracking TDD commits
+- AI Maestro for delegating to Remote Developer Agents
+
+## Instructions
+
+Follow the TDD cycle strictly: RED (write failing test) → GREEN (make it pass) → REFACTOR (improve code). Never write production code without a failing test first.
 
 ### The Orchestrator's Role
 
@@ -236,3 +252,66 @@ If writing tests reveals a requirement problem:
 | RED | Is this testing what user actually asked for? |
 | GREEN | Does implementation match user's specification? |
 | REFACTOR | Does refactoring preserve user's requirements? |
+
+## Examples
+
+### Example 1: TDD Cycle for New Feature
+
+```bash
+# Phase 1: RED - Write failing test
+git add tests/test_user_auth.py
+git commit -m "RED: test for user authentication"
+# Run tests - should FAIL
+
+# Phase 2: GREEN - Implement minimum code
+git add src/auth.py
+git commit -m "GREEN: implement user authentication"
+# Run tests - should PASS
+
+# Phase 3: REFACTOR - Improve code quality
+git add src/auth.py
+git commit -m "REFACTOR: extract password validation to separate function"
+# Run tests - should still PASS
+```
+
+### Example 2: Verify TDD Compliance in PR
+
+```bash
+# Check commit history follows TDD pattern
+git log --oneline | grep -E "^[a-f0-9]+ (RED|GREEN|REFACTOR):"
+
+# Expected output:
+# abc1234 REFACTOR: improve error messages
+# def5678 GREEN: implement login endpoint
+# 789abcd RED: test for login endpoint
+```
+
+## Error Handling
+
+### Issue: Test passes on first run (RED phase failed)
+
+**Cause**: Test is not testing the right thing or code already exists.
+
+**Solution**: Ensure the test fails before writing implementation. If test passes immediately, either the test is wrong or you're not in a true RED state.
+
+### Issue: Production code written without failing test
+
+**Cause**: TDD discipline violation.
+
+**Solution**: Revert the production code, write the failing test first, then reimplement. Use the Violation Recovery Procedure in [references/rules-and-constraints.md](references/rules-and-constraints.md).
+
+### Issue: Refactoring breaks tests
+
+**Cause**: Behavior changed during refactoring.
+
+**Solution**: Refactoring must preserve behavior. Revert to GREEN state and try smaller refactoring steps.
+
+## Resources
+
+- [references/iron-law.md](references/iron-law.md) - The fundamental TDD principle
+- [references/red-green-refactor-cycle.md](references/red-green-refactor-cycle.md) - Cycle details
+- [references/implementation-procedure.md](references/implementation-procedure.md) - Step-by-step guide
+- [references/common-patterns.md](references/common-patterns.md) - TDD best practices
+- [references/rules-and-constraints.md](references/rules-and-constraints.md) - Strict rules
+- [references/troubleshooting.md](references/troubleshooting.md) - Problem solving
+- [references/status-tracking.md](references/status-tracking.md) - Progress tracking

@@ -1,6 +1,6 @@
 ---
 name: eia-code-review-patterns
-description: Teaches a two-stage code review methodology with confidence scoring, enabling rapid identification of critical issues while maintaining comprehensive multi-dimensional analysis across 8 review dimensions. Balances speed with thoroughness for both quick validation and in-depth examination.
+description: Use when performing code reviews on pull requests. Teaches a two-stage methodology with confidence scoring, enabling rapid identification of critical issues while maintaining comprehensive multi-dimensional analysis across 8 review dimensions.
 license: Apache-2.0
 compatibility: Requires intermediate software development experience and familiarity with code review basics. Designed for reviewers analyzing pull requests with 1-30+ file changes using an 8-dimensional evaluation framework.
 triggers:
@@ -20,6 +20,18 @@ context: fork
 # Code Review Patterns Skill
 
 ## Overview
+
+This skill teaches the **two-stage code review methodology**
+
+## Prerequisites
+
+Before using this skill, ensure:
+1. Intermediate software development experience
+2. Familiarity with code review basics and pull request workflows
+3. Access to the repository containing the PR to review
+4. Python 3.8+ for running helper scripts
+
+## Instructions
 
 This skill teaches the **two-stage code review methodology** with confidence scoring, enabling rapid identification of critical issues while maintaining comprehensive multi-dimensional analysis. The approach balances speed with thoroughness, suitable for both quick validation and in-depth examination.
 
@@ -288,6 +300,65 @@ Code review examines code across 8 dimensions simultaneously:
 - `scripts/review_report_generator.py` - Create final review document
 
 ---
+
+## Examples
+
+### Example 1: Quick Scan of a Small PR (1-10 files)
+
+```bash
+# Generate quick scan report
+python scripts/quick_scan_template.py --pr 123 --repo owner/repo
+
+# Output: Quick scan report with confidence score
+# If confidence >= 70%, proceed to deep dive
+# If confidence < 70%, request clarification from author
+```
+
+### Example 2: Full Two-Stage Review
+
+```bash
+# Stage 1: Quick Scan
+python scripts/quick_scan_template.py --pr 456 --repo owner/repo
+# Result: 75% confidence, proceed to Stage 2
+
+# Stage 2: Deep Dive with 8-dimension analysis
+python scripts/deep_dive_calculator.py --pr 456 --repo owner/repo
+# Result: 82% confidence across all dimensions
+
+# Generate final report
+python scripts/review_report_generator.py --pr 456 --output review.md
+```
+
+## Error Handling
+
+### Slow Reviews
+If reviews are taking too long, see [references/troubleshooting-performance.md](references/troubleshooting-performance.md) for optimization strategies.
+
+### Reviewer Calibration Issues
+If confidence scores vary significantly between reviewers, see [references/troubleshooting-calibration.md](references/troubleshooting-calibration.md).
+
+### Coverage Gaps
+If dimensions are not being adequately covered, see [references/troubleshooting-coverage.md](references/troubleshooting-coverage.md).
+
+### Reviewer Disagreements
+If reviewers disagree on findings, see [references/troubleshooting-agreement.md](references/troubleshooting-agreement.md).
+
+## Resources
+
+- [references/requirement-compliance.md](references/requirement-compliance.md) - Gate 0 compliance checklist
+- [references/stage-one-quick-scan.md](references/stage-one-quick-scan.md) - Stage One process
+- [references/stage-two-deep-dive.md](references/stage-two-deep-dive.md) - Stage Two 8-dimension analysis
+- [references/workflow-and-decision-tree.md](references/workflow-and-decision-tree.md) - Decision flow
+- [references/implementation-checklist.md](references/implementation-checklist.md) - Complete checklist
+- [references/pre-pr-quality-gate.md](references/pre-pr-quality-gate.md) - Pre-PR validation
+- [references/functional-correctness.md](references/functional-correctness.md) - Dimension 1 details
+- [references/architecture-design.md](references/architecture-design.md) - Dimension 2 details
+- [references/code-quality.md](references/code-quality.md) - Dimension 3 details
+- [references/performance-analysis.md](references/performance-analysis.md) - Dimension 4 details
+- [references/security-analysis.md](references/security-analysis.md) - Dimension 5 details
+- [references/testing-analysis.md](references/testing-analysis.md) - Dimension 6 details
+- [references/backward-compatibility.md](references/backward-compatibility.md) - Dimension 7 details
+- [references/documentation-analysis.md](references/documentation-analysis.md) - Dimension 8 details
 
 ## Getting Started
 

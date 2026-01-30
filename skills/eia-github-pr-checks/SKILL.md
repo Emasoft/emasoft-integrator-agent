@@ -1,6 +1,6 @@
 ---
 name: eia-github-pr-checks
-description: Monitor and interpret GitHub Pull Request CI/CD check statuses, wait for check completion, and retrieve detailed check information for orchestration decisions.
+description: Use when monitoring GitHub Pull Request CI/CD check statuses, waiting for check completion, and retrieving detailed check information for orchestration decisions.
 license: Apache-2.0
 metadata:
   version: 1.0.0
@@ -33,7 +33,9 @@ This skill enables agents to monitor, interpret, and wait for GitHub Pull Reques
 - Determine if a PR is ready for merge based on required checks
 - Poll for check completion with intelligent backoff
 
-## When to Use This Skill
+## Instructions
+
+### When to Use This Skill
 
 | Scenario | Script to Use |
 |----------|---------------|
@@ -233,7 +235,29 @@ For guidance on waiting for checks, see [polling-strategies.md](references/polli
   - 4.2 Re-running failed checks
   - 4.3 Determining merge readiness with failures
 
-## Troubleshooting
+## Examples
+
+### Example 1: Check PR Status Before Merge
+
+```bash
+# Get all check statuses for PR #123
+python eia_get_pr_checks.py --pr 123
+
+# If all_passing is true, proceed with merge
+# If not, investigate failing checks
+```
+
+### Example 2: Wait for CI to Complete
+
+```bash
+# Wait up to 10 minutes for all checks to complete
+python eia_wait_for_checks.py --pr 456 --timeout 600
+
+# If timed_out is true, check CI runner status
+# If completed is true and final_status is all_passing, merge is safe
+```
+
+## Error Handling
 
 ### Common Issues
 
@@ -282,3 +306,8 @@ All scripts use standardized exit codes for consistent error handling:
 | 6 | Not mergeable | N/A for these scripts |
 
 **Note:** `eia_wait_for_checks.py` returns exit code 3 on timeout. Check the JSON output's `timed_out` field for details.
+
+## Resources
+
+- [references/ci-status-interpretation.md](references/ci-status-interpretation.md) - Understanding check conclusions and required checks
+- [references/polling-strategies.md](references/polling-strategies.md) - When and how to poll for check completion

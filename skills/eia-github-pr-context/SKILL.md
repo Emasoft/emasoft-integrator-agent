@@ -1,6 +1,6 @@
 ---
 name: eia-github-pr-context
-description: Retrieve and analyze GitHub Pull Request context including metadata, diff, and changed files for informed code review and task planning.
+description: Use when retrieving and analyzing GitHub Pull Request context including metadata, diff, and changed files for informed code review and task planning.
 license: Apache-2.0
 metadata:
   version: 1.0.0
@@ -26,7 +26,9 @@ This skill provides tools to retrieve comprehensive context about GitHub Pull Re
 - **Analyze merge readiness**: Check mergeable status, conflicts, and CI state
 - **Extract specific metadata**: Get author, branch names, labels, reviewers
 
-## When to Use This Skill
+## Instructions
+
+### When to Use This Skill
 
 | Scenario | Use This Skill |
 |----------|----------------|
@@ -93,7 +95,7 @@ All scripts use standardized exit codes for consistent error handling:
 | 5 | Idempotency skip | N/A for these scripts |
 | 6 | Not mergeable | N/A for these scripts |
 
-## Quick Start Examples
+## Examples
 
 ### Get Full PR Context
 
@@ -188,7 +190,7 @@ When delegating PR review tasks, use this skill to gather context first:
 4. Aggregate results and post review summary
 ```
 
-## Troubleshooting
+## Error Handling
 
 | Problem | Cause | Solution |
 |---------|-------|----------|
@@ -199,3 +201,8 @@ When delegating PR review tasks, use this skill to gather context first:
 | Permission denied | No repo access | Verify you have read access to the repository |
 
 For additional troubleshooting, run scripts with `--verbose` flag for detailed logging.
+
+## Resources
+
+- [references/pr-metadata.md](references/pr-metadata.md) - PR metadata JSON structure and field extraction
+- [references/diff-analysis.md](references/diff-analysis.md) - Understanding and analyzing PR diffs

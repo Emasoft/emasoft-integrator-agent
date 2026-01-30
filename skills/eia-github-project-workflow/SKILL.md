@@ -1,13 +1,28 @@
 ---
 name: eia-github-project-workflow
-description: Track multi-developer work using GitHub Projects boards, issues with acceptance criteria, and Kanban workflows.
+description: >
+  Use when tracking multi-developer work with GitHub Projects. Track work using
+  GitHub Projects boards, issues with acceptance criteria, and Kanban workflows.
+license: Apache-2.0
 agent: api-coordinator
 context: fork
 ---
 
 # GitHub Project Workflow Skill
 
-Patterns for tracking multi-developer work using **GitHub Projects** boards and issues. Use this skill for:
+## Overview
+
+Patterns for tracking multi-developer work using **GitHub Projects** boards and issues.
+
+## Prerequisites
+
+- GitHub CLI (`gh`) installed and authenticated
+- GitHub Projects V2 enabled on the repository
+- Repository write access for issue and project management
+
+## Instructions
+
+Use this skill for:
 - Creating project boards with standard columns
 - Creating issues with acceptance criteria
 - Tracking task status (Todo → In Progress → Review → Done)
@@ -88,3 +103,46 @@ For handling blocked or failed tasks, see [communication-patterns.md](references
 2. **One task per developer** - No multitasking
 3. **Clear acceptance criteria** - Every issue has success criteria
 4. **TDD first** - Tests before integration approval
+
+## Examples
+
+### Example 1: Create a New Project Board
+
+```bash
+# Create project board with standard columns
+gh project create --owner OWNER --title "Sprint 1" --body "Sprint tracking"
+
+# Add standard columns: Todo, In Progress, Review, Done
+gh project field-create PROJECT_NUMBER --owner OWNER --name "Status" --data-type "SINGLE_SELECT"
+```
+
+### Example 2: Create Issue with Acceptance Criteria
+
+```bash
+gh issue create --repo owner/repo \
+  --title "Implement user authentication" \
+  --body "## Acceptance Criteria
+- [ ] User can log in with email/password
+- [ ] JWT tokens are issued on successful login
+- [ ] Invalid credentials return 401 error"
+```
+
+## Error Handling
+
+### Issue: Project board not syncing
+
+**Cause**: Project field IDs may have changed or permissions issue.
+
+**Solution**: Re-fetch project field IDs and verify write access.
+
+### Issue: Developer assignment fails
+
+**Cause**: User may not have repository access.
+
+**Solution**: Verify user has repository collaborator access before assignment.
+
+## Resources
+
+- [references/procedure-steps.md](references/procedure-steps.md) - Complete workflow steps
+- [references/instruction-templates.md](references/instruction-templates.md) - Issue templates
+- [references/communication-patterns.md](references/communication-patterns.md) - Failure handling patterns

@@ -1,6 +1,6 @@
 ---
 name: eia-github-integration
-description: Complete bidirectional synchronization between Agent tasks and GitHub Projects V2, with standardized 9-label system, pull request workflow automation, and comprehensive issue tracking for orchestrator-driven development.
+description: Use when integrating with GitHub for bidirectional synchronization between Agent tasks and GitHub Projects V2, with standardized 9-label system, pull request workflow automation, and comprehensive issue tracking.
 license: Apache-2.0
 compatibility: Requires GitHub CLI version 2.14 or higher, GitHub account with write permissions to target repositories, and basic Git knowledge.
 metadata:
@@ -12,7 +12,21 @@ context: fork
 
 # GitHub Integration for Agent Orchestration
 
+## Overview
+
 This skill provides agents and orchestrators with complete GitHub integration capabilities for managing development workflows at scale. It covers GitHub Projects V2 bidirectional synchronization, a standardized 9-label classification system, pull request workflow management, and comprehensive issue tracking for orchestrator-driven development.
+
+## Prerequisites
+
+Before using this skill, ensure:
+1. GitHub CLI version 2.14 or higher is installed (`gh --version`)
+2. GitHub CLI is authenticated (`gh auth status`)
+3. You have write permissions to the target repository
+4. Basic familiarity with Git commands
+
+## Instructions
+
+Follow the Core Workflow Sequence below to set up and use GitHub integration.
 
 ## Quick Start
 
@@ -255,7 +269,30 @@ Each reference document focuses on a specific aspect of GitHub integration. Read
 
 ---
 
-## Troubleshooting
+## Examples
+
+### Example 1: Create an Issue with Labels and Link to Project
+
+```bash
+# Create a feature issue and add to project
+gh issue create --title "Add OAuth support" --body "Implement OAuth2 flow" --label "feature" --project "1"
+
+# Output: https://github.com/owner/repo/issues/124
+```
+
+### Example 2: Create PR That Closes an Issue
+
+```bash
+# Create branch and PR that auto-closes issue
+git checkout -b feature/issue-124
+# Make changes, commit
+gh pr create --title "Add OAuth support" --body "Closes #124" --head "feature/issue-124"
+
+# Merge with squash and delete branch
+gh pr merge 124 --squash --delete-branch
+```
+
+## Error Handling
 
 **Reference:** [references/troubleshooting.md](references/troubleshooting.md)
 
@@ -380,6 +417,20 @@ For teams ready to go beyond basic implementation:
 - **CI/CD Integration**: Linking deployments to issue tracking
 
 These topics are covered in the [Implementation Guide → Advanced Implementation Topics](references/implementation-guide.md#part-3-advanced-implementation-topics).
+
+## Resources
+
+- [references/prerequisites-and-setup.md](references/prerequisites-and-setup.md) - GitHub CLI installation and authentication
+- [references/multi-user-workflow.md](references/multi-user-workflow.md) - Managing multiple GitHub identities
+- [references/core-concepts.md](references/core-concepts.md) - Projects V2 and 9-label system
+- [references/issue-management.md](references/issue-management.md) - Creating and managing issues
+- [references/pull-request-management.md](references/pull-request-management.md) - PR creation and merging
+- [references/projects-v2-operations.md](references/projects-v2-operations.md) - Project board configuration
+- [references/batch-operations.md](references/batch-operations.md) - Bulk operations and filtering
+- [references/automation-scripts.md](references/automation-scripts.md) - Python automation scripts
+- [references/script-multi-user-identity.md](references/script-multi-user-identity.md) - Multi-user identity script
+- [references/troubleshooting.md](references/troubleshooting.md) - Common issues and solutions
+- [references/implementation-guide.md](references/implementation-guide.md) - Complete setup guide
 
 ---
 

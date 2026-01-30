@@ -1,9 +1,10 @@
 ---
 name: eia-worktree-management
 description: >-
-  Manage Git worktrees for parallel development with registry tracking and port allocation.
-  Enables multiple development contexts in the same repository without switching branches.
-  Provides cross-platform support (Windows, macOS, Linux) with atomic operations and file locking.
+  Use when managing Git worktrees for parallel development. Manage Git worktrees with
+  registry tracking and port allocation. Enables multiple development contexts in the
+  same repository without switching branches. Provides cross-platform support (Windows,
+  macOS, Linux) with atomic operations and file locking.
 license: Apache-2.0
 compatibility: >-
   Cross-platform support for Windows, macOS, and Linux. Requires Git 2.17+ with worktree support.
@@ -24,6 +25,17 @@ This skill teaches how to manage Git worktrees within the Integrator Agent syste
 - **Worktree Registry**: Centralized tracking at `~/design/worktree-registry.json`
 - **Port Allocation**: Managed port range 8100-8199 for services running in worktrees
 - **Parallel Development**: Work on multiple features, fixes, or experiments in parallel
+
+## Prerequisites
+
+- Git 2.17+ with worktree support
+- Python 3.8+ for automation scripts
+- Write access to `~/design/` for registry storage
+- Cross-platform: Works on Windows, macOS, and Linux
+
+## Instructions
+
+Use the automation scripts or git commands to create, manage, and remove worktrees. Always register worktrees in the registry for tracking and port allocation.
 
 For cross-platform details, see [Cross-Platform Support](./references/cross-platform-support.md):
 - Overview - When you need to understand cross-platform compatibility
@@ -248,7 +260,35 @@ This skill integrates with other Integrator Agent skills:
 - **[eia-github-projects-sync](../eia-github-projects-sync/SKILL.md)** - Link worktrees to GitHub issues, synchronize development status with project boards
 - **[eia-verification-patterns](../eia-verification-patterns/SKILL.md)** - Apply verification patterns to worktree isolation tests
 
-## Troubleshooting Quick Reference
+## Examples
+
+### Example 1: Create a Feature Worktree
+
+```bash
+# Create worktree for new feature
+python scripts/worktree_create.py --name feature-auth --branch feature/user-auth
+
+# Allocate port for development server
+python scripts/port_allocate.py --worktree feature-auth --port 8101
+
+# Verify creation
+python scripts/worktree_list.py
+```
+
+### Example 2: Clean Up After Merge
+
+```bash
+# List all worktrees
+python scripts/worktree_list.py
+
+# Remove merged worktree
+python scripts/worktree_remove.py --name feature-auth --cleanup
+
+# Validate registry
+python scripts/registry_validate.py
+```
+
+## Error Handling
 
 | Problem | Solution Reference |
 |---------|-------------------|
@@ -297,6 +337,16 @@ This skill integrates with other Integrator Agent skills:
 2. Run `registry_validate.py` to detect problems
 3. Review [Port Management](references/port-management.md)
 4. Consult [Removing Worktrees](references/removing-worktrees.md)
+
+## Resources
+
+- [references/worktree-fundamentals.md](references/worktree-fundamentals.md) - Git worktree basics
+- [references/registry-system.md](references/registry-system.md) - Registry management
+- [references/creating-worktrees.md](references/creating-worktrees.md) - Creation workflows
+- [references/port-allocation.md](references/port-allocation.md) - Port management
+- [references/removing-worktrees.md](references/removing-worktrees.md) - Safe removal
+- [references/troubleshooting.md](references/troubleshooting.md) - Problem solving
+- [references/scripts-guide.md](references/scripts-guide.md) - Automation scripts
 
 ---
 
