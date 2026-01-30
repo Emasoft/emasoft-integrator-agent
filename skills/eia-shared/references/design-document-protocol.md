@@ -250,7 +250,7 @@ To link a document to an existing issue:
 
 **Detection:** `design/` folder or subfolders don't exist
 **Resolution:**
-1. Run `eoa_init_design_folders.py` to create structure
+1. Run `eia_design_create.py --init` to create structure
 2. Retry operation
 
 ## 8. File Naming Convention
