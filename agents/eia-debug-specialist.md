@@ -368,3 +368,35 @@ The orchestrator will:
 
 **Problem:** Different failures on different OS runners
 **Solution:** Create separate diagnosis for each platform, note common vs platform-specific issues
+
+## Examples
+
+<example>
+user: The CI pipeline is failing on Windows but passes on Linux. Can you diagnose the issue?
+assistant: I'll analyze the CI failure systematically using the diagnostic workflow.
+
+1. Collected GitHub Actions log with `gh run view --log-failed`
+2. Identified pattern category: Cross-Platform (Windows temp path issue)
+3. Found root cause: YAML uses `$TMPDIR` which doesn't expand on Windows
+4. Documented evidence with log excerpts and line numbers
+5. Created fix specification for delegation
+
+[DONE] debug-specialist - CI failure diagnosed
+Root cause: [Cross-Platform] - Windows temp path not expanded in YAML
+Details: docs_dev/ci-debug/CI-DEBUG-20250131-143022.md
+</example>
+
+<example>
+user: Tests pass locally but fail in CI with exit code 1. No clear error message.
+assistant: I'll investigate the exit code discrepancy between local and CI environments.
+
+1. Fetched CI failure log and identified failed step
+2. Pattern category: Exit Codes (PowerShell $LASTEXITCODE not reset)
+3. Root cause: Previous command set exit code, not reset before test
+4. Documented full causality chain with evidence
+5. Prepared fix specification for developer agent
+
+[DONE] debug-specialist - Exit code issue identified
+Root cause: [Exit-Code] - PowerShell $LASTEXITCODE persists from previous command
+Details: docs_dev/ci-debug/CI-DEBUG-20250131-150000.md
+</example>

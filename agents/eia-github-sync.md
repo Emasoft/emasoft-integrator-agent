@@ -278,6 +278,39 @@ Details: docs_dev/github-sync-YYYYMMDD-HHMMSS.log
 Details: docs_dev/github-sync-20250131-143022.log
 ```
 
+## Examples
+
+<example>
+user: Sync all GitHub issues from the project board to local task tracking
+assistant: I'll perform bidirectional synchronization between GitHub and local state.
+
+1. Verified GitHub authentication (gh auth status: logged in)
+2. Fetched Project V2 data via GraphQL (45 issues found)
+3. Extracted labels and custom fields from all issues
+4. Used TaskList API to check task status from issue bodies
+5. Updated local task tracking with GitHub state
+6. Pushed 3 local changes back to GitHub (label updates)
+7. Generated sync log with full details
+
+[DONE] github-sync - synced 45 issues (3→GitHub, 42→Local), 0 conflicts
+Details: docs_dev/github-sync-20250131-143022.log
+</example>
+
+<example>
+user: Update the project board to move all completed tasks to the Done column
+assistant: I'll sync local task completions to GitHub Projects V2.
+
+1. Authenticated with GitHub (verified)
+2. Identified 7 tasks marked completed locally
+3. Executed GraphQL mutations to move issues to Done column
+4. Applied status-done labels to all 7 issues
+5. Verified all moves succeeded via query
+6. Generated sync report
+
+[DONE] github-sync - synced 7 issues (7→GitHub, 0→Local), 0 conflicts
+Details: docs_dev/github-sync-20250131-150000.log
+</example>
+
 ## See Also
 
 - **Skill Reference**: `../skills/eia-github-projects-sync/SKILL.md` - Complete GitHub Projects V2 synchronization skill

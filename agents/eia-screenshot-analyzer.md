@@ -181,3 +181,17 @@ For each UI element analyzed:
 - Link to requirement (if exists)
 - Flag as "not in requirements" if no backing
 - Recommend Requirement Issue Report for ambiguous cases
+
+## Examples
+
+<example>
+user: Can you analyze this screenshot showing an error message? [shares screenshot]
+assistant: Analyzing image at /tmp/screenshot-20250131.png...
+[Agent reads screenshot, extracts error text, identifies it as a Python traceback with "ModuleNotFoundError: No module named 'requests'", notes it's from terminal output, and returns: "[SCREENSHOT] Terminal showing Python error - KEY CONTENT: ModuleNotFoundError for 'requests' module at line 3 of main.py - ACTIONABLE: Install requests package via 'pip install requests'"]
+</example>
+
+<example>
+user: Here's the UI mockup - does it match our requirements? [shares design image]
+assistant: Analyzing image at /tmp/ui-mockup.png...
+[Agent reads UI mockup image, compares against USER_REQUIREMENTS.md, identifies that login button is blue instead of green as specified in REQ-021, notices missing "Forgot Password" link required by REQ-023, and returns: "[UI MOCKUP] Login screen design - KEY CONTENT: Button color deviation (blue vs REQ-021 green), missing Forgot Password link (REQ-023) - ACTIONABLE: Fix button color and add missing link - Details: docs_dev/image-analysis-20250131-143000.md"]
+</example>

@@ -448,6 +448,37 @@ Details: logs/api-operations-20250129.log
 
 **Keep output under 3 lines. Caller will read log file if needed.**
 
+## Examples
+
+<example>
+user: Create a GitHub issue for the authentication bug in the main repo with high priority label
+assistant: I'll create the issue using the GitHub API with proper validation gates.
+
+1. Verified authentication (Gate 1: PASS)
+2. Checked repository permissions (Gate 2: PASS - WRITE access)
+3. Verified rate limit (Gate 5: PASS - 4523 remaining)
+4. Created issue #456 with labels: bug, priority-high
+5. Logged operation to logs/api-operations-20250131.log
+
+[DONE] api-coordinator - create-issue created #456
+Details: logs/api-operations-20250131.log
+</example>
+
+<example>
+user: Merge PR #123 using squash strategy after all checks pass
+assistant: I'll execute the PR merge with quality gates.
+
+1. Verified PR exists (Gate 3: PASS)
+2. Checked PR mergeable state (Gate 4: PASS - all checks passed)
+3. Verified rate limit (Gate 5: PASS - 4501 remaining)
+4. Executed merge with squash strategy
+5. PR #123 merged successfully
+6. Logged operation to logs/api-operations-20250131.log
+
+[DONE] api-coordinator - merge-pr PR#123 merged (squash)
+Details: logs/api-operations-20250131.log
+</example>
+
 ## See Also
 
 - **Issue Operations**: `../skills/eia-github-issue-operations/SKILL.md`

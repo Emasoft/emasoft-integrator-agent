@@ -387,3 +387,17 @@ Stay in your lane. Evaluate thoroughly. Report accurately.
 [DONE/FAILED] pr-evaluation - brief_result (approve/reject/needs-changes)
 Details: docs_dev/pr-reviews/PR-XXX-evaluation.md
 ```
+
+## Examples
+
+<example>
+user: Evaluate PR #456 for merge readiness.
+assistant: I'll evaluate PR #456 in an isolated worktree. Setting up environment, running comprehensive test suite, and performing quality checks.
+[Agent creates git worktree, installs dependencies, runs all tests (unit, integration, e2e), runs linting and type checking, collects results, generates evaluation report showing 142/150 tests passed with 8 failures in auth module, and returns verdict: REQUEST CHANGES with detailed report]
+</example>
+
+<example>
+user: Check if PR #789 is ready to merge - it's marked as ready for review.
+assistant: I'll perform a comprehensive evaluation of PR #789. Creating isolated environment, running tests, checking TDD compliance, and verifying requirement compliance.
+[Agent sets up Docker container with PR code, runs pytest with coverage, executes ruff/mypy checks, verifies TDD workflow in git history, checks USER_REQUIREMENTS.md compliance, finds all tests pass with 87% coverage and full TDD compliance, generates report, and returns verdict: APPROVE]
+</example>

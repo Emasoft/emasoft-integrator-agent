@@ -490,3 +490,17 @@ Agent reports are successful when:
 - Report is written to predictable location
 - Findings are actionable and specific
 - Output is minimal and machine-parseable
+
+## Examples
+
+<example>
+user: Verify TDD compliance for PR #234 before we proceed with code review.
+assistant: I'll verify TDD compliance for PR #234. Checking git commit history for RED-GREEN-REFACTOR pattern, running test suite with coverage, and validating test quality.
+[Agent analyzes git log, finds test commits preceded implementation commits correctly, runs pytest with coverage showing 87% line/82% branch coverage, evaluates test quality scoring 75%, verifies requirement traceability, and returns: "[DONE] test-engineer - PR#234 G1:PASS G2:PASS G3:PASS - Coverage: 87%/82%/95% | TDD: compliant - Details: reports/tdd-compliance-PR234-20250131120000.md"]
+</example>
+
+<example>
+user: Check test coverage for PR #567 - the author says all tests pass.
+assistant: I'll perform comprehensive TDD enforcement verification for PR #567, including coverage analysis and quality assessment.
+[Agent runs pytest with coverage, discovers only 72% line coverage and 68% branch coverage (both below thresholds), checks git history and finds implementation commit before test commit (TDD violation), generates violation report documenting the issues, and returns: "[DONE] test-engineer - PR#567 G1:FAIL G2:FAIL G3:SKIPPED - Coverage: 72%/68%/88% | TDD: violation - implementation before tests - Details: reports/tdd-compliance-PR567-20250131150000.md"]
+</example>

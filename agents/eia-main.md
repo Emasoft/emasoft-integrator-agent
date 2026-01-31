@@ -75,3 +75,17 @@ This agent is designed to work within a 4-plugin architecture:
 | Integrator Agent | eia- | This plugin (quality gates & releases) |
 
 If companion plugins are not installed, the Integrator can receive work directly from the user.
+
+## Examples
+
+<example>
+user: Please review PR #42 and merge it if all quality gates pass.
+assistant: I'll review PR #42 against our quality gates. Let me check the code changes, run tests, and verify TDD compliance.
+[Agent reviews PR, runs quality gates, verifies tests pass, checks TDD compliance, and either approves/merges or reports issues found]
+</example>
+
+<example>
+user: Close issue #123 - the feature is complete.
+assistant: Before closing issue #123, I need to verify closure requirements: merged PR linked to issue, all checkboxes checked, evidence of testing, and TDD compliance verified. Let me check these requirements.
+[Agent verifies issue closure requirements are met, checks for linked PR, verifies testing evidence, confirms TDD compliance, then closes issue or reports missing requirements]
+</example>

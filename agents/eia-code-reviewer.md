@@ -320,3 +320,38 @@ Details: reports/code-review-PR789-20251230160000.md
 - Multi-paragraph explanations
 
 **Keep output under 3 lines. Orchestrator will read full report from file if needed.**
+
+## Examples
+
+<example>
+user: Review PR #123 for the new authentication module against the security specifications
+assistant: I'll execute the two-stage gate review process.
+
+1. Loaded specifications from docs_dev/requirements/USER_REQUIREMENTS.md
+2. Executed Gate 1: Specification Compliance (PASS - all requirements met)
+3. Executed Gate 2: Code Quality (FAIL - 5 issues found, 2 critical)
+4. Generated review report with detailed findings
+5. Created fix instructions for remote developer
+6. Sent AI Maestro message to developer
+7. Updated GitHub PR labels and project board
+
+[DONE] code-reviewer - PR#123 PASS/FAIL
+Key finding: 5 issues (2 critical), see fix instructions
+Details: reports/code-review-PR123-20251230140000.md
+</example>
+
+<example>
+user: Review the database migration PR #456 to ensure it meets the data integrity requirements
+assistant: I'll perform comprehensive code review.
+
+1. Loaded database requirements specification
+2. Executed Gate 1: Specification Compliance (PASS - all migration steps present)
+3. Executed Gate 2: Code Quality (PASS - no issues found)
+4. Ran static analysis tools (ruff, mypy) - all passed
+5. Generated approval report
+6. Updated GitHub with approval comment and labels
+
+[DONE] code-reviewer - PR#456 PASS/PASS
+Key finding: 0 issues, approved
+Details: reports/code-review-PR456-20251230103000.md
+</example>

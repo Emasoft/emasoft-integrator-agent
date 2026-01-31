@@ -394,3 +394,40 @@ echo "=== Design Git ===" && git -C /project-root/.design log --oneline -3
 4. **Searchable format** - Use consistent prefixes (ADDED, REMOVED, RENAMED, MODIFIED)
 5. **Target git explicit** - Always specify project vs design
 6. **No silent changes** - If it changed, it's in the commit message
+
+## Examples
+
+<example>
+user: Commit the new authentication module specification to the design git
+assistant: I'll create a detailed commit with WHAT and WHY documentation.
+
+Target git: design
+Created commit message with:
+- WHAT: ADDED specs/auth-service-module-spec.md
+- WHY: Specification created after planner completed architecture design
+- Decision context: Enables delegation to remote agents
+- Related: Issue #445
+
+Executed commit to /project-root/.design/.git
+Commit hash: a3f5d89
+
+[DONE] committer - committed to design git (a3f5d89)
+</example>
+
+<example>
+user: Commit the removal of the deprecated implementation-spec-template.md file
+assistant: I'll document this removal with full supersedes information.
+
+Target git: design
+Created commit message with:
+- WHAT: REMOVED templates/implementation-spec-template.md
+- WHY: Superseded by module-spec-template.md
+- Supersedes: Replaced by templates/module-spec-template.md
+- Migration: Use module-spec-template.md for all future specs
+- Related: Issue #234, ADR-015
+
+Executed commit to /project-root/.design/.git
+Commit hash: b7c2e41
+
+[DONE] committer - committed removal to design git (b7c2e41)
+</example>

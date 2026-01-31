@@ -1,6 +1,6 @@
 ---
 name: eia-bug-investigator
-model: claude-sonnet-4-20250514
+model: sonnet
 description: Investigates and reproduces bugs with systematic debugging approach
 type: task-agent
 triggers:
@@ -225,3 +225,37 @@ Before returning to orchestrator, verify:
 - Never skip testing the fix
 - Always produce a log file with investigation details
 - Report back to orchestrator upon task completion or when blocked
+
+## Examples
+
+<example>
+user: Investigate the IndexError crash reported in issue #234 when processing empty lists
+assistant: I'll systematically investigate this bug with evidence collection.
+
+1. Read error logs and stack trace (Step 1)
+2. Identified failure at parser.py line 45: list index out of range
+3. Reproduced bug with empty input list
+4. Root cause: Missing empty list validation before accessing index [0]
+5. Documented analysis in docs_dev/bug_investigation_20250131_143022.md
+6. Delegated fix to remote developer via AI Maestro
+
+[DONE] bug-investigator - IndexError in parser.py:45 identified
+Evidence: docs_dev/bug_investigation_20250131_143022.md
+Status: Identified
+</example>
+
+<example>
+user: Debug the test failures in test_authentication.py that started after the recent refactor
+assistant: I'll investigate the test failures with systematic debugging.
+
+1. Read test failure logs from CI output
+2. Reproduced failures locally: 3 tests failing with AssertionError
+3. Root cause: Refactored function changed return type from dict to tuple
+4. Tests still expect old dict format
+5. Evidence collected in docs_dev/bug_investigation_20250131_150000.md
+6. Delegated test fix to remote developer
+
+[DONE] bug-investigator - test failures due to return type change
+Evidence: docs_dev/bug_investigation_20250131_150000.md
+Status: Identified
+</example>
