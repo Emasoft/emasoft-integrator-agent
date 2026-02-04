@@ -8,6 +8,37 @@
 - When you need to set up automation → [Setting Up Automation Rules](#setting-up-automation-rules)
 - When you need to sync agent tasks with GitHub → [Bidirectional Sync Workflow](#bidirectional-sync-workflow)
 
+## Table of Contents
+
+- [Creating Projects V2 Board](#creating-projects-v2-board)
+  - [Create New Project](#create-new-project)
+  - [List Existing Projects](#list-existing-projects)
+  - [View Project Details](#view-project-details)
+- [Adding Issues to Projects](#adding-issues-to-projects)
+  - [Add Single Issue](#add-single-issue)
+  - [Add Issues in Bulk](#add-issues-in-bulk)
+  - [Verify Issue Was Added](#verify-issue-was-added)
+- [Updating Issue Status](#updating-issue-status)
+  - [Understanding Status Fields](#understanding-status-fields)
+  - [Get Field IDs](#get-field-ids)
+  - [Update Issue Status](#update-issue-status)
+  - [Automated Status Update Script](#automated-status-update-script)
+- [Configuring Custom Fields](#configuring-custom-fields)
+  - [Create Custom Field](#create-custom-field)
+  - [Common Custom Fields](#common-custom-fields)
+  - [Update Custom Fields via API](#update-custom-fields-via-api)
+- [Setting Up Automation Rules](#setting-up-automation-rules)
+  - [Built-in Automation Options](#built-in-automation-options)
+  - [Configuring Auto-add Workflow](#configuring-auto-add-workflow)
+  - [Configuring Auto-archive Workflow](#configuring-auto-archive-workflow)
+  - [Custom Automation with GitHub Actions](#custom-automation-with-github-actions)
+- [Bidirectional Sync Workflow](#bidirectional-sync-workflow)
+  - [Sync Direction 1: Agent → GitHub](#sync-direction-1-agent--github)
+  - [Sync Direction 2: GitHub → Agent](#sync-direction-2-github--agent)
+  - [Monitoring Sync Health](#monitoring-sync-health)
+  - [Conflict Resolution](#conflict-resolution)
+- [Best Practices](#best-practices)
+
 ## Creating Projects V2 Board
 
 GitHub Projects V2 provides a table-based project management interface.

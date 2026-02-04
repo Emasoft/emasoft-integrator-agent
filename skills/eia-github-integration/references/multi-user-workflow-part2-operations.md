@@ -1,5 +1,30 @@
 # Multi-User GitHub Workflow: Operations and Troubleshooting
 
+## Table of Contents
+
+- [Use-Case TOC](#use-case-toc)
+- [Per-Command Identity Override](#per-command-identity-override)
+  - [Git Commands with Environment Variables](#git-commands-with-environment-variables)
+  - [GitHub CLI Commands](#github-cli-commands)
+- [Collaborator Management](#collaborator-management)
+  - [Adding a Collaborator](#adding-a-collaborator)
+  - [Accepting a Collaboration Invitation](#accepting-a-collaboration-invitation)
+- [Troubleshooting](#troubleshooting)
+  - [Problem: SSH Shows Wrong User](#problem-ssh-shows-wrong-user)
+  - [Problem: Push Permission Denied](#problem-push-permission-denied)
+  - [Problem: Commits Show Wrong Author](#problem-commits-show-wrong-author)
+  - [Problem: gh CLI Uses Wrong Account](#problem-gh-cli-uses-wrong-account)
+  - [Problem: "Too Many Authentication Failures"](#problem-too-many-authentication-failures)
+  - [Problem: Key Not Persisting After Reboot (macOS)](#problem-key-not-persisting-after-reboot-macos)
+- [Security Best Practices](#security-best-practices)
+- [Quick Reference](#quick-reference)
+  - [Key Files and Locations](#key-files-and-locations)
+  - [Common Commands](#common-commands)
+- [Integration with Agent Orchestration](#integration-with-agent-orchestration)
+  - [Owner/Orchestrator Identity](#ownerorchestrator-identity)
+  - [Developer/Worker Identity](#developerworker-identity)
+  - [Workflow Example](#workflow-example)
+
 ## Use-Case TOC
 - When running commands as a specific user → [Per-Command Identity Override](#per-command-identity-override)
 - When adding collaborators to a repository → [Collaborator Management](#collaborator-management)

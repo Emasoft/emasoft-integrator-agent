@@ -1,5 +1,26 @@
 # Bot Categories for PR Review
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Category Table](#category-table)
+- [Detailed Category Definitions](#detailed-category-definitions)
+  - [1. Claude Code Action (60-80% Reliability)](#1-claude-code-action-60-80-reliability)
+  - [2. Human (Variable Reliability)](#2-human-variable-reliability)
+- [Signal Interpretation Guide](#signal-interpretation-guide)
+  - [Understanding Reliability Percentages](#understanding-reliability-percentages)
+  - [Decision Matrix](#decision-matrix)
+- [Priority Matrix](#priority-matrix)
+- [Implementation Example](#implementation-example)
+  - [Classifying PR Authors](#classifying-pr-authors)
+  - [Handling PRs by Category](#handling-prs-by-category)
+- [Claude Code Action Workflow Setup](#claude-code-action-workflow-setup)
+- [Best Practices](#best-practices)
+- [Troubleshooting](#troubleshooting)
+  - [Issue: Claude Code Action not responding](#issue-claude-code-action-not-responding)
+  - [Issue: Claude provides incomplete review](#issue-claude-provides-incomplete-review)
+  - [Issue: Misclassified reviewer](#issue-misclassified-reviewer)
+
 ## Overview
 
 When monitoring Pull Requests in automated CI/CD pipelines, different types of PR authors require different handling strategies. This document defines the bot categories and their signal reliability for automated decision-making.

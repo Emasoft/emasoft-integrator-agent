@@ -1,7 +1,7 @@
 ---
 name: eia-bug-investigator
 model: sonnet
-description: Investigates and reproduces bugs with systematic debugging approach
+description: Investigates and reproduces bugs with systematic debugging approach. Requires AI Maestro installed.
 type: task-agent
 triggers:
   - Bug report requires investigation and root cause analysis
@@ -10,7 +10,7 @@ triggers:
   - Reproduction of reported bug needs verification
   - Root cause analysis needed before implementing solution
 auto_skills:
-  - session-memory
+  - eia-session-memory
   - eia-tdd-enforcement
 memory_requirements: medium
 ---

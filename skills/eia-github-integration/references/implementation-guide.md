@@ -1,5 +1,31 @@
 # Implementation Guide
 
+## Table of Contents
+
+- [Use-Case TOC](#use-case-toc)
+- [Part 1: Complete Implementation Checklist](#part-1-complete-implementation-checklist)
+  - [Phase Overview](#phase-overview)
+  - [Phase 1: Prerequisites and Authentication](#phase-1-prerequisites-and-authentication)
+  - [Phase 2: Label System Setup](#phase-2-label-system-setup)
+  - [Phase 3: GitHub Projects V2 Setup](#phase-3-github-projects-v2-setup)
+  - [Phase 4-5: Issue and PR Workflows](#phase-4-5-issue-and-pr-workflows)
+  - [Phase 6: Automation Scripts](#phase-6-automation-scripts)
+  - [Phase 7-8: Team Onboarding and Improvement](#phase-7-8-team-onboarding-and-improvement)
+- [Part 2: Agent Orchestrator Integration](#part-2-agent-orchestrator-integration)
+  - [Topics Covered](#topics-covered)
+  - [Integration Architecture](#integration-architecture)
+  - [Integration Patterns](#integration-patterns)
+  - [Agent Configuration](#agent-configuration)
+  - [Monitoring Agent-GitHub Health](#monitoring-agent-github-health)
+  - [Next Steps After Implementation](#next-steps-after-implementation)
+  - [Team Onboarding](#team-onboarding)
+- [Part 3: Advanced Implementation Topics](#part-3-advanced-implementation-topics)
+  - [Topics Covered](#topics-covered-1)
+  - [Success Metrics](#success-metrics)
+- [Quick Reference](#quick-reference)
+  - [Essential Commands](#essential-commands)
+  - [Related Documents](#related-documents)
+
 This guide provides comprehensive instructions for implementing GitHub integration from scratch. The content is organized into three parts for easier navigation.
 
 ## Use-Case TOC

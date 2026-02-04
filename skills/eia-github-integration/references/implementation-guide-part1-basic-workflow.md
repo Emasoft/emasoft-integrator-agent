@@ -1,5 +1,24 @@
 # Implementation Guide Part 1: Basic Workflow
 
+## Table of Contents
+
+- [Use-Case TOC](#use-case-toc)
+- [Complete Implementation Checklist](#complete-implementation-checklist)
+  - [Phase 1: Prerequisites and Authentication](#phase-1-prerequisites-and-authentication)
+  - [Phase 2: Label System Setup](#phase-2-label-system-setup)
+  - [Phase 3: GitHub Projects V2 Setup](#phase-3-github-projects-v2-setup)
+  - [Phase 4: Issue Workflow Implementation](#phase-4-issue-workflow-implementation)
+  - [Phase 5: Pull Request Workflow](#phase-5-pull-request-workflow)
+  - [Phase 6: Automation Scripts Setup](#phase-6-automation-scripts-setup)
+  - [Phase 7: Team Onboarding](#phase-7-team-onboarding)
+  - [Phase 8: Continuous Improvement](#phase-8-continuous-improvement)
+- [Agent Orchestrator Integration](#agent-orchestrator-integration)
+  - [Integration Architecture](#integration-architecture)
+  - [Integration Patterns](#integration-patterns)
+  - [Agent Configuration](#agent-configuration)
+  - [Monitoring Agent-GitHub Health](#monitoring-agent-github-health)
+- [Next Steps After Implementation](#next-steps-after-implementation)
+
 ## Use-Case TOC
 - When you need to implement GitHub integration from scratch → [Complete Implementation Checklist](#complete-implementation-checklist)
 - When you need to integrate with agent orchestrator → [Agent Orchestrator Integration](#agent-orchestrator-integration)

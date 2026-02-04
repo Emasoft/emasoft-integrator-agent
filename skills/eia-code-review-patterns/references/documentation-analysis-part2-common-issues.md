@@ -1,5 +1,15 @@
 # Documentation Analysis: Common Issues
 
+## Table of Contents
+
+- [Common Issues to Look For](#common-issues-to-look-for)
+  - [Missing Docstrings](#missing-docstrings)
+  - [Poor Documentation Quality](#poor-documentation-quality)
+  - [Missing Examples](#missing-examples)
+  - [Poor README](#poor-readme)
+  - [Missing Error Documentation](#missing-error-documentation)
+  - [Unhelpful Comments](#unhelpful-comments)
+
 This document covers common documentation issues to look for during code review, with examples.
 
 **Parent document**: [documentation-analysis.md](./documentation-analysis.md)

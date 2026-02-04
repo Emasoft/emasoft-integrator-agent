@@ -1,5 +1,14 @@
 # Milestone Tracking - Part 2: Assigning Issues to Milestones
 
+## Table of Contents
+
+- [3.2 Assigning Issues to Milestones](#32-assigning-issues-to-milestones)
+  - [3.2.1 Single Issue Assignment](#321-single-issue-assignment)
+  - [3.2.2 Bulk Assignment](#322-bulk-assignment)
+  - [3.2.3 Moving Between Milestones](#323-moving-between-milestones)
+
+---
+
 ## 3.2 Assigning Issues to Milestones
 
 ### 3.2.1 Single Issue Assignment

@@ -1,5 +1,15 @@
 # Merge Safeguards - Part 3: Validation and Advanced Scenarios
 
+## Table of Contents
+
+- [Pre-Merge Validation Checklist](#pre-merge-validation-checklist)
+- [Advanced Scenarios](#advanced-scenarios)
+  - [Multiple Sequential Merges](#multiple-sequential-merges)
+  - [Conflict Resolution Workflow](#conflict-resolution-workflow)
+  - [Detecting Breaking Changes](#detecting-breaking-changes)
+
+---
+
 ## Pre-Merge Validation Checklist
 
 The validator checks:

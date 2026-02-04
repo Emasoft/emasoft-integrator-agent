@@ -37,7 +37,7 @@ import subprocess
 import sys
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any, Optional, cast
 
 
 def get_log_file() -> Path:
@@ -377,7 +377,7 @@ def parse_stdin_json() -> dict:
         stdin_data = sys.stdin.read()
         if not stdin_data.strip():
             return {}
-        return json.loads(stdin_data)
+        return cast(dict[Any, Any], json.loads(stdin_data))
     except (json.JSONDecodeError, TypeError):
         return {}
 

@@ -1,6 +1,6 @@
 ---
 name: eia-api-coordinator
-description: Handles GitHub API operations including issues, PRs, projects, and threads
+description: Handles GitHub API operations including issues, PRs, projects, and threads. Requires AI Maestro installed.
 version: 1.0.0
 model: sonnet
 type: api-handler
@@ -18,7 +18,7 @@ auto_skills:
   - eia-github-pr-merge
   - eia-github-thread-management
   - eia-github-integration
-  - eia-github-kanban-core
+  - eia-kanban-orchestration
   - eia-github-projects-sync
   - eia-github-project-workflow
 memory_requirements: medium

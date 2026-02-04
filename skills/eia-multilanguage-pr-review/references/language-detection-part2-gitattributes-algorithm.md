@@ -2,6 +2,19 @@
 
 This reference covers using .gitattributes linguist hints and understanding GitHub's language detection algorithm.
 
+## Table of Contents
+
+- [1.3 Using .gitattributes Linguist Hints](#13-using-gitattributes-linguist-hints)
+  - [What is .gitattributes?](#what-is-gitattributes)
+  - [Linguist Attributes](#linguist-attributes)
+  - [Example .gitattributes File](#example-gitattributes-file)
+  - [Reading .gitattributes Programmatically](#reading-gitattributes-programmatically)
+- [1.4 Understanding GitHub's Language Detection Algorithm](#14-understanding-githubs-language-detection-algorithm)
+  - [Detection Priority Order](#detection-priority-order)
+  - [Special Filenames Recognized](#special-filenames-recognized)
+  - [Content Heuristics](#content-heuristics)
+  - [Implementation Example](#implementation-example)
+
 ---
 
 ## 1.3 Using .gitattributes Linguist Hints

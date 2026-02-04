@@ -1,5 +1,14 @@
 # Go Error Handling Patterns Reference
 
+## Table of Contents
+
+- [5.2 Error Handling Patterns in Go](#52-error-handling-patterns-in-go)
+  - [Basic Error Handling](#basic-error-handling)
+  - [Error Wrapping](#error-wrapping)
+  - [Custom Error Types](#custom-error-types)
+  - [Error Handling Best Practices](#error-handling-best-practices)
+  - [Error Handling Checklist](#error-handling-checklist)
+
 ## 5.2 Error Handling Patterns in Go
 
 Go uses explicit error handling with the `error` type.

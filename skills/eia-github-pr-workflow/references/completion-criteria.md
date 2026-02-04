@@ -24,7 +24,7 @@
 ```
 [ ] 6.1.1 All review comments addressed
 [ ] 6.1.2 All PR comments acknowledged
-[ ] 6.1.3 No new comments in last 45 seconds
+[ ] 6.1.3 No new comments after quiet period
 [ ] 6.1.4 All required CI checks pass
 [ ] 6.1.5 No unresolved conversation threads
 [ ] 6.1.6 GitHub shows merge eligible
@@ -83,11 +83,11 @@ gh api repos/{owner}/{repo}/issues/{pr}/comments
 | Information sharing | No - unless question implied |
 | Praise/thanks | No |
 
-### 6.1.3 No new comments (45s wait)
+### 6.1.3 No new comments (quiet period)
 
-**Definition**: No new activity on the PR in the last 45 seconds.
+**Definition**: No new activity on the PR after a brief quiet period.
 
-**Why 45 seconds**:
+**Why a quiet period**:
 - GitHub webhooks can be delayed
 - UI updates are not instant
 - Comments might appear after we checked
@@ -95,11 +95,10 @@ gh api repos/{owner}/{repo}/issues/{pr}/comments
 
 **Implementation**:
 ```python
-def check_quiet_period(pr_number, owner, repo, seconds=45):
-    """Check if PR has been quiet for specified seconds."""
+def check_quiet_period(pr_number, owner, repo):
+    """Check if PR has been quiet - no recent activity."""
     import subprocess
-    import json
-    from datetime import datetime, timezone, timedelta
+    from datetime import datetime, timezone
 
     # Get latest activity timestamps
     cmd = f"gh api repos/{owner}/{repo}/issues/{pr_number}/comments --jq '.[].created_at' | tail -1"
@@ -111,11 +110,13 @@ def check_quiet_period(pr_number, owner, repo, seconds=45):
     last_comment = datetime.fromisoformat(result.stdout.strip().replace('Z', '+00:00'))
     now = datetime.now(timezone.utc)
 
-    return (now - last_comment) > timedelta(seconds=seconds)
+    # Use judgment - is this recent enough to indicate ongoing activity?
+    time_since_comment = now - last_comment
+    return time_since_comment.total_seconds() > 30  # brief quiet period
 ```
 
 **If quiet period fails**:
-- Wait until 45 seconds pass
+- Wait for quiet period to pass
 - Re-check other criteria after waiting
 - If new activity detected, address it first
 
@@ -143,8 +144,8 @@ gh pr checks {pr_number} --required
 **Handling pending checks**:
 1. Do not report ready while checks pending
 2. Set up polling to re-check
-3. Maximum wait: 30 minutes
-4. If still pending, escalate to user
+3. Wait until CI completes or fails
+4. If CI appears stuck, escalate to user
 
 ### 6.1.5 No unresolved threads
 
@@ -283,7 +284,7 @@ When a criterion fails, the response depends on the failure type.
 
 **Symptoms**:
 - Quiet period check fails
-- New comment timestamp within 45 seconds
+- New comment detected recently
 
 **Resolution steps**:
 1. Wait for quiet period to pass

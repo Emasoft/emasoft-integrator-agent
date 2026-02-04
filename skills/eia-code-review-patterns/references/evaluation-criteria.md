@@ -5,6 +5,39 @@ description: "Comprehensive criteria for evaluating code quality, style, securit
 
 # Code Review Evaluation Criteria
 
+## Table of Contents
+
+- [1. Code Quality](#1-code-quality)
+  - [1.1 Readability](#11-readability)
+  - [1.2 Maintainability](#12-maintainability)
+  - [1.3 Correctness](#13-correctness)
+- [2. Code Style](#2-code-style)
+  - [2.1 Language Conventions](#21-language-conventions)
+  - [2.2 Project Standards](#22-project-standards)
+  - [2.3 Documentation Style](#23-documentation-style)
+- [3. Security](#3-security)
+  - [3.1 Input Validation](#31-input-validation)
+  - [3.2 Authentication & Authorization](#32-authentication--authorization)
+  - [3.3 Data Protection](#33-data-protection)
+  - [3.4 Common Vulnerabilities](#34-common-vulnerabilities)
+- [4. Performance](#4-performance)
+  - [4.1 Algorithmic Efficiency](#41-algorithmic-efficiency)
+  - [4.2 Resource Management](#42-resource-management)
+  - [4.3 Scalability](#43-scalability)
+  - [4.4 Optimization Level](#44-optimization-level)
+- [5. Testing](#5-testing)
+  - [5.1 Test Coverage](#51-test-coverage)
+  - [5.2 Test Quality](#52-test-quality)
+  - [5.3 Test Maintainability](#53-test-maintainability)
+- [6. Architecture & Design](#6-architecture--design)
+  - [6.1 Design Patterns](#61-design-patterns)
+  - [6.2 Dependencies](#62-dependencies)
+  - [6.3 API Design](#63-api-design)
+- [7. Evaluation Scoring](#7-evaluation-scoring)
+  - [Priority Levels](#priority-levels)
+  - [Review Decision Matrix](#review-decision-matrix)
+- [8. Review Checklist](#8-review-checklist)
+
 This document defines the key criteria for evaluating code during reviews. Each criterion includes specific checkpoints and examples.
 
 ## 1. Code Quality

@@ -1,5 +1,23 @@
 # Testing in Isolated Worktrees
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Document Map](#document-map)
+  - [Part 1: Types and Creation](#part-1-types-and-creation)
+  - [Part 2: Environment Setup](#part-2-environment-setup)
+  - [Part 3: Running Tests](#part-3-running-tests)
+  - [Part 4: Database Testing Patterns](#part-4-database-testing-patterns)
+  - [Part 5: Cleanup After Tests](#part-5-cleanup-after-tests)
+  - [Part 6: CI/CD Integration](#part-6-cicd-integration)
+  - [Part 7: Troubleshooting and Summary](#part-7-troubleshooting-and-summary)
+- [Quick Reference](#quick-reference)
+  - [Essential Commands](#essential-commands)
+  - [When to Use Each Worktree Type](#when-to-use-each-worktree-type)
+- [Related Documents](#related-documents)
+
+---
+
 ## Overview
 
 **Purpose**: This document is the index for testing in isolated git worktrees.

@@ -1,5 +1,19 @@
 # TDD Troubleshooting - Part 2: Code Issues
 
+## Table of Contents
+- [Code Passes But Seems Wrong](#code-passes-but-seems-wrong)
+  - [Symptoms](#symptoms)
+  - [Root Cause](#root-cause)
+  - [Solution](#solution)
+  - [Prevention](#prevention)
+- [Refactoring Takes Too Long](#refactoring-takes-too-long)
+  - [Symptoms](#symptoms-1)
+  - [Root Cause](#root-cause-1)
+  - [Solution](#solution-1)
+  - [Prevention](#prevention-1)
+
+---
+
 ## Code Passes But Seems Wrong
 
 ### Symptoms

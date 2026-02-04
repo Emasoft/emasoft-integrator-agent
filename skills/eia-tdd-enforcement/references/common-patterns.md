@@ -1,5 +1,39 @@
 # Common TDD Patterns and Anti-Patterns
 
+## Table of Contents
+- [Use-Case TOC](#use-case-toc)
+- [Testing Behavior, Not Implementation](#testing-behavior-not-implementation)
+  - [The Rule](#the-rule)
+  - [Anti-Pattern: Testing Implementation](#anti-pattern-testing-implementation)
+  - [Correct Pattern: Testing Behavior](#correct-pattern-testing-behavior)
+  - [More Examples](#more-examples)
+- [One Assertion Per Test](#one-assertion-per-test)
+  - [The Rule](#the-rule-1)
+  - [Anti-Pattern: Multiple Behaviors in One Test](#anti-pattern-multiple-behaviors-in-one-test)
+  - [Correct Pattern: One Test Per Behavior](#correct-pattern-one-test-per-behavior)
+  - [When Multiple Assertions Are OK](#when-multiple-assertions-are-ok)
+- [Arrange-Act-Assert Pattern](#arrange-act-assert-pattern)
+  - [The Rule](#the-rule-2)
+  - [Pattern Structure](#pattern-structure)
+  - [Example](#example)
+  - [Anti-Pattern: Mixed Phases](#anti-pattern-mixed-phases)
+- [Edge Case Testing](#edge-case-testing)
+  - [The Rule](#the-rule-3)
+  - [Pattern](#pattern)
+  - [Anti-Pattern: All Edge Cases at Once](#anti-pattern-all-edge-cases-at-once)
+- [Dependency Isolation](#dependency-isolation)
+  - [The Rule](#the-rule-4)
+  - [Anti-Pattern: Shared State](#anti-pattern-shared-state)
+  - [Correct Pattern: Independent Tests](#correct-pattern-independent-tests)
+  - [Using Setup Methods](#using-setup-methods)
+- [Test Naming Patterns](#test-naming-patterns)
+  - [The Rule](#the-rule-5)
+  - [Pattern: Given-When-Then](#pattern-given-when-then)
+  - [Pattern: Should](#pattern-should)
+  - [Pattern: Can/Cannot](#pattern-cancannot)
+
+---
+
 ## Use-Case TOC
 - When you need to understand what to test → [Testing Behavior Not Implementation](#testing-behavior-not-implementation)
 - If your test has multiple assertions → [One Assertion Per Test](#one-assertion-per-test)

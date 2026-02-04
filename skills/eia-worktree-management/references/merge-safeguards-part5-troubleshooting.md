@@ -1,5 +1,18 @@
 # Merge Safeguards - Part 5: Troubleshooting and Integration
 
+## Table of Contents
+
+- [Troubleshooting](#troubleshooting)
+  - [Issue: Rebase Fails with Conflicts](#issue-rebase-fails-with-conflicts)
+  - [Issue: Validation Shows "Behind Remote"](#issue-validation-shows-behind-remote)
+  - [Issue: Multiple Conflicting Files](#issue-multiple-conflicting-files)
+- [Integration with Worktree Lifecycle](#integration-with-worktree-lifecycle)
+  - [During Creation](#during-creation)
+  - [Before Removal](#before-removal)
+- [See Also](#see-also)
+
+---
+
 ## Troubleshooting
 
 ### Issue: Rebase Fails with Conflicts

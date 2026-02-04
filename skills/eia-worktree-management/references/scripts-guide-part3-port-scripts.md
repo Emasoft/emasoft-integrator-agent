@@ -9,6 +9,27 @@
 
 ---
 
+## Table of Contents
+
+- [Script Reference: Port Scripts](#script-reference-port-scripts)
+  - [port_allocate.py](#port_allocatepy)
+    - [Purpose](#purpose)
+    - [Usage Syntax](#usage-syntax)
+    - [Required Arguments (one of)](#required-arguments-one-of)
+    - [Optional Arguments](#optional-arguments)
+    - [Examples with Explanations](#examples-with-explanations)
+    - [Port Ranges by Service](#port-ranges-by-service)
+    - [Exit Codes](#exit-codes)
+  - [port_status.py](#port_statuspy)
+    - [Purpose](#purpose-1)
+    - [Usage Syntax](#usage-syntax-1)
+    - [Optional Arguments](#optional-arguments-1)
+    - [Examples with Explanations](#examples-with-explanations-1)
+    - [Health Check Behavior](#health-check-behavior)
+    - [Exit Codes](#exit-codes-1)
+
+---
+
 ## Script Reference: Port Scripts
 
 This section covers port management scripts:

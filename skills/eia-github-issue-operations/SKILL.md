@@ -1,20 +1,14 @@
 ---
 name: eia-github-issue-operations
-description: Use when managing GitHub Issues including creation, labels, milestones, assignees, and comments using gh CLI.
+description: Use when managing GitHub Issues including creation, labels, milestones, assignees, and comments using gh CLI. Trigger with create issue, set labels, assign milestone.
 license: Apache-2.0
+compatibility: Requires AI Maestro installed.
 metadata:
   version: "1.0.0"
   author: Integrator Agent Team
   category: github
-  tags:
-    - github
-    - issues
-    - labels
-    - milestones
-    - project-management
-  requires_tools:
-    - gh
-    - jq
+  tags: "github, issues, labels, milestones, project-management"
+  requires_tools: "gh, jq"
 agent: api-coordinator
 context: fork
 ---
@@ -27,12 +21,37 @@ This skill provides complete GitHub Issue management capabilities for orchestrat
 
 ## Instructions
 
-Use this skill when:
-- Creating issues from automated workflows
-- Managing issue labels and categorization
-- Tracking progress via milestones
-- Posting automated comments or status updates
-- Querying issue metadata and context
+1. Verify prerequisites are met (gh CLI installed and authenticated)
+2. Identify which GitHub Issue operation you need using the Decision Tree below
+3. Select the appropriate script from the Script Reference Table
+4. Execute the script with required arguments
+5. Check the JSON output for success or error codes (see Exit Codes section)
+6. Handle errors using the Error Handling section if needed
+
+### Checklist
+
+Copy this checklist and track your progress:
+
+- [ ] Verify gh CLI is installed: `gh --version`
+- [ ] Verify gh CLI is authenticated: `gh auth status`
+- [ ] Verify write access to target repository
+- [ ] Identify operation needed using Decision Tree
+- [ ] Select appropriate script from Script Reference Table
+- [ ] Execute script with required arguments
+- [ ] Check JSON output for success (`"error": false`) or error (`"error": true`)
+- [ ] If error, check exit code (0=success, 1-6=specific errors)
+- [ ] Handle any errors using Error Handling section
+- [ ] Verify operation completed as expected (e.g., issue created, labels applied)
+
+## Output
+
+All scripts return structured JSON output:
+
+| Output Type | Format | Fields | Example |
+|-------------|--------|--------|---------|
+| Success | JSON object | Operation-specific data | `{"number": 123, "url": "https://github.com/..."}` |
+| Error | JSON object with `error: true` | `message`, `code` | `{"error": true, "message": "Issue not found", "code": "ISSUE_NOT_FOUND"}` |
+| Exit codes | Standard codes 0-6 | See Exit Codes section | `0` = success, `1-6` = specific errors |
 
 ## Prerequisites
 

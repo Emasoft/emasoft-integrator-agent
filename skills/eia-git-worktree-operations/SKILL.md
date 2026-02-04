@@ -1,19 +1,13 @@
 ---
 name: eia-git-worktree-operations
-description: Use when processing multiple PRs in parallel using git worktrees for isolated, concurrent development without branch switching overhead.
+description: "Use when processing parallel PRs. Trigger with git worktree or parallel development requests."
 license: Apache-2.0
+compatibility: Requires AI Maestro installed.
 metadata:
   version: 1.0.0
   author: integrator-agent
-  tags:
-    - git
-    - worktree
-    - parallel-development
-    - pr-workflow
-    - isolation
-  requires:
-    - git >= 2.15
-    - python >= 3.9
+  tags: "git, worktree, parallel-development, pr-workflow, isolation"
+  requires: "git >= 2.15, python >= 3.9"
 context: fork
 ---
 
@@ -51,6 +45,23 @@ Do NOT use worktrees when:
 2. The repository is very large and disk space is limited
 3. You need to share uncommitted changes between "checkouts"
 4. You are working with submodules (additional complexity)
+
+### Checklist
+
+Copy this checklist and track your progress:
+
+- [ ] Verify git version is 2.15+ (`git --version`)
+- [ ] Check no other git operations are currently running
+- [ ] Fetch PR branch from remote: `git fetch origin pull/<PR>/head:<branch>`
+- [ ] Create worktree: `python scripts/eia_create_worktree.py --pr <number> --base-path /tmp/worktrees`
+- [ ] Verify worktree creation succeeded
+- [ ] Work ONLY within the worktree directory (no file ops outside)
+- [ ] Periodically verify isolation: `python scripts/eia_verify_worktree_isolation.py --worktree-path <path>`
+- [ ] Commit changes within worktree
+- [ ] Push to remote: `python scripts/eia_worktree_commit_push.py --worktree-path <path> --message "<msg>"`
+- [ ] Verify all changes are pushed before cleanup
+- [ ] Verify no uncommitted files remain
+- [ ] Cleanup worktree: `python scripts/eia_cleanup_worktree.py --worktree-path <path>`
 
 ---
 
@@ -241,6 +252,23 @@ python scripts/eia_create_worktree.py --pr 103 --base-path /tmp/worktrees
 python scripts/eia_verify_worktree_isolation.py --worktree-path /tmp/worktrees/pr-101
 ```
 
+---
+
+## Output
+
+| Output Type | Description |
+|-------------|-------------|
+| **Worktree Directory** | New directory created at specified path containing checked-out PR branch |
+| **Worktree List** | JSON or text output listing all active worktrees with paths and branch names |
+| **Verification Report** | Status of isolation checks showing any files written outside worktree boundaries |
+| **Commit Confirmation** | Success/failure message with commit hash after committing changes |
+| **Push Confirmation** | Success/failure message indicating remote branch update status |
+| **Cleanup Report** | Confirmation of worktree removal with any warnings about uncommitted changes |
+| **Error Messages** | Diagnostic output when operations fail (branch conflicts, lock files, etc.) |
+| **Isolation Violations** | List of files that were written outside the designated worktree path |
+
+---
+
 ## Error Handling
 
 ### Problem: "fatal: branch is already checked out"
@@ -281,6 +309,64 @@ python scripts/eia_verify_worktree_isolation.py --worktree-path /tmp/worktrees/p
 - [references/parallel-pr-workflow.md](references/parallel-pr-workflow.md) - Processing multiple PRs simultaneously
 - [references/worktree-cleanup.md](references/worktree-cleanup.md) - Safe worktree removal procedures
 - [references/worktree-verification.md](references/worktree-verification.md) - Isolation and integrity checks
+
+---
+
+## SAFETY WARNING: Destructive Operations
+
+### IRREVERSIBLE Operations
+
+The following git worktree operations are **IRREVERSIBLE** and can cause data loss:
+
+| Operation | Risk | Alternative |
+|-----------|------|-------------|
+| `git worktree remove --force` | Deletes worktree even with uncommitted changes | Use `git worktree remove` (no --force) first |
+| `rm -rf <worktree-path>` | Bypasses git's safety checks, corrupts worktree list | Always use `git worktree remove` |
+| `git worktree prune` | Removes stale worktree entries | Verify with `git worktree list` first |
+
+### BEFORE ANY DESTRUCTIVE OPERATION
+
+1. **Verify you have a backup branch**
+   ```bash
+   git branch -a | grep backup
+   # If no backup, create one:
+   git branch backup-$(date +%Y%m%d) HEAD
+   ```
+
+2. **Confirm with orchestrator** before force operations
+   - Never use `--force` flags without explicit approval
+   - Document the reason for force operation
+
+3. **Log the operation details**
+   ```bash
+   echo "$(date): Removing worktree $WORKTREE_PATH - Reason: [REASON]" >> worktree-ops.log
+   ```
+
+### Safe Worktree Removal Checklist
+
+- [ ] Run `git status` in worktree to check for uncommitted changes
+- [ ] Run `git log origin/branch..HEAD` to check for unpushed commits
+- [ ] Verify no other processes are using the worktree
+- [ ] Use `git worktree remove <path>` (without --force)
+- [ ] If removal fails, investigate why before using --force
+- [ ] After removal, verify with `git worktree list`
+
+### Emergency Recovery
+
+If worktree was removed with uncommitted changes:
+
+```bash
+# Check git reflog for recent commits
+git reflog
+
+# Recover lost commits
+git cherry-pick <commit-hash>
+
+# Check for dangling commits
+git fsck --lost-found
+```
+
+---
 
 ## Quick Reference Card
 

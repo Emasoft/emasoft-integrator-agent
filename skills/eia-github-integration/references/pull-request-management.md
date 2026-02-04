@@ -1,5 +1,34 @@
 # Pull Request Management
 
+## Table of Contents
+
+- [Use-Case TOC](#use-case-toc)
+- [Creating Pull Requests](#creating-pull-requests)
+  - [Basic PR Creation Syntax](#basic-pr-creation-syntax)
+  - [Parameters](#parameters)
+  - [Examples](#examples)
+- [Linking PRs to Issues](#linking-prs-to-issues)
+  - [Linking Keywords](#linking-keywords)
+  - [Example PR Body with Multiple Issue Links](#example-pr-body-with-multiple-issue-links)
+  - [Automatic PR Creation from Issues](#automatic-pr-creation-from-issues)
+- [Monitoring PR Status](#monitoring-pr-status)
+  - [Check Your PRs](#check-your-prs)
+  - [View Detailed PR Information](#view-detailed-pr-information)
+  - [Monitor CI/CD Checks](#monitor-cicd-checks)
+- [Handling Failed Checks](#handling-failed-checks)
+  - [View Failed Check Details](#view-failed-check-details)
+  - [Common Failure Patterns](#common-failure-patterns)
+  - [Re-running Checks](#re-running-checks)
+  - [Manual Check Re-run](#manual-check-re-run)
+- [Merging Pull Requests](#merging-pull-requests)
+  - [Merge Strategies](#merge-strategies)
+  - [Auto-merge](#auto-merge)
+  - [Merge with Commit Message](#merge-with-commit-message)
+- [PR Workflow Automation](#pr-workflow-automation)
+  - [Automated PR Creation Script](#automated-pr-creation-script)
+  - [Automated PR Merge Script](#automated-pr-merge-script)
+- [Best Practices](#best-practices)
+
 ## Use-Case TOC
 - When you need to create a pull request → [Creating Pull Requests](#creating-pull-requests)
 - When you need to link PR to an issue → [Linking PRs to Issues](#linking-prs-to-issues)

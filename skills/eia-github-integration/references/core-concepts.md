@@ -6,6 +6,29 @@
 - When you need to understand synchronization → [Bidirectional Synchronization](#bidirectional-synchronization)
 - When choosing which label to use → [Label Selection Guide](#label-selection-guide)
 
+## Table of Contents
+
+- [What is GitHub Projects V2](#what-is-github-projects-v2)
+  - [Projects V2 vs Legacy Projects](#projects-v2-vs-legacy-projects)
+  - [Why Use Projects V2](#why-use-projects-v2)
+- [The 9-Label System](#the-9-label-system)
+  - [Why Nine Labels?](#why-nine-labels)
+  - [Label Selection Guide](#label-selection-guide)
+  - [Important Rules](#important-rules)
+- [Label Selection Guide](#label-selection-guide)
+- [Bidirectional Synchronization](#bidirectional-synchronization)
+  - [How Bidirectional Sync Works](#how-bidirectional-sync-works)
+  - [Sync Triggers](#sync-triggers)
+  - [Conflict Resolution](#conflict-resolution)
+  - [Sync Health Monitoring](#sync-health-monitoring)
+  - [When Sync Fails](#when-sync-fails)
+- [Best Practices](#best-practices)
+  - [For Projects V2](#for-projects-v2)
+  - [For Labels](#for-labels)
+  - [For Synchronization](#for-synchronization)
+
+---
+
 ## What is GitHub Projects V2
 
 GitHub Projects V2 is a table-based project management system built directly into GitHub repositories. Unlike the legacy Projects system, Projects V2 provides:

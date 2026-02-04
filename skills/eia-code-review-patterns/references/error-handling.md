@@ -5,6 +5,37 @@ description: "Common error patterns, anti-patterns, and best practices for revie
 
 # Error Handling in Code Reviews
 
+## Table of Contents
+
+- [Core Principles](#core-principles)
+- [Common Error Handling Patterns](#common-error-handling-patterns)
+  - [1. Try-Catch-Finally (Exception-Based)](#1-try-catch-finally-exception-based)
+  - [2. Context Managers (Resource Management)](#2-context-managers-resource-management)
+  - [3. Result Types (Functional Approach)](#3-result-types-functional-approach)
+  - [4. Error Codes (Legacy/C-Style)](#4-error-codes-legacyc-style)
+- [Anti-Patterns to Flag](#anti-patterns-to-flag)
+- [Language-Specific Patterns](#language-specific-patterns)
+  - [Python](#python)
+  - [JavaScript/TypeScript](#javascripttypescript)
+  - [Go](#go)
+- [Review Checklist](#review-checklist)
+  - [Error Detection](#error-detection)
+  - [Error Handling](#error-handling)
+  - [Resource Management](#resource-management)
+  - [Error Communication](#error-communication)
+  - [Security](#security)
+- [Common Scenarios](#common-scenarios)
+  - [Scenario 1: Database Operations](#scenario-1-database-operations)
+  - [Scenario 2: External API Calls](#scenario-2-external-api-calls)
+  - [Scenario 3: File Operations](#scenario-3-file-operations)
+  - [Scenario 4: User Input Validation](#scenario-4-user-input-validation)
+- [Error Logging Best Practices](#error-logging-best-practices)
+  - [What to Log](#what-to-log)
+  - [What NOT to Log](#what-not-to-log)
+- [Testing Error Handling](#testing-error-handling)
+  - [Reviewers Should Verify Tests Exist](#reviewers-should-verify-tests-exist)
+- [Summary](#summary)
+
 Proper error handling is critical for robust, maintainable software. This guide helps reviewers identify error handling issues and suggest improvements.
 
 ## Core Principles

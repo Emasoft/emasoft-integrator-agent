@@ -1,5 +1,36 @@
 # Batch Operations and Filtering
 
+## Table of Contents
+
+- [Use-Case TOC](#use-case-toc)
+- [Filtering by Label](#filtering-by-label)
+  - [Filter by Single Label](#filter-by-single-label)
+  - [Filter by Multiple Labels (AND)](#filter-by-multiple-labels-and)
+  - [Filter by Multiple Labels (OR)](#filter-by-multiple-labels-or)
+  - [Filter by Status](#filter-by-status)
+  - [Filter by Assignee](#filter-by-assignee)
+  - [Filter by Date](#filter-by-date)
+- [Advanced Filtering](#advanced-filtering)
+  - [Complex Filter Examples](#complex-filter-examples)
+  - [Saving Filter Results](#saving-filter-results)
+  - [Filtering in Projects V2](#filtering-in-projects-v2)
+- [Batch Issue Updates](#batch-issue-updates)
+  - [Update Labels on Multiple Issues](#update-labels-on-multiple-issues)
+  - [Update Assignees on Multiple Issues](#update-assignees-on-multiple-issues)
+  - [Update Status in Projects V2](#update-status-in-projects-v2)
+- [Bulk Label Operations](#bulk-label-operations)
+  - [Add Label to All Matching Issues](#add-label-to-all-matching-issues)
+  - [Remove Label from All Issues](#remove-label-from-all-issues)
+  - [Replace Label Across All Issues](#replace-label-across-all-issues)
+- [Bulk Closing Issues](#bulk-closing-issues)
+  - [Close All Issues with Specific Label](#close-all-issues-with-specific-label)
+  - [Close Stale Issues](#close-stale-issues)
+- [Safe Batch Operations](#safe-batch-operations)
+  - [Preview Changes Before Applying](#preview-changes-before-applying)
+  - [Create Audit Trail](#create-audit-trail)
+  - [Implement Rollback Capability](#implement-rollback-capability)
+- [Best Practices](#best-practices)
+
 ## Use-Case TOC
 - When you need to filter issues by label → [Filtering by Label](#filtering-by-label)
 - When you need to update multiple issues → [Batch Issue Updates](#batch-issue-updates)

@@ -1,5 +1,14 @@
 # Milestone Tracking - Part 1: Creating Milestones
 
+## Table of Contents
+
+- [3.1 Creating Milestones](#31-creating-milestones)
+  - [3.1.1 Milestone Title Conventions](#311-milestone-title-conventions)
+  - [3.1.2 Setting Due Dates](#312-setting-due-dates)
+  - [3.1.3 Milestone Descriptions](#313-milestone-descriptions)
+
+---
+
 ## 3.1 Creating Milestones
 
 ### 3.1.1 Milestone Title Conventions

@@ -1,5 +1,15 @@
 # RED-GREEN-REFACTOR Cycle
 
+## Table of Contents
+- [Use-Case TOC](#use-case-toc)
+- [Phase 1: RED (Write Failing Test)](#phase-1-red-write-failing-test)
+- [Phase 2: GREEN (Write Minimum Implementation)](#phase-2-green-write-minimum-implementation)
+- [Phase 3: REFACTOR (Improve Code Quality)](#phase-3-refactor-improve-code-quality)
+- [Cycle Flow](#cycle-flow)
+- [Cycle Completion](#cycle-completion)
+
+---
+
 ## Use-Case TOC
 - When starting a new feature → [Phase 1: RED](#phase-1-red-write-failing-test)
 - If you have a failing test and need to implement → [Phase 2: GREEN](#phase-2-green-write-minimum-implementation)

@@ -67,7 +67,7 @@ When an isolation violation is detected, document it:
 | Category | Description | Response |
 |----------|-------------|----------|
 | CRITICAL | Production/main contaminated | Immediate escalation |
-| HIGH | Cross-worktree contamination | Escalate within 1 hour |
+| HIGH | Cross-worktree contamination | Escalate promptly |
 | MEDIUM | Main repo touched but unchanged | Fix and document |
 | LOW | Temp files in wrong location | Clean up and note |
 

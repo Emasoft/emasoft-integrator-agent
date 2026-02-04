@@ -1,5 +1,18 @@
 # Milestone Tracking - Part 3: Progress Tracking and Closing
 
+## Table of Contents
+
+- [3.3 Milestone Progress Tracking](#33-milestone-progress-tracking)
+  - [3.3.1 Querying Completion Percentage](#331-querying-completion-percentage)
+  - [3.3.2 Open vs Closed Issues Count](#332-open-vs-closed-issues-count)
+  - [3.3.3 Overdue Detection](#333-overdue-detection)
+- [3.4 Closing Milestones](#34-closing-milestones)
+  - [3.4.1 When to Close](#341-when-to-close)
+  - [3.4.2 Handling Incomplete Issues](#342-handling-incomplete-issues)
+  - [3.4.3 Archive vs Delete](#343-archive-vs-delete)
+
+---
+
 ## 3.3 Milestone Progress Tracking
 
 ### 3.3.1 Querying Completion Percentage

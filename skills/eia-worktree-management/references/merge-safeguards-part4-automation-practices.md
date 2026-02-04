@@ -1,5 +1,18 @@
 # Merge Safeguards - Part 4: Automation and Best Practices
 
+## Table of Contents
+
+- [Automation Scripts](#automation-scripts)
+  - [Auto-Rebase All Worktrees](#auto-rebase-all-worktrees)
+  - [Continuous Validation](#continuous-validation)
+- [Best Practices](#best-practices)
+  - [1. Validate Before Opening PR](#1-validate-before-opening-pr)
+  - [2. Rebase Daily](#2-rebase-daily)
+  - [3. Coordinate Overlapping Changes](#3-coordinate-overlapping-changes)
+  - [4. Test After Each Merge](#4-test-after-each-merge)
+
+---
+
 ## Automation Scripts
 
 ### Auto-Rebase All Worktrees

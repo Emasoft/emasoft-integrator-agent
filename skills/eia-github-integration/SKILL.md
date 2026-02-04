@@ -1,8 +1,8 @@
 ---
 name: eia-github-integration
-description: Use when integrating with GitHub for bidirectional synchronization between Agent tasks and GitHub Projects V2, with standardized 9-label system, pull request workflow automation, and comprehensive issue tracking.
+description: "Use when integrating GitHub Projects. Trigger with GitHub sync, label setup, or PR workflow requests."
 license: Apache-2.0
-compatibility: Requires GitHub CLI version 2.14 or higher, GitHub account with write permissions to target repositories, and basic Git knowledge.
+compatibility: Requires GitHub CLI version 2.14 or higher, GitHub account with write permissions to target repositories, and basic Git knowledge. Requires AI Maestro installed.
 metadata:
   author: Anthropic
   version: 1.0.0
@@ -26,7 +26,43 @@ Before using this skill, ensure:
 
 ## Instructions
 
-Follow the Core Workflow Sequence below to set up and use GitHub integration.
+1. Authenticate GitHub CLI using the [Prerequisites and Setup](#prerequisites-and-setup) reference
+2. Create the 9-label system in your repository using [Core Concepts](#core-concepts)
+3. Create and configure a Projects V2 board using [Projects V2 Operations](#projects-v2-operations)
+4. Create issues with proper labels using [Issue Management](#issue-management)
+5. Create and link pull requests to issues using [Pull Request Management](#pull-request-management)
+6. Set up bidirectional synchronization using [Projects V2 Operations](#projects-v2-operations)
+7. Automate workflows using scripts from [Automation Scripts](#automation-scripts)
+8. Monitor and troubleshoot using [Error Handling](#error-handling)
+
+### Checklist
+
+Copy this checklist and track your progress:
+
+- [ ] Authenticate GitHub CLI: `gh auth login`
+- [ ] Verify authentication: `gh auth status`
+- [ ] Create 9-label system in repository (feature, bug, refactor, test, docs, performance, security, dependencies, workflow)
+- [ ] Create Projects V2 board: `gh project create --title "<name>" --owner "@username"`
+- [ ] Configure project status columns (Backlog, Ready, In Progress, In Review, Done)
+- [ ] Create issues with proper labels: `gh issue create --title "..." --body "..." --label "<label>" --project "<number>"`
+- [ ] Create PRs linked to issues: `gh pr create --title "..." --body "Closes #<issue>" --head "<branch>"`
+- [ ] Set up bidirectional synchronization scripts
+- [ ] Configure automation rules (auto-add, auto-archive, status transitions)
+- [ ] Test workflow: create issue → create PR → merge → verify issue closes
+- [ ] Monitor sync health and troubleshoot any issues
+
+## Output
+
+| Output Type | Format | Location | Description |
+|-------------|--------|----------|-------------|
+| GitHub Issues | Web UI / JSON | `https://github.com/owner/repo/issues` | Created issues with labels and project assignments |
+| Pull Requests | Web UI / JSON | `https://github.com/owner/repo/pulls` | PRs linked to issues with auto-close syntax |
+| Projects V2 Board | Web UI / GraphQL | `https://github.com/users/username/projects/N` | Kanban board with bidirectional sync |
+| Issue Numbers | CLI Output | stdout | `#123` issue number returned after creation |
+| PR Numbers | CLI Output | stdout | `#456` PR number returned after creation |
+| Sync Reports | JSON / Text | Agent logs or file | Synchronization status and conflicts |
+| Automation Logs | Text / JSON | Script output files | Results from batch operations and automation scripts |
+| Label List | CLI Output | stdout | List of configured labels with colors and descriptions |
 
 ## Quick Start
 

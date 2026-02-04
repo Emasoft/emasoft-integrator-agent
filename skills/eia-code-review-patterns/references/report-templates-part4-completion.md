@@ -1,5 +1,11 @@
 # Completion Report Template
 
+## Table of Contents
+
+- [Template](#template)
+- [Sign-Off Status Types](#sign-off-status-types)
+- [Checklist Categories](#checklist-categories)
+
 Template for documenting task completion with verification evidence.
 
 ---

@@ -1,5 +1,35 @@
 # Issue Management
 
+## Table of Contents
+
+- [Use-Case TOC](#use-case-toc)
+- [Creating Issues](#creating-issues)
+  - [Basic Issue Creation Syntax](#basic-issue-creation-syntax)
+  - [Parameters](#parameters)
+  - [Examples](#examples)
+- [Assigning Labels](#assigning-labels)
+  - [Multiple Labels](#multiple-labels)
+  - [Creating Labels](#creating-labels)
+  - [Adding Labels to Existing Issues](#adding-labels-to-existing-issues)
+  - [Removing Labels from Issues](#removing-labels-from-issues)
+  - [Listing All Labels](#listing-all-labels)
+- [Issue Lifecycle](#issue-lifecycle)
+  - [Typical Issue Lifecycle](#typical-issue-lifecycle)
+  - [Phase 1: Issue Creation](#phase-1-issue-creation)
+  - [Phase 2: Issue Transition (Backlog → In Progress)](#phase-2-issue-transition-backlog--in-progress)
+  - [Phase 3: Work Completion (In Progress → In Review)](#phase-3-work-completion-in-progress--in-review)
+  - [Phase 4: Issue Closure (In Review → Done)](#phase-4-issue-closure-in-review--done)
+- [Linking Issues to PRs](#linking-issues-to-prs)
+  - [Linking Keywords](#linking-keywords)
+  - [Multiple Issue Linking](#multiple-issue-linking)
+  - [Example PR Body with Issue Linking](#example-pr-body-with-issue-linking)
+- [Closing Issues](#closing-issues)
+  - [Automatic Closure](#automatic-closure)
+  - [Manual Closure](#manual-closure)
+  - [Reopening Issues](#reopening-issues)
+- [Batch Issue Creation](#batch-issue-creation)
+- [Best Practices](#best-practices)
+
 ## Use-Case TOC
 - When you need to create a new issue → [Creating Issues](#creating-issues)
 - When you need to assign labels → [Assigning Labels](#assigning-labels)

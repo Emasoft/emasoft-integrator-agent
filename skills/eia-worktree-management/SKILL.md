@@ -1,14 +1,10 @@
 ---
 name: eia-worktree-management
-description: >-
-  Use when managing Git worktrees for parallel development. Manage Git worktrees with
-  registry tracking and port allocation. Enables multiple development contexts in the
-  same repository without switching branches. Provides cross-platform support (Windows,
-  macOS, Linux) with atomic operations and file locking.
+description: Use when managing Git worktrees for parallel development with registry tracking and port allocation. Trigger with /manage-worktrees.
 license: Apache-2.0
 compatibility: >-
   Cross-platform support for Windows, macOS, and Linux. Requires Git 2.17+ with worktree support.
-  Python 3.8+ for script automation. File locking and atomic writes for safe concurrent access.
+  Python 3.8+ for script automation. File locking and atomic writes for safe concurrent access. Requires AI Maestro installed.
 metadata:
   author: Anthropic
   version: 1.0.0
@@ -35,7 +31,15 @@ This skill teaches how to manage Git worktrees within the Integrator Agent syste
 
 ## Instructions
 
-Use the automation scripts or git commands to create, manage, and remove worktrees. Always register worktrees in the registry for tracking and port allocation.
+1. Verify Git 2.17+ is installed with worktree support
+2. Ensure Python 3.8+ is available for automation scripts
+3. Confirm write access to `~/design/` for registry storage
+4. Use automation scripts or git commands to create worktrees
+5. Always register worktrees in the registry for tracking and port allocation
+6. Allocate ports from the managed range (8100-8199) when running services
+7. Follow worktree naming conventions for consistency
+8. Validate registry regularly to detect orphaned entries
+9. Remove worktrees safely when no longer needed
 
 For cross-platform details, see [Cross-Platform Support](./references/cross-platform-support.md):
 - Overview - When you need to understand cross-platform compatibility
@@ -55,6 +59,8 @@ For foundational understanding, see [Worktree Fundamentals](./references/worktre
 - `MAX_ACTIVE_WORKTREES: 10` - Maximum worktrees per developer
 
 ## Operations Checklist
+
+Copy this checklist and track your progress:
 
 - [ ] Create a new worktree
 - [ ] List all existing worktrees
@@ -257,8 +263,19 @@ See [Scripts and Automation](references/scripts-guide.md) for detailed usage.
 
 This skill integrates with other Integrator Agent skills:
 
-- **[eia-github-projects-sync](../eia-github-projects-sync/SKILL.md)** - Link worktrees to GitHub issues, synchronize development status with project boards
-- **[eia-verification-patterns](../eia-verification-patterns/SKILL.md)** - Apply verification patterns to worktree isolation tests
+- **eia-github-projects-sync** - Link worktrees to GitHub issues, synchronize development status with project boards
+- **eia-verification-patterns** - Apply verification patterns to worktree isolation tests
+
+## Output
+
+| Output Type | Format | Description |
+|-------------|--------|-------------|
+| Worktree Registry | JSON file at `~/design/worktree-registry.json` | Centralized tracking of all worktrees with metadata, ports, and status |
+| Port Allocation Table | Console/JSON | Port assignments for each worktree in range 8100-8199 |
+| Worktree List | Console/JSON | List of active worktrees with paths, branches, and ports |
+| Validation Report | Console/JSON | Registry integrity check results with detected issues |
+| Creation Confirmation | Console | Success message with worktree path and allocated port |
+| Removal Confirmation | Console | Cleanup status and freed resources |
 
 ## Examples
 
@@ -324,12 +341,12 @@ python scripts/registry_validate.py
 1. Read [Review Worktree Isolation](references/review-worktree-isolation.md)
 2. Follow [Testing Worktree Isolation](references/testing-worktree-isolation.md)
 3. Use [Docker Worktree Testing](references/docker-worktree-testing.md)
-4. Apply [eia-verification-patterns](../eia-verification-patterns/SKILL.md)
+4. See eia-verification-patterns skill
 
 ### For Automation
 1. Review [Scripts and Automation](references/scripts-guide.md)
 2. Use provided Python scripts for common operations
-3. Integrate with [eia-github-projects-sync](../eia-github-projects-sync/SKILL.md)
+3. See eia-github-projects-sync skill
 4. Set up automated validation with `registry_validate.py`
 
 ### For Troubleshooting

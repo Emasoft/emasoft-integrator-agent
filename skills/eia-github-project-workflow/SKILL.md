@@ -1,9 +1,8 @@
 ---
 name: eia-github-project-workflow
-description: >
-  Use when tracking multi-developer work with GitHub Projects. Track work using
-  GitHub Projects boards, issues with acceptance criteria, and Kanban workflows.
+description: Use when tracking multi-developer work with GitHub Projects boards and Kanban workflows. Trigger with /setup-project-board or when creating team boards.
 license: Apache-2.0
+compatibility: Requires AI Maestro installed.
 agent: api-coordinator
 context: fork
 ---
@@ -20,15 +19,41 @@ Patterns for tracking multi-developer work using **GitHub Projects** boards and 
 - GitHub Projects V2 enabled on the repository
 - Repository write access for issue and project management
 
+## Output
+
+| Output Type | Location/Format | Description |
+|-------------|----------------|-------------|
+| Task plan | `docs_dev/plan.md` | Breakdown of work into subtasks |
+| Project board | GitHub Projects V2 | Kanban board with Todo/In Progress/Review/Done columns |
+| GitHub issues | Repository issues | Issues with acceptance criteria, labels, and assignments |
+| Issue comments | Issue threads | Progress updates, blockers, completion reports |
+| PR links | Issue comments | Pull request links for code review |
+| Merge authorization | Issue comments | Final approval to merge after verification |
+
 ## Instructions
 
-Use this skill for:
-- Creating project boards with standard columns
-- Creating issues with acceptance criteria
-- Tracking task status (Todo → In Progress → Review → Done)
-- Managing labels and dependencies
+1. Analyze the requirements and create a task breakdown plan
+2. Create a GitHub Project board with standard columns (Todo, In Progress, Review, Done)
+3. Create GitHub issues for each task with clear acceptance criteria
+4. Assign issues to developers (one task per developer)
+5. Track progress by monitoring issue comments and status updates
+6. Review completion by checking linked PRs and running verification tests
+7. Make integration decisions and authorize merges for completed, verified tasks
 
 **Note**: This skill handles GitHub-side tracking only. AI Maestro messaging is orchestrator-only.
+
+### Checklist
+
+Copy this checklist and track your progress:
+
+- [ ] Analyze the requirements and create a task breakdown plan
+- [ ] Create a GitHub Project board with standard columns
+- [ ] Create GitHub issues for each task with clear acceptance criteria
+- [ ] Assign issues to developers (one task per developer)
+- [ ] Track progress by monitoring issue comments and status updates
+- [ ] Review completion by checking linked PRs
+- [ ] Run verification tests on completed work
+- [ ] Make integration decisions and authorize merges
 
 ---
 

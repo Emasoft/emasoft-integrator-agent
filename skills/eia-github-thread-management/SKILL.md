@@ -1,25 +1,13 @@
 ---
 name: eia-github-thread-management
-description: >
-  Use when managing GitHub PR review threads. Manage GitHub PR review threads - resolve,
-  unresolve, reply, and track comment conversations. CRITICAL - replying to a thread
-  does NOT automatically resolve it.
+description: "Use when managing PR review threads. Reply does NOT auto-resolve threads. Trigger with /manage-threads."
 license: Apache-2.0
+compatibility: Requires AI Maestro installed.
 metadata:
   version: "1.0.0"
   author: "Integrator Agent"
-  tags:
-    - github
-    - pull-request
-    - code-review
-    - thread-management
-  triggers:
-    - resolve review thread
-    - unresolve thread
-    - reply to comment
-    - track review comments
-    - unaddressed comments
-    - batch resolve threads
+  tags: "github, pull-request, code-review, thread-management"
+  triggers: "resolve review thread, unresolve thread, reply to comment, track review comments, unaddressed comments, batch resolve threads"
 agent: api-coordinator
 context: fork
 ---
@@ -41,12 +29,41 @@ This skill teaches you how to manage GitHub Pull Request review threads. Review 
 
 ## Instructions
 
-Use this skill when you need to:
-- Resolve one or more review threads after addressing feedback
-- Reply to reviewer comments while keeping threads open for further discussion
-- Find unaddressed review comments that need responses
-- Batch-resolve multiple threads efficiently (single API call)
-- Track which comments have been addressed vs pending
+Follow these steps when managing GitHub PR review threads:
+
+1. **Identify threads requiring attention**: Use `eia_get_review_threads.py --unresolved-only` to list all unresolved threads on the PR
+2. **Determine the appropriate action**: Consult the Decision Tree section below to decide whether to reply, resolve, or both
+3. **Execute the operation**: Run the corresponding script from the Available Scripts section with the required parameters
+4. **Verify success**: Check the JSON output's `success` field and verify the thread state changed as expected
+5. **Track progress**: Re-run listing commands to confirm all threads have been properly addressed
+
+### Checklist
+
+Copy this checklist and track your progress:
+
+- [ ] Identify unresolved threads using `eia_get_review_threads.py --unresolved-only`
+- [ ] Determine action for each thread (reply/resolve/both)
+- [ ] For implemented changes: resolve thread (optionally with reply)
+- [ ] For clarification needed: reply only (keep thread open)
+- [ ] For batch operations: use `eia_resolve_threads_batch.py`
+- [ ] Verify each operation succeeded via JSON output
+- [ ] Re-run listing to confirm all threads addressed
+- [ ] Check for any comments without replies using `eia_get_unaddressed_comments.py`
+
+## Output
+
+All scripts in this skill output JSON to stdout with the following standard structure:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `success` | boolean | Whether the operation completed successfully |
+| `threadId` | string | The GraphQL node ID of the affected thread (PRRT_xxx format) |
+| `isResolved` | boolean | Current resolution state of the thread after operation |
+| `commentId` | string | (Reply operations only) The GraphQL node ID of the created comment |
+| `results` | array | (Batch operations only) Array of per-thread success/failure details |
+| `error` | string | (On failure) Human-readable error message explaining what went wrong |
+
+See the Script Usage Details section for script-specific output format variations.
 
 ## Decision Tree for Thread Operations
 

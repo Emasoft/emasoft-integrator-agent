@@ -9,6 +9,26 @@
 
 ---
 
+## Table of Contents
+
+- [Troubleshooting](#troubleshooting)
+  - [Problem: Script says "worktree already exists" but directory is empty](#problem-script-says-worktree-already-exists-but-directory-is-empty)
+  - [Problem: Port allocation fails with "no ports available"](#problem-port-allocation-fails-with-no-ports-available)
+  - [Problem: Registry validation fails with "corrupted JSON"](#problem-registry-validation-fails-with-corrupted-json)
+  - [Problem: Health check shows "ERROR" for all ports](#problem-health-check-shows-error-for-all-ports)
+  - [Problem: Worktree removal says "uncommitted changes" but there are none](#problem-worktree-removal-says-uncommitted-changes-but-there-are-none)
+  - [Problem: Port shows "RUNNING" but browser says "Connection refused"](#problem-port-shows-running-but-browser-says-connection-refused)
+  - [Problem: Multiple worktrees have same identifier](#problem-multiple-worktrees-have-same-identifier)
+  - [Problem: Script fails with "Python version too old"](#problem-script-fails-with-python-version-too-old)
+  - [Problem: Git says "worktree already exists" after script failure](#problem-git-says-worktree-already-exists-after-script-failure)
+  - [Problem: "Permission denied" when running scripts](#problem-permission-denied-when-running-scripts)
+  - [Problem: Registry grows too large and slows down scripts](#problem-registry-grows-too-large-and-slows-down-scripts)
+  - [Problem: Branch doesn't exist and script can't create it](#problem-branch-doesnt-exist-and-script-cant-create-it)
+- [Best Practices Summary](#best-practices-summary)
+- [Quick Reference Command Matrix](#quick-reference-command-matrix)
+
+---
+
 ## Troubleshooting
 
 This section covers common problems and their solutions.

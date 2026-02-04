@@ -1,5 +1,14 @@
 # Go Test Patterns Reference
 
+## Table of Contents
+
+- [5.4 Test Patterns with go test](#54-test-patterns-with-go-test)
+  - [Test File Organization](#test-file-organization)
+  - [Basic Test Patterns](#basic-test-patterns)
+  - [Test Helpers and Setup](#test-helpers-and-setup)
+  - [Running Tests](#running-tests)
+  - [Test Checklist](#test-checklist)
+
 ## 5.4 Test Patterns with go test
 
 Go has built-in testing support with the testing package.

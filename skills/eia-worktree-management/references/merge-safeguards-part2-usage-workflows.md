@@ -1,5 +1,18 @@
 # Merge Safeguards - Part 2: Usage Workflows
 
+## Table of Contents
+
+- [Usage Workflows](#usage-workflows)
+  - [1. Check Single Worktree Status](#1-check-single-worktree-status)
+  - [2. Create Merge Plan](#2-create-merge-plan)
+  - [3. Execute Merge Sequence](#3-execute-merge-sequence)
+    - [Step 1: Merge First Worktree](#step-1-merge-first-worktree)
+    - [Step 2: Rebase Remaining Worktrees](#step-2-rebase-remaining-worktrees)
+    - [Step 3: Validate After Rebase](#step-3-validate-after-rebase)
+  - [4. Detect File Conflicts](#4-detect-file-conflicts)
+
+---
+
 ## Usage Workflows
 
 ### 1. Check Single Worktree Status

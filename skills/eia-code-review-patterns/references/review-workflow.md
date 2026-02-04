@@ -5,6 +5,45 @@ description: "Step-by-step workflow for conducting effective code reviews from i
 
 # Code Review Workflow
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Workflow Phases](#workflow-phases)
+- [Phase 1: Initial Scan (5-10 minutes)](#phase-1-initial-scan-5-10-minutes)
+  - [1.1 Check Basic Requirements](#11-check-basic-requirements)
+  - [1.2 Quick Size Assessment](#12-quick-size-assessment)
+  - [1.3 Scope Verification](#13-scope-verification)
+  - [1.4 Automated Check Review](#14-automated-check-review)
+- [Phase 2: Deep Review (20-60 minutes)](#phase-2-deep-review-20-60-minutes)
+  - [2.1 First Pass: High-Level Review](#21-first-pass-high-level-review)
+  - [2.2 Second Pass: Code Quality](#22-second-pass-code-quality)
+  - [2.3 Third Pass: Security Review](#23-third-pass-security-review)
+  - [2.4 Fourth Pass: Testing Review](#24-fourth-pass-testing-review)
+- [Phase 3: Feedback Compilation (5-15 minutes)](#phase-3-feedback-compilation-5-15-minutes)
+  - [3.1 Categorize Issues](#31-categorize-issues)
+  - [3.2 Structure Feedback](#32-structure-feedback)
+  - [3.3 Add Code Suggestions](#33-add-code-suggestions)
+- [Phase 4: Decision & Communication (5 minutes)](#phase-4-decision--communication-5-minutes)
+  - [4.1 Make Review Decision](#41-make-review-decision)
+  - [4.2 Write Review Summary](#42-write-review-summary)
+  - [4.3 Submit Review](#43-submit-review)
+- [Phase 5: Follow-up (as needed)](#phase-5-follow-up-as-needed)
+  - [5.1 Re-Review Process](#51-re-review-process)
+  - [5.2 Communication During Follow-up](#52-communication-during-follow-up)
+  - [5.3 Final Approval](#53-final-approval)
+- [Workflow Best Practices](#workflow-best-practices)
+  - [Time Management](#time-management)
+  - [Context Switching](#context-switching)
+  - [Communication](#communication)
+  - [Continuous Improvement](#continuous-improvement)
+- [Common Review Patterns](#common-review-patterns)
+  - [Pattern: Feature Addition](#pattern-feature-addition)
+  - [Pattern: Bug Fix](#pattern-bug-fix)
+  - [Pattern: Refactoring](#pattern-refactoring)
+  - [Pattern: Performance Optimization](#pattern-performance-optimization)
+- [Escalation](#escalation)
+- [Review Metrics (Optional)](#review-metrics-optional)
+
 This document outlines a systematic workflow for conducting code reviews, from initial assessment to final decision.
 
 ## Overview

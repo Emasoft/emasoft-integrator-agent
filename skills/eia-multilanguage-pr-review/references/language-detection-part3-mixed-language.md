@@ -2,6 +2,16 @@
 
 This reference covers handling files that contain code in multiple programming languages.
 
+## Table of Contents
+
+- [1.5 Handling Mixed-Language Files](#15-handling-mixed-language-files)
+  - [Common Mixed-Language Scenarios](#common-mixed-language-scenarios)
+  - [Detecting Embedded Languages in HTML](#detecting-embedded-languages-in-html)
+  - [Detecting Code Blocks in Markdown](#detecting-code-blocks-in-markdown)
+  - [Vue Single-File Component Detection](#vue-single-file-component-detection)
+  - [Review Strategy for Mixed-Language Files](#review-strategy-for-mixed-language-files)
+  - [Jupyter Notebook Handling](#jupyter-notebook-handling)
+
 ---
 
 ## 1.5 Handling Mixed-Language Files

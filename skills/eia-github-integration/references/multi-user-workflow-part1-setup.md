@@ -1,5 +1,30 @@
 # Multi-User GitHub Workflow: Setup and Configuration
 
+## Table of Contents
+
+- [Use-Case TOC](#use-case-toc)
+- [Why Multiple Identities](#why-multiple-identities)
+  - [Identity Components](#identity-components)
+- [SSH Key Setup](#ssh-key-setup)
+  - [Step 1: Generate a Dedicated SSH Key](#step-1-generate-a-dedicated-ssh-key)
+  - [Step 2: Add Public Key to GitHub Account](#step-2-add-public-key-to-github-account)
+  - [Step 3: Add Key to SSH Agent](#step-3-add-key-to-ssh-agent)
+- [SSH Host Aliases](#ssh-host-aliases)
+  - [Step 1: Configure SSH Host Aliases](#step-1-configure-ssh-host-aliases)
+  - [Step 2: Test SSH Connection](#step-2-test-ssh-connection)
+- [GitHub CLI Multi-Account Setup](#github-cli-multi-account-setup)
+  - [Step 1: Authenticate Primary Account](#step-1-authenticate-primary-account)
+  - [Step 2: Authenticate Secondary Account](#step-2-authenticate-secondary-account)
+  - [Step 3: Verify Both Accounts](#step-3-verify-both-accounts)
+  - [Step 4: Switch Active Account](#step-4-switch-active-account)
+- [Identity Switching](#identity-switching)
+  - [Shell Helper Functions](#shell-helper-functions)
+- [Repository Identity Configuration](#repository-identity-configuration)
+  - [Per-Repository Git Identity](#per-repository-git-identity)
+  - [Configure Remote to Use Specific Host Alias](#configure-remote-to-use-specific-host-alias)
+  - [Clone Using Specific Identity](#clone-using-specific-identity)
+  - [Helper Function for Repository Configuration](#helper-function-for-repository-configuration)
+
 ## Use-Case TOC
 - When you need multiple GitHub identities on the same machine → [Why Multiple Identities](#why-multiple-identities)
 - When setting up SSH keys for a secondary account → [SSH Key Setup](#ssh-key-setup)

@@ -1,10 +1,10 @@
 ---
 name: eia-github-sync
 model: opus
-description: Synchronizes GitHub issues, PRs, and project boards
+description: Synchronizes GitHub issues, PRs, and project boards. Requires AI Maestro installed.
 type: local-helper
 auto_skills:
-  - session-memory
+  - eia-session-memory
   - eia-github-integration
   - eia-github-projects-sync
 memory_requirements: medium

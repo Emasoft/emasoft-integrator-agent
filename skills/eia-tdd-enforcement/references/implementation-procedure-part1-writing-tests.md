@@ -1,5 +1,17 @@
 # Implementation Procedure Part 1: Writing Tests
 
+## Table of Contents
+- [Use-Case TOC](#use-case-toc)
+- [Step 1: Understand the Requirement](#step-1-understand-the-requirement)
+- [Step 2: Write the Failing Test](#step-2-write-the-failing-test)
+  - [Test Structure Pattern](#test-structure-pattern)
+  - [Test Naming Convention](#test-naming-convention)
+  - [Writing the Test](#writing-the-test)
+  - [Running the Test](#running-the-test)
+  - [Commit the Failing Test](#commit-the-failing-test)
+
+---
+
 ## Use-Case TOC
 - When starting to implement a new feature → [Step 1: Understand the Requirement](#step-1-understand-the-requirement)
 - If you need to write a failing test → [Step 2: Write the Failing Test](#step-2-write-the-failing-test)

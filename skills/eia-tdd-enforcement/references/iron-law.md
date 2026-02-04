@@ -1,5 +1,18 @@
 # The Iron Law of TDD
 
+## Table of Contents
+- [Use-Case TOC](#use-case-toc)
+- [The Iron Law](#the-iron-law)
+- [Pre-Code Checklist](#pre-code-checklist)
+- [Violation Detection](#violation-detection)
+  - [Signs of Iron Law Violation](#signs-of-iron-law-violation)
+- [Enforcement Role](#enforcement-role)
+  - [Orchestrator Responsibilities](#orchestrator-responsibilities)
+  - [Remote Agent Instructions](#remote-agent-instructions)
+  - [Verification Checklist](#verification-checklist)
+
+---
+
 ## Use-Case TOC
 - When you need to understand the fundamental TDD principle → [The Iron Law](#the-iron-law)
 - If you're unsure whether to write code → [Pre-Code Checklist](#pre-code-checklist)

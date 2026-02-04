@@ -1,5 +1,19 @@
 # TDD Troubleshooting - Part 3: Passing Tests
 
+## Table of Contents
+- [Test Passes But Code Incomplete](#test-passes-but-code-incomplete)
+  - [Symptoms](#symptoms)
+  - [Root Cause](#root-cause)
+  - [Solution](#solution)
+  - [Prevention](#prevention)
+- [Test Passes on First Run](#test-passes-on-first-run)
+  - [Symptoms](#symptoms-1)
+  - [Root Cause](#root-cause-1)
+  - [Solution](#solution-1)
+  - [Prevention](#prevention-1)
+
+---
+
 ## Test Passes But Code Incomplete
 
 ### Symptoms

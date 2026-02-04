@@ -1,5 +1,19 @@
 # TDD Troubleshooting - Part 1: Test Failures
 
+## Table of Contents
+- [Test Fails During Refactoring](#test-fails-during-refactoring)
+  - [Symptoms](#symptoms)
+  - [Root Cause](#root-cause)
+  - [Solution](#solution)
+  - [Prevention](#prevention)
+- [Cannot Write a Failing Test](#cannot-write-a-failing-test)
+  - [Symptoms](#symptoms-1)
+  - [Root Cause](#root-cause-1)
+  - [Solution](#solution-1)
+  - [Prevention](#prevention-1)
+
+---
+
 ## Test Fails During Refactoring
 
 ### Symptoms

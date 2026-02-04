@@ -2,6 +2,21 @@
 
 This document covers test framework patterns and linting configuration.
 
+## Table of Contents
+
+- [3.4 Test Framework Patterns with Jest and Vitest](#34-test-framework-patterns-with-jest-and-vitest)
+  - [Jest Project Structure](#jest-project-structure)
+  - [Jest Configuration](#jest-configuration)
+  - [Jest Test Patterns](#jest-test-patterns)
+  - [Vitest Configuration](#vitest-configuration)
+  - [Test Review Checklist](#test-review-checklist)
+- [3.5 Linting with ESLint and Prettier](#35-linting-with-eslint-and-prettier)
+  - [ESLint Configuration (Flat Config)](#eslint-configuration-flat-config)
+  - [Prettier Configuration](#prettier-configuration)
+  - [Running Linters](#running-linters)
+  - [Package.json Scripts](#packagejson-scripts)
+  - [Linting Review Checklist](#linting-review-checklist)
+
 ---
 
 ## 3.4 Test Framework Patterns with Jest and Vitest

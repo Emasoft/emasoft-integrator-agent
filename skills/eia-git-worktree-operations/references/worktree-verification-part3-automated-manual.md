@@ -2,6 +2,17 @@
 
 [Back to Worktree Verification Index](worktree-verification.md)
 
+## Table of Contents
+
+- [4.5 Automated Verification Script Usage](#45-automated-verification-script-usage)
+  - [Using eia_verify_worktree_isolation.py](#using-eia_verify_worktree_isolationpy)
+  - [Interpreting Script Output](#interpreting-script-output)
+  - [Integrating Verification into Workflow](#integrating-verification-into-workflow)
+- [4.6 Manual Verification When Scripts Fail](#46-manual-verification-when-scripts-fail)
+  - [When to Use Manual Verification](#when-to-use-manual-verification)
+  - [Manual Verification Procedure](#manual-verification-procedure)
+  - [Manual Verification Checklist](#manual-verification-checklist)
+
 ---
 
 ## 4.5 Automated Verification Script Usage

@@ -1,5 +1,12 @@
 # Rust Error Handling Reference
 
+## Table of Contents
+
+- [4.3 Error Handling with Result and Option](#43-error-handling-with-result-and-option)
+  - [Result Patterns](#result-patterns)
+  - [Option Patterns](#option-patterns)
+  - [Error Handling Checklist](#error-handling-checklist)
+
 ## 4.3 Error Handling with Result and Option
 
 Rust uses `Result<T, E>` for recoverable errors and `Option<T>` for optional values.

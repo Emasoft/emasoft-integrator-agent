@@ -6,6 +6,28 @@
 - If authentication fails or is expired → [Re-authentication](#re-authentication)
 - When setting up a new machine or environment → [Initial Setup Requirements](#initial-setup-requirements)
 
+## Table of Contents
+
+- [Initial Setup Requirements](#initial-setup-requirements)
+  - [Installing GitHub CLI](#installing-github-cli)
+  - [Verifying GitHub CLI Version](#verifying-github-cli-version)
+- [GitHub CLI Authentication](#github-cli-authentication)
+  - [Step 1: Execute Authentication](#step-1-execute-authentication)
+  - [Step 2: Choose Authentication Method](#step-2-choose-authentication-method)
+  - [Step 3: Grant Permissions](#step-3-grant-permissions)
+  - [Step 4: Initial Verification](#step-4-initial-verification)
+- [Verify Authentication](#verify-authentication)
+- [Re-authentication](#re-authentication)
+- [Troubleshooting Authentication](#troubleshooting-authentication)
+  - [Problem: "Command not found: gh"](#problem-command-not-found-gh)
+  - [Problem: "Not logged into any GitHub hosts"](#problem-not-logged-into-any-github-hosts)
+  - [Problem: "HTTP 401: Bad credentials"](#problem-http-401-bad-credentials)
+  - [Problem: "Resource not accessible by integration"](#problem-resource-not-accessible-by-integration)
+- [Security Best Practices](#security-best-practices)
+- [Next Steps](#next-steps)
+
+---
+
 ## Initial Setup Requirements
 
 Before using this skill, you must have:

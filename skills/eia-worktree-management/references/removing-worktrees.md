@@ -4,6 +4,20 @@ This document provides a complete table of contents for all worktree removal doc
 
 ---
 
+## Table of Contents
+
+- [Quick Navigation](#quick-navigation)
+- [Part 1: Preparation and Basic Commands](#part-1-preparation-and-basic-commands)
+  - [Contents](#contents)
+- [Part 2: Post-Removal and Automation](#part-2-post-removal-and-automation)
+  - [Contents](#contents-1)
+- [Part 3: Advanced Operations](#part-3-advanced-operations)
+  - [Contents](#contents-2)
+- [Key Commands Quick Reference](#key-commands-quick-reference)
+- [Related Documentation](#related-documentation)
+
+---
+
 ## Quick Navigation
 
 | If you need to... | Go to |

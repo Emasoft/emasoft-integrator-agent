@@ -1,5 +1,16 @@
 # Registry System - Part 2: Operations
 
+## Table of Contents
+
+- [Registry Operations](#registry-operations)
+  - [Create Entry](#create-entry)
+  - [Update Status](#update-status)
+  - [Remove Entry](#remove-entry)
+  - [Query by Purpose](#query-by-purpose)
+  - [Query by Issue](#query-by-issue)
+
+---
+
 ## Registry Operations
 
 ### Create Entry

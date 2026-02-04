@@ -1,5 +1,40 @@
 # Creating Git Worktrees
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Document Structure](#document-structure)
+- [Quick Reference: Standard Creation Flow](#quick-reference-standard-creation-flow)
+  - [STEP 1: Check Registry for Conflicts](#step-1-check-registry-for-conflicts)
+  - [STEP 2: Determine Naming Based on Purpose](#step-2-determine-naming-based-on-purpose)
+  - [STEP 3: Allocate Ports If Needed](#step-3-allocate-ports-if-needed)
+  - [STEP 4: Create Git Worktree](#step-4-create-git-worktree)
+  - [STEP 5: Register in Registry](#step-5-register-in-registry)
+  - [STEP 6: Setup Environment](#step-6-setup-environment)
+- [Quick Reference: Purpose-Specific Patterns](#quick-reference-purpose-specific-patterns)
+  - [Review Worktrees](#review-worktrees)
+  - [Feature Worktrees](#feature-worktrees)
+  - [Bugfix Worktrees](#bugfix-worktrees)
+  - [Testing Worktrees](#testing-worktrees)
+- [Quick Reference: Port Allocation](#quick-reference-port-allocation)
+  - [When to Allocate](#when-to-allocate)
+  - [Standard Port Ranges](#standard-port-ranges)
+- [Quick Reference: Environment Setup](#quick-reference-environment-setup)
+  - [7 Setup Steps](#7-setup-steps)
+- [Quick Reference: Essential Commands](#quick-reference-essential-commands)
+  - [Create Worktree](#create-worktree)
+  - [List Worktrees](#list-worktrees)
+  - [Registry Queries](#registry-queries)
+- [Quick Reference: Post-Creation Checklist](#quick-reference-post-creation-checklist)
+  - [Required Checks](#required-checks)
+  - [Verification Checks](#verification-checks)
+- [Quick Reference: Common Errors](#quick-reference-common-errors)
+- [Summary](#summary)
+- [Related Documentation](#related-documentation)
+  - [Part Files](#part-files)
+
+---
+
 ## Overview
 
 This document provides complete instructions for creating git worktrees in a systematic and safe manner. A git worktree allows you to check out multiple branches of the same repository simultaneously in different directories.

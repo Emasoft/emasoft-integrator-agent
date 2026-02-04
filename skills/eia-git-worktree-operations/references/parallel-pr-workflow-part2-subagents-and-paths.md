@@ -4,6 +4,19 @@ This document covers:
 - Working directory management for subagents
 - Path validation rules and common violations
 
+## Table of Contents
+
+- [2.3 Working Directory Management for Subagents](#23-working-directory-management-for-subagents)
+  - [Assigning Worktrees to Subagents](#assigning-worktrees-to-subagents)
+  - [Subagent Prompt Template](#subagent-prompt-template)
+  - [Multi-Agent Coordination](#multi-agent-coordination)
+  - [Preventing Cross-Worktree Contamination](#preventing-cross-worktree-contamination)
+- [2.4 Path Validation Rules and Common Violations](#24-path-validation-rules-and-common-violations)
+  - [Valid Paths (Within Worktree)](#valid-paths-within-worktree)
+  - [Invalid Paths (Isolation Violations)](#invalid-paths-isolation-violations)
+  - [Common Violation Patterns](#common-violation-patterns)
+  - [Path Validation Function](#path-validation-function)
+
 ---
 
 ## 2.3 Working Directory Management for Subagents

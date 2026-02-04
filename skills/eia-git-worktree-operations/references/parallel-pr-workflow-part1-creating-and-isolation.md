@@ -4,6 +4,19 @@ This document covers the foundational aspects of parallel PR workflow:
 - Creating worktrees for multiple simultaneous PRs
 - Isolation requirements and enforcement rules
 
+## Table of Contents
+
+- [2.1 Creating Worktrees for Multiple Simultaneous PRs](#21-creating-worktrees-for-multiple-simultaneous-prs)
+  - [Standard Worktree Creation Process](#standard-worktree-creation-process)
+  - [Naming Convention for Worktree Paths](#naming-convention-for-worktree-paths)
+  - [Creating Worktree from Remote Branch](#creating-worktree-from-remote-branch)
+  - [Creating Worktree for a New Branch](#creating-worktree-for-a-new-branch)
+- [2.2 Isolation Requirements and Enforcement Rules](#22-isolation-requirements-and-enforcement-rules)
+  - [The Golden Rule of Worktree Isolation](#the-golden-rule-of-worktree-isolation)
+  - [Why Isolation Matters](#why-isolation-matters)
+  - [Enforcement Rules for Agents](#enforcement-rules-for-agents)
+  - [Automated Isolation Checking](#automated-isolation-checking)
+
 ---
 
 ## 2.1 Creating Worktrees for Multiple Simultaneous PRs

@@ -1,5 +1,20 @@
 # Documentation Analysis: Scoring and Best Practices
 
+## Table of Contents
+
+- [Scoring Criteria](#scoring-criteria)
+  - [Critical (Must Fix)](#critical-must-fix)
+  - [High Priority (Should Fix)](#high-priority-should-fix)
+  - [Medium Priority (Consider Fixing)](#medium-priority-consider-fixing)
+  - [Low Priority (Nice to Have)](#low-priority-nice-to-have)
+- [Review Questions](#review-questions)
+- [Red Flags](#red-flags)
+- [Documentation Types](#documentation-types)
+  - [Code-Level Documentation](#code-level-documentation)
+  - [Project Documentation](#project-documentation)
+  - [Process Documentation](#process-documentation)
+- [Best Practices](#best-practices)
+
 This document covers scoring criteria, review questions, red flags, documentation types, and best practices.
 
 **Parent document**: [documentation-analysis.md](./documentation-analysis.md)

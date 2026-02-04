@@ -1,7 +1,7 @@
 ---
 name: eia-debug-specialist
 model: sonnet
-description: Diagnoses CI/CD failures, analyzes logs, and identifies root causes
+description: Diagnoses CI/CD failures, analyzes logs, and identifies root causes. Requires AI Maestro installed.
 version: 1.0.0
 type: task-agent
 triggers:
@@ -12,7 +12,7 @@ triggers:
   - Orchestrator assigns CI debugging task
 auto_skills:
   - eia-ci-failure-patterns
-  - eia-shared
+  - eia-integration-protocols
 memory_requirements: medium
 ---
 

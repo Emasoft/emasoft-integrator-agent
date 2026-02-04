@@ -1,12 +1,12 @@
 ---
 name: eia-integration-verifier
 model: opus
-description: Verifies feature integration and cross-component compatibility
+description: Verifies feature integration and cross-component compatibility. Requires AI Maestro installed.
 type: evaluator
 auto_skills:
-  - session-memory
+  - eia-session-memory
   - eia-tdd-enforcement
-  - eia-shared
+  - eia-integration-protocols
 memory_requirements: medium
 ---
 

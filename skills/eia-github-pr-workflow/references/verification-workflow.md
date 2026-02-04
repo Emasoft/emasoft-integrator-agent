@@ -112,9 +112,9 @@ gh pr checks <pr_number> --required
 ### CI verification timing
 
 1. Check immediately after commit push
-2. If pending, set polling interval (2-5 minutes)
-3. Maximum wait time: 30 minutes
-4. If still pending after 30 minutes, escalate to user
+2. If pending, poll frequently until CI completes
+3. If CI appears stuck, escalate to user
+4. No fixed time limits - wait until CI completes or fails
 
 ---
 
@@ -171,16 +171,16 @@ All of these MUST be true:
 | 7 | PR not already merged | `gh pr view --json state` |
 | 8 | Commits have been pushed | Compare commit SHAs |
 
-### The 45-second quiet period
+### The quiet period check
 
 **Why**: GitHub webhooks and UI updates can have delays. A comment might appear after we checked.
 
 **Implementation**:
 1. Record timestamp of last comment/activity
-2. Wait 45 seconds
+2. Wait briefly for any pending updates
 3. Re-check for new activity
 4. If no new activity, proceed
-5. If new activity, reset the 45-second timer
+5. If new activity, repeat the quiet period check
 
 ### Merge eligibility states
 
@@ -211,14 +211,14 @@ The protocol consists of 4 verification passes with specific timing.
 │  ├─ If all pass → Continue to Pass 2                   │
 │  └─ If any fail → Address failures, restart loop       │
 │                                                         │
-│  [Wait 15 seconds]                                      │
+│  [Brief wait]                                           │
 │                                                         │
 │  Pass 2: Confirmation Check                             │
 │  ├─ Run full verification script                        │
 │  ├─ If all pass → Continue to Pass 3                   │
 │  └─ If any fail → Address failures, restart loop       │
 │                                                         │
-│  [Wait 15 seconds]                                      │
+│  [Brief wait]                                           │
 │                                                         │
 │  Pass 3: Quiet Period Start                             │
 │  ├─ Run full verification script                        │
@@ -226,7 +226,7 @@ The protocol consists of 4 verification passes with specific timing.
 │  ├─ If all pass → Continue to Pass 4                   │
 │  └─ If any fail → Address failures, restart loop       │
 │                                                         │
-│  [Wait 45 seconds - quiet period]                       │
+│  [Quiet period - wait for any pending updates]          │
 │                                                         │
 │  Pass 4: Final Verification                             │
 │  ├─ Run full verification script                        │
@@ -252,7 +252,7 @@ The protocol consists of 4 verification passes with specific timing.
 **Escalation exit** (report to user):
 - Maximum iterations exceeded
 - Unresolvable blocker detected
-- Timeout exceeded
+- CI appears stuck
 
 ### 3.6.3 Escalation triggers
 
@@ -263,7 +263,7 @@ Escalate to user immediately when:
 | Repeated failures | Same criterion fails 3 times | "PR #X blocked by [criterion] - needs attention" |
 | Unresolvable blocker | Branch protection requires manual approval | "PR #X requires [action] that I cannot perform" |
 | New activity from human | Human reviewer adds comment | "Human reviewer commented on PR #X - please review" |
-| Timeout | CI pending for > 30 minutes | "CI checks for PR #X have been pending for 30+ minutes" |
+| CI stuck | CI pending unusually long | "CI checks for PR #X appear stuck - please investigate" |
 
 ---
 

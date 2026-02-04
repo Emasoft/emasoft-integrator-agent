@@ -2,6 +2,22 @@
 
 [Back to Worktree Verification Index](worktree-verification.md)
 
+## Table of Contents
+
+- [4.3 Branch State Verification Procedures](#43-branch-state-verification-procedures)
+  - [Verifying Branch is Complete](#verifying-branch-is-complete)
+  - [Verifying Branch Against Base](#verifying-branch-against-base)
+  - [Verifying Branch Merge Status](#verifying-branch-merge-status)
+  - [Verifying No Dependent Branches](#verifying-no-dependent-branches)
+  - [Branch State Decision Tree](#branch-state-decision-tree)
+- [4.4 Remote Sync Verification Steps](#44-remote-sync-verification-steps)
+  - [Step 1: Verify Remote Tracking](#step-1-verify-remote-tracking)
+  - [Step 2: Verify No Unpushed Commits](#step-2-verify-no-unpushed-commits)
+  - [Step 3: Verify Remote Branch Exists](#step-3-verify-remote-branch-exists)
+  - [Step 4: Verify Local and Remote Match](#step-4-verify-local-and-remote-match)
+  - [Step 5: Verify Push Was Successful](#step-5-verify-push-was-successful)
+  - [Remote Sync Verification Script](#remote-sync-verification-script)
+
 ---
 
 ## 4.3 Branch State Verification Procedures

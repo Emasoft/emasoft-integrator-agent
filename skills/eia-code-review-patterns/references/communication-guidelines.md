@@ -5,6 +5,45 @@ description: "Best practices for communicating code review feedback effectively,
 
 # Code Review Communication Guidelines
 
+## Table of Contents
+
+- [Core Principles](#core-principles)
+- [The Language of Review](#the-language-of-review)
+  - [Tone Modifiers](#tone-modifiers)
+  - [Framing Techniques](#framing-techniques)
+- [Comment Structure](#comment-structure)
+  - [The PIER Model](#the-pier-model)
+  - [Short Comment Template](#short-comment-template)
+  - [Long Comment Template](#long-comment-template)
+- [Giving Feedback by Issue Type](#giving-feedback-by-issue-type)
+  - [Security Issues](#security-issues)
+  - [Performance Issues](#performance-issues)
+  - [Logic Errors](#logic-errors)
+  - [Style/Readability Issues](#stylereadability-issues)
+  - [Architecture/Design Issues](#architecturedesign-issues)
+- [Positive Feedback](#positive-feedback)
+  - [Why It Matters](#why-it-matters)
+  - [When to Give Positive Feedback](#when-to-give-positive-feedback)
+  - [Examples](#examples)
+- [Handling Disagreements](#handling-disagreements)
+  - [When Author Pushes Back](#when-author-pushes-back)
+  - [When You're Uncertain](#when-youre-uncertain)
+  - [When to Escalate](#when-to-escalate)
+- [Responding to Feedback (Author Perspective)](#responding-to-feedback-author-perspective)
+  - [Receiving Feedback](#receiving-feedback)
+  - [Resolving Comments](#resolving-comments)
+- [Review Response Templates](#review-response-templates)
+  - [Approval](#approval)
+  - [Approve with Comments](#approve-with-comments)
+  - [Request Changes](#request-changes)
+- [Cultural Considerations](#cultural-considerations)
+  - [Remote/Distributed Teams](#remotedistributed-teams)
+  - [Junior Developers](#junior-developers)
+  - [Senior Developers](#senior-developers)
+- [Anti-Patterns to Avoid](#anti-patterns-to-avoid)
+- [Communication Checklist](#communication-checklist)
+- [Summary](#summary)
+
 Effective code review communication balances thoroughness with empathy. This guide helps you provide feedback that improves code while supporting team collaboration.
 
 ## Core Principles

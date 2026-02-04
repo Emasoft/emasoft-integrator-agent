@@ -1,5 +1,21 @@
 # Registry System - Part 4: Automatic Cleanup and Troubleshooting
 
+## Table of Contents
+
+- [Automatic Cleanup](#automatic-cleanup)
+  - [What is a Stale Entry?](#what-is-a-stale-entry)
+  - [Stale Detection Algorithm](#stale-detection-algorithm)
+  - [Cleanup Process](#cleanup-process)
+  - [Manual Cleanup Override](#manual-cleanup-override)
+- [Troubleshooting](#troubleshooting)
+  - [Registry File Corrupted](#registry-file-corrupted)
+  - [Port Already in Use (but not in registry)](#port-already-in-use-but-not-in-registry)
+  - [Duplicate IDs After Manual Edit](#duplicate-ids-after-manual-edit)
+  - [Worktree Exists but Not in Registry](#worktree-exists-but-not-in-registry)
+- [Related References](#related-references)
+
+---
+
 ## Automatic Cleanup
 
 The registry system includes automatic detection and cleanup of stale entries.

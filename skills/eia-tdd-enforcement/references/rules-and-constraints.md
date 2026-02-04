@@ -7,6 +7,32 @@
 - If you're in REFACTOR phase and unsure what's allowed → [Refactor Phase Rules](#refactor-phase-rules)
 - When you need to know what actions are forbidden → [Forbidden Actions](#forbidden-actions)
 
+## Table of Contents
+
+- [The Iron Law (Absolute)](#the-iron-law-absolute)
+  - [Rule 1: No Code Without a Failing Test](#rule-1-no-code-without-a-failing-test)
+  - [Rule 2: Test Must Fail Before Implementation](#rule-2-test-must-fail-before-implementation)
+  - [Rule 3: Only Modify Tests or Code, Never Both](#rule-3-only-modify-tests-or-code-never-both)
+- [Red Phase Rules](#red-phase-rules)
+  - [Allowed in RED Phase](#allowed-in-red-phase)
+  - [Forbidden in RED Phase](#forbidden-in-red-phase)
+  - [RED Phase Checklist](#red-phase-checklist)
+- [Green Phase Rules](#green-phase-rules)
+  - [Allowed in GREEN Phase](#allowed-in-green-phase)
+  - [Forbidden in GREEN Phase](#forbidden-in-green-phase)
+  - [GREEN Phase Checklist](#green-phase-checklist)
+- [Refactor Phase Rules](#refactor-phase-rules)
+  - [Allowed in REFACTOR Phase](#allowed-in-refactor-phase)
+  - [Forbidden in REFACTOR Phase](#forbidden-in-refactor-phase)
+  - [REFACTOR Phase Checklist](#refactor-phase-checklist)
+- [Forbidden Actions](#forbidden-actions)
+  - [Never Allowed (Any Phase)](#never-allowed-any-phase)
+- [Violation Recovery Procedure](#violation-recovery-procedure)
+  - [When You Realize You Violated TDD](#when-you-realize-you-violated-tdd)
+- [Enforcement Scripts](#enforcement-scripts)
+  - [Pre-Commit Hook](#pre-commit-hook)
+  - [Test-First Verification](#test-first-verification)
+
 ---
 
 ## The Iron Law (Absolute)

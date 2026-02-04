@@ -1,16 +1,13 @@
 ---
 name: eia-github-pr-context
-description: Use when retrieving and analyzing GitHub Pull Request context including metadata, diff, and changed files for informed code review and task planning.
+description: Use when retrieving PR context including metadata, diff, and changed files for code review planning. Trigger with /review-pr [PR_NUMBER].
 license: Apache-2.0
+compatibility: Requires AI Maestro installed.
 metadata:
   version: 1.0.0
   author: integrator-agent
   category: github
-  tags:
-    - pull-request
-    - code-review
-    - diff-analysis
-    - github-api
+  tags: "pull-request, code-review, diff-analysis, github-api"
 agent: api-coordinator
 context: fork
 ---
@@ -26,7 +23,64 @@ This skill provides tools to retrieve comprehensive context about GitHub Pull Re
 - **Analyze merge readiness**: Check mergeable status, conflicts, and CI state
 - **Extract specific metadata**: Get author, branch names, labels, reviewers
 
+## Output
+
+Each script produces structured output for different PR analysis needs:
+
+| Script | Output Format | Key Fields | Use Case |
+|--------|---------------|------------|----------|
+| `eia_get_pr_context.py` | JSON | `number`, `title`, `state`, `author`, `mergeable`, `files[]`, `labels[]`, `reviewers[]` | Complete PR overview for review planning |
+| `eia_get_pr_files.py` | JSON array | `filename`, `status`, `additions`, `deletions`, `patch` (optional) | File-level change tracking |
+| `eia_get_pr_diff.py` | Unified diff text or JSON stats | Diff hunks or `files_changed`, `insertions`, `deletions` | Code change inspection |
+
+All JSON outputs are pretty-printed and can be piped to `jq` for filtering.
+
 ## Instructions
+
+Follow these numbered steps to retrieve and analyze GitHub PR context:
+
+1. **Verify prerequisites are met**
+   - Run `gh auth status` to confirm GitHub CLI authentication
+   - Run `python3 --version` to confirm Python 3.8+ is available
+   - Ensure you have read access to the target repository
+
+2. **Identify which information you need**
+   - Need full PR overview? → Use `eia_get_pr_context.py`
+   - Need only changed files list? → Use `eia_get_pr_files.py`
+   - Need actual code diff? → Use `eia_get_pr_diff.py`
+
+3. **Run the appropriate script with required parameters**
+   - Always provide `--pr NUMBER` (the PR number)
+   - Optionally provide `--repo OWNER/REPO` (defaults to current directory's repo)
+   - For diffs, optionally add `--stat` for summary or `--files` for specific files
+
+4. **Parse the output based on your task**
+   - For JSON outputs: pipe to `jq` or parse in your code
+   - For diff outputs: analyze unified diff format or statistics
+   - Check exit codes (0 = success, 1-4 = various errors)
+
+5. **Handle errors appropriately**
+   - Exit code 1: Fix invalid parameters
+   - Exit code 2: Verify PR number and repository
+   - Exit code 3: Check network, retry if rate limited
+   - Exit code 4: Re-authenticate with `gh auth login`
+
+6. **Extract specific information as needed**
+   - For metadata fields, see [references/pr-metadata.md](references/pr-metadata.md)
+   - For diff analysis, see [references/diff-analysis.md](references/diff-analysis.md)
+
+### Checklist
+
+Copy this checklist and track your progress:
+
+- [ ] Verify GitHub CLI is authenticated (`gh auth status`)
+- [ ] Verify Python 3.8+ is available
+- [ ] Confirm read access to the target repository
+- [ ] Identify which information is needed (context/files/diff)
+- [ ] Run the appropriate script with `--pr NUMBER` parameter
+- [ ] Parse the JSON or diff output
+- [ ] Check exit codes and handle any errors
+- [ ] Extract specific metadata or diff information as needed
 
 ### When to Use This Skill
 
@@ -39,7 +93,7 @@ This skill provides tools to retrieve comprehensive context about GitHub Pull Re
 | Creating a new PR | No - use git workflow skill instead |
 | Commenting on a PR | Partially - get context first, then use gh CLI directly |
 
-## Decision Tree: Which Script to Use
+### Decision Tree: Which Script to Use
 
 ```
 Need PR information?

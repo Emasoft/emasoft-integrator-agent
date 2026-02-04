@@ -2,6 +2,19 @@
 
 This document provides an overview of the port allocation system for worktrees. The content has been split into four parts for easier navigation.
 
+## Table of Contents
+
+- [Document Overview](#document-overview)
+- [Complete Table of Contents](#complete-table-of-contents)
+  - [Part 1: Core Concepts](#part-1-core-concepts)
+  - [Part 2: Configuration & Status](#part-2-configuration--status)
+  - [Part 3: Conflict Resolution & Docker](#part-3-conflict-resolution--docker)
+  - [Part 4: Cleanup & Troubleshooting](#part-4-cleanup--troubleshooting)
+- [Quick Navigation by Use Case](#quick-navigation-by-use-case)
+- [Key Files Reference](#key-files-reference)
+- [Port Ranges Summary](#port-ranges-summary)
+- [Common Commands Quick Reference](#common-commands-quick-reference)
+
 ---
 
 ## Document Overview

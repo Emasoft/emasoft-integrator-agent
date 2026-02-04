@@ -1,28 +1,14 @@
 ---
 name: eia-github-pr-merge
-description: >
-  Use when you need to merge pull requests, check merge status, verify merge readiness,
-  or configure auto-merge. Provides PR merge operations including merge execution,
-  auto-merge configuration, merge readiness verification, and merge state checking
-  using GraphQL as the authoritative source of truth.
+description: "Use when merging pull requests, checking merge status, or configuring auto-merge. Trigger with merge, auto-merge, or readiness verification requests."
 license: Apache-2.0
+compatibility: Requires AI Maestro installed.
 metadata:
   version: "1.0.0"
   author: integrator-agent
   category: github-workflow
-  tags:
-    - github
-    - pull-request
-    - merge
-    - graphql
-    - automation
-  triggers:
-    - merge PR
-    - check if merged
-    - auto-merge
-    - merge readiness
-    - squash merge
-    - rebase merge
+  tags: "github, pull-request, merge, graphql, automation"
+  triggers: "merge PR, check if merged, auto-merge, merge readiness, squash merge, rebase merge"
 agent: api-coordinator
 context: fork
 ---
@@ -40,9 +26,37 @@ This skill provides comprehensive guidance for merging pull requests, checking m
 - Repository write access for merge operations
 - GraphQL API access (included with standard GitHub authentication)
 
+## Output
+
+| Output Type | Format | Description |
+|-------------|--------|-------------|
+| Merge status | JSON | Contains `merged` (boolean), `state` (OPEN/CLOSED/MERGED) |
+| Readiness check | JSON | Contains `ready` (boolean), `merge_state` (MergeStateStatus), blocking reasons |
+| Merge result | JSON | Contains `success` (boolean), `merged_at` (ISO timestamp), `sha` (commit hash) |
+| Auto-merge status | JSON | Contains `auto_merge_enabled` (boolean), `merge_method` (MERGE/SQUASH/REBASE) |
+| Exit codes | Integer | Standardized codes: 0=success, 1=invalid params, 2=not found, 3=API error, 4=auth, 5=already merged, 6=not mergeable |
+
 ## Instructions
 
-Follow the decision tree below to determine which operation to perform, then use the corresponding script.
+1. Identify the operation needed (check merged status, verify readiness, execute merge, or configure auto-merge)
+2. Consult the decision tree below to select the appropriate script
+3. Run the selected script with required parameters (--pr, --repo, strategy/method as applicable)
+4. Parse the JSON output to determine success or blocking conditions
+5. If blocked, resolve the issue indicated by the exit code and JSON details
+6. For merge operations, verify completion using `eia_test_pr_merged.py`
+
+### Checklist
+
+Copy this checklist and track your progress:
+
+- [ ] Identify the operation needed (check/verify/merge/auto-merge)
+- [ ] Check if PR is already merged using `eia_test_pr_merged.py`
+- [ ] Verify merge readiness using `eia_test_pr_merge_ready.py`
+- [ ] Resolve any blocking conditions (CI, conflicts, reviews, threads)
+- [ ] Execute merge with appropriate strategy (merge/squash/rebase)
+- [ ] Or enable auto-merge if waiting for CI/reviews
+- [ ] Verify merge completion using `eia_test_pr_merged.py`
+- [ ] Handle any errors based on exit codes
 
 ## CRITICAL: GraphQL is the Source of Truth
 
@@ -337,6 +351,73 @@ Check:
 2. Required number of approvals met
 3. Allowed merge methods in branch protection
 4. No CODEOWNERS blocking reviews
+
+---
+
+## SAFETY WARNING: Destructive Operations
+
+### IRREVERSIBLE Operations
+
+The following PR merge operations are **IRREVERSIBLE** or have significant impact:
+
+| Operation | Risk | Mitigation |
+|-----------|------|------------|
+| `git push --force` | Overwrites remote history, loses commits | NEVER use on shared branches; requires explicit approval |
+| Merge without PR | Bypasses review process, no audit trail | ALWAYS use PR workflow |
+| Squash merge | Original commits are lost from branch history | Acceptable if commits were WIP; verify first |
+| Delete branch after merge | Cannot recover branch pointer | Commits still exist; can recreate branch if needed |
+| Force merge ignoring CI | May introduce broken code to main | Only with explicit user approval and documented reason |
+
+### BEFORE ANY DESTRUCTIVE OPERATION
+
+1. **Verify you have a backup branch**
+   ```bash
+   # Create backup before any risky operation
+   git branch backup-pre-merge-$(date +%Y%m%d) HEAD
+   ```
+
+2. **Confirm with orchestrator** before:
+   - Any `--force` push operations
+   - Merging with failing CI (using `--ignore-ci`)
+   - Merging with unresolved threads (using `--ignore-threads`)
+
+3. **Log the operation details**
+   ```bash
+   echo "$(date): Merging PR #${PR_NUMBER} - Strategy: ${STRATEGY} - Flags: ${FLAGS}" >> merge-ops.log
+   ```
+
+### Safe Merge Checklist
+
+- [ ] PR has been reviewed and approved
+- [ ] All CI checks pass (or explicit approval to bypass)
+- [ ] No unresolved review threads (or explicit approval to bypass)
+- [ ] Branch is up-to-date with target branch
+- [ ] Merge strategy selected (merge/squash/rebase)
+- [ ] Branch deletion policy confirmed
+- [ ] Verify merge with `eia_test_pr_merged.py` after completion
+
+### Rollback After Bad Merge
+
+If a merge introduces issues:
+
+```bash
+# Option 1: Revert the merge commit (creates new commit, preserves history)
+git revert -m 1 <merge-commit-hash>
+git push origin main
+
+# Option 2: Reset to pre-merge state (DESTRUCTIVE - requires --force push)
+# Only use if revert is not possible
+git reset --hard <commit-before-merge>
+git push --force origin main  # REQUIRES EXPLICIT APPROVAL
+
+# Option 3: Create hotfix branch and new PR
+git checkout -b hotfix/revert-pr-${PR_NUMBER}
+git revert -m 1 <merge-commit-hash>
+git push -u origin hotfix/revert-pr-${PR_NUMBER}
+gh pr create --title "Revert PR #${PR_NUMBER}" --body "Reverting due to: [REASON]"
+```
+
+---
 
 ## Script Locations
 

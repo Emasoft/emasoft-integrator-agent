@@ -2,6 +2,31 @@
 
 For teams ready to go beyond basic implementation, these advanced topics extend the GitHub integration capabilities. These features are optional and should only be implemented after mastering the basic workflow.
 
+## Table of Contents
+
+- [Multi-Repository Projects](#multi-repository-projects)
+- [Custom GitHub Actions Workflows](#custom-github-actions-workflows)
+  - [Workflow 1: Auto-label based on file changes](#workflow-1-auto-label-based-on-file-changes)
+  - [Workflow 2: Slack notification for high-priority issues](#workflow-2-slack-notification-for-high-priority-issues)
+  - [Workflow 3: Auto-update project status](#workflow-3-auto-update-project-status)
+- [Advanced GraphQL Queries](#advanced-graphql-queries)
+  - [Example 1: Fetch all issues with specific label and status](#example-1-fetch-all-issues-with-specific-label-and-status)
+  - [Example 2: Bulk update issue statuses](#example-2-bulk-update-issue-statuses)
+  - [Example 3: Generate custom metrics](#example-3-generate-custom-metrics)
+- [Real-time Webhooks](#real-time-webhooks)
+  - [Setup webhook receiver](#setup-webhook-receiver)
+  - [Configure webhook in GitHub](#configure-webhook-in-github)
+  - [Security best practices](#security-best-practices)
+- [CI/CD Integration](#cicd-integration)
+  - [Best practices](#best-practices)
+- [Success Metrics](#success-metrics)
+  - [Adoption Metrics](#adoption-metrics)
+  - [Quality Metrics](#quality-metrics)
+  - [Efficiency Metrics](#efficiency-metrics)
+  - [Team Satisfaction](#team-satisfaction)
+
+---
+
 ## Multi-Repository Projects
 
 **Purpose:** Manage work across multiple related repositories in a single project board.

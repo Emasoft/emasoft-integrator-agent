@@ -1,5 +1,20 @@
 # Implementation Procedure Part 2: Implementation and Refactoring
 
+## Table of Contents
+- [Use-Case TOC](#use-case-toc)
+- [Step 3: Make the Test Pass](#step-3-make-the-test-pass)
+  - [Minimum Implementation Rules](#minimum-implementation-rules)
+  - [Implementation Example](#implementation-example)
+  - [Run All Tests](#run-all-tests)
+  - [Commit the Implementation](#commit-the-implementation)
+- [Step 4: Refactor](#step-4-refactor)
+  - [Refactoring Targets](#refactoring-targets)
+  - [Refactoring Process](#refactoring-process)
+  - [Refactored Example](#refactored-example)
+  - [Commit Each Refactoring](#commit-each-refactoring)
+
+---
+
 ## Use-Case TOC
 - When you have a failing test and need to implement → [Step 3: Make the Test Pass](#step-3-make-the-test-pass)
 - If tests pass and code needs improvement → [Step 4: Refactor](#step-4-refactor)

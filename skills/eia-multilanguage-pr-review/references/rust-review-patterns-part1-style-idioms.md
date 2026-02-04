@@ -1,5 +1,13 @@
 # Rust Code Style and Idioms Reference
 
+## Table of Contents
+
+- [4.1 Rust Code Style and Idioms Checklist](#41-rust-code-style-and-idioms-checklist)
+  - [Essential Style Rules](#essential-style-rules)
+  - [rustfmt Configuration](#rustfmt-configuration)
+  - [Idiomatic Rust Patterns](#idiomatic-rust-patterns)
+  - [Style Checklist](#style-checklist)
+
 ## 4.1 Rust Code Style and Idioms Checklist
 
 Rust has strong conventions enforced by rustfmt and clippy.

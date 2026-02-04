@@ -1,5 +1,30 @@
 # Claude Code Action PR Handling Workflow
 
+## Table of Contents
+
+- [Overview](#overview)
+- [When to Use This Workflow](#when-to-use-this-workflow)
+- [Claude Code Action Integration](#claude-code-action-integration)
+  - [GitHub Actions Workflow Setup](#github-actions-workflow-setup)
+  - [Step 1: Detect PRs Needing Review](#step-1-detect-prs-needing-review)
+  - [Step 2: Collect Previous Claude Feedback](#step-2-collect-previous-claude-feedback)
+  - [Step 3: Request Claude Review via @claude Mention](#step-3-request-claude-review-via-claude-mention)
+  - [Step 4: Monitor Claude's Response](#step-4-monitor-claudes-response)
+- [Integration with Monitoring Cycle](#integration-with-monitoring-cycle)
+  - [Autonomous Monitoring Loop](#autonomous-monitoring-loop)
+  - [ActionRequired Classification](#actionrequired-classification)
+- [Response Patterns for Claude](#response-patterns-for-claude)
+  - [Pattern 1: Simple Fix Request](#pattern-1-simple-fix-request)
+  - [Pattern 2: Multiple Issues](#pattern-2-multiple-issues)
+  - [Pattern 3: CI Failure Analysis](#pattern-3-ci-failure-analysis)
+  - [Pattern 4: Code Review Request](#pattern-4-code-review-request)
+- [Complete Workflow Example](#complete-workflow-example)
+- [Troubleshooting](#troubleshooting)
+  - [Claude Not Responding to Mentions](#claude-not-responding-to-mentions)
+  - [Workflow Not Triggering](#workflow-not-triggering)
+  - [Claude Provides Incomplete Review](#claude-provides-incomplete-review)
+- [Best Practices](#best-practices)
+
 ## Overview
 
 This document describes how to handle Pull Requests using Claude Code Action (`anthropics/claude-code-action@v1`). Claude Code Action is a GitHub Action that provides AI-powered code review, implementation, and PR management capabilities.

@@ -1,5 +1,13 @@
 # Rust Documentation Standards Reference
 
+## Table of Contents
+
+- [4.5 Documentation Standards with rustdoc](#45-documentation-standards-with-rustdoc)
+  - [Documentation Comments](#documentation-comments)
+  - [Documentation Sections](#documentation-sections)
+  - [Doc Tests](#doc-tests)
+  - [Documentation Checklist](#documentation-checklist)
+
 ## 4.5 Documentation Standards with rustdoc
 
 Rust has built-in documentation support with rustdoc.

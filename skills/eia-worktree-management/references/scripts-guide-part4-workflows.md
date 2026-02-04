@@ -9,6 +9,18 @@
 
 ---
 
+## Table of Contents
+
+- [Common Workflows](#common-workflows)
+  - [Workflow 1: Code Review Setup](#workflow-1-code-review-setup)
+  - [Workflow 2: Feature Development with Multiple Services](#workflow-2-feature-development-with-multiple-services)
+  - [Workflow 3: Cleanup Old Worktrees](#workflow-3-cleanup-old-worktrees)
+  - [Workflow 4: Emergency Hotfix](#workflow-4-emergency-hotfix)
+  - [Workflow 5: Experiment Without Risk](#workflow-5-experiment-without-risk)
+  - [Workflow 6: Validate and Fix Registry After Manual Operations](#workflow-6-validate-and-fix-registry-after-manual-operations)
+
+---
+
 ## Common Workflows
 
 This section provides step-by-step procedures for typical worktree operations.

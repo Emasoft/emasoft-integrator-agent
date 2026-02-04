@@ -37,7 +37,7 @@ The Integrator Agent handles **quality gates, testing, merging, and release cand
 | `eia-github-pr-merge` | PR merge strategies |
 | `eia-github-pr-context` | PR context management |
 | `eia-github-issue-operations` | Issue CRUD operations |
-| `eia-github-kanban-core` | Kanban board patterns |
+| `eia-kanban-orchestration` | Kanban board patterns |
 | `eia-github-projects-sync` | Projects sync |
 | `eia-github-project-workflow` | Project workflow |
 | `eia-github-thread-management` | Thread management |
@@ -47,7 +47,7 @@ The Integrator Agent handles **quality gates, testing, merging, and release cand
 | `eia-ci-failure-patterns` | CI failure patterns |
 | `eia-worktree-management` | Git worktree management |
 | `eia-git-worktree-operations` | Worktree operations |
-| `eia-shared` | Shared utilities |
+| `eia-integration-protocols` | Shared utilities |
 
 ### Hooks
 

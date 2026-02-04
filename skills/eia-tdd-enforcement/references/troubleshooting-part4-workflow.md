@@ -1,5 +1,17 @@
 # TDD Troubleshooting - Part 4: Workflow Issues
 
+## Table of Contents
+- [Unsure What to Test Next](#unsure-what-to-test-next)
+  - [Symptoms](#symptoms)
+  - [Solution](#solution)
+  - [Prevention](#prevention)
+- [Tests Are Too Slow](#tests-are-too-slow)
+  - [Symptoms](#symptoms-1)
+  - [Solution](#solution-1)
+  - [Prevention](#prevention-1)
+
+---
+
 ## Unsure What to Test Next
 
 ### Symptoms

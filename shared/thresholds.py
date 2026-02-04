@@ -31,3 +31,25 @@ GH_MAX_RETRIES = 3
 # CI/CD thresholds
 CI_CHECK_TIMEOUT_SECONDS = 600
 MAX_CI_RETRIES = 2
+
+
+class WorktreeThresholds:
+    """Thresholds and configuration for worktree management."""
+
+    # Port ranges by purpose/service type: (start_port, end_port)
+    PORT_RANGES: dict[str, tuple[int, int]] = {
+        "review": (8100, 8199),
+        "feature": (8200, 8299),
+        "bugfix": (8300, 8399),
+        "test": (8400, 8499),
+        "hotfix": (8500, 8549),
+        "refactor": (8550, 8599),
+    }
+
+    @property
+    def PORT_RANGES_LIST(self) -> list[dict[str, int | str]]:
+        """Return port ranges as a list of dicts for registry format."""
+        return [
+            {"purpose": purpose, "start": start, "end": end}
+            for purpose, (start, end) in self.PORT_RANGES.items()
+        ]

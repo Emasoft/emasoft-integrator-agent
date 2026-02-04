@@ -1,5 +1,24 @@
 # Implementation Guide Part 2: Agent Orchestrator Integration
 
+## Table of Contents
+
+- [Integration Architecture](#integration-architecture)
+- [Integration Patterns](#integration-patterns)
+  - [Pattern 1: Automatic Issue Creation](#pattern-1-automatic-issue-creation)
+  - [Pattern 2: Status Synchronization](#pattern-2-status-synchronization)
+  - [Pattern 3: Automated PR Creation](#pattern-3-automated-pr-creation)
+- [Agent Configuration](#agent-configuration)
+- [Monitoring Agent-GitHub Health](#monitoring-agent-github-health)
+- [Next Steps After Implementation](#next-steps-after-implementation)
+  - [1. Start Using the Workflow](#1-start-using-the-workflow)
+  - [2. Monitor Synchronization](#2-monitor-synchronization)
+  - [3. Collect Team Feedback](#3-collect-team-feedback)
+  - [4. Optimize Workflow](#4-optimize-workflow)
+  - [5. Scale Implementation](#5-scale-implementation)
+- [Team Onboarding](#team-onboarding)
+  - [Onboarding New Team Members](#onboarding-new-team-members)
+  - [Training Materials](#training-materials)
+
 This skill is designed to integrate with agent orchestrators to automate GitHub operations.
 
 ## Integration Architecture

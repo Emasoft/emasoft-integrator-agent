@@ -4,6 +4,21 @@ This document covers:
 - Handling concurrent git operation limitations
 - Complete example workflow for processing 3 PRs in parallel
 
+## Table of Contents
+
+- [2.5 Handling Concurrent Git Operation Limitations](#25-handling-concurrent-git-operation-limitations)
+  - [The Concurrency Problem](#the-concurrency-problem)
+  - [Problematic Concurrent Operations](#problematic-concurrent-operations)
+  - [Safe Concurrent Operations](#safe-concurrent-operations)
+  - [Serialization Strategies](#serialization-strategies)
+  - [Best Practice: Git Operation Sequencing](#best-practice-git-operation-sequencing)
+- [2.6 Example Workflow: Processing 3 PRs in Parallel](#26-example-workflow-processing-3-prs-in-parallel)
+  - [Setup Phase](#setup-phase)
+  - [Agent Assignment Phase](#agent-assignment-phase)
+  - [Parallel Work Phase](#parallel-work-phase)
+  - [Git Operations Phase (Serialized)](#git-operations-phase-serialized)
+  - [Cleanup Phase](#cleanup-phase)
+
 ---
 
 ## 2.5 Handling Concurrent Git Operation Limitations

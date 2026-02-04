@@ -1,5 +1,14 @@
 # Rust Memory Safety Patterns Reference
 
+## Table of Contents
+
+- [4.2 Memory Safety Patterns and Ownership](#42-memory-safety-patterns-and-ownership)
+  - [Ownership Rules](#ownership-rules)
+  - [Borrowing Patterns](#borrowing-patterns)
+  - [Lifetime Annotations](#lifetime-annotations)
+  - [Common Patterns for Avoiding Borrow Checker Issues](#common-patterns-for-avoiding-borrow-checker-issues)
+  - [Memory Safety Checklist](#memory-safety-checklist)
+
 ## 4.2 Memory Safety Patterns and Ownership
 
 Rust's ownership system prevents memory errors at compile time.

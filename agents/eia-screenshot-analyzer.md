@@ -1,7 +1,7 @@
 ---
 name: eia-screenshot-analyzer
 model: opus
-description: Analyzes screenshots and images on behalf of orchestrator to protect context memory
+description: Analyzes screenshots and images on behalf of orchestrator to protect context memory. Requires AI Maestro installed.
 type: local-helper
 triggers:
   - User shares screenshot of error or bug
@@ -10,7 +10,7 @@ triggers:
   - Any image or screenshot needs interpretation
   - Orchestrator needs to delegate image analysis to protect context memory
 auto_skills:
-  - session-memory
+  - eia-session-memory
 memory_requirements: low
 ---
 

@@ -10,6 +10,23 @@
 - When you need to measure success → [Success Metrics](#success-metrics)
 - For basic workflow setup → See [implementation-guide-part1-basic-workflow.md](implementation-guide-part1-basic-workflow.md)
 
+## Table of Contents
+
+- [Team Onboarding](#team-onboarding)
+  - [Onboarding New Team Members](#onboarding-new-team-members)
+  - [Training Materials](#training-materials)
+- [Advanced Implementation Topics](#advanced-implementation-topics)
+  - [Multi-Repository Projects](#multi-repository-projects)
+  - [Custom GitHub Actions Workflows](#custom-github-actions-workflows)
+  - [Advanced GraphQL Queries](#advanced-graphql-queries)
+  - [Real-time Webhooks](#real-time-webhooks)
+  - [CI/CD Integration](#cicd-integration)
+- [Success Metrics](#success-metrics)
+  - [Adoption Metrics](#adoption-metrics)
+  - [Quality Metrics](#quality-metrics)
+  - [Efficiency Metrics](#efficiency-metrics)
+  - [Team Satisfaction](#team-satisfaction)
+
 ---
 
 ## Team Onboarding

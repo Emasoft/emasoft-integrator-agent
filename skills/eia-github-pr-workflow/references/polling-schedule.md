@@ -11,17 +11,17 @@
 
 ## 7.1 Base polling frequency
 
-**Default interval**: Poll every 10-15 minutes during active work periods.
+**Default**: Poll regularly based on activity level. No fixed intervals - poll as needed.
 
-### Recommended intervals by context
+### Recommended frequency by context
 
-| Context | Interval | Rationale |
-|---------|----------|-----------|
-| Normal operations | 10-15 minutes | Balance between responsiveness and overhead |
-| Active PR work | 5 minutes | Faster feedback during implementation |
-| Waiting for CI | 2-5 minutes | CI completion can unblock work |
-| After hours | 30-60 minutes | Reduced activity expected |
-| Urgent PR | 2-3 minutes | Time-sensitive work |
+| Context | Frequency | Rationale |
+|---------|-----------|-----------|
+| Normal operations | Regular | Balance between responsiveness and overhead |
+| Active PR work | More frequent | Faster feedback during implementation |
+| Waiting for CI | Frequent | CI completion can unblock work |
+| Low activity periods | Less frequent | Reduced activity expected |
+| Urgent PR | Very frequent | Needs attention |
 
 ### Polling implementation
 
@@ -35,10 +35,10 @@ python scripts/eia_orchestrator_pr_poll.py --repo owner/repo
 Delegate polling to a monitoring subagent:
 ```
 You are a PR monitoring subagent. Your task is:
-Poll PR status every 10 minutes and report significant changes.
+Poll PR status regularly and report significant changes.
 
 Actions:
-1. Run poll script every 10 minutes
+1. Run poll script at regular intervals (use judgment based on activity)
 2. Compare results to previous poll
 3. Report via AI Maestro message if significant change detected
 ```
@@ -46,15 +46,14 @@ Actions:
 **Option 3: Event-driven (preferred)**
 Use GitHub webhooks or CLI notifications when available.
 
-### Polling budget
+### Polling considerations
 
-**Maximum polls per hour**: 12 (every 5 minutes)
-**Maximum polls per day**: 144 (12 per hour * 12 active hours)
-
-**Why budget matters**:
-- API rate limits
+**Why poll frequency matters**:
+- API rate limits (respect GitHub limits)
 - Context consumption
 - Orchestrator availability for other tasks
+
+**Principle**: Poll frequently enough to stay responsive, but not so often that you waste resources. Use judgment.
 
 ---
 
@@ -123,27 +122,27 @@ Use GitHub webhooks or CLI notifications when available.
 
 Polling frequency should adapt based on PR state and recent activity.
 
-### Frequency increase triggers
+### Poll more frequently when
 
-| Condition | Adjust To | Rationale |
-|-----------|-----------|-----------|
-| CI just started | 2 min | Know completion ASAP |
-| Commits just pushed | 3 min | Await CI start |
-| Active conversation | 5 min | Respond quickly |
-| User is online | 5 min | More responsive |
-| Approaching deadline | 3 min | Time-sensitive |
+| Condition | Rationale |
+|-----------|-----------|
+| CI just started | Know completion ASAP |
+| Commits just pushed | Await CI start |
+| Active conversation | Respond quickly |
+| User is online | More responsive |
+| Needs attention | Work is time-sensitive |
 
-### Frequency decrease triggers
+### Poll less frequently when
 
-| Condition | Adjust To | Rationale |
-|-----------|-----------|-----------|
-| CI pending > 10 min | 5 min | Long-running, don't spam |
-| No activity > 30 min | 15 min | Likely stalled |
-| Outside work hours | 30 min | Low activity expected |
-| Waiting for human | 15 min | Can't control timing |
-| All PRs stable | 15 min | Nothing to action |
+| Condition | Rationale |
+|-----------|-----------|
+| CI has been pending a while | Long-running, don't spam |
+| No recent activity | Likely stalled |
+| Low activity periods | Reduced activity expected |
+| Waiting for human | Can't control timing |
+| All PRs stable | Nothing to action |
 
-### State-based polling schedule
+### State-based polling priority
 
 ```
 PR State Machine:
@@ -151,41 +150,39 @@ PR State Machine:
 │                                                              │
 │  DRAFT → READY_FOR_REVIEW → IN_REVIEW → CHANGES_REQUESTED   │
 │    │           │                │              │             │
-│  30min       10min            5min           5min            │
+│  Low       Regular          Frequent       Frequent          │
 │                                │                             │
 │                          APPROVED → CI_PENDING → READY       │
 │                             │          │           │         │
-│                           10min      2min        5min        │
+│                          Regular   Frequent    Frequent      │
 │                                                              │
 └──────────────────────────────────────────────────────────────┘
 ```
 
-### Adaptive algorithm pseudocode
+### Adaptive polling logic
 
 ```python
-def get_poll_interval(pr_status, last_activity_time, current_time):
-    """Determine next poll interval based on PR state."""
+def should_poll_frequently(pr_status, recent_activity):
+    """Determine if PR needs frequent polling based on state."""
 
-    minutes_since_activity = (current_time - last_activity_time).minutes
+    # High priority - poll more frequently
+    if pr_status.ci_status == "pending" and pr_status.ci_recently_started:
+        return True  # CI completion is imminent
+    if pr_status.recently_pushed_commits:
+        return True  # Waiting for CI to start
+    if pr_status.has_recent_comments:
+        return True  # Active conversation
 
-    # High frequency cases
-    if pr_status.ci_status == "pending" and pr_status.ci_started_within(10):
-        return 2  # minutes
-    if pr_status.commits_pushed_within(5):
-        return 3
-    if pr_status.has_new_comments_within(10):
-        return 5
-
-    # Low frequency cases
-    if minutes_since_activity > 60:
-        return 15
+    # Low priority - poll less frequently
+    if not recent_activity:
+        return False  # Stalled
     if pr_status.state == "draft":
-        return 30
+        return False  # Not ready for review
     if pr_status.waiting_for_human:
-        return 15
+        return False  # Can't control timing
 
-    # Default
-    return 10
+    # Default - regular polling
+    return None  # Use standard frequency
 ```
 
 ---
@@ -215,12 +212,12 @@ The orchestrator should notify the user when significant events occur.
 
 ### Escalation triggers
 
-| Condition | Escalation | Timing |
-|-----------|------------|--------|
-| CI pending > 30 min | "CI for PR #X stuck. Check status." | After 30 min |
-| Same failure 3 times | "Repeated failure on PR #X: [criterion]" | After 3 attempts |
-| Human waiting > 4 hours | "Human awaiting response on PR #X" | After 4 hours |
-| Conflict unresolved > 1 hour | "Merge conflict on PR #X needs attention" | After 1 hour |
+| Condition | Escalation | When |
+|-----------|------------|------|
+| CI stuck | "CI for PR #X stuck. Check status." | When CI appears stuck |
+| Repeated failure | "Repeated failure on PR #X: [criterion]" | After multiple attempts |
+| Human waiting | "Human awaiting response on PR #X" | When response is overdue |
+| Conflict persists | "Merge conflict on PR #X needs attention" | When conflict lingers |
 
 ### Notification suppression
 

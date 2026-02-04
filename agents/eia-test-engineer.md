@@ -1,6 +1,6 @@
 ---
 name: eia-test-engineer
-description: Enforces TDD practices, validates test coverage, and maintains test quality
+description: Enforces TDD practices, validates test coverage, and maintains test quality. Requires AI Maestro installed.
 version: 1.0.0
 model: sonnet
 type: evaluator
@@ -12,7 +12,7 @@ triggers:
 auto_skills:
   - eia-tdd-enforcement
   - eia-code-review-patterns
-  - eia-shared
+  - eia-integration-protocols
 memory_requirements: medium
 ---
 

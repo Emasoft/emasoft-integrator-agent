@@ -1,12 +1,8 @@
 ---
 name: eia-github-projects-sync
-description: >
-  Use when managing team tasks through GitHub Projects V2 or synchronizing project state.
-  Manages team tasks through GitHub Projects V2, enabling INTEGRATOR-AGENT to track features,
-  bugs, PRs, and issues with automatic CI integration. Provides GraphQL API operations for
-  issue creation, status updates, and project synchronization across remote developer agents.
+description: Use when managing team tasks through GitHub Projects V2 or synchronizing project state via GraphQL API. Trigger with /sync-projects or when updating project items.
 license: Apache-2.0
-compatibility: "Requires GitHub CLI authentication, GitHub Projects V2 enabled repository, GraphQL API access, Python 3.8+, and AI Maestro integration for notifications"
+compatibility: "Requires GitHub CLI authentication, GitHub Projects V2 enabled repository, GraphQL API access, Python 3.8+, and AI Maestro integration for notifications. Requires AI Maestro installed."
 metadata:
   author: Anthropic
   version: 1.0.0
@@ -34,13 +30,49 @@ The GitHub Projects Sync skill enables the INTEGRATOR-AGENT to manage team tasks
 
 ## Instructions
 
-Invoke this skill when:
+Follow these steps when using this skill:
+
+1. **Identify the task type** - Determine if you need to create, update, query, or sync GitHub Projects data
+2. **Authenticate** - Verify GitHub CLI is authenticated with `gh auth status` and has `project` scope
+3. **Locate the project** - Find the project ID using GraphQL queries (see Quick Start section below)
+4. **Select the appropriate operation** - Refer to the Reference Documentation section to find the matching use case
+5. **Execute the operation** - Use GraphQL API via `gh api graphql` or run automation scripts
+6. **Verify the result** - Check the project board or query the API to confirm the change was applied
+7. **Notify stakeholders** - Send AI Maestro messages to relevant agents if coordination is needed
+8. **Document the change** - Add comments to issues or update task lists to maintain audit trail
+
+### Checklist
+
+Copy this checklist and track your progress:
+
+- [ ] Identify the task type (create/update/query/sync)
+- [ ] Verify GitHub CLI authentication with `project` scope
+- [ ] Locate the project using GraphQL queries
+- [ ] Select the appropriate operation from reference documentation
+- [ ] Execute the operation via GraphQL API or automation scripts
+- [ ] Verify the result on the project board or via API query
+- [ ] Notify stakeholders via AI Maestro if needed
+- [ ] Document the change in issue comments or task lists
+
+**When to invoke this skill:**
 - Assigning GitHub issues to remote agents
 - Tracking feature implementation progress
 - Synchronizing PR status with project boards
 - Managing sprint/iteration planning
 - Generating project status reports
 - Coordinating multi-agent work on features
+
+## Output
+
+| Output Type | Format | Location | Description |
+|-------------|--------|----------|-------------|
+| Project item IDs | JSON | API response | GraphQL node IDs for created/updated items |
+| Status updates | JSON | API response | Confirmation of field value changes |
+| Issue metadata | JSON | API response | Issue numbers, titles, states, assignees |
+| Project reports | Markdown | AI Maestro messages | Status summaries, progress updates |
+| Sync logs | Text/JSON | Script stdout | Automation script execution results |
+| Error details | JSON/Text | stderr | API errors, validation failures, rate limits |
+| Notification receipts | JSON | AI Maestro API | Confirmation of sent messages to agents |
 
 ## Iron Rules Compliance
 

@@ -2,6 +2,24 @@
 
 This document provides a comprehensive guide to managing multiple GitHub identities on a single machine, enabling formal PR workflows where different users submit and review code.
 
+## Table of Contents
+
+- [Use-Case TOC](#use-case-toc)
+  - [Part 1: Setup and Configuration](#part-1-setup-and-configuration)
+  - [Part 2: Operations and Troubleshooting](#part-2-operations-and-troubleshooting)
+- [Overview](#overview)
+  - [Why Multiple Identities?](#why-multiple-identities)
+  - [Identity Components](#identity-components)
+- [Quick Start](#quick-start)
+  - [1. Generate SSH Key for Secondary Account](#1-generate-ssh-key-for-secondary-account)
+  - [2. Add Key to GitHub](#2-add-key-to-github)
+  - [3. Configure SSH Host Alias](#3-configure-ssh-host-alias)
+  - [4. Authenticate Secondary Account with gh CLI](#4-authenticate-secondary-account-with-gh-cli)
+  - [5. Configure Repository for Secondary Identity](#5-configure-repository-for-secondary-identity)
+- [Key Files and Locations](#key-files-and-locations)
+- [Common Commands Quick Reference](#common-commands-quick-reference)
+- [See Also](#see-also)
+
 ---
 
 ## Use-Case TOC

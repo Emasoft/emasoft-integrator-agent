@@ -9,6 +9,25 @@
 
 ---
 
+## Table of Contents
+
+- [Script Reference: Core Scripts](#script-reference-core-scripts)
+  - [worktree_create.py](#worktree_createpy)
+    - [Purpose](#purpose)
+    - [Usage Syntax](#usage-syntax)
+    - [Required Arguments](#required-arguments)
+    - [Optional Arguments](#optional-arguments)
+    - [Examples with Explanations](#examples-with-explanations)
+    - [Exit Codes](#exit-codes)
+  - [worktree_list.py](#worktree_listpy)
+    - [Purpose](#purpose-1)
+    - [Usage Syntax](#usage-syntax-1)
+    - [Optional Arguments](#optional-arguments-1)
+    - [Examples with Explanations](#examples-with-explanations-1)
+    - [Exit Codes](#exit-codes-1)
+
+---
+
 ## Script Reference: Core Scripts
 
 This section covers the two most frequently used scripts:

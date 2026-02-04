@@ -1,20 +1,13 @@
 ---
 name: eia-github-pr-workflow
-description: >
-  Use when coordinating PR review work as an orchestrator. Defines when and how
-  the orchestrator coordinates PR review work, including delegation rules,
-  verification workflows, and completion criteria.
+description: Use when coordinating PR review work as orchestrator. Defines delegation rules, verification, and completion criteria. Trigger with /start-pr-review [PR_NUMBER].
 license: Apache-2.0
+compatibility: Requires AI Maestro installed.
 metadata:
   version: 1.0.0
   author: Integrator Agent Team
   category: workflow
-  tags:
-    - pr-review
-    - orchestration
-    - delegation
-    - verification
-    - github
+  tags: "pr-review, orchestration, delegation, verification, github"
 agent: api-coordinator
 context: fork
 ---
@@ -34,7 +27,39 @@ This skill defines the orchestrator's role in coordinating Pull Request review w
 - AI Maestro configured for inter-agent communication
 - Access to spawn subagents for delegation
 
+## Output
+
+| Output Type | Format | Description |
+|-------------|--------|-------------|
+| Subagent Delegation | Task spawn | Spawned subagent with PR review/fix instructions |
+| Status Report | Text/JSON | Current PR status and action recommendations |
+| Verification Result | JSON | Pass/fail status for all completion criteria |
+| User Notification | Text | Human-readable summary of PR readiness |
+| Polling Schedule | Background task | Recurring PR status checks |
+
 ## Instructions
+
+1. **Poll for PRs requiring attention** - Run `eia_orchestrator_pr_poll.py` to get list of open PRs and their status
+2. **Identify PR author type** - Determine if PR is from human contributor or AI/bot (see section 5)
+3. **Classify work needed** - Review PR status and determine action type (review/changes/verification/wait)
+4. **Delegate to appropriate subagent** - Spawn specialized subagent based on work type (never do the work yourself)
+5. **Monitor subagent progress** - Use polling to track completion (never block waiting)
+6. **Verify completion criteria** - Run `eia_verify_pr_completion.py` before reporting ready
+7. **Report to user** - Provide status update and await merge decision (never merge without approval)
+8. **Handle failures** - If verification fails, identify gaps and delegate fixes (see section 6.2)
+
+### Checklist
+
+Copy this checklist and track your progress:
+
+- [ ] Poll for PRs requiring attention using `eia_orchestrator_pr_poll.py`
+- [ ] Identify if PR is from human or AI/bot author
+- [ ] Classify the work needed (review/changes/verification/wait)
+- [ ] Delegate to appropriate subagent (never do work yourself)
+- [ ] Monitor subagent progress via polling (never block)
+- [ ] Verify all completion criteria using `eia_verify_pr_completion.py`
+- [ ] Report status to user and await merge decision
+- [ ] Handle any failures by delegating fixes
 
 Follow the decision tree below to determine the appropriate action for any PR review request.
 
@@ -144,6 +169,16 @@ PR Review Request Received
 - 7.3 Adaptive polling rules
 - 7.4 Notification triggers
 
+### 8. Merge Failure Recovery
+**Reference**: [merge-failure-recovery.md](references/merge-failure-recovery.md)
+- 8.1 Types of merge failures
+- 8.2 Merge conflict resolution steps
+- 8.3 CI failure during merge handling
+- 8.4 Partial merge recovery
+- 8.5 Notification procedures for author/reviewer
+- 8.6 Rollback if merge corrupts main
+- 8.7 Prevention strategies
+
 ---
 
 ## Scripts Reference
@@ -251,16 +286,16 @@ python scripts/eia_verify_pr_completion.py --repo owner/repo --pr 123
 ## Error Handling
 
 ### Issue: Subagent not returning results
-**Cause**: Subagent may have crashed or timed out
-**Solution**: Check subagent logs, re-delegate with increased timeout or simpler scope
+**Cause**: Subagent may have crashed or become unresponsive
+**Solution**: Check subagent logs, re-delegate with simpler scope
 
 ### Issue: PR status appears stale
 **Cause**: GitHub API rate limiting or cache
-**Solution**: Wait 60 seconds, then re-poll. If persistent, check API rate limits.
+**Solution**: Wait briefly, then re-poll. If persistent, check API rate limits.
 
 ### Issue: Completion verification fails intermittently
 **Cause**: Race condition with GitHub webhook processing
-**Solution**: Implement 45-second quiet period check before final verification
+**Solution**: Implement quiet period check before final verification
 
 ### Issue: Multiple subagents conflicting
 **Cause**: Insufficient task isolation
@@ -277,3 +312,4 @@ python scripts/eia_verify_pr_completion.py --repo owner/repo --pr 123
 - [references/verification-workflow.md](references/verification-workflow.md) - Verification procedures
 - [references/completion-criteria.md](references/completion-criteria.md) - PR completion requirements
 - [references/polling-schedule.md](references/polling-schedule.md) - Polling frequency configuration
+- [references/merge-failure-recovery.md](references/merge-failure-recovery.md) - Merge failure and recovery procedures

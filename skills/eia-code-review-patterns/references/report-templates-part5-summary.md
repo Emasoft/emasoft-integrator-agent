@@ -1,5 +1,11 @@
 # Summary Report Template
 
+## Table of Contents
+
+- [Template](#template)
+- [Project Health Indicators](#project-health-indicators)
+- [Risk Levels](#risk-levels)
+
 Template for high-level project status summaries.
 
 ---

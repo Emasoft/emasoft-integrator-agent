@@ -1,5 +1,19 @@
 # Registry System - Part 1: Schema and Location
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Registry Location](#registry-location)
+- [Registry Schema](#registry-schema)
+  - [Full Schema Example](#full-schema-example)
+  - [Worktree Entry Fields](#worktree-entry-fields)
+  - [Purpose Categories](#purpose-categories)
+  - [Status Values](#status-values)
+  - [Port Ranges Section](#port-ranges-section)
+  - [Naming Convention Section](#naming-convention-section)
+
+---
+
 ## Overview
 
 The **registry system** is a centralized JSON database that tracks all active and historical git worktrees in a project. Its purpose is to:

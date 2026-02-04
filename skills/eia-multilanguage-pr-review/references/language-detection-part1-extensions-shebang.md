@@ -2,6 +2,22 @@
 
 This reference covers detecting programming languages from file extensions and shebang lines.
 
+## Table of Contents
+
+- [1.1 Detecting Language from File Extensions](#11-detecting-language-from-file-extensions)
+  - [Python Extensions](#python-extensions)
+  - [JavaScript/TypeScript Extensions](#javascripttypescript-extensions)
+  - [Rust Extensions](#rust-extensions)
+  - [Go Extensions](#go-extensions)
+  - [Shell Script Extensions](#shell-script-extensions)
+  - [Configuration and Data Files (Often Embedded Code)](#configuration-and-data-files-often-embedded-code)
+  - [Implementation Example](#implementation-example)
+- [1.2 Detecting Language from Shebang Lines](#12-detecting-language-from-shebang-lines)
+  - [What is a Shebang?](#what-is-a-shebang)
+  - [Common Shebang Patterns](#common-shebang-patterns)
+  - [Implementation Example](#implementation-example-1)
+  - [Best Practice: Prefer `#!/usr/bin/env`](#best-practice-prefer-usrbinenv)
+
 ---
 
 ## 1.1 Detecting Language from File Extensions

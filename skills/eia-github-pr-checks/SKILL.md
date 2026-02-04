@@ -1,22 +1,13 @@
 ---
 name: eia-github-pr-checks
-description: Use when monitoring GitHub Pull Request CI/CD check statuses, waiting for check completion, and retrieving detailed check information for orchestration decisions.
+description: "Use when monitoring PR checks. Trigger with CI status, check verification, or PR readiness requests."
 license: Apache-2.0
+compatibility: Requires AI Maestro installed.
 metadata:
   version: 1.0.0
   author: integrator-agent
-  tags:
-    - github
-    - ci-cd
-    - pull-requests
-    - checks
-    - automation
-  triggers:
-    - verify PR check status
-    - wait for CI to complete
-    - check if PR is ready to merge
-    - get failing check details
-    - monitor check progress
+  tags: "github, ci-cd, pull-requests, checks, automation"
+  triggers: "verify PR check status, wait for CI to complete, check if PR is ready to merge, get failing check details, monitor check progress"
 agent: api-coordinator
 context: fork
 ---
@@ -33,7 +24,70 @@ This skill enables agents to monitor, interpret, and wait for GitHub Pull Reques
 - Determine if a PR is ready for merge based on required checks
 - Poll for check completion with intelligent backoff
 
+## Output
+
+| Output Type | Format | Contents |
+|-------------|--------|----------|
+| Check Status Report | JSON | Complete status of all PR checks including pass/fail counts, individual check conclusions, and required check status |
+| Wait Completion Report | JSON | Final status after polling, including timeout status, total wait time, and checks summary |
+| Check Details | JSON | Detailed information about a specific check including duration, logs URL, and failure output |
+| Exit Code | Integer | Standardized exit code (0-6) indicating success, error type, or specific failure reason |
+
 ## Instructions
+
+Follow these steps to monitor and manage GitHub PR checks:
+
+1. **Determine Your Objective**
+   - Review the decision tree below to identify which script matches your needs
+   - Consider whether you need real-time polling or just current status
+   - Identify if you need all checks or only required checks
+
+2. **Select and Execute the Appropriate Script**
+   - Use `eia_get_pr_checks.py` for current status snapshots
+   - Use `eia_wait_for_checks.py` for polling until completion
+   - Use `eia_get_check_details.py` for investigating specific failures
+   - Refer to the Scripts Reference section for command-line options
+
+3. **Parse the JSON Output**
+   - All scripts return structured JSON to stdout
+   - Check the `all_passing` or `final_status` field for overall status
+   - Examine individual check objects for detailed information
+   - Use the exit code for automated decision-making
+
+4. **Interpret Check Conclusions**
+   - Refer to the Check Status Quick Reference table
+   - Identify which checks are required vs optional
+   - Determine if action is needed (see Action Required column)
+
+5. **Take Appropriate Action**
+   - If all passing: proceed with merge or next workflow step
+   - If failing: investigate using `eia_get_check_details.py`
+   - If pending: wait using `eia_wait_for_checks.py` with appropriate timeout
+   - If timeout: check CI runner status and consider increasing timeout
+
+6. **Handle Errors Gracefully**
+   - Check exit codes (see Exit Codes section)
+   - Refer to Error Handling section for common issues
+   - Use debugging commands to verify authentication and access
+
+### Checklist
+
+Copy this checklist and track your progress:
+
+- [ ] Verify gh CLI is authenticated: `gh auth status`
+- [ ] Determine objective (current status, wait for completion, investigate failure)
+- [ ] Get current PR check status: `python eia_get_pr_checks.py --pr <number>`
+- [ ] Review `all_passing` field in JSON output
+- [ ] If checks pending, wait for completion: `python eia_wait_for_checks.py --pr <number> --timeout <seconds>`
+- [ ] If checks failing, investigate: `python eia_get_check_details.py --pr <number> --check "<name>"`
+- [ ] Interpret check conclusions using Quick Reference table
+- [ ] Identify required vs optional failing checks
+- [ ] Take appropriate action based on results:
+  - [ ] If all passing: proceed with merge
+  - [ ] If failing: fix issues and push new commit
+  - [ ] If timeout: check CI runner status
+- [ ] Handle any errors using exit codes (0=success, 1-4=errors)
+- [ ] Verify PR is ready for merge before proceeding
 
 ### When to Use This Skill
 

@@ -1,13 +1,13 @@
 ---
 name: eia-committer
-description: Creates detailed, searchable git commits with comprehensive WHAT and WHY documentation
+description: Creates detailed, searchable git commits with comprehensive WHAT and WHY documentation. Requires AI Maestro installed.
 type: specialized
 triggers:
   - Git commits need detailed WHAT/WHY documentation
   - Dual-git handling between public and private repos
   - Decision archaeology support for commit history
 auto_skills:
-  - session-memory
+  - eia-session-memory
 memory_requirements: low
 ---
 

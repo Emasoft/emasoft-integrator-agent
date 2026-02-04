@@ -2,6 +2,20 @@
 
 Template for comprehensive code quality assessment and tracking.
 
+## Table of Contents
+
+- [Template](#template)
+  - [Scoring Breakdown](#scoring-breakdown)
+  - [Test Coverage](#test-coverage)
+  - [Code Quality](#code-quality)
+  - [Documentation](#documentation)
+  - [Security](#security)
+  - [Performance](#performance)
+  - [Technical Debt](#technical-debt)
+  - [Recommendations](#recommendations)
+- [Quality Score Calculation](#quality-score-calculation)
+- [Trend Indicators](#trend-indicators)
+
 ---
 
 ## Template

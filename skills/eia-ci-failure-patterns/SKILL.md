@@ -1,29 +1,14 @@
 ---
 name: eia-ci-failure-patterns
-description: Use when diagnosing and fixing CI/CD pipeline failures across platforms (Linux, macOS, Windows) and languages (Python, JavaScript, Rust, Go). Covers cross-platform issues, exit codes, syntax problems, dependency failures, and GitHub Actions infrastructure patterns.
+description: "Use when diagnosing CI/CD failures. Trigger with CI failure logs or pipeline errors."
 license: Apache-2.0
+compatibility: Requires AI Maestro installed.
 metadata:
   version: 1.0.0
   author: integrator-agent
-  tags:
-    - ci
-    - cd
-    - github-actions
-    - debugging
-    - cross-platform
-    - devops
-  platforms:
-    - linux
-    - macos
-    - windows
-  languages:
-    - python
-    - javascript
-    - typescript
-    - rust
-    - go
-    - bash
-    - powershell
+  tags: "ci, cd, github-actions, debugging, cross-platform, devops"
+  platforms: "linux, macos, windows"
+  languages: "python, javascript, typescript, rust, go, bash, powershell"
 agent: debug-specialist
 context: fork
 ---
@@ -43,6 +28,30 @@ Before using this skill, ensure:
 
 ## Instructions
 
+Follow these steps to diagnose and fix CI failures:
+
+1. Collect the CI failure log from the GitHub Actions workflow run
+2. Run the diagnostic script: `python scripts/eia_diagnose_ci_failure.py --log-file ci.log`
+3. If the script identifies a pattern, read the corresponding reference document for the fix
+4. If the script doesn't identify the pattern, follow the Diagnosis Decision Tree to determine the failure category
+5. Read the appropriate reference document for detailed diagnosis and fix instructions
+6. Apply the recommended fix to your code or workflow configuration
+7. Verify the fix locally (when possible) before pushing to CI
+8. Push the changes and monitor the CI run to confirm the fix resolved the issue
+
+### Checklist
+
+Copy this checklist and track your progress:
+
+- [ ] Collect CI failure log from GitHub Actions workflow run
+- [ ] Run diagnostic script: `python scripts/eia_diagnose_ci_failure.py --log-file ci.log`
+- [ ] Identify failure pattern (from script output or Decision Tree)
+- [ ] Read the corresponding reference document for the identified pattern
+- [ ] Apply the recommended fix to code or workflow configuration
+- [ ] Verify the fix locally before pushing (if possible)
+- [ ] Push changes to trigger new CI run
+- [ ] Monitor CI run and confirm the fix resolved the issue
+
 Use this skill when:
 - A CI workflow fails and you need to diagnose the cause
 - Tests pass locally but fail in CI
@@ -50,6 +59,17 @@ Use this skill when:
 - Exit codes indicate failure but the error message is unclear
 - Dependency installation fails in CI but works locally
 - GitHub Actions infrastructure issues occur (labels, permissions, runners)
+
+## Output
+
+This skill produces the following outputs:
+
+| Output Type | Description |
+|-------------|-------------|
+| Diagnostic report | JSON or text report from `eia_diagnose_ci_failure.py` identifying failure patterns and suggested fixes |
+| Platform issue scan | JSON or text report from `eia_detect_platform_issue.py` listing platform-specific code patterns that may cause CI failures |
+| Fix recommendations | Step-by-step instructions from reference documents for resolving identified failure patterns |
+| Verification steps | Commands and procedures to verify fixes locally before pushing to CI |
 
 ## Failure Pattern Categories
 

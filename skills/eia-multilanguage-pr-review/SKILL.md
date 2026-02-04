@@ -1,27 +1,15 @@
 ---
 name: eia-multilanguage-pr-review
-description: >
-  Use when reviewing PRs in multilanguage repositories. Review pull requests in
-  repositories containing multiple programming languages and targeting multiple
-  platforms. Teaches language detection, routing reviews to appropriate checkers,
-  and coordinating cross-language concerns.
+description: Use when reviewing PRs in multilanguage repositories. Routes reviews to appropriate language checkers. Trigger with /review-multilang [PR_NUMBER].
 license: Apache-2.0
+compatibility: Requires AI Maestro installed.
 version: 1.0.0
 author: Emasoft
 metadata:
   category: code-review
   complexity: advanced
-  requires_tools:
-    - gh
-    - git
-  supported_languages:
-    - python
-    - javascript
-    - typescript
-    - rust
-    - go
-    - bash
-    - shell
+  requires_tools: "gh, git"
+  supported_languages: "python, javascript, typescript, rust, go, bash, shell"
 agent: code-reviewer
 context: fork
 ---
@@ -46,9 +34,25 @@ Reviewing PRs in such repositories requires understanding which languages are af
 - Language-specific linters installed (ruff, mypy, ESLint, clippy, etc.)
 - Git for local diff analysis
 
+## Output
+
+| Output Type | Format | Description |
+|-------------|--------|-------------|
+| Language Detection Report | JSON | List of detected languages with file counts and lines changed per language |
+| Linter Recommendations | JSON | Recommended linters, install commands, and run commands for each detected language |
+| Review Summary | Markdown | Comprehensive review findings organized by language with cross-language impact analysis |
+| Linter Results | Text/JSON | Aggregated output from all language-specific linters (ruff, ESLint, clippy, etc.) |
+
 ## Instructions
 
-Follow the decision tree in this skill to determine which review patterns to apply based on detected languages.
+1. Run `eia_detect_pr_languages.py` to identify all programming languages affected by the PR
+2. For each detected language, read the corresponding review patterns document from the references directory
+3. Execute `eia_get_language_linters.py` to obtain the appropriate linters and their commands for each language
+4. Run all recommended linters against the changed files in their respective languages
+5. Check for cross-language interface changes (API contracts, FFI boundaries, shared configuration)
+6. Verify platform-specific code paths have appropriate guards and tests (see cross-platform-testing.md)
+7. Compile linter results and findings into a comprehensive review summary organized by language
+8. Write the final review comment with language-specific findings and cross-language impact analysis
 
 ## Challenges of Multilanguage Repositories
 
@@ -292,6 +296,8 @@ python scripts/eia_detect_pr_languages.py --repo myorg/myrepo --pr 789
 **Solution**: Read cross-platform-testing.md section 7.3 for platform-specific skip annotations.
 
 ## Checklist: Multilanguage PR Review
+
+Copy this checklist and track your progress:
 
 - [ ] Detect all languages in the PR using eia_detect_pr_languages.py
 - [ ] Read the review patterns document for each detected language

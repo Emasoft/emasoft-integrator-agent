@@ -1,5 +1,23 @@
 # Status Tracking System
 
+## Table of Contents
+- [Use-Case TOC](#use-case-toc)
+- [Status States](#status-states)
+  - [State Descriptions](#state-descriptions)
+- [Status Tracking Format](#status-tracking-format)
+- [Multi-Feature Tracking](#multi-feature-tracking)
+- [Phase Transition Rules](#phase-transition-rules)
+  - [Transition: pending to RED](#transition-pending--red)
+  - [Transition: RED to GREEN](#transition-red--green)
+  - [Transition: GREEN to REFACTOR](#transition-green--refactor)
+  - [Transition: REFACTOR to pending (next feature)](#transition-refactor--pending-next-feature)
+- [Status Tracking in Git](#status-tracking-in-git)
+  - [Git Log View](#git-log-view)
+  - [Verification Script](#verification-script)
+- [Status Tracking Best Practices](#status-tracking-best-practices)
+
+---
+
 ## Use-Case TOC
 - When you need to track TDD cycle progress → [Status States](#status-states)
 - If you need to document current phase → [Status Tracking Format](#status-tracking-format)

@@ -2,6 +2,20 @@
 
 [Back to Worktree Verification Index](worktree-verification.md)
 
+## Table of Contents
+
+- [4.1 Pre-Cleanup Verification Checklist](#41-pre-cleanup-verification-checklist)
+  - [Complete Verification Checklist](#complete-verification-checklist)
+  - [Quick Verification Commands](#quick-verification-commands)
+- [4.2 Detecting Files Written Outside Worktree Boundaries](#42-detecting-files-written-outside-worktree-boundaries)
+  - [The Isolation Violation Problem](#the-isolation-violation-problem)
+  - [Detection Method 1: Main Repo Status Check](#detection-method-1-main-repo-status-check)
+  - [Detection Method 2: Timestamp Analysis](#detection-method-2-timestamp-analysis)
+  - [Detection Method 3: Git Diff Against Expected State](#detection-method-3-git-diff-against-expected-state)
+  - [Detection Method 4: File System Monitoring](#detection-method-4-file-system-monitoring)
+  - [Detection Method 5: Hash Comparison](#detection-method-5-hash-comparison)
+  - [Automated Isolation Check](#automated-isolation-check)
+
 ---
 
 ## 4.1 Pre-Cleanup Verification Checklist

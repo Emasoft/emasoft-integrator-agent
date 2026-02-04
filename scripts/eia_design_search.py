@@ -35,7 +35,7 @@ import json
 import re
 import sys
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, cast
 
 
 class DesignDocumentSearcher:
@@ -251,7 +251,7 @@ class DesignDocumentSearcher:
             Document type string
         """
         if "type" in frontmatter:
-            return frontmatter["type"]
+            return cast(str, frontmatter["type"])
 
         try:
             relative = file_path.relative_to(self.design_root)

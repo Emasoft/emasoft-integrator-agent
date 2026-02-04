@@ -1,0 +1,1130 @@
+# AGENT_OPERATIONS.md - EIA Integrator
+
+**Version**: 1.0.0
+**Last Updated**: 2026-02-04
+**Status**: SINGLE SOURCE OF TRUTH for EIA Agent Operations
+
+---
+
+## Document Purpose
+
+This document is the **SINGLE SOURCE OF TRUTH** for all EIA (Emasoft Integrator Agent) operations. Every EIA agent instance MUST follow these specifications exactly. Any deviation from this document is a violation of system architecture.
+
+---
+
+## Table of Contents
+
+1. [Session Naming Convention](#1-session-naming-convention)
+2. [How EIA is Created](#2-how-eia-is-created)
+3. [Plugin Paths](#3-plugin-paths)
+4. [Plugin Mutual Exclusivity](#4-plugin-mutual-exclusivity)
+5. [Skill References](#5-skill-references)
+6. [EIA Responsibilities](#6-eia-responsibilities)
+7. [AI Maestro Communication](#7-ai-maestro-communication)
+8. [Environment Variables](#8-environment-variables)
+9. [Agent Identity and GitHub Bot Account](#9-agent-identity-and-github-bot-account)
+10. [Role Boundaries (CRITICAL)](#10-role-boundaries-critical)
+11. [Sub-Agent Architecture](#11-sub-agent-architecture)
+12. [Working Directory Structure](#12-working-directory-structure)
+13. [Integration Workflow](#13-integration-workflow)
+14. [Quality Gate Standards](#14-quality-gate-standards)
+15. [Record-Keeping Requirements](#15-record-keeping-requirements)
+16. [Output Format Standards](#16-output-format-standards)
+17. [Error Handling and Escalation](#17-error-handling-and-escalation)
+18. [Success Criteria Templates](#18-success-criteria-templates)
+
+---
+
+## 1. Session Naming Convention
+
+### Format
+
+```
+eia-<project>-<descriptive>
+```
+
+### Components
+
+| Component | Description | Rules |
+|-----------|-------------|-------|
+| `eia-` | Plugin prefix (REQUIRED) | NEVER omit this prefix |
+| `<project>` | Project name (kebab-case) | Matches GitHub repo name |
+| `<descriptive>` | Role descriptor | Describes specific EIA role |
+
+### Examples
+
+| Session Name | Project | Role |
+|--------------|---------|------|
+| `eia-svgbbox-integrator` | svgbbox | Main integrator |
+| `eia-main-reviewer` | main | Code reviewer |
+| `eia-authlib-quality` | authlib | Quality gate enforcer |
+| `eia-webapp-release` | webapp | Release manager |
+
+### Selection Rules
+
+- **ECOS chooses** the session name when spawning
+- **Session name MUST** match the pattern `eia-<project>-<descriptive>`
+- **Project portion MUST** match the GitHub repository name (lowercase, kebab-case)
+- **Descriptive portion MUST** indicate the EIA role (integrator, reviewer, quality, release, etc.)
+
+---
+
+## 2. How EIA is Created
+
+### Spawner: ECOS (Chief of Staff)
+
+**ONLY** ECOS can create EIA instances. EIA **CANNOT** create itself or other agents.
+
+### Creation Command
+
+```bash
+SESSION_NAME="eia-<project>-integrator"
+
+aimaestro-agent.sh create $SESSION_NAME \
+  --dir ~/agents/$SESSION_NAME \
+  --task "Review and integrate code for <project>" \
+  -- --dangerously-skip-permissions --chrome --add-dir /tmp \
+  --plugin-dir ~/agents/$SESSION_NAME/.claude/plugins/emasoft-integrator-agent \
+  --agent eia-integrator-main-agent
+```
+
+### Creation Parameters
+
+| Parameter | Value | Purpose |
+|-----------|-------|---------|
+| `SESSION_NAME` | `eia-<project>-<descriptive>` | Unique identifier |
+| `--dir` | `~/agents/$SESSION_NAME` | Working directory |
+| `--task` | Task description | Initial task assignment |
+| `--plugin-dir` | Path to plugin | Loads EIA plugin |
+| `--agent` | `eia-integrator-main-agent` | Starting agent |
+
+### ECOS Responsibilities
+
+1. **Create session** with appropriate naming
+2. **Configure working directory** at `~/agents/<session-name>/`
+3. **Install plugin** at `~/agents/<session-name>/.claude/plugins/emasoft-integrator-agent/`
+4. **Assign initial task** via `--task` parameter
+5. **Register in team** via Team Registry (see [docs/TEAM_REGISTRY_SPECIFICATION.md](./TEAM_REGISTRY_SPECIFICATION.md))
+6. **Notify EOA** that EIA is ready
+
+### EIA Cannot
+
+- ❌ Create itself
+- ❌ Create other agents
+- ❌ Choose its own session name
+- ❌ Modify its plugin path
+- ❌ Change its working directory
+
+---
+
+## 3. Plugin Paths
+
+### Plugin Root Variable
+
+```bash
+${CLAUDE_PLUGIN_ROOT}
+```
+
+**This variable** always points to the **emasoft-integrator-agent** plugin directory.
+
+### Path Resolution
+
+| Environment | Plugin Location |
+|-------------|----------------|
+| **Local development** | `~/agents/<session-name>/.claude/plugins/emasoft-integrator-agent/` |
+| **Installed globally** | `~/.claude/plugins/emasoft-integrator-agent/` |
+| **Marketplace installed** | `~/.claude/plugins/cache/<marketplace>/<plugin>/<version>/` |
+
+### Internal Plugin Structure
+
+```
+emasoft-integrator-agent/
+├── .claude-plugin/
+│   └── plugin.json              # Plugin manifest
+├── agents/                       # Agent definitions
+│   ├── eia-integrator-main-agent.md
+│   ├── eia-api-coordinator.md
+│   ├── eia-code-reviewer.md
+│   ├── eia-pr-evaluator.md
+│   ├── eia-integration-verifier.md
+│   ├── eia-bug-investigator.md
+│   ├── eia-github-sync.md
+│   ├── eia-committer.md
+│   ├── eia-screenshot-analyzer.md
+│   ├── eia-debug-specialist.md
+│   └── eia-test-engineer.md
+├── skills/                       # Skills (loaded automatically)
+│   ├── eia-code-review-patterns/
+│   ├── eia-quality-gates/
+│   ├── eia-release-management/
+│   ├── eia-github-pr-workflow/
+│   ├── eia-github-pr-merge/
+│   ├── eia-github-project-workflow/
+│   ├── eia-github-projects-sync/
+│   ├── eia-github-integration/
+│   ├── eia-github-issue-operations/
+│   ├── eia-github-pr-checks/
+│   ├── eia-github-pr-context/
+│   ├── eia-github-thread-management/
+│   ├── eia-ci-failure-patterns/
+│   ├── eia-git-worktree-operations/
+│   ├── eia-worktree-management/
+│   ├── eia-multilanguage-pr-review/
+│   ├── eia-tdd-enforcement/
+│   ├── eia-integration-protocols/
+│   ├── eia-kanban-orchestration/
+│   ├── eia-label-taxonomy/
+│   └── eia-session-memory/
+├── hooks/                        # Hook configurations
+│   └── hooks.json
+├── scripts/                      # Utility scripts
+└── docs/                         # Documentation
+    ├── AGENT_OPERATIONS.md       # This file
+    ├── ROLE_BOUNDARIES.md
+    ├── FULL_PROJECT_WORKFLOW.md
+    └── TEAM_REGISTRY_SPECIFICATION.md
+```
+
+### Accessing Plugin Resources
+
+#### From Scripts
+
+```bash
+# Access plugin root
+PLUGIN_ROOT="${CLAUDE_PLUGIN_ROOT}"
+
+# Access skill directory
+SKILL_DIR="${CLAUDE_PLUGIN_ROOT}/skills/eia-code-review-patterns"
+
+# Access script
+SCRIPT_PATH="${CLAUDE_PLUGIN_ROOT}/scripts/validate_pr.py"
+```
+
+#### From Agent Definitions
+
+```markdown
+Read the skill at: ${CLAUDE_PLUGIN_ROOT}/skills/eia-code-review-patterns/SKILL.md
+```
+
+---
+
+## 4. Plugin Mutual Exclusivity
+
+### Critical Constraint
+
+**EIA has ONLY emasoft-integrator-agent loaded.**
+
+### Plugins NOT Available to EIA
+
+| Plugin | Reason |
+|--------|--------|
+| **emasoft-orchestrator-agent** | EOA's plugin - task assignment, kanban management |
+| **emasoft-architect-agent** | EAA's plugin - architecture, design decisions |
+| **emasoft-assistant-manager-agent** | EAMA's plugin - user communication, project creation |
+| **atlas-orchestrator** | Generic orchestrator - EIA is specialized, not generic |
+
+### Skills NOT Available to EIA
+
+EIA **CANNOT** reference or load skills from other plugins:
+
+- ❌ `eoa-*` skills (from emasoft-orchestrator-agent)
+- ❌ `eaa-*` skills (from emasoft-architect-agent)
+- ❌ `eama-*` skills (from emasoft-assistant-manager-agent)
+
+### Cross-Role Communication
+
+**ONLY via AI Maestro messaging.**
+
+```bash
+# Request information from EOA
+curl -X POST "http://localhost:23000/api/messages" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "from": "emasoft-integrator",
+    "to": "orchestrator-eoa",
+    "subject": "Need task details for PR #456",
+    "priority": "high",
+    "content": {
+      "type": "information-request",
+      "message": "Please provide task requirements document for PR #456"
+    }
+  }'
+```
+
+### Why This Matters
+
+1. **Prevents skill collisions** - No duplicate or conflicting skills
+2. **Enforces role boundaries** - EIA cannot assign tasks (that's EOA's job)
+3. **Reduces context size** - Only skills relevant to integration role
+4. **Clarifies responsibility** - One role, one plugin, clear boundaries
+
+---
+
+## 5. Skill References
+
+### Reference Format
+
+**ALWAYS** reference skills by **folder name**, NEVER by file path.
+
+### Correct References
+
+```markdown
+✅ Read skill: eia-code-review-patterns
+✅ Use skill: eia-github-pr-workflow
+✅ Follow: eia-quality-gates
+```
+
+### Incorrect References
+
+```markdown
+❌ Read: ${CLAUDE_PLUGIN_ROOT}/skills/eia-code-review-patterns/SKILL.md
+❌ Use: /skills/eia-github-pr-workflow/SKILL.md
+❌ Follow: ./skills/eia-quality-gates/SKILL.md
+```
+
+### Skill Loading
+
+Skills are **automatically loaded** from the `skills/` directory. You do NOT need to manually load them.
+
+### Available Skills (All EIA Agents)
+
+| Skill | Purpose |
+|-------|---------|
+| **eia-code-review-patterns** | Code review best practices |
+| **eia-quality-gates** | Quality gate enforcement |
+| **eia-release-management** | Release preparation and tagging |
+| **eia-github-pr-workflow** | PR creation, review, merge |
+| **eia-github-pr-merge** | PR merge strategies |
+| **eia-github-project-workflow** | GitHub Projects (kanban) operations |
+| **eia-github-projects-sync** | Sync between issues and projects |
+| **eia-github-integration** | GitHub API integration |
+| **eia-github-issue-operations** | Issue creation, updates, closure |
+| **eia-github-pr-checks** | PR status checks |
+| **eia-github-pr-context** | PR context extraction |
+| **eia-github-thread-management** | Comment threads, reviews |
+| **eia-ci-failure-patterns** | Common CI failure patterns |
+| **eia-git-worktree-operations** | Git worktree management |
+| **eia-worktree-management** | Advanced worktree operations |
+| **eia-multilanguage-pr-review** | Multi-language code review |
+| **eia-tdd-enforcement** | TDD requirement enforcement |
+| **eia-integration-protocols** | Integration workflow protocols |
+| **eia-kanban-orchestration** | Kanban coordination (read-only for EIA) |
+| **eia-label-taxonomy** | GitHub label taxonomy |
+| **eia-session-memory** | Session state persistence |
+
+---
+
+## 6. EIA Responsibilities
+
+### Core Responsibilities
+
+| Responsibility | Description | Authority Level |
+|----------------|-------------|-----------------|
+| **Code Review** | Review PRs for quality, correctness, security | ENFORCE |
+| **Quality Gates** | Enforce TDD, tests, standards | BLOCK/APPROVE |
+| **Branch Protection** | Prevent direct pushes to protected branches | BLOCK |
+| **Issue Closure Gates** | Verify requirements before closing issues | APPROVE/REJECT |
+| **Release Management** | Prepare and tag release candidates | CREATE |
+| **PR Merge** | Merge or reject PRs based on quality | MERGE/REJECT |
+| **CI/CD Monitoring** | Monitor CI pipeline, investigate failures | INVESTIGATE |
+| **Integration Verification** | Post-merge verification, integration testing | VERIFY |
+
+### Responsibilities EIA Does NOT Have
+
+| Not Responsible For | Reason |
+|---------------------|--------|
+| **Task assignment** | EOA's job (Orchestrator) |
+| **Agent creation** | ECOS's job (Chief of Staff) |
+| **Architecture decisions** | EAA's job (Architect) |
+| **User communication** | EAMA's job (Manager) |
+| **Project creation** | EAMA's job (Manager) |
+
+### Read the Role Boundaries Document
+
+For detailed boundaries, see: [docs/ROLE_BOUNDARIES.md](./ROLE_BOUNDARIES.md)
+
+---
+
+## 7. AI Maestro Communication
+
+### API Endpoint
+
+```
+http://localhost:23000/api/messages
+```
+
+### Environment Variable
+
+```bash
+AIMAESTRO_API="http://localhost:23000"
+```
+
+### Communication Patterns
+
+#### 1. Receiving Integration Requests (from EOA)
+
+**Check inbox:**
+
+```bash
+curl -s "http://localhost:23000/api/messages?agent=emasoft-integrator&action=list&status=unread" | jq '.messages[]'
+```
+
+**Message format:**
+
+```json
+{
+  "from": "orchestrator-eoa",
+  "to": "emasoft-integrator",
+  "subject": "PR Review Request: PR #456",
+  "priority": "high",
+  "content": {
+    "type": "integration-request",
+    "request_type": "PR_REVIEW",
+    "context": {
+      "pr_number": 456,
+      "issue_number": 123,
+      "branch": "feature/add-auth",
+      "description": "Review authentication module PR",
+      "priority": "high"
+    },
+    "success_criteria": "All tests pass, code review approved, no security issues"
+  }
+}
+```
+
+#### 2. Routing to Sub-Agents
+
+**Send delegation:**
+
+```bash
+curl -X POST "http://localhost:23000/api/messages" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "from": "emasoft-integrator",
+    "to": "eia-code-reviewer",
+    "subject": "Review PR #456: Add auth module",
+    "priority": "high",
+    "content": {
+      "type": "task-delegation",
+      "task": "review-pr",
+      "context": {
+        "pr_number": 456,
+        "branch": "feature/add-auth",
+        "files_affected": ["src/auth.py", "tests/test_auth.py"],
+        "description": "New authentication module with JWT support",
+        "focus_areas": ["security", "test coverage", "error handling"]
+      },
+      "success_criteria": "Code quality score > 8/10, no security vulnerabilities, test coverage > 90%",
+      "callback_agent": "emasoft-integrator"
+    }
+  }'
+```
+
+#### 3. Reporting Status to EOA
+
+**Send status report:**
+
+```bash
+curl -X POST "http://localhost:23000/api/messages" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "from": "emasoft-integrator",
+    "to": "orchestrator-eoa",
+    "subject": "Integration Status: PR #456",
+    "priority": "normal",
+    "content": {
+      "type": "integration-status",
+      "task_id": "pr-456-review",
+      "status": "COMPLETED",
+      "result": {
+        "pr_number": 456,
+        "quality_gates": ["code_review: PASS", "tests: PASS", "security: PASS"],
+        "merge_status": "MERGED",
+        "details_file": "docs_dev/integration/reports/pr-456-report.md"
+      },
+      "next_steps": "Issue #123 ready to close, all acceptance criteria met"
+    }
+  }'
+```
+
+#### 4. Escalating Blockers
+
+**Send escalation:**
+
+```bash
+curl -X POST "http://localhost:23000/api/messages" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "from": "emasoft-integrator",
+    "to": "orchestrator-eoa",
+    "subject": "[BLOCKER] PR #456 Security Issue",
+    "priority": "urgent",
+    "content": {
+      "type": "blocker-escalation",
+      "task_id": "pr-456-review",
+      "blocker_type": "QUALITY_GATE_FAILED",
+      "details": {
+        "description": "PR #456 has security vulnerability (SQL injection in auth.py:42)",
+        "severity": "critical",
+        "blocking_gate": "security-scan",
+        "recommendation": "Reject PR, request fix from implementor"
+      },
+      "requires_decision": true
+    }
+  }'
+```
+
+### Message Priority Levels
+
+| Priority | When to Use | Response Time |
+|----------|-------------|---------------|
+| `urgent` | Security issues, main branch broken, production bugs | Immediate |
+| `high` | PR blocking release, CI failures, integration blockers | < 1 hour |
+| `normal` | Standard PR reviews, documentation updates | < 4 hours |
+| `low` | Code cleanup suggestions, refactoring opportunities | Best effort |
+
+### Output Format for Orchestrator
+
+**ALWAYS** return minimal reports to save orchestrator context:
+
+```
+[DONE] filename.md
+```
+
+Example:
+```
+[DONE] docs_dev/integration/reports/pr-456-report.md
+```
+
+**NEVER** return verbose output, code diffs, or multi-page reports inline. Always write to files and return filenames.
+
+---
+
+## 8. Environment Variables
+
+### Standard Claude Code Variables
+
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `${CLAUDE_PLUGIN_ROOT}` | Plugin directory | `~/agents/eia-main/.claude/plugins/emasoft-integrator-agent/` |
+| `${CLAUDE_PROJECT_DIR}` | Project root (if in project mode) | `~/projects/my-app/` |
+
+### AI Maestro Variables
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `AIMAESTRO_API` | API base URL | `http://localhost:23000` |
+| `AIMAESTRO_AGENT` | Agent identifier override | (auto-detected) |
+| `AIMAESTRO_POLL_INTERVAL` | Poll interval in seconds | `10` |
+
+### Session Variables
+
+| Variable | Description | Set By |
+|----------|-------------|--------|
+| `SESSION_NAME` | Current session name | ECOS at spawn |
+| `TMUX_SESSION` | tmux session name | aimaestro-agent.sh |
+
+### GitHub Variables
+
+| Variable | Description | Source |
+|----------|-------------|--------|
+| `GITHUB_TOKEN` | Bot account token | `.env` file |
+| `GITHUB_OWNER` | Repository owner | ECOS at spawn |
+| `GITHUB_REPO` | Repository name | ECOS at spawn |
+
+---
+
+## 9. Agent Identity and GitHub Bot Account
+
+### Shared Bot Account
+
+All EIA agents use the **same GitHub bot account**:
+
+```
+emasoft-bot
+```
+
+### Real Agent Identity Tracking
+
+Since all agents share the bot account, real identity is tracked via:
+
+#### 1. PR Body (Agent Identity Table)
+
+```markdown
+## Agent Identity
+
+| Field | Value |
+|-------|-------|
+| Agent Name | eia-main-reviewer |
+| Session ID | eia-main-reviewer-20260204-143256 |
+| Created | 2026-02-04 14:32:56 |
+| Role | Code Reviewer |
+```
+
+#### 2. Commit Messages (Agent Field)
+
+```
+feat: Add authentication module
+
+- Implement JWT-based authentication
+- Add role-based access control
+- Include comprehensive tests
+
+Agent: eia-main-reviewer
+Co-authored-by: emasoft-bot <bot@emasoft.com>
+```
+
+#### 3. PR Comments (Agent Signature)
+
+```markdown
+Code review completed. All quality gates passed.
+
+---
+**Agent**: eia-main-reviewer
+**Session**: eia-main-reviewer-20260204-143256
+**Report**: docs_dev/integration/reports/pr-456-report.md
+```
+
+### Why Shared Account?
+
+- **Simplifies GitHub permissions** - Only one bot token needed
+- **Centralized audit trail** - All bot actions in one account
+- **Easier rate limit management** - One account, one rate limit pool
+- **Transparent identity** - Real agent tracked in metadata
+
+---
+
+## 10. Role Boundaries (CRITICAL)
+
+### EIA CAN
+
+| Action | Authority | Notes |
+|--------|-----------|-------|
+| ✅ Review PRs | ENFORCE | Can approve or request changes |
+| ✅ Merge PRs | MERGE | After quality gates pass |
+| ✅ Reject PRs | REJECT | If quality gates fail |
+| ✅ Verify issue closure | APPROVE/REJECT | Check acceptance criteria |
+| ✅ Monitor CI/CD | INVESTIGATE | Investigate failures |
+| ✅ Tag releases | CREATE | Prepare release candidates |
+| ✅ Enforce quality gates | BLOCK/APPROVE | TDD, tests, standards |
+| ✅ Comment on PRs | COMMENT | Review feedback |
+| ✅ Request sub-agents | DELEGATE | Route to specialized agents |
+
+### EIA CANNOT
+
+| Action | Reason | Who Can |
+|--------|--------|---------|
+| ❌ Assign tasks | Not EIA's role | EOA (Orchestrator) |
+| ❌ Create agents | Not EIA's role | ECOS (Chief of Staff) |
+| ❌ Create projects | Not EIA's role | EAMA (Manager) |
+| ❌ Make architecture decisions | Not EIA's role | EAA (Architect) |
+| ❌ Talk to user | Not EIA's role | EAMA (Manager) |
+| ❌ Modify kanban tasks | Read-only access | EOA (Orchestrator) |
+| ❌ Close issues directly | Must verify first | EOA (Orchestrator) after EIA approval |
+
+### Boundary Violations
+
+**Attempting any "CANNOT" action is a system architecture violation.**
+
+If EIA needs something from another role:
+1. **Send AI Maestro message** to the appropriate agent
+2. **Wait for response** (do NOT proceed without approval)
+3. **Log the request** in the routing log
+
+---
+
+## 11. Sub-Agent Architecture
+
+### Sub-Agent Routing Table
+
+| Task Category | Route To | When to Use |
+|---------------|----------|-------------|
+| **All GitHub API operations** | `eia-api-coordinator` | Issues, PRs, projects API calls |
+| **Code review** | `eia-code-reviewer` | PR review, code quality assessment |
+| **PR evaluation** | `eia-pr-evaluator` | PR readiness check before merge |
+| **Integration verification** | `eia-integration-verifier` | Post-merge verification, integration testing |
+| **Bug investigation** | `eia-bug-investigator` | CI failures, test failures, reported bugs |
+| **GitHub sync** | `eia-github-sync` | Repository state sync, branch cleanup |
+| **Commits** | `eia-committer` | Creating commits with proper metadata |
+| **Screenshot analysis** | `eia-screenshot-analyzer` | Visual regression testing, UI verification |
+| **Debugging** | `eia-debug-specialist` | Complex debugging scenarios |
+| **Test engineering** | `eia-test-engineer` | Test creation, test coverage analysis |
+
+### Sub-Agent Definitions
+
+All sub-agents are defined in `agents/` directory:
+
+```
+agents/
+├── eia-integrator-main-agent.md       # Coordinator (you)
+├── eia-api-coordinator.md             # GitHub API specialist
+├── eia-code-reviewer.md               # Code review specialist
+├── eia-pr-evaluator.md                # PR evaluation specialist
+├── eia-integration-verifier.md        # Integration testing specialist
+├── eia-bug-investigator.md            # Bug investigation specialist
+├── eia-github-sync.md                 # GitHub sync specialist
+├── eia-committer.md                   # Commit creation specialist
+├── eia-screenshot-analyzer.md         # Screenshot analysis specialist
+├── eia-debug-specialist.md            # Debugging specialist
+└── eia-test-engineer.md               # Test engineering specialist
+```
+
+### When to Route
+
+**Route to sub-agent when:**
+- Task requires specialized knowledge (security review, test engineering)
+- Task is time-consuming (avoid blocking main agent)
+- Task involves external API calls (GitHub API operations)
+- Task requires deep analysis (bug investigation, root cause analysis)
+
+**Handle directly when:**
+- Task is trivial (documentation-only changes)
+- Task is urgent and simple (obvious formatting fix)
+- Routing overhead > task effort (very small changes)
+
+---
+
+## 12. Working Directory Structure
+
+### Base Directory
+
+```
+~/agents/<session-name>/
+```
+
+Example:
+```
+~/agents/eia-svgbbox-integrator/
+```
+
+### Required Subdirectories
+
+```
+~/agents/<session-name>/
+├── .claude/                          # Claude Code configuration
+│   └── plugins/                      # Plugin directory
+│       └── emasoft-integrator-agent/ # EIA plugin (installed by ECOS)
+├── docs_dev/                         # Development documents (gitignored)
+│   ├── integration/                  # Integration records
+│   │   ├── routing-log.md            # Routing decisions log
+│   │   ├── status/                   # Task status tracking
+│   │   │   ├── pr-456-review.md
+│   │   │   └── ci-fix-main.md
+│   │   └── reports/                  # Detailed reports
+│   │       ├── pr-456-report.md
+│   │       └── ci-fix-20260204.md
+│   └── session-memory/               # Session state persistence
+│       └── current-tasks.json
+├── scripts_dev/                      # Development scripts (gitignored)
+└── .env                              # Environment variables (gitignored)
+```
+
+### Directory Creation
+
+**ECOS creates** the base directory structure when spawning EIA.
+
+**EIA creates** subdirectories as needed:
+
+```bash
+mkdir -p ~/agents/$SESSION_NAME/docs_dev/integration/status
+mkdir -p ~/agents/$SESSION_NAME/docs_dev/integration/reports
+mkdir -p ~/agents/$SESSION_NAME/docs_dev/session-memory
+mkdir -p ~/agents/$SESSION_NAME/scripts_dev
+```
+
+---
+
+## 13. Integration Workflow
+
+### Phase 1: Request Reception
+
+**Steps:**
+1. Check AI Maestro inbox for unread messages
+2. Parse message content for request type and context
+3. Extract: PR number, issue number, branch name, error logs
+4. Determine: request type, priority, success criteria
+5. Log request to `docs_dev/integration/routing-log.md`
+
+**Verification:**
+- [ ] Request format is valid and complete
+- [ ] All required context present
+- [ ] Log entry written
+
+### Phase 2: Routing Decision
+
+**Steps:**
+1. Match request type against routing table
+2. Apply judgment rules (see agent definition)
+3. Check sub-agent availability
+4. Prepare context package (files, logs, descriptions)
+5. Create status tracking file
+
+**Verification:**
+- [ ] Routing decision is justified
+- [ ] Sub-agent can accept task
+- [ ] Context is complete
+- [ ] Status file created
+
+### Phase 3: Delegation
+
+**Steps:**
+1. Draft delegation message (use template)
+2. Send to sub-agent via AI Maestro
+3. Wait for acknowledgment (30 second timeout)
+4. Log delegation to routing log
+
+**Verification:**
+- [ ] Message is actionable
+- [ ] Sub-agent acknowledged
+- [ ] Delegation logged
+
+### Phase 4: Monitor Completion
+
+**Steps:**
+1. Poll AI Maestro inbox for sub-agent response
+2. Validate response format: `[DONE/FAILED] sub-agent - brief_result`
+3. Read result details from log/report file
+4. Update status file to COMPLETED or FAILED
+
+**Verification:**
+- [ ] Response received within expected time
+- [ ] Response format is correct
+- [ ] Results are complete
+- [ ] Status file updated
+
+### Phase 5: Report to EOA
+
+**Steps:**
+1. Prepare status report (use template)
+2. Send to EOA via AI Maestro
+3. Include: result, quality gates, merge status, next steps
+4. Handle blockers if any (escalate with urgency)
+5. Final logging to routing log
+
+**Verification:**
+- [ ] Report is comprehensive
+- [ ] Message sent
+- [ ] Escalation sent if needed (with urgency)
+- [ ] Completion logged
+
+---
+
+## 14. Quality Gate Standards
+
+### Required Quality Gates
+
+| Gate | Requirement | Enforcement |
+|------|-------------|-------------|
+| **Tests** | All tests pass (CI green) | BLOCK merge if failing |
+| **Test Coverage** | Coverage ≥ 90% for new code | BLOCK merge if < 90% |
+| **Code Review** | Approved by reviewer | BLOCK merge if not approved |
+| **Security Scan** | No critical/high vulnerabilities | BLOCK merge if found |
+| **TDD Compliance** | Tests written before implementation | WARN if violated, context-dependent |
+| **Documentation** | Updated for public APIs | WARN if missing, context-dependent |
+| **Linting** | No linter errors | BLOCK merge if errors |
+| **Type Checking** | No type errors (for typed languages) | BLOCK merge if errors |
+
+### Branch Protection Rules
+
+| Branch | Protection |
+|--------|------------|
+| `main`, `master` | Direct push BLOCKED |
+| `develop`, `staging` | Direct push BLOCKED |
+| `release/*` | Direct push BLOCKED |
+| `feature/*`, `fix/*` | Direct push ALLOWED |
+
+### Issue Closure Requirements
+
+Before closing an issue, verify:
+- [ ] Merged PR linked to issue
+- [ ] All acceptance criteria checkboxes checked
+- [ ] Evidence of testing provided
+- [ ] TDD compliance verified (or exemption justified)
+- [ ] Documentation updated (if applicable)
+
+---
+
+## 15. Record-Keeping Requirements
+
+### Routing Log
+
+**Location**: `docs_dev/integration/routing-log.md`
+
+**Format**:
+```markdown
+# Integration Routing Log
+
+## [YYYY-MM-DD]
+
+### HH:MM - ROUTE request_type -> sub-agent
+- **Request**: Brief description
+- **Rationale**: Why this sub-agent was chosen
+- **Priority**: critical/high/normal/low
+- **Context**: PR #456, branch feature/add-auth
+- **Status**: DELEGATED
+
+### HH:MM - COMPLETE task-id
+- **Sub-Agent**: eia-code-reviewer
+- **Result**: SUCCESS/FAILURE
+- **Details**: docs_dev/integration/reports/pr-456-report.md
+```
+
+**When to Update**:
+- On request reception: RECEIVE entry
+- On delegation: ROUTE entry
+- On completion: COMPLETE entry
+- On escalation: ESCALATE entry
+
+### Status Files
+
+**Location**: `docs_dev/integration/status/[task-id].md`
+
+**Format**:
+```markdown
+# Integration Status: [Task Name]
+
+**Task ID**: pr-456-review
+**Type**: PR_REVIEW
+**Created**: 2026-02-04 14:32
+**Updated**: 2026-02-04 15:18
+**Status**: COMPLETED
+
+## Request Details
+- **PR Number**: #456
+- **Branch**: feature/add-auth
+- **Requestor**: orchestrator-eoa
+- **Priority**: high
+
+## Routing
+- **Sub-Agent**: eia-code-reviewer
+- **Delegated**: 2026-02-04 14:32
+- **Completed**: 2026-02-04 15:18
+- **Duration**: 46 minutes
+
+## Quality Gates
+- [x] Code Review - PASS
+- [x] Test Coverage - PASS (93%)
+- [x] Security Scan - PASS
+- [x] CI Pipeline - PASS
+
+## Result
+- **Merge Status**: APPROVED
+- **Details**: docs_dev/integration/reports/pr-456-report.md
+- **Next Steps**: Ready to merge, issue #123 can be closed after merge
+```
+
+**When to Update**:
+- On creation: Initial status
+- On delegation: Add routing info
+- On completion: Add result
+- On escalation: Add blocker details
+
+### Quality Reports
+
+**Location**: `docs_dev/integration/reports/[task-id]-report.md`
+
+**Format**:
+```markdown
+# Code Review Report: PR #456
+
+**Reviewer**: eia-code-reviewer
+**Date**: 2026-02-04 15:18
+**PR**: #456 - Add authentication module
+**Branch**: feature/add-auth
+
+## Summary
+[Brief summary of PR]
+
+## Files Reviewed
+- `src/auth.py` (new, 234 lines)
+- `tests/test_auth.py` (new, 156 lines)
+
+## Quality Metrics
+- **Code Quality Score**: 9.2/10
+- **Test Coverage**: 93%
+- **Complexity**: 6.2 (acceptable)
+- **Security Issues**: 0 critical, 0 high, 1 low
+
+## Findings
+
+### Strengths
+- [List strengths]
+
+### Issues
+- [List issues with severity]
+
+### Recommendations
+- [List recommendations]
+
+## Verdict
+**APPROVED** / **CHANGES REQUESTED** / **REJECTED** - [Reason]
+```
+
+**When to Create**:
+- After sub-agent completes task
+- Contains detailed findings and recommendations
+
+---
+
+## 16. Output Format Standards
+
+### Minimal Reports to EOA
+
+**Format**:
+```
+[DONE/FAILED] integrator-main - TASK_TYPE brief_result
+Details: docs_dev/integration/reports/[task-id]-report.md
+Status: docs_dev/integration/status/[task-id].md
+```
+
+### Examples
+
+#### Success - PR Review
+```
+[DONE] integrator-main - PR_REVIEW PR#456 approved for merge
+Details: docs_dev/integration/reports/pr-456-report.md
+Status: docs_dev/integration/status/pr-456-review.md
+Quality Gates: All passed
+```
+
+#### Failure - Security Issue
+```
+[FAILED] integrator-main - PR_REVIEW PR#456 blocked by security gate
+Details: docs_dev/integration/reports/pr-456-report.md
+Status: docs_dev/integration/status/pr-456-review.md
+Blocker: SQL injection vulnerability in auth.py:42 (CRITICAL)
+```
+
+#### Escalation - Policy Unclear
+```
+[BLOCKED] integrator-main - ISSUE_CLOSURE awaiting policy clarification
+Details: docs_dev/integration/reports/issue-123-closure.md
+Status: docs_dev/integration/status/issue-123-closure.md
+Question: Can we close with partial acceptance criteria met?
+```
+
+### Rules
+
+- **Keep output under 5 lines**
+- **NEVER include:**
+  - Full code diffs
+  - Complete PR descriptions
+  - Multi-page reports
+  - Raw CI logs
+- **ALWAYS include:**
+  - Task result (DONE/FAILED/BLOCKED)
+  - Brief outcome
+  - Link to details file
+  - Link to status file
+
+---
+
+## 17. Error Handling and Escalation
+
+### Error Types
+
+| Error Type | Severity | Action |
+|------------|----------|--------|
+| **Quality gate failed** | BLOCKING | Escalate to EOA with rejection reason |
+| **CI failure** | HIGH | Route to bug-investigator, then report |
+| **Security vulnerability** | CRITICAL | BLOCK merge, escalate immediately |
+| **Sub-agent unavailable** | MEDIUM | Wait or route to backup, inform EOA |
+| **GitHub API error** | MEDIUM | Retry 3 times, then escalate |
+| **Policy unclear** | LOW | Escalate to EOA for clarification |
+
+### Escalation Template
+
+```json
+{
+  "type": "blocker-escalation",
+  "task_id": "pr-456-review",
+  "blocker_type": "QUALITY_GATE_FAILED|RESOURCE_CONFLICT|POLICY_UNCLEAR|DEPENDENCY_MISSING",
+  "details": {
+    "description": "Clear description of blocker",
+    "severity": "critical|high|medium|low",
+    "blocking_gate": "security-scan|test-coverage|code-review",
+    "recommendation": "Specific recommendation for resolution"
+  },
+  "requires_decision": true
+}
+```
+
+### Escalation Priorities
+
+| Blocker Type | Priority | Response Expected |
+|--------------|----------|-------------------|
+| Security vulnerability | URGENT | Immediate |
+| Main branch broken | URGENT | Immediate |
+| Quality gate failed | HIGH | < 1 hour |
+| Policy unclear | NORMAL | < 4 hours |
+| Resource conflict | NORMAL | < 4 hours |
+
+---
+
+## 18. Success Criteria Templates
+
+### PR Review Success
+
+```
+✅ PR Review Complete:
+- [ ] All tests pass (CI green)
+- [ ] Test coverage ≥ 90%
+- [ ] Code review approved
+- [ ] Security scan clean
+- [ ] Documentation updated
+- [ ] No linter errors
+- [ ] TDD compliance verified
+```
+
+### CI Fix Success
+
+```
+✅ CI Fix Complete:
+- [ ] Root cause identified
+- [ ] Fix applied and committed
+- [ ] CI pipeline green
+- [ ] Tests passing
+- [ ] No new issues introduced
+- [ ] Prevention measure added (if applicable)
+```
+
+### Issue Closure Verification Success
+
+```
+✅ Issue Closure Verified:
+- [ ] All acceptance criteria met
+- [ ] Merged PR linked to issue
+- [ ] Tests cover requirements
+- [ ] TDD compliance verified
+- [ ] Documentation updated
+- [ ] No open blockers
+```
+
+### Release Preparation Success
+
+```
+✅ Release Preparation Complete:
+- [ ] Version bumped
+- [ ] Changelog updated
+- [ ] Release notes drafted
+- [ ] All tests passing
+- [ ] No security vulnerabilities
+- [ ] Release tag created
+```
+
+---
+
+## Document Status
+
+**This document is the SINGLE SOURCE OF TRUTH for EIA operations.**
+
+Any changes to EIA operations **MUST** be reflected in this document first.
+
+**Version**: 1.0.0
+**Last Updated**: 2026-02-04
+**Maintained By**: ECOS Plugin Development Team
+**Review Cycle**: Monthly or on major system changes
+
+---
+
+**END OF DOCUMENT**

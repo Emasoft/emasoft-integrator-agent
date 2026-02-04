@@ -2,6 +2,18 @@
 
 This document serves as an index to the worktree operations reference, which has been split into 7 parts for easier navigation and consumption.
 
+## Table of Contents
+
+- [Quick Reference: Which Part to Read](#quick-reference-which-part-to-read)
+- [Part 1: Listing and Switching Worktrees](#part-1-listing-and-switching-worktrees)
+- [Part 2: Updating Worktrees](#part-2-updating-worktrees)
+- [Part 3: Locking and Moving Worktrees](#part-3-locking-and-moving-worktrees)
+- [Part 4: Checking Worktree Status](#part-4-checking-worktree-status)
+- [Part 5: Syncing with Main Branch](#part-5-syncing-with-main-branch)
+- [Part 6: Best Practices](#part-6-best-practices)
+- [Part 7: Troubleshooting](#part-7-troubleshooting)
+- [Essential Commands Quick Reference](#essential-commands-quick-reference)
+
 ---
 
 ## Quick Reference: Which Part to Read

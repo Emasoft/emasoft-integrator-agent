@@ -4,6 +4,15 @@ This document covers:
 - Error recovery when isolation is violated
 - Summary of parallel PR workflow requirements
 
+## Table of Contents
+
+- [2.7 Error Recovery When Isolation is Violated](#27-error-recovery-when-isolation-is-violated)
+  - [Detecting Violations](#detecting-violations)
+  - [Recovery Procedure for Main Repo Contamination](#recovery-procedure-for-main-repo-contamination)
+  - [Recovery Procedure for Cross-Worktree Contamination](#recovery-procedure-for-cross-worktree-contamination)
+  - [Preventing Future Violations](#preventing-future-violations)
+- [Summary](#summary)
+
 ---
 
 ## 2.7 Error Recovery When Isolation is Violated

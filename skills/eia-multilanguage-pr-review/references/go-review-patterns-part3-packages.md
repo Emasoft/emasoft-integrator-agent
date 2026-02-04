@@ -1,5 +1,14 @@
 # Go Package Organization and Naming Reference
 
+## Table of Contents
+
+- [5.3 Package Organization and Naming](#53-package-organization-and-naming)
+  - [Package Structure](#package-structure)
+  - [Package Naming Rules](#package-naming-rules)
+  - [Import Organization](#import-organization)
+  - [Avoiding Circular Dependencies](#avoiding-circular-dependencies)
+  - [Package Organization Checklist](#package-organization-checklist)
+
 ## 5.3 Package Organization and Naming
 
 Go packages should be small, focused, and well-organized.

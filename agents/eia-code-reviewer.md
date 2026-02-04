@@ -1,14 +1,14 @@
 ---
 name: eia-code-reviewer
 model: opus
-description: Reviews code changes for quality, security, and best practices
+description: Reviews code changes for quality, security, and best practices. Requires AI Maestro installed.
 type: evaluator
 triggers:
   - code changes need review
   - PR quality assessment required
   - orchestrator assigns code review task
 auto_skills:
-  - session-memory
+  - eia-session-memory
   - eia-code-review-patterns
   - eia-tdd-enforcement
 memory_requirements: medium

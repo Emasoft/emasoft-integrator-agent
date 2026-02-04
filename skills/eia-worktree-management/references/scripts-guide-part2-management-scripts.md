@@ -9,6 +9,27 @@
 
 ---
 
+## Table of Contents
+
+- [Script Reference: Management Scripts](#script-reference-management-scripts)
+  - [worktree_remove.py](#worktree_removepy)
+    - [Purpose](#purpose)
+    - [Usage Syntax](#usage-syntax)
+    - [Required Arguments](#required-arguments)
+    - [Optional Arguments](#optional-arguments)
+    - [Examples with Explanations](#examples-with-explanations)
+    - [Safety Checks Performed (unless --force)](#safety-checks-performed-unless---force)
+    - [Exit Codes](#exit-codes)
+  - [registry_validate.py](#registry_validatepy)
+    - [Purpose](#purpose-1)
+    - [Usage Syntax](#usage-syntax-1)
+    - [Optional Arguments](#optional-arguments-1)
+    - [Examples with Explanations](#examples-with-explanations-1)
+    - [Validation Checks Performed](#validation-checks-performed)
+    - [Exit Codes](#exit-codes-1)
+
+---
+
 ## Script Reference: Management Scripts
 
 This section covers scripts for worktree lifecycle management:

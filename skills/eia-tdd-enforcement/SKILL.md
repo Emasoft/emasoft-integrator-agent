@@ -1,13 +1,8 @@
 ---
 name: eia-tdd-enforcement
-description: >
-  Use when enforcing TDD discipline on development workflows. Enforces Test-Driven
-  Development (TDD) discipline through the RED-GREEN-REFACTOR cycle. Implements the
-  Iron Law - no production code can be written without a failing test that justifies
-  its existence. The orchestrator ENFORCES TDD discipline on remote agents but NEVER
-  writes tests or code itself.
+description: "Use when enforcing TDD via RED-GREEN-REFACTOR. No production code without a failing test first. Trigger with /enforce-tdd."
 license: Apache-2.0
-compatibility: Requires understanding of TDD principles, RED-GREEN-REFACTOR cycle, test frameworks, and version control. Works with any programming language that supports automated testing.
+compatibility: Requires understanding of TDD principles, RED-GREEN-REFACTOR cycle, test frameworks, and version control. Works with any programming language that supports automated testing. Requires AI Maestro installed.
 metadata:
   author: Anthropic
   version: 2.0.0
@@ -30,7 +25,25 @@ This skill enforces Test-Driven Development (TDD) discipline through the RED-GRE
 
 ## Instructions
 
-Follow the TDD cycle strictly: RED (write failing test) → GREEN (make it pass) → REFACTOR (improve code). Never write production code without a failing test first.
+1. **Write a failing test (RED)** - Create a test that documents the intended behavior. Run it to confirm it fails.
+2. **Make the test pass (GREEN)** - Write the minimum code needed to make the test pass. Run all tests to confirm.
+3. **Refactor the code (REFACTOR)** - Improve code quality while keeping all tests passing. Run tests after each refactoring step.
+4. **Commit after each phase** - Use git commits with RED:/GREEN:/REFACTOR: prefixes to track progress.
+5. **Return to RED for next feature** - After completing one cycle, start the next feature with a new failing test.
+
+**Critical Rule**: Never write production code without a failing test first.
+
+## Output
+
+| Output Type | Description |
+|-------------|-------------|
+| TDD Status Report | Current phase status (`pending`, `RED`, `GREEN`, `refactor`) for each feature being developed |
+| Git Commit Messages | Structured commits following pattern: `RED: test for [feature]`, `GREEN: implement [feature]`, `REFACTOR: improve [aspect]` |
+| Test Execution Results | Pass/fail status of test suites after each phase transition |
+| Enforcement Decisions | Allow/deny decisions for code changes based on TDD compliance (tests must exist before code) |
+| Phase Transition Validation | Verification reports confirming proper RED→GREEN→REFACTOR cycle progression |
+| Violation Reports | Documentation of TDD discipline violations with recovery procedures |
+| Progress Tracking Updates | Multi-feature TDD cycle tracking with phase completion status |
 
 ### The Orchestrator's Role
 
@@ -138,6 +151,8 @@ This SKILL.md is a **map** to detailed reference documents. Each section below s
 ## Quick Reference
 
 ### Essential Checklist
+
+Copy this checklist and track your progress:
 
 **Before Writing ANY Production Code:**
 - [ ] A failing test exists for this specific behavior

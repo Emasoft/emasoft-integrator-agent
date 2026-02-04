@@ -2,6 +2,18 @@
 
 Template for documenting test execution results and analysis.
 
+## Table of Contents
+
+- [Template](#template)
+  - [Test Results](#test-results)
+  - [Failed Tests](#failed-tests)
+  - [Skipped Tests](#skipped-tests)
+  - [Slow Tests](#slow-tests)
+  - [Coverage Impact](#coverage-impact)
+  - [Next Actions](#next-actions)
+- [Test Status Icons](#test-status-icons)
+- [Result Summary Types](#result-summary-types)
+
 ---
 
 ## Template

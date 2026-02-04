@@ -2,6 +2,24 @@
 
 This document covers code style conventions, TypeScript type safety, and module systems.
 
+## Table of Contents
+
+- [3.1 JavaScript/TypeScript Code Style Checklist](#31-javascripttypescript-code-style-checklist)
+  - [Essential Style Rules](#essential-style-rules)
+  - [Modern JavaScript Features to Use](#modern-javascript-features-to-use)
+  - [Formatting Checklist](#formatting-checklist)
+- [3.2 Type Safety Patterns in TypeScript](#32-type-safety-patterns-in-typescript)
+  - [Essential Type Patterns](#essential-type-patterns)
+  - [Strict Mode Configuration](#strict-mode-configuration)
+  - [Type Safety Checklist](#type-safety-checklist)
+  - [Common TypeScript Errors and Fixes](#common-typescript-errors-and-fixes)
+- [3.3 Module System Considerations (ESM vs CommonJS)](#33-module-system-considerations-esm-vs-commonjs)
+  - [ES Modules (ESM) - Modern Standard](#es-modules-esm---modern-standard)
+  - [CommonJS (CJS) - Node.js Legacy](#commonjs-cjs---nodejs-legacy)
+  - [Choosing Module System](#choosing-module-system)
+  - [Package.json Configuration](#packagejson-configuration)
+  - [Module System Checklist](#module-system-checklist)
+
 ---
 
 ## 3.1 JavaScript/TypeScript Code Style Checklist

@@ -84,16 +84,16 @@ Estimate relative size of work.
 | `effort:l` | `#D93F0B` (orange) | Large task | 1-3 days |
 | `effort:xl` | `#B60205` (dark red) | Epic sized | > 3 days |
 
-### Agent Assignment Labels
+### Assignment Labels
 
 Track which agent is working on the issue.
 
 | Label | Color | Description |
 |-------|-------|-------------|
-| `agent:dev-1` | `#1D76DB` (blue) | Assigned to dev-agent-1 |
-| `agent:dev-2` | `#5319E7` (violet) | Assigned to dev-agent-2 |
-| `agent:human` | `#0E8A16` (green) | Assigned to human developer |
-| `agent:orchestrator` | `#D876E3` (pink) | Orchestrator handling |
+| `assign:dev-1` | `#1D76DB` (blue) | Assigned to dev-agent-1 |
+| `assign:dev-2` | `#5319E7` (violet) | Assigned to dev-agent-2 |
+| `assign:human` | `#0E8A16` (green) | Assigned to human developer |
+| `assign:orchestrator` | `#D876E3` (pink) | Orchestrator handling |
 
 ### Review Labels
 
@@ -293,10 +293,10 @@ gh issue list --label "priority:critical" --label "priority:high" --state open
 gh issue list --label "status:blocked" --state open
 ```
 
-### Find Items by Agent
+### Find Items by Assignment
 
 ```bash
-gh issue list --label "agent:dev-1" --state open
+gh issue list --label "assign:dev-1" --state open
 ```
 
 ### Find Ready to Work
