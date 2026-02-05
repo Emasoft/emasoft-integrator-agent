@@ -101,26 +101,26 @@ Generated Docker:   <worktree>/docker-compose.yml
 
 ```bash
 # Allocate ports for new worktree
-atlas worktree create <name>  # Auto-allocates
+eia worktree create <name>  # Auto-allocates
 
 # List all ports
-atlas port list
+eia port list
 
 # Check specific port
-atlas port check <port>
+eia port check <port>
 
 # Show ports for worktree
-atlas port show <worktree>
+eia port show <worktree>
 
 # Release ports
-atlas port release <worktree>
+eia port release <worktree>
 
 # Clean up stale allocations
-atlas port cleanup
+eia port cleanup
 
 # Rebuild registry
-atlas port scan-rebuild
+eia port scan-rebuild
 
 # Check port conflicts
-atlas port check-conflicts
+eia port check-conflicts
 ```

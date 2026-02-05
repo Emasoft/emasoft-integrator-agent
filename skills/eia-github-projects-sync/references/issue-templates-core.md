@@ -12,7 +12,7 @@
 
 ## Overview
 
-This document provides core issue templates for the ATLAS-ORCHESTRATOR system. All templates are designed to provide maximum context for remote developer agents.
+This document provides core issue templates for the EOA (Emasoft Orchestrator Agent) system. All templates are designed to provide maximum context for remote developer agents.
 
 ## Directory Structure
 

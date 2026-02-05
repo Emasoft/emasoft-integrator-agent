@@ -22,7 +22,7 @@ Ports should be released when:
 
 **Integrated cleanup:**
 ```bash
-atlas worktree remove feature-old
+eia worktree remove feature-old
 ```
 
 **This automatically:**
@@ -70,7 +70,7 @@ def remove_worktree_with_cleanup(worktree_name):
 #### Clean Up Stale Allocations
 
 ```bash
-atlas port cleanup
+eia port cleanup
 
 # This will:
 # 1. List all worktrees in registry
@@ -97,7 +97,7 @@ Cleanup complete: 8 ports released
 #### Force Release All Ports
 
 ```bash
-atlas port release-all --force
+eia port release-all --force
 
 # WARNING: This releases ALL ports
 # Use only when starting fresh
@@ -106,7 +106,7 @@ atlas port release-all --force
 #### Reset Port Registry
 
 ```bash
-atlas port reset
+eia port reset
 
 # This will:
 # 1. Scan all existing worktrees
@@ -121,8 +121,8 @@ When deleting the entire project:
 ```bash
 # Clean up everything
 cd ~/projects/myapp
-atlas port release-all
-atlas worktree remove-all
+eia port release-all
+eia worktree remove-all
 cd ..
 rm -rf myapp
 
@@ -137,17 +137,17 @@ rm -rf myapp
 
 **Symptom:**
 ```bash
-$ atlas worktree create feature-new
+$ eia worktree create feature-new
 ERROR: Failed to allocate ports
 ```
 
 **Diagnosis:**
 ```bash
 # Check port range capacity
-atlas port status
+eia port status
 
 # Check for conflicts
-atlas port check-conflicts
+eia port check-conflicts
 ```
 
 **Solution:**
@@ -169,7 +169,7 @@ ERROR: Port 8082 already in use
 lsof -i :8082
 
 # Is it allocated correctly?
-atlas port show feature-payment
+eia port show feature-payment
 ```
 
 **Solution:**
@@ -178,10 +178,10 @@ atlas port show feature-payment
 kill <PID>
 
 # If registry is wrong:
-atlas port scan-rebuild
+eia port scan-rebuild
 
 # If port is wrong in config:
-atlas worktree regenerate-config feature-payment
+eia worktree regenerate-config feature-payment
 ```
 
 ### Problem: Docker Containers Conflict
@@ -198,7 +198,7 @@ ERROR: Bind for 0.0.0.0:8082 failed: port is already allocated
 docker ps | grep 8082
 
 # Check port allocation
-atlas port list
+eia port list
 ```
 
 **Solution:**
@@ -207,14 +207,14 @@ atlas port list
 docker stop <container_id>
 
 # Or regenerate docker-compose.yml
-atlas docker regenerate feature-payment
+eia docker regenerate feature-payment
 ```
 
 ### Problem: Registry Corruption
 
 **Symptom:**
 ```bash
-$ atlas port list
+$ eia port list
 ERROR: Invalid registry format
 ```
 
@@ -233,7 +233,7 @@ python -m json.tool .git/worktree-registry/ports.json
 cp .git/worktree-registry/ports.json .git/worktree-registry/ports.json.backup
 
 # Rebuild from scratch
-atlas port reset
+eia port reset
 
 # Or restore from backup
 cp .git/worktree-registry/ports.json.backup .git/worktree-registry/ports.json
@@ -243,7 +243,7 @@ cp .git/worktree-registry/ports.json.backup .git/worktree-registry/ports.json
 
 **Symptom:**
 ```bash
-$ atlas port list
+$ eia port list
 # Shows ports for deleted worktree
 ```
 
@@ -258,40 +258,40 @@ git worktree list | grep feature-old
 **Solution:**
 ```bash
 # Release manually
-atlas port release feature-old
+eia port release feature-old
 
 # Or run cleanup
-atlas port cleanup
+eia port cleanup
 ```
 
 ### Problem: Cannot Expand Port Range
 
 **Symptom:**
 ```bash
-$ atlas port config --web-range 8080-8199
+$ eia port config --web-range 8080-8199
 ERROR: Range conflicts with existing allocations
 ```
 
 **Diagnosis:**
 ```bash
 # Check current allocations
-atlas port list --service web
+eia port list --service web
 ```
 
 **Solution:**
 ```bash
 # Compact existing allocations first
-atlas port compact
+eia port compact
 
 # Then expand range
-atlas port config --web-range 8080-8199
+eia port config --web-range 8080-8199
 ```
 
 ### Problem: Port Check Shows Wrong Status
 
 **Symptom:**
 ```bash
-$ atlas port check 8082
+$ eia port check 8082
 Status: AVAILABLE
 # But it's actually in use!
 ```
@@ -306,7 +306,7 @@ netstat -an | grep 8082
 **Solution:**
 ```bash
 # Rebuild registry from actual port usage
-atlas port scan-rebuild
+eia port scan-rebuild
 
 # This will update registry to match reality
 ```
@@ -319,28 +319,28 @@ atlas port scan-rebuild
 
 ```bash
 # Allocate ports for new worktree
-atlas worktree create <name>  # Auto-allocates
+eia worktree create <name>  # Auto-allocates
 
 # List all ports
-atlas port list
+eia port list
 
 # Check specific port
-atlas port check <port>
+eia port check <port>
 
 # Show ports for worktree
-atlas port show <worktree>
+eia port show <worktree>
 
 # Release ports
-atlas port release <worktree>
+eia port release <worktree>
 
 # Clean up stale allocations
-atlas port cleanup
+eia port cleanup
 
 # Rebuild registry
-atlas port scan-rebuild
+eia port scan-rebuild
 
 # Check port conflicts
-atlas port check-conflicts
+eia port check-conflicts
 ```
 
 ### Port Ranges Reference

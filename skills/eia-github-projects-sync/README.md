@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Manages team tasks through GitHub Projects V2, enabling ATLAS-ORCHESTRATOR to track features, bugs, PRs, and issues with automatic CI integration and project synchronization.
+Manages team tasks through GitHub Projects V2, enabling EOA (Emasoft Orchestrator Agent) to track features, bugs, PRs, and issues with automatic CI integration and project synchronization.
 
 ## When to Use
 

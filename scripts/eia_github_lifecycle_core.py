@@ -243,7 +243,7 @@ def parse_design_document(file_path: Path) -> Optional[DesignDocument]:
 def sanitize_content(content: str) -> str:
     """Remove INTERNAL and SENSITIVE markers from content.
 
-    Follows Atlas IRON RULE for document sanitization.
+    Follows EOA IRON RULE for document sanitization.
     """
     # Remove <!-- INTERNAL --> ... <!-- /INTERNAL --> blocks
     content = re.sub(

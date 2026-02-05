@@ -32,10 +32,10 @@ netstat -an | grep 8080
 kill <PID>
 
 # Option 2: Skip the port in registry
-atlas port mark-unavailable 8080 "Used by system service"
+eia port mark-unavailable 8080 "Used by system service"
 
 # Option 3: Change port ranges
-atlas port config --web-range 8100-8199
+eia port config --web-range 8100-8199
 ```
 
 #### 2. Registry Out of Sync
@@ -45,7 +45,7 @@ Registry says port is free, but it's actually in use.
 
 **Symptoms:**
 ```bash
-$ atlas worktree create feature-new
+$ eia worktree create feature-new
 Allocated port 8081
 ERROR: Port 8081 already in use
 ```
@@ -53,7 +53,7 @@ ERROR: Port 8081 already in use
 **Solution:**
 ```bash
 # Scan all ports and rebuild registry
-atlas port scan-rebuild
+eia port scan-rebuild
 
 # This will:
 # 1. Check which ports are actually listening
@@ -71,35 +71,35 @@ ERROR: No available ports in web range (8080-8099)
 **Solution:**
 ```bash
 # Option 1: Expand the range
-atlas port config --web-range 8080-8199
+eia port config --web-range 8080-8199
 
 # Option 2: Remove unused worktrees
-atlas worktree list --unused
-atlas worktree remove old-feature-1
+eia worktree list --unused
+eia worktree remove old-feature-1
 
 # Option 3: Compact port assignments
-atlas port compact
+eia port compact
 # This reassigns ports to fill gaps
 ```
 
 #### 4. Stale Port Allocations
 
 **Problem:**
-Worktree was deleted manually (not via atlas), ports still marked as used.
+Worktree was deleted manually (not via eia), ports still marked as used.
 
 **Solution:**
 ```bash
 # List all allocated ports
-atlas port list
+eia port list
 
 # Check if worktree still exists
-atlas worktree list
+eia worktree list
 
 # Release ports for non-existent worktree
-atlas port release deleted-worktree-name
+eia port release deleted-worktree-name
 
 # Or run cleanup to auto-detect
-atlas port cleanup
+eia port cleanup
 ```
 
 ### Automatic Conflict Resolution

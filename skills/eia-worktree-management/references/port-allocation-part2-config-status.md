@@ -138,7 +138,7 @@ app.run(host='localhost', port=web_port)
 
 **Command:**
 ```bash
-atlas port list
+eia port list
 ```
 
 **Output:**
@@ -175,12 +175,12 @@ Debug: 3/10 ports used (30%)
 
 **Command:**
 ```bash
-atlas port check <port_number>
+eia port check <port_number>
 ```
 
 **Example:**
 ```bash
-$ atlas port check 8083
+$ eia port check 8083
 
 Port 8083 Status
 ═════════════════════════════════════════════════════════
@@ -191,7 +191,7 @@ Next in use: 8082 (feature-payment)
 
 **Example (port in use):**
 ```bash
-$ atlas port check 8081
+$ eia port check 8081
 
 Port 8081 Status
 ═════════════════════════════════════════════════════════
@@ -205,12 +205,12 @@ Started:     2024-01-15 14:30:22
 
 **Command:**
 ```bash
-atlas port show <worktree_name>
+eia port show <worktree_name>
 ```
 
 **Example:**
 ```bash
-$ atlas port show feature-login
+$ eia port show feature-login
 
 Ports for Worktree: feature-login
 ═════════════════════════════════════════════════════════
@@ -227,12 +227,12 @@ To start all services:
 
 **Command:**
 ```bash
-atlas port release <worktree_name>
+eia port release <worktree_name>
 ```
 
 **Example:**
 ```bash
-$ atlas port release feature-login
+$ eia port release feature-login
 
 Releasing ports for: feature-login
 ═════════════════════════════════════════════════════════

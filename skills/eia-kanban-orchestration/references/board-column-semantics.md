@@ -16,7 +16,7 @@
 
 ## 2.1 Overview
 
-The Atlas orchestration workflow uses exactly 6 columns. Each column has a precise meaning, requirements, and rules about who can move items into it.
+The EOA orchestration workflow uses exactly 6 columns. Each column has a precise meaning, requirements, and rules about who can move items into it.
 
 ```
 ┌──────────┬──────────┬────────────┬───────────┬──────────┬──────────┐

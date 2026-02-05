@@ -44,7 +44,7 @@ design/worktrees/registry.json
 ```
 
 **Path explanation:**
-- `design/` - Hidden directory containing Atlas orchestrator metadata
+- `design/` - Hidden directory containing EOA orchestrator metadata
 - `worktrees/` - Subdirectory dedicated to worktree management
 - `registry.json` - JSON file containing all worktree records
 

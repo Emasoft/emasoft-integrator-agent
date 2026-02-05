@@ -3,7 +3,7 @@
 kanban_check_completion.py
 
 Check if all Kanban board items are complete (for stop hook integration).
-Part of github-kanban-core skill for Atlas orchestrator.
+Part of github-kanban-core skill for EOA orchestrator.
 
 Usage:
     python3 kanban_check_completion.py OWNER REPO PROJECT_NUMBER [--verbose] [--json]

@@ -251,6 +251,33 @@ See [references/troubleshooting.md](references/troubleshooting.md) for solutions
 
 ---
 
+## Design Document Scripts
+
+These scripts manage design documents for quality gate integration:
+
+| Script | Purpose | Usage |
+|--------|---------|-------|
+| `eia_design_create.py` | Create new design documents with proper GUUID | `python scripts/eia_design_create.py --type <TYPE> --title "<TITLE>"` |
+| `eia_design_search.py` | Search design documents by UUID, type, or status | `python scripts/eia_design_search.py --type <TYPE> --status <STATUS>` |
+| `eia_design_validate.py` | Validate design document frontmatter compliance | `python scripts/eia_design_validate.py --all` |
+
+### PR Gate Scripts
+
+These scripts enforce quality gates on pull requests:
+
+| Script | Purpose | Usage |
+|--------|---------|-------|
+| `eia_github_pr_gate.py` | Run pre-merge quality checks on PRs | `python scripts/eia_github_pr_gate.py --pr <NUMBER>` |
+| `eia_github_pr_gate_checks.py` | Individual check implementations for PR gates | (Internal, called by eia_github_pr_gate.py) |
+| `eia_github_report.py` | Generate comprehensive GitHub project reports | `python scripts/eia_github_report.py --owner <OWNER> --repo <REPO> --project <NUM>` |
+| `eia_github_report_formatters.py` | Format reports in markdown/JSON | (Internal, used by eia_github_report.py) |
+
+### Script Locations
+
+All scripts are located at `../../scripts/` relative to this skill.
+
+---
+
 ## Resources
 
 ### Gate Details

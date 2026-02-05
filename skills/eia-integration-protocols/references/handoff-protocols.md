@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document defines the standard protocols for handing off tasks, documents, and communications between the orchestrator and remote agents in the ATLAS ecosystem.
+This document defines the standard protocols for handing off tasks, documents, and communications between the orchestrator and remote agents in the EOA ecosystem.
 
 ---
 

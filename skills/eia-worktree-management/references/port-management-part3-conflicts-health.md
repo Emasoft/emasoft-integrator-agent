@@ -371,10 +371,10 @@ crontab -e
 
 **Example systemd timer:**
 
-Create `/etc/systemd/system/atlas-health-check.service`:
+Create `/etc/systemd/system/eia-health-check.service`:
 ```ini
 [Unit]
-Description=Atlas Port Health Check
+Description=EIA Port Health Check
 
 [Service]
 Type=oneshot
@@ -382,10 +382,10 @@ WorkingDirectory=/path/to/repo
 ExecStart=/usr/bin/python3 scripts/port_status.py --health-check
 ```
 
-Create `/etc/systemd/system/atlas-health-check.timer`:
+Create `/etc/systemd/system/eia-health-check.timer`:
 ```ini
 [Unit]
-Description=Run Atlas Port Health Check every 15 minutes
+Description=Run EIA Port Health Check every 15 minutes
 
 [Timer]
 OnBootSec=5min
@@ -397,8 +397,8 @@ WantedBy=timers.target
 
 Enable the timer:
 ```bash
-sudo systemctl enable atlas-health-check.timer
-sudo systemctl start atlas-health-check.timer
+sudo systemctl enable eia-health-check.timer
+sudo systemctl start eia-health-check.timer
 ```
 
 ---

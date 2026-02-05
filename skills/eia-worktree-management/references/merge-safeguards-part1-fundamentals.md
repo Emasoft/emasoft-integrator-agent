@@ -85,7 +85,7 @@ Reverse order: B → A
 Before opening a PR, verify the worktree can merge cleanly:
 
 ```bash
-cd /atlas-root
+cd /project-root
 python skills/eia-worktree-management/scripts/merge_safeguard.py \
     --check worktrees/feature-api-v2
 

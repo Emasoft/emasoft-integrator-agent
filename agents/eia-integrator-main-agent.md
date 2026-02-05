@@ -6,6 +6,8 @@ skills:
   - eia-code-review-patterns
   - eia-quality-gates
   - eia-release-management
+  - eia-github-integration
+  - eia-session-memory
   - eia-label-taxonomy
 ---
 

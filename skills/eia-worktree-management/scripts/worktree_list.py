@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-worktree_list.py - List worktrees from Atlas registry
+worktree_list.py - List worktrees from EIA registry
 
-Lists all worktrees registered in the Atlas worktree registry with filtering,
+Lists all worktrees registered in the EIA worktree registry with filtering,
 validation, and formatting options.
 
 Usage:
@@ -329,7 +329,7 @@ def print_validation_summary(validation: dict[str, list[str]]) -> None:
 def main() -> None:
     """Main entry point for worktree_list.py."""
     parser = argparse.ArgumentParser(
-        description="List worktrees from Atlas registry",
+        description="List worktrees from EIA registry",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:

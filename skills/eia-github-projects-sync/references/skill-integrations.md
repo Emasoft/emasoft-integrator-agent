@@ -2,7 +2,7 @@
 
 ## Table of Contents
 
-1. [When integrating GitHub Projects with other ATLAS skills](#overview)
+1. [When integrating GitHub Projects with other EOA skills](#overview)
 2. [When coordinating with Remote Agent Coordinator](#remote-agent-coordinator)
 3. [When working with Code Reviewer skill](#code-reviewer)
 4. [When generating reports](#report-generator)
@@ -11,7 +11,7 @@
 
 ## Overview
 
-GitHub Projects Sync integrates with other ATLAS-ORCHESTRATOR skills to provide a complete task management workflow. This document describes the integration points and protocols.
+GitHub Projects Sync integrates with other EOA (Emasoft Orchestrator Agent) skills to provide a complete task management workflow. This document describes the integration points and protocols.
 
 **Key Integrations:**
 - Remote Agent Coordinator: Task assignment and tracking

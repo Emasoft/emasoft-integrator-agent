@@ -97,7 +97,7 @@ class RegistryValidator:
         self.warnings: list[ValidationError] = []
         self.fixes_applied: list[str] = []
 
-        # Get repository root (parent of .atlas)
+        # Get repository root (parent of design)
         self.repo_root = self.registry_path.parent.parent
 
     def log(self, message: str, level: str = "info") -> None:

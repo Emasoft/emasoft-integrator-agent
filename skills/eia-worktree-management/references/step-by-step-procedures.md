@@ -33,7 +33,7 @@ git log --oneline -1
 
 ### Step 1.2: Verify Registry Directory
 
-Ensure the Atlas configuration directory is accessible:
+Ensure the EIA configuration directory is accessible:
 
 ```bash
 # Check if directory exists

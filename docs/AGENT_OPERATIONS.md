@@ -221,7 +221,6 @@ Read the skill at: ${CLAUDE_PLUGIN_ROOT}/skills/eia-code-review-patterns/SKILL.m
 | **emasoft-orchestrator-agent** | EOA's plugin - task assignment, kanban management |
 | **emasoft-architect-agent** | EAA's plugin - architecture, design decisions |
 | **emasoft-assistant-manager-agent** | EAMA's plugin - user communication, project creation |
-| **atlas-orchestrator** | Generic orchestrator - EIA is specialized, not generic |
 
 ### Skills NOT Available to EIA
 

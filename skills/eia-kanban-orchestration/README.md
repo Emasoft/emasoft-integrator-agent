@@ -1,10 +1,10 @@
 # GitHub Kanban Core
 
-**THE SINGLE SOURCE OF TRUTH for Atlas orchestration.**
+**THE SINGLE SOURCE OF TRUTH for EOA orchestration.**
 
 ## Overview
 
-This skill establishes GitHub Projects V2 Kanban as the absolute center of Atlas orchestration. All planning, tracking, assignment, and completion verification flows through the Kanban board.
+This skill establishes GitHub Projects V2 Kanban as the absolute center of EOA orchestration. All planning, tracking, assignment, and completion verification flows through the Kanban board.
 
 **The Iron Rule:** If it's not on the board, it doesn't exist. If the board says "In Progress", it IS in progress.
 

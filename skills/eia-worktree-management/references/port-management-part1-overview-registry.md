@@ -38,7 +38,7 @@ When working with multiple worktrees, each worktree may run the same services (w
 - Services would fail to start with "port already in use" errors
 - You would need to manually track which port each worktree is using
 
-The Atlas port management system solves this by:
+The EIA port management system solves this by:
 - Automatically allocating unique ports to each worktree
 - Tracking all port assignments in a central registry
 - Detecting and preventing conflicts before they occur
@@ -46,7 +46,7 @@ The Atlas port management system solves this by:
 
 ### Port Range Organization
 
-Atlas organizes ports into **service-specific ranges**:
+EIA organizes ports into **service-specific ranges**:
 
 | Service Type | Start Port | End Port | Purpose |
 |--------------|-----------|----------|---------|

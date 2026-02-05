@@ -3,7 +3,7 @@
 kanban_get_board_state.py
 
 Get complete Kanban board state with all items grouped by status column.
-Part of github-kanban-core skill for Atlas orchestrator.
+Part of github-kanban-core skill for EOA orchestrator.
 
 Usage:
     python3 kanban_get_board_state.py OWNER REPO PROJECT_NUMBER [--json] [--summary]

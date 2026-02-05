@@ -27,7 +27,7 @@ If it's not on the board, it doesn't exist. If the board says "In Progress", it 
 
 ## Overview
 
-This skill establishes GitHub Projects V2 as the absolute center of Atlas orchestration workflow. All planning, tracking, assignment, and completion verification flows through the Kanban board.
+This skill establishes GitHub Projects V2 as the absolute center of EOA orchestration workflow. All planning, tracking, assignment, and completion verification flows through the Kanban board.
 
 ## Prerequisites
 

@@ -213,10 +213,10 @@ Read this when breaking down large features into smaller tasks.
 
 ### Skill Integrations ([references/skill-integrations.md](references/skill-integrations.md))
 
-Read this when coordinating GitHub Projects with other ATLAS skills.
+Read this when coordinating GitHub Projects with other EOA skills.
 
 **Contents:**
-- 7.1 When integrating GitHub Projects with other ATLAS skills
+- 7.1 When integrating GitHub Projects with other EOA skills
 - 7.2 When coordinating with Remote Agent Coordinator
 - 7.3 When working with Code Reviewer skill
 - 7.4 When generating reports
@@ -366,7 +366,7 @@ github-projects-sync/
 │   ├── label-taxonomy.md             # Label system
 │   ├── issue-templates.md            # Issue/PR templates
 │   ├── sub-issue-tracking.md         # Epic/sub-issue management
-│   ├── skill-integrations.md         # ATLAS skill integration
+│   ├── skill-integrations.md         # EOA skill integration
 │   ├── ci-notification-setup.md      # Webhook configuration
 │   ├── error-handling.md             # Error handling patterns
 │   ├── best-practices.md             # Best practices guide

@@ -194,7 +194,7 @@ def detect_stale_entries(registry):
 
 **Automatic cleanup runs:**
 - On every worktree create/remove operation (cleanup others)
-- On demand via `atlas cleanup-worktrees` command
+- On demand via `eia cleanup-worktrees` command
 - Daily via cron/scheduled task (optional)
 
 **Cleanup steps:**
@@ -218,7 +218,7 @@ Stale worktree cleanup:
 Users can force cleanup of specific entries:
 
 ```bash
-atlas remove-worktree review-GH-42 --force
+eia remove-worktree review-GH-42 --force
 ```
 
 This bypasses the 7-day pending-removal period and removes immediately.
@@ -235,7 +235,7 @@ This bypasses the 7-day pending-removal period and removes immediately.
 1. Restore from backup: `design/worktrees/registry.json.backup`
 2. If no backup, rebuild registry:
    ```bash
-   atlas rebuild-registry --scan-worktrees
+   eia rebuild-registry --scan-worktrees
    ```
    This scans filesystem and rebuilds registry from actual worktrees
 
@@ -248,7 +248,7 @@ This bypasses the 7-day pending-removal period and removes immediately.
 2. If port used by non-worktree process, update port ranges to exclude it
 3. If port used by unregistered worktree, register it:
    ```bash
-   atlas register-existing ../path/to/worktree
+   eia register-existing ../path/to/worktree
    ```
 
 ### Duplicate IDs After Manual Edit
@@ -259,15 +259,15 @@ This bypasses the 7-day pending-removal period and removes immediately.
 1. Open `design/worktrees/registry.json` in editor
 2. Find duplicate `id` values
 3. Rename one of them to make unique (follow naming convention)
-4. Validate: `atlas validate-registry`
+4. Validate: `eia validate-registry`
 
 ### Worktree Exists but Not in Registry
 
-**Symptom:** Git worktree shows in `git worktree list` but not in Atlas registry
+**Symptom:** Git worktree shows in `git worktree list` but not in EIA registry
 
 **Solution:**
 ```bash
-atlas register-existing ../path/to/worktree --purpose review --issue GH-42
+eia register-existing ../path/to/worktree --purpose review --issue GH-42
 ```
 
 This adds existing worktree to registry without recreating it.

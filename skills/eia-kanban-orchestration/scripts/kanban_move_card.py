@@ -3,7 +3,7 @@
 kanban_move_card.py
 
 Move a Kanban card to a different status column with validation.
-Part of github-kanban-core skill for Atlas orchestrator.
+Part of github-kanban-core skill for EOA orchestrator.
 
 Usage:
     python3 kanban_move_card.py OWNER REPO PROJECT_NUMBER ISSUE_NUMBER NEW_STATUS [--reason "Reason"]
