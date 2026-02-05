@@ -24,7 +24,7 @@ The validator checks:
 **Example validation failure:**
 
 ```bash
-python skills/eia-worktree-management/scripts/merge_safeguard.py \
+python skills/eia-git-worktree-operations/scripts/merge_safeguard.py \
     --validate worktrees/feature-auth
 
 # ✗ Validation failed for feature-auth:
@@ -56,7 +56,7 @@ When merging 5+ worktrees:
 
 ```bash
 # 1. Create plan
-python skills/eia-worktree-management/scripts/merge_safeguard.py \
+python skills/eia-git-worktree-operations/scripts/merge_safeguard.py \
     --plan --output merge-plan.json
 
 # 2. Iterate through merge order
@@ -64,7 +64,7 @@ for worktree in $(jq -r '.merge_order[]' merge-plan.json); do
     echo "=== Processing $worktree ==="
 
     # Validate
-    python skills/eia-worktree-management/scripts/merge_safeguard.py \
+    python skills/eia-git-worktree-operations/scripts/merge_safeguard.py \
         --validate "$worktree"
 
     if [ $? -ne 0 ]; then

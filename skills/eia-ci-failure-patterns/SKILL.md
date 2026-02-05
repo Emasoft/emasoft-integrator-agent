@@ -279,6 +279,27 @@ Contents:
   - 8.5.4 Code review requests
 - 8.6 Troubleshooting Claude Code Action
 
+### Debug Procedures
+**File**: [references/debug-procedures.md](references/debug-procedures.md)
+
+Contents:
+- 9.1 Systematic Debugging Workflow
+  - 9.1.1 Initial failure assessment
+  - 9.1.2 Root cause analysis steps
+  - 9.1.3 Hypothesis formation and testing
+- 9.2 CI-Specific Debugging Techniques
+  - 9.2.1 Log analysis strategies
+  - 9.2.2 Reproducing CI failures locally
+  - 9.2.3 Isolating platform-specific issues
+- 9.3 Common Debug Patterns
+  - 9.3.1 Binary search debugging
+  - 9.3.2 Minimal reproduction cases
+  - 9.3.3 Incremental verification
+- 9.4 Debug Tools and Commands
+  - 9.4.1 CI log extraction commands
+  - 9.4.2 Local CI simulation tools
+  - 9.4.3 Diagnostic script usage
+
 ## Diagnostic Scripts
 
 This skill includes two Python scripts for automated diagnosis:

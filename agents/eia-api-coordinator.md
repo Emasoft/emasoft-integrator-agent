@@ -20,7 +20,7 @@ auto_skills:
   - eia-github-integration
   - eia-kanban-orchestration
   - eia-github-projects-sync
-  - eia-github-project-workflow
+  - eia-kanban-orchestration
 memory_requirements: medium
 ---
 

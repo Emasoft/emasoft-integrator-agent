@@ -19,7 +19,7 @@
 
 **Symptom:**
 ```bash
-python skills/eia-worktree-management/scripts/merge_safeguard.py \
+python skills/eia-git-worktree-operations/scripts/merge_safeguard.py \
     --rebase worktrees/feature-auth
 
 # ✗ Rebase failed: CONFLICT (content): Merge conflict in src/api.py
@@ -68,9 +68,9 @@ File Conflicts:
 gh pr merge 123
 
 # 2. Rebase feature-B and feature-C
-python skills/eia-worktree-management/scripts/merge_safeguard.py \
+python skills/eia-git-worktree-operations/scripts/merge_safeguard.py \
     --rebase worktrees/feature-B
-python skills/eia-worktree-management/scripts/merge_safeguard.py \
+python skills/eia-git-worktree-operations/scripts/merge_safeguard.py \
     --rebase worktrees/feature-C
 
 # 3. Test both
@@ -81,7 +81,7 @@ cd worktrees/feature-C && npm test
 gh pr merge 124
 
 # 5. Rebase feature-C again
-python skills/eia-worktree-management/scripts/merge_safeguard.py \
+python skills/eia-git-worktree-operations/scripts/merge_safeguard.py \
     --rebase worktrees/feature-C
 ```
 
@@ -91,11 +91,11 @@ python skills/eia-worktree-management/scripts/merge_safeguard.py \
 
 ```bash
 # Creating new worktree
-python skills/eia-worktree-management/scripts/worktree_create.py \
+python skills/eia-git-worktree-operations/scripts/worktree_create.py \
     --name feature-api-v3
 
 # Immediately check status
-python skills/eia-worktree-management/scripts/merge_safeguard.py \
+python skills/eia-git-worktree-operations/scripts/merge_safeguard.py \
     --check worktrees/feature-api-v3
 
 # Should show: Status: clean (newly created)
@@ -105,7 +105,7 @@ python skills/eia-worktree-management/scripts/merge_safeguard.py \
 
 ```bash
 # Before removing worktree, ensure changes merged
-python skills/eia-worktree-management/scripts/merge_safeguard.py \
+python skills/eia-git-worktree-operations/scripts/merge_safeguard.py \
     --validate worktrees/feature-old
 
 # If not merged, create PR first
@@ -113,7 +113,7 @@ cd worktrees/feature-old
 gh pr create --fill
 
 # After PR merged, safe to remove
-python skills/eia-worktree-management/scripts/worktree_remove.py \
+python skills/eia-git-worktree-operations/scripts/worktree_remove.py \
     --name feature-old
 ```
 

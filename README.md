@@ -39,13 +39,12 @@ The Integrator Agent handles **quality gates, testing, merging, and release cand
 | `eia-github-issue-operations` | Issue CRUD operations |
 | `eia-kanban-orchestration` | Kanban board patterns |
 | `eia-github-projects-sync` | Projects sync |
-| `eia-github-project-workflow` | Project workflow |
+| `eia-kanban-orchestration` | Kanban board patterns |
 | `eia-github-thread-management` | Thread management |
 | `eia-code-review-patterns` | Code review patterns |
 | `eia-multilanguage-pr-review` | Multi-language reviews |
 | `eia-tdd-enforcement` | TDD enforcement |
 | `eia-ci-failure-patterns` | CI failure patterns |
-| `eia-worktree-management` | Git worktree management |
 | `eia-git-worktree-operations` | Worktree operations |
 | `eia-integration-protocols` | Shared utilities |
 

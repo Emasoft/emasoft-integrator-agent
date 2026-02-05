@@ -159,7 +159,7 @@ emasoft-integrator-agent/
 │   ├── eia-release-management/
 │   ├── eia-github-pr-workflow/
 │   ├── eia-github-pr-merge/
-│   ├── eia-github-project-workflow/
+│   ├── eia-kanban-orchestration/
 │   ├── eia-github-projects-sync/
 │   ├── eia-github-integration/
 │   ├── eia-github-issue-operations/
@@ -168,7 +168,6 @@ emasoft-integrator-agent/
 │   ├── eia-github-thread-management/
 │   ├── eia-ci-failure-patterns/
 │   ├── eia-git-worktree-operations/
-│   ├── eia-worktree-management/
 │   ├── eia-multilanguage-pr-review/
 │   ├── eia-tdd-enforcement/
 │   ├── eia-integration-protocols/
@@ -294,7 +293,7 @@ Skills are **automatically loaded** from the `skills/` directory. You do NOT nee
 | **eia-release-management** | Release preparation and tagging |
 | **eia-github-pr-workflow** | PR creation, review, merge |
 | **eia-github-pr-merge** | PR merge strategies |
-| **eia-github-project-workflow** | GitHub Projects (kanban) operations |
+| **eia-kanban-orchestration** | GitHub Projects (kanban) operations |
 | **eia-github-projects-sync** | Sync between issues and projects |
 | **eia-github-integration** | GitHub API integration |
 | **eia-github-issue-operations** | Issue creation, updates, closure |
@@ -303,7 +302,6 @@ Skills are **automatically loaded** from the `skills/` directory. You do NOT nee
 | **eia-github-thread-management** | Comment threads, reviews |
 | **eia-ci-failure-patterns** | Common CI failure patterns |
 | **eia-git-worktree-operations** | Git worktree management |
-| **eia-worktree-management** | Advanced worktree operations |
 | **eia-multilanguage-pr-review** | Multi-language code review |
 | **eia-tdd-enforcement** | TDD requirement enforcement |
 | **eia-integration-protocols** | Integration workflow protocols |

@@ -299,6 +299,9 @@ All scripts are located at `../../scripts/` relative to this skill.
 - [references/gate-decision-flowchart.md](references/gate-decision-flowchart.md) - Visual decision flowchart
 - [references/label-reference.md](references/label-reference.md) - Complete label list
 - [references/troubleshooting.md](references/troubleshooting.md) - Common issues and solutions
+- [references/rule-14-enforcement.md](references/rule-14-enforcement.md) - RULE 14 canonical text and enforcement procedures
+- [references/pr-evaluation.md](references/pr-evaluation.md) - PR evaluation procedures from eia-pr-evaluator
+- [references/integration-verification.md](references/integration-verification.md) - Integration verification from eia-integration-verifier
 
 ---
 

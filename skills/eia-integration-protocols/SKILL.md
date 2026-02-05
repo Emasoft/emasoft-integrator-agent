@@ -107,3 +107,8 @@ Standard protocols for handing off work between agents:
 ## Resources
 
 - [references/handoff-protocols.md](references/handoff-protocols.md) - Complete handoff protocol reference
+- [references/ai-maestro-message-templates.md](references/ai-maestro-message-templates.md) - AI Maestro curl command templates for inter-agent messaging
+- [references/sub-agent-role-boundaries-template.md](references/sub-agent-role-boundaries-template.md) - Worker agent role boundary template for task delegation
+- [references/routing-checklist.md](references/routing-checklist.md) - Task routing checklist for agent coordination
+- [references/record-keeping.md](references/record-keeping.md) - Session record-keeping formats and state management
+- [references/phase-procedures.md](references/phase-procedures.md) - Integration phase procedures and workflow steps

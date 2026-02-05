@@ -205,6 +205,18 @@ Code review examines code across 8 dimensions simultaneously:
 - 6.3 Checklist Template
 - 6.4 Automation - Scripts to run before every PR
 
+### Commit Conventions ([references/commit-conventions.md](references/commit-conventions.md))
+- When writing commit messages after review approval → Commit message format and conventions
+- If you need to verify commit message compliance → Commit message validation rules
+- When squashing commits before merge → Squash commit best practices
+- If you're reviewing commit history → Commit structure guidelines
+
+### Review Workflow ([references/review-workflow.md](references/review-workflow.md))
+- When coordinating review with other agents → Review coordination workflow
+- If you need to delegate review tasks → Task delegation patterns
+- When receiving review requests → Request handling procedures
+- If you're reporting review results → Review reporting format
+
 ---
 
 ## Dimension-Specific References

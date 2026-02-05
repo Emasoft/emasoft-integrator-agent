@@ -24,7 +24,7 @@
 for worktree in worktrees/*; do
     if [ -d "$worktree/.git" ]; then
         echo "Rebasing $(basename $worktree)..."
-        python skills/eia-worktree-management/scripts/merge_safeguard.py \
+        python skills/eia-git-worktree-operations/scripts/merge_safeguard.py \
             --rebase "$worktree"
 
         if [ $? -ne 0 ]; then
@@ -48,7 +48,7 @@ failed=0
 
 for worktree in worktrees/*; do
     if [ -d "$worktree/.git" ]; then
-        python skills/eia-worktree-management/scripts/merge_safeguard.py \
+        python skills/eia-git-worktree-operations/scripts/merge_safeguard.py \
             --validate "$worktree" > /dev/null 2>&1
 
         if [ $? -ne 0 ]; then
@@ -76,7 +76,7 @@ echo "All worktrees validated successfully"
 
 ```bash
 # Before `gh pr create`:
-python skills/eia-worktree-management/scripts/merge_safeguard.py \
+python skills/eia-git-worktree-operations/scripts/merge_safeguard.py \
     --validate worktrees/my-feature
 
 # Fix any issues, then create PR
@@ -89,7 +89,7 @@ Keep worktrees synchronized to minimize conflicts:
 ```bash
 # Daily workflow
 git checkout main && git pull
-python skills/eia-worktree-management/scripts/merge_safeguard.py \
+python skills/eia-git-worktree-operations/scripts/merge_safeguard.py \
     --rebase worktrees/my-feature
 ```
 
@@ -98,7 +98,7 @@ python skills/eia-worktree-management/scripts/merge_safeguard.py \
 If file conflicts detected:
 
 ```bash
-python skills/eia-worktree-management/scripts/merge_safeguard.py --conflicts
+python skills/eia-git-worktree-operations/scripts/merge_safeguard.py --conflicts
 
 # Output shows src/api.py modified in 2 worktrees
 # → Coordinate with other developer

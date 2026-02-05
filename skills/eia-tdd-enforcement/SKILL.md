@@ -330,3 +330,4 @@ git log --oneline | grep -E "^[a-f0-9]+ (RED|GREEN|REFACTOR):"
 - [references/rules-and-constraints.md](references/rules-and-constraints.md) - Strict rules
 - [references/troubleshooting.md](references/troubleshooting.md) - Problem solving
 - [references/status-tracking.md](references/status-tracking.md) - Progress tracking
+- [references/test-engineering.md](references/test-engineering.md) - Test engineering procedures from EIA Test Engineer

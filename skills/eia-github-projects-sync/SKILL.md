@@ -283,6 +283,24 @@ Read this when using the included Python automation scripts.
 
 ---
 
+### GitHub Sync Procedure ([references/github-sync-procedure.md](references/github-sync-procedure.md))
+
+Read this when synchronizing GitHub Projects state with external systems.
+
+**Contents:**
+- 12.1 When understanding the sync workflow overview
+- 12.2 When configuring sync source and destination
+- 12.3 When mapping external states to GitHub Projects columns
+- 12.4 When handling sync conflicts and resolution strategies
+- 12.5 When scheduling automatic sync operations
+- 12.6 When manually triggering sync procedures
+- 12.7 When monitoring sync health and audit logs
+- 12.8 When troubleshooting failed sync operations
+- 12.9 When integrating with CI/CD pipelines for sync
+- 12.10 When using sync APIs and webhooks
+
+---
+
 ### Planning & Iteration ([references/planning-phase-mapping.md](references/planning-phase-mapping.md))
 
 Read this when mapping planning phases to GitHub status.
