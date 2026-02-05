@@ -526,3 +526,29 @@ gh api graphql -f query='
 **Escalated:** 1 (#48)
 **Action Needed:** Human decision on #48
 ```
+
+---
+
+## 6.9 Blocker Lifecycle Checklist
+
+Copy this checklist and track your progress:
+
+**When marking a task as blocked:**
+- [ ] Confirm the agent cannot resolve the issue independently (not a test failure, merge conflict, etc.)
+- [ ] Record the task's current Kanban column (`$CURRENT_STATUS`) before moving to Blocked
+- [ ] Move the card to the Blocked column via GraphQL (section 6.2 Step 1)
+- [ ] Add `blocked` label to the task issue (section 6.2 Step 2)
+- [ ] Add blocker comment to the task issue with Previous Status field (section 6.2 Step 3)
+- [ ] Create a separate GitHub issue for the blocker with `type:blocker` label (section 6.2 Step 4)
+- [ ] Link the blocker issue to the blocked task issue
+- [ ] Notify the orchestrator via AI Maestro with `blocker_issue_number` (section 6.2 Step 5)
+
+**When resolving a blocker and unblocking the task:**
+- [ ] Verify the blocker is actually resolved (do not assume)
+- [ ] Add resolution comment on the blocked task issue (section 6.5 Resolution Comment Template)
+- [ ] Close the blocker issue: `gh issue close $BLOCKER_ISSUE --comment "Resolved: [details]"`
+- [ ] Remove the `blocked` label from the task issue
+- [ ] Read the "Previous Status" from the blocker comment to determine the return column
+- [ ] Move the task back to its PREVIOUS column (not always "In Progress")
+- [ ] Notify the assigned agent via AI Maestro that work can resume
+- [ ] Notify the orchestrator that the blocker is resolved
