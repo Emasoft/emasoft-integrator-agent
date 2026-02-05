@@ -2,7 +2,7 @@
 
 ## Table of Contents
 
-- 6.1 [What constitutes a blocker](#61-what-is-a-blocker)
+- 6.1 [What constitutes a blocked task](#61-what-constitutes-a-blocked-task)
 - 6.2 [How to mark an item as blocked](#62-marking-as-blocked)
 - 6.3 [Required information when blocking](#63-required-information)
 - 6.4 [Blocker escalation timeline](#64-escalation-timeline)
@@ -13,31 +13,31 @@
 
 ---
 
-## 6.1 What Is a Blocker
+## 6.1 What constitutes a blocked task
 
-A blocker is an impediment that prevents work from continuing AND that the assigned agent cannot resolve independently.
+A task is BLOCKED when an agent cannot continue working on it and must wait for an external resolution before resuming. The agent has no way to resolve the issue on its own.
 
-### Is a Blocker
+### Categories of blockers
 
-| Situation | Why It's a Blocker |
-|-----------|-------------------|
-| Missing credentials | Agent cannot provision access |
-| Dependency issue not resolved | Must wait for other work |
-| API/service is down | External factor, cannot control |
-| Requirements unclear | Need clarification from human |
-| Infrastructure not ready | DevOps/admin action needed |
-| Review required before continuing | Waiting for human decision |
+| Category | Description | Examples |
+|----------|-------------|---------|
+| **Task Dependency** | Waiting for another task to complete before this one can proceed | Feature B depends on Feature A's API; test suite needs database schema from migration task |
+| **Problem Resolution** | Waiting for a solution to a technical or design problem from the architect (EAA) or the user | Architecture decision needed; design conflict to resolve; user requirement clarification |
+| **Missing Resource** | Lacking a resource that must be provided or set up before work can continue | Library to install; server to set up; API key or password to configure on GitHub or a service; Docker container to build; certificate to provision; database to create |
+| **Missing Approval** | Waiting for user or manager approval before proceeding | Deployment approval; budget approval; scope change approval; third-party service subscription |
+| **External Dependency** | Waiting for an external party, service, or system outside the agent team | Third-party API not yet available; upstream service outage; external team deliverable |
+| **Access or Credentials** | Lacking credentials, tokens, or permissions required to proceed | GitHub secret not configured; API token expired; SSH key not provisioned; environment variable not set |
 
-### Is NOT a Blocker
+### What is NOT a blocker
 
-| Situation | Why It's NOT a Blocker |
-|-----------|------------------------|
-| Tests failing | Agent should fix tests |
-| Code needs refactoring | Agent should refactor |
-| Missing documentation | Agent should write it |
-| Merge conflicts | Agent should resolve |
-| Unclear how to implement | Agent should research |
-| Takes longer than expected | Not a blocker, just slow |
+The following are NOT blockers — agents should handle them directly:
+- A test failure (fix the code)
+- A linting error (fix the formatting)
+- A merge conflict (resolve it)
+- A transient network error (retry)
+- A performance issue (optimize)
+
+If an agent encounters a problem it CAN solve, it is NOT blocked — it should solve it.
 
 ### Decision Tree
 
@@ -62,6 +62,36 @@ Can agent resolve this independently?
 Move the card to Blocked column via GraphQL:
 
 ```bash
+# CRITICAL: First, get the CURRENT status column before moving to Blocked
+# This will be stored in the blocker comment as "Previous Status"
+CURRENT_STATUS=$(gh api graphql -f query='
+  query($projectId: ID!, $itemId: ID!) {
+    node(id: $projectId) {
+      ... on ProjectV2 {
+        items(first: 100) {
+          nodes {
+            id
+            fieldValues(first: 10) {
+              nodes {
+                ... on ProjectV2ItemFieldSingleSelectValue {
+                  name
+                  field { ... on ProjectV2SingleSelectField { name } }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+' -f projectId="$PROJECT_ID" | jq -r "
+  .data.node.items.nodes[]
+  | select(.id == \"$ITEM_ID\")
+  | .fieldValues.nodes[]
+  | select(.field.name == \"Status\")
+  | .name
+")
+
 # Get status field and option IDs
 STATUS_INFO=$(gh api graphql -f query='
   query($projectId: ID!) {
@@ -81,7 +111,7 @@ STATUS_INFO=$(gh api graphql -f query='
 FIELD_ID=$(echo "$STATUS_INFO" | jq -r '.data.node.field.id')
 BLOCKED_ID=$(echo "$STATUS_INFO" | jq -r '.data.node.field.options[] | select(.name == "Blocked") | .id')
 
-# Update status
+# Update status to Blocked
 gh api graphql -f query='
   mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $optionId: String!) {
     updateProjectV2ItemFieldValue(input: {
@@ -92,6 +122,9 @@ gh api graphql -f query='
     }) { projectV2Item { id } }
   }
 ' -f projectId="$PROJECT_ID" -f itemId="$ITEM_ID" -f fieldId="$FIELD_ID" -f optionId="$BLOCKED_ID"
+
+# IMPORTANT: Store $CURRENT_STATUS for use in the blocker comment (Step 3)
+# This ensures we can return to the correct column when unblocking
 ```
 
 ### Step 2: Add Blocked Label
@@ -119,7 +152,44 @@ EOF
 )"
 ```
 
-### Step 4: Notify Orchestrator
+### Step 4: Create a GitHub Issue for the Blocker
+
+The blocker itself (the problem preventing the task from continuing) must be tracked as a separate GitHub issue. This makes the blocking problem visible to all team members and agents on the issue tracker.
+
+```bash
+# Create a new issue for the blocker, referencing the blocked task
+BLOCKER_ISSUE=$(gh issue create \
+  --title "BLOCKER: Missing database credentials for staging environment" \
+  --label "type:blocker" \
+  --body "$(cat <<'EOF'
+## Blocker
+
+This issue tracks a problem that is blocking task #42.
+
+**Blocked Task**: #42 (Data layer implementation)
+**Blocker Category**: Access / Credentials
+**What's Needed**: DBA to provide credentials in vault
+**Impact**: Cannot test data layer implementation
+**Detected**: 2024-01-15 15:00 UTC
+
+## Resolution
+
+This issue should be closed when the blocking problem is resolved and task #42 can resume.
+EOF
+)" | grep -oP '\d+$')
+
+# Link the blocker issue to the blocked task
+gh issue comment 42 --body "Blocked by #$BLOCKER_ISSUE"
+```
+
+**Why create a separate issue for the blocker:**
+- Makes the blocking problem visible to all agents and team members
+- Allows tracking resolution progress independently
+- Can be assigned to whoever can resolve it (user, DBA, architect, etc.)
+- When the blocker issue is closed, it signals that the blocked task can resume
+- Creates a clear audit trail of what was blocking and how it was resolved
+
+### Step 5: Notify Orchestrator
 
 ```bash
 curl -X POST "http://localhost:23000/api/messages" \
@@ -130,9 +200,10 @@ curl -X POST "http://localhost:23000/api/messages" \
     "priority": "high",
     "content": {
       "type": "blocker",
-      "message": "Issue #42 is blocked. Blocker: Missing database credentials. Need DBA action.",
+      "message": "Issue #42 is blocked. Blocker issue #BLOCKER_ISSUE created. Need DBA action.",
       "data": {
         "issue_number": 42,
+        "blocker_issue_number": "BLOCKER_ISSUE",
         "blocker_type": "access",
         "what_needed": "DBA to provide credentials"
       }
@@ -153,8 +224,9 @@ Every blocker MUST have this information documented:
 
 **Previous Status:** [Status before blocking]
 **Blocker:** [One-line description]
+**Blocker Issue:** #[blocker issue number]
 **Type:** [Technical | Access | Clarification | External | Resource | Dependency]
-**Blocking Issue:** #[number] or N/A
+**Blocking Dependency:** #[task number] or N/A
 **What's Needed:** [Specific action to unblock]
 **Impact:** [What work is prevented]
 **Discovered:** YYYY-MM-DD HH:MM UTC
@@ -169,8 +241,9 @@ Every blocker MUST have this information documented:
 |-------|-------------|---------|
 | Previous Status | Where to return after unblocking | "In Progress" |
 | Blocker | Clear, concise description | "Missing API key for payment service" |
+| Blocker Issue | GitHub issue tracking the blocker problem | "#99" |
 | Type | Category for routing | "Access" |
-| Blocking Issue | Related issue if dependency | "#35" |
+| Blocking Dependency | Task issue that must complete first (if dependency type) | "#35" |
 | What's Needed | Actionable next step | "DevOps to add key to secrets manager" |
 | Impact | What can't proceed | "Cannot implement payment flow" |
 | Discovered | Timestamp for tracking | "2024-01-15 15:00 UTC" |
@@ -178,53 +251,50 @@ Every blocker MUST have this information documented:
 
 ---
 
-## 6.4 Escalation Timeline
+## 6.4 Escalation rules — IMMEDIATE notification required
 
-Blockers have an escalation timeline. The longer a blocker persists, the higher it escalates.
+**CRITICAL RULE**: When a task becomes blocked, the user MUST be informed immediately through the escalation chain. There is NO waiting period before notifying the user.
 
-### Timeline
+### Escalation flow (happens within minutes, not hours)
 
-| Duration | Action | Who |
-|----------|--------|-----|
-| 0-4 hours | Monitor, await resolution | Agent |
-| 4-24 hours | Ping responsible party | Agent |
-| 24-48 hours | Escalate to orchestrator | Agent/Orchestrator |
-| 48-72 hours | Orchestrator escalates to human | Orchestrator |
-| >72 hours | Human decides: resolve, defer, or cancel | Human |
+```
+1. Agent detects blocker
+   → IMMEDIATELY moves task to Blocked column
+   → IMMEDIATELY adds status:blocked label
+   → IMMEDIATELY adds blocker comment to GitHub issue
+   → IMMEDIATELY sends AI Maestro message to EOA (orchestrator)
 
-### Escalation Actions
+2. EOA receives blocker notification
+   → Verifies the blocker is real (not something the agent can solve)
+   → IMMEDIATELY sends blocker escalation to EAMA (manager)
+   → Updates Kanban board if agent hasn't already
 
-#### At 4 Hours
-
-```markdown
-**Blocker Update (4h)**
-
-Still blocked. Pinging @responsible-party for resolution.
+3. EAMA receives blocker escalation
+   → IMMEDIATELY communicates the blocker to the user
+   → Includes: what's blocked, why, what's needed, impact, options
 ```
 
-#### At 24 Hours
+### Parallel self-resolution attempts
 
-```markdown
-**Blocker Escalation (24h)**
+While the escalation chain runs, agents MAY attempt to resolve the blocker themselves:
+- Check if a dependency task is close to completion
+- Search for alternative resources or approaches
+- Consult with other agents via AI Maestro
 
-@orchestrator-master This issue has been blocked for 24 hours.
-Blocker: [brief description]
-Recommended action: [suggestion]
-```
+If the agent resolves the blocker before the user responds:
+1. Remove status:blocked label
+2. Move task back to its ORIGINAL column (the column it was in before being blocked)
+3. Notify EOA that the blocker was self-resolved
+4. EOA notifies EAMA to update the user
 
-#### At 48 Hours
+### User response timeout (after user has been notified)
 
-```markdown
-**Blocker Escalation (48h)**
-
-@orchestrator-master @human-owner This issue has been blocked for 48 hours.
-Blocker: [brief description]
-Impact: [affected work]
-Options:
-1. [Option 1]
-2. [Option 2]
-3. Defer to next sprint
-```
+| Duration | Action |
+|----------|--------|
+| 0-4 hours | Wait for user response, agents work on other unblocked tasks |
+| 4-8 hours | EAMA sends reminder to user |
+| 8-24 hours | EAMA sends urgent reminder with impact assessment |
+| >24 hours | EAMA marks the blocker as "awaiting user" in next status report |
 
 ---
 
@@ -233,10 +303,30 @@ Options:
 ### Resolution Process
 
 1. **Verify blocker is resolved** - Don't assume
-2. **Document resolution** - Comment on issue
-3. **Remove blocked label** - `gh issue edit 42 --remove-label "blocked"`
-4. **Update status** - Move back to previous status
-5. **Notify agent** - Via AI Maestro
+2. **Document resolution** - Comment on the blocked task issue
+3. **Close blocker issue** - `gh issue close $BLOCKER_ISSUE --comment "Resolved: [resolution details]"`
+4. **Remove blocked label** - `gh issue edit 42 --remove-label "blocked"`
+5. **Update status** - Move back to **ORIGINAL** status (the column it was in before being blocked)
+6. **Notify agent** - Via AI Maestro
+
+### Returning a task to its original column after unblocking
+
+When a blocker is resolved:
+1. Remove the `status:blocked` label
+2. Move the task back to the column it was in BEFORE being blocked:
+   - If it was in "In Progress" → return to "In Progress"
+   - If it was in "In Review" → return to "In Review"
+   - If it was in "Todo" → return to "Todo"
+   - If it was in "Done" but was re-blocked → return to the appropriate active column
+3. Add a comment to the GitHub issue documenting:
+   - When the blocker was detected
+   - What the blocker was
+   - How it was resolved
+   - Who resolved it (user decision, agent self-resolution, resource provision)
+4. Notify the assigned agent via AI Maestro that the blocker is resolved
+5. Update the `previous_column` tracking (used by the Kanban manager to know where to return the task)
+
+**CRITICAL**: The "Previous Status" field in the blocker comment is the source of truth for where to return the task. Always record this when moving to Blocked, and always read it when unblocking.
 
 ### Resolution Comment Template
 
@@ -249,7 +339,7 @@ Options:
 **Duration Blocked:** 18 hours
 
 Agent @agent-1 can now continue work.
-Returning to **In Progress**.
+Returning to **[previous status from blocker comment]**.
 ```
 
 ### CLI Commands
@@ -259,16 +349,19 @@ Returning to **In Progress**.
 gh issue comment 42 --body "$(cat <<'EOF'
 ## Unblocked
 **Resolution:** Database credentials added to vault
+**Resolved By:** DBA team
 **Resolved:** 2024-01-16 09:00 UTC
-Returning to **In Progress**.
+**Duration Blocked:** 18 hours
+Returning to **In Progress** (previous status).
 EOF
 )"
 
 # Remove blocked label
 gh issue edit 42 --remove-label "blocked"
 
-# Update status to In Progress
-# [GraphQL mutation to set status]
+# Update status back to previous column (get from blocker comment)
+# IMPORTANT: Read the "Previous Status" from the blocker comment to determine target column
+# [GraphQL mutation to set status - use PREVIOUS_STATUS from blocker comment, not hardcoded "In Progress"]
 
 # Notify agent
 curl -X POST "http://localhost:23000/api/messages" \
@@ -279,7 +372,11 @@ curl -X POST "http://localhost:23000/api/messages" \
     "priority": "high",
     "content": {
       "type": "unblocked",
-      "message": "Issue #42 is unblocked. Credentials are now in vault. Please resume work."
+      "message": "Issue #42 is unblocked. Credentials are now in vault. Please resume work.",
+      "data": {
+        "issue_number": 42,
+        "returned_to_column": "In Progress"
+      }
     }
   }'
 ```
