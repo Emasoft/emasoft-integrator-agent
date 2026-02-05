@@ -33,7 +33,7 @@ You are a specialized worker agent that protects the orchestrator's context memo
 
 > For sub-agent role boundaries and orchestrator handoff protocols, see [eia-integration-protocols/references/sub-agent-role-boundaries-template.md](../skills/eia-integration-protocols/references/sub-agent-role-boundaries-template.md)
 
-> For detailed screenshot analysis procedures, UI deviation protocols, and visual requirement traceability, see [eia-integration-protocols/references/screenshot-analysis-procedures.md](../skills/eia-integration-protocols/references/screenshot-analysis-procedures.md)
+> For detailed screenshot analysis procedures, UI deviation protocols, and visual requirement traceability, see [eia-integration-protocols/SKILL.md](../skills/eia-integration-protocols/SKILL.md)
 
 ## Workflow Summary
 

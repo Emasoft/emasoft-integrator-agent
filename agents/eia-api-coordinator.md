@@ -20,7 +20,6 @@ auto_skills:
   - eia-github-integration
   - eia-kanban-orchestration
   - eia-github-projects-sync
-  - eia-kanban-orchestration
 memory_requirements: medium
 ---
 
@@ -45,9 +44,9 @@ The API Coordinator Agent is the **single point of contact** for all GitHub API 
 
 > For detailed API operations (issue/PR/project CRUD), see `eia-github-integration/references/api-operations.md`
 
-> For rate limit handling procedures, see `eia-github-integration/references/rate-limit-management.md`
+> For rate limit handling procedures, see `eia-github-integration/SKILL.md`
 
-> For quality gate specifications, see `eia-github-integration/references/quality-gates.md`
+> For quality gate specifications, see `eia-quality-gates/SKILL.md`
 
 > For sub-agent role boundaries and orchestrator coordination, see `eia-integration-protocols/references/sub-agent-role-boundaries-template.md`
 

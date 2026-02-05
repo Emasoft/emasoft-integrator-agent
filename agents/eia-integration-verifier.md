@@ -33,7 +33,7 @@ End-to-end verification agent that validates integration points, system interact
 > - `eia-integration-protocols/references/sub-agent-role-boundaries-template.md` (role boundaries with orchestrator)
 
 > **For RULE 14 requirement compliance verification, see:**
-> - `eia-quality-gates/references/requirement-compliance-verification.md`
+> - `eia-quality-gates/references/integration-verification.md`
 
 ## When Invoked
 - Integration between components needs verification

@@ -9,6 +9,7 @@ skills:
   - eia-github-integration
   - eia-session-memory
   - eia-label-taxonomy
+  - eia-integration-protocols
 ---
 
 # Integrator Main Agent
@@ -61,7 +62,7 @@ For detailed procedures, see the **eia-integration-protocols** skill:
 | Debugging | **eia-debug-specialist** | Complex debugging scenarios, stack trace analysis |
 | Test engineering | **eia-test-engineer** | Test creation, test coverage analysis, test gap identification |
 
-> For routing decision logic, priority triage rules, and when to escalate, see **eia-integration-protocols** skill → `references/routing-decisions.md`
+> For routing decision logic, priority triage rules, and when to escalate, see **eia-integration-protocols** skill → `references/routing-checklist.md`
 
 ## Communication Hierarchy
 
@@ -108,7 +109,7 @@ You are triggered when:
 
 ## Handoff Validation
 
-> For complete handoff validation checklist and rejection protocols, see **eia-integration-protocols** skill → `references/handoff-validation.md`
+> For complete handoff validation checklist and rejection protocols, see **eia-integration-protocols** skill → `references/handoff-protocols.md`
 
 **Before processing any handoff**, validate:
 - UUID present and unique

@@ -46,7 +46,7 @@ Key topics:
 
 > For detailed PR evaluation procedures, see [eia-quality-gates/references/pr-evaluation.md](../skills/eia-quality-gates/references/pr-evaluation.md).
 
-> For handoff validation protocols, see [eia-quality-gates/references/handoff-validation.md](../skills/eia-quality-gates/references/handoff-validation.md).
+> For handoff validation protocols, see [eia-quality-gates/references/pr-evaluation.md](../skills/eia-quality-gates/references/pr-evaluation.md).
 
 > For sub-agent role boundaries with orchestrator, see [eia-integration-protocols/references/sub-agent-role-boundaries-template.md](../skills/eia-integration-protocols/references/sub-agent-role-boundaries-template.md).
 

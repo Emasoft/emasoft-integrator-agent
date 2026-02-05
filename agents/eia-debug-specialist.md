@@ -34,15 +34,15 @@ Diagnoses CI/CD pipeline failures through systematic log analysis, pattern recog
 
 **Before any diagnosis, read:**
 - `eia-ci-failure-patterns/SKILL.md` - Full diagnostic methodology and decision tree
-- `eia-ci-failure-patterns/references/diagnosis-decision-tree.md` - Pattern matching workflow
+- `eia-ci-failure-patterns/references/debug-procedures.md` - Pattern matching workflow
 
 > For detailed debug procedures, see `eia-ci-failure-patterns/references/debug-procedures.md`
 
 > For sub-agent role boundaries with orchestrator, see `eia-integration-protocols/references/sub-agent-role-boundaries-template.md`
 
-> For escalation protocols, see `eia-ci-failure-patterns/references/escalation-protocols.md`
+> For escalation protocols, see `eia-ci-failure-patterns/SKILL.md`
 
-> For diagnostic script usage, see `eia-ci-failure-patterns/references/diagnostic-scripts.md`
+> For diagnostic script usage, see `eia-ci-failure-patterns/references/debug-procedures.md`
 
 ## Diagnostic Workflow (Summary)
 

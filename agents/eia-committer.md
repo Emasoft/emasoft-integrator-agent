@@ -37,7 +37,7 @@ cat "$SKILL_PATH/SKILL.md"
 
 > For commit message conventions, formatting standards, and searchability requirements, see `eia-code-review-patterns/references/commit-conventions.md`.
 
-> For dual-git handling procedures (project vs design git), see `eia-code-review-patterns/references/dual-git-workflow.md`.
+> For dual-git handling procedures (project vs design git), see `eia-code-review-patterns/references/commit-conventions.md`.
 
 > For sub-agent role boundaries and responsibility limits, see `eia-integration-protocols/references/sub-agent-role-boundaries-template.md`.
 

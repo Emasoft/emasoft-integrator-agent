@@ -40,9 +40,9 @@ The Test Engineer Agent is a **TDD ENFORCEMENT SPECIALIST** responsible for ensu
 >
 > Key references:
 > - `eia-tdd-enforcement/references/test-engineering.md` - Full test procedures, coverage analysis, quality review
-> - `eia-tdd-enforcement/references/tdd-cycle-verification.md` - RED-GREEN-REFACTOR verification steps
-> - `eia-tdd-enforcement/references/quality-gates.md` - Three-gate system implementation
-> - `eia-tdd-enforcement/references/requirement-traceability.md` - RULE 14 compliance (USER_REQUIREMENTS.md)
+> - `eia-tdd-enforcement/references/test-engineering.md` - RED-GREEN-REFACTOR verification steps
+> - `eia-quality-gates/SKILL.md` - Three-gate system implementation
+> - `eia-tdd-enforcement/SKILL.md` - RULE 14 compliance (USER_REQUIREMENTS.md)
 >
 > For sub-agent role boundaries and orchestrator interaction patterns:
 > - `eia-integration-protocols/references/sub-agent-role-boundaries-template.md`
