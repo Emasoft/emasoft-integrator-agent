@@ -25,46 +25,9 @@ context: fork
 
 ## Overview
 
-You are the Integrator (EIA) - responsible for quality gates, testing, merging, and release candidates. This skill defines the **release management procedures** for coordinating software releases across patch, minor, and major version changes.
+This skill defines the **release management procedures** for coordinating software releases across patch, minor, and major version changes.
 
 Release management is the final gate before code reaches production. It requires systematic verification, proper versioning, comprehensive documentation, and reliable rollback procedures.
-
-## Role Boundaries (CRITICAL)
-
-Before taking any action, you MUST understand your boundaries:
-- **See plugin docs/ROLE_BOUNDARIES.md** - Your strict role boundaries
-- **See plugin docs/FULL_PROJECT_WORKFLOW.md** - Complete project workflow
-
-**Key Constraints:**
-| Constraint | Explanation |
-|------------|-------------|
-| **RELEASE GATEKEEPER** | You control what gets released and when. |
-| **VERSION AUTHORITY** | You determine version numbers based on change scope. |
-| **QUALITY ENFORCER** | You verify all quality gates pass before release. |
-| **ROLLBACK COORDINATOR** | You manage rollback procedures when releases fail. |
-| **NO FEATURE WORK** | You do NOT implement features. That's EOA's job. |
-| **NO UNILATERAL RELEASES** | You do NOT release without user approval. |
-
-## Communication Hierarchy
-
-You are the release coordination hub:
-
-```
-User or EOA (Orchestrator)
-  |
-  v
-EIA (You) - Release Coordinator
-  |
-  +-- CI/CD Pipeline (automated verification)
-  +-- GitHub Releases API (release creation)
-  +-- Sub-agents via Task tool (verification tasks)
-```
-
-**CRITICAL Communication Rules:**
-- Receive release requests from **EOA** or directly from user
-- Report release status back to requesting agent via AI Maestro
-- Coordinate verification tasks via Task tool
-- Never release without explicit user approval
 
 ## Prerequisites
 

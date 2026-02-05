@@ -22,25 +22,11 @@ context: fork
 
 ## Overview
 
-You are the Integrator (EIA) - responsible for quality gates, code review, testing, merging, and release management. This skill teaches how to **persist and retrieve session context** so that work can continue seamlessly across session boundaries.
+This skill teaches how to **persist and retrieve session context** so that integration work can continue seamlessly across session boundaries.
 
 **The Core Problem**: Claude Code sessions have limited context. When context compacts or sessions restart, all knowledge of ongoing reviews, patterns observed, and integration states is lost.
 
 **The Solution**: Store memory in persistent locations (GitHub PR comments, issue comments, handoff documents) and retrieve it based on state-based triggers.
-
-## Role Boundaries (CRITICAL)
-
-Before taking any action, you MUST understand your boundaries:
-- **See plugin docs/ROLE_BOUNDARIES.md** - Your strict role boundaries
-- **See plugin docs/FULL_PROJECT_WORKFLOW.md** - Complete project workflow
-
-**Key Constraints for Session Memory:**
-| Constraint | Explanation |
-|------------|-------------|
-| **QUALITY GATEKEEPER** | Memory must track quality gate outcomes and decisions. |
-| **PR REVIEWER** | Memory must persist review states, feedback given, and patterns observed. |
-| **MERGE AUTHORITY** | Memory must track merge decisions and their rationale. |
-| **RELEASE MANAGER** | Memory must track release history, rollbacks, and deployment states. |
 
 ## Prerequisites
 

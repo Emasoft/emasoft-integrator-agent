@@ -16,9 +16,9 @@ context: fork
 
 ## Overview
 
-This skill defines the orchestrator's role in coordinating Pull Request review work. The orchestrator is a **coordinator**, not a worker. It monitors PR status, delegates review tasks to specialized subagents, tracks completion, and reports to the user.
+This skill defines the coordination workflow for Pull Request reviews. The approach is **coordination-only**: monitor PR status, delegate review tasks to specialized subagents, track completion, and report results.
 
-**Core Principle**: The orchestrator NEVER does direct work on PRs. It orchestrates, delegates, monitors, and reports.
+**Core Principle**: This workflow separates coordination from work. The coordinator delegates, monitors, and reports — it does not perform direct review work.
 
 ## Prerequisites
 
@@ -241,16 +241,16 @@ python scripts/eia_verify_pr_completion.py --repo owner/repo --pr 123
 ## Critical Rules Summary
 
 ### Rule 1: Never Block
-The orchestrator must NEVER execute blocking operations. All long-running tasks must be:
+This workflow must NEVER execute blocking operations. All long-running tasks must be:
 - Delegated to subagents
 - Run as background tasks
 - Monitored via polling
 
 ### Rule 2: Never Write Code
-The orchestrator coordinates, it does not implement. Code writing is ALWAYS delegated to implementation subagents.
+The coordinator role is to coordinate, not to implement. Code writing is ALWAYS delegated to implementation subagents.
 
 ### Rule 3: Never Merge Without User
-The orchestrator may verify merge readiness but NEVER executes merge without explicit user approval.
+The coordinator may verify merge readiness but NEVER executes merge without explicit user approval.
 
 ### Rule 4: Always Verify Before Reporting
 Before reporting any status (ready, complete, blocked), always run the verification script to confirm.

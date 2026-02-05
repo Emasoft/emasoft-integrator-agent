@@ -4,7 +4,7 @@ description: "Use when enforcing TDD via RED-GREEN-REFACTOR. No production code 
 license: Apache-2.0
 compatibility: Requires understanding of TDD principles, RED-GREEN-REFACTOR cycle, test frameworks, and version control. Works with any programming language that supports automated testing. Requires AI Maestro installed.
 metadata:
-  author: Anthropic
+  author: Emasoft
   version: 2.0.0
 agent: test-engineer
 context: fork
@@ -45,11 +45,11 @@ This skill enforces Test-Driven Development (TDD) discipline through the RED-GRE
 | Violation Reports | Documentation of TDD discipline violations with recovery procedures |
 | Progress Tracking Updates | Multi-feature TDD cycle tracking with phase completion status |
 
-### The Orchestrator's Role
+### The Coordinator's Role
 
-**The orchestrator ENFORCES TDD discipline on remote agents. The orchestrator NEVER writes tests or code itself.**
+**This skill enforces TDD discipline on remote agents. The coordinator delegates testing and coding to developer agents — it verifies compliance, not performs implementation.**
 
-**Orchestrator Responsibilities:**
+**Coordinator Responsibilities:**
 - **VERIFY** remote agents follow TDD (tests before code)
 - **REVIEW** PRs to ensure TDD was followed
 - **REJECT** work that violates TDD principles
@@ -196,7 +196,7 @@ REFACTOR: improve [aspect] in [feature]
 
 **Enforcing TDD on Remote Agents?**
 
-1. Read [Enforcement Role](references/iron-law.md#enforcement-role) - understand orchestrator vs. agent responsibilities
+1. Read [Enforcement Role](references/iron-law.md#enforcement-role) - understand coordinator vs. agent responsibilities
 2. Review [Phase Transition Rules](references/status-tracking.md#phase-transition-rules) - verify agent work
 3. Use [Violation Recovery Procedure](references/rules-and-constraints.md#violation-recovery-procedure) - handle violations
 
@@ -213,7 +213,7 @@ TDD Enforcement ensures quality through discipline:
 
 **The Iron Law is absolute:** No code without a failing test.
 
-**The orchestrator enforces**, remote agents execute.
+**This skill enforces discipline**, remote agents execute the work.
 
 Follow the cycle: **RED → GREEN → REFACTOR → Repeat**
 
