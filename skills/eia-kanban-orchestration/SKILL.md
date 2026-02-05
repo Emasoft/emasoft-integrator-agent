@@ -245,19 +245,46 @@ Read this when coordinating between AI agents and human developers.
 
 ---
 
+### Instruction Templates ([references/instruction-templates.md](references/instruction-templates.md))
+
+Read this when creating assignments, integrations, or communicating with agents.
+
+**Contents:**
+- 10.1 Task Assignment Template
+- 10.2 GitHub Issue Template for Subtasks
+- 10.3 Integration Assignment Template
+- 10.4 Conflict Resolution Assignment Template
+- 10.5 Merge Authorization Template
+- 10.6 Progress Check-In Template
+
+---
+
+### Failure Scenarios ([references/failure-scenarios.md](references/failure-scenarios.md))
+
+Read this when handling task failures, integration issues, or unresponsive agents.
+
+**Contents:**
+- 11.1 Subtask Reports Failure After Others In Progress
+- 11.2 Integration Reports Failures
+- 11.3 Agent Becomes Unresponsive
+- 11.4 Conflict Resolution Planning
+- 11.5 Failure Communication Patterns
+
+---
+
 ### Error Handling ([references/troubleshooting.md](references/troubleshooting.md))
 
 Read this when encountering issues with board synchronization or operations.
 
 **Contents:**
-- 10.1 Issue not appearing on board after creation
-- 10.2 Status change not reflecting on board
-- 10.3 Assignment not showing correctly
-- 10.4 GraphQL API errors and rate limiting
-- 10.5 Permission denied errors
-- 10.6 Board state out of sync with reality
-- 10.7 Stop hook blocking exit incorrectly
-- 10.8 Recovery procedures for corrupted state
+- 12.1 Issue not appearing on board after creation
+- 12.2 Status change not reflecting on board
+- 12.3 Assignment not showing correctly
+- 12.4 GraphQL API errors and rate limiting
+- 12.5 Permission denied errors
+- 12.6 Board state out of sync with reality
+- 12.7 Stop hook blocking exit incorrectly
+- 12.8 Recovery procedures for corrupted state
 
 ---
 
@@ -453,6 +480,8 @@ python3 scripts/kanban_check_completion.py owner repo 1
 - [references/board-queries.md](references/board-queries.md) - GraphQL queries for board state
 - [references/stop-hook-integration.md](references/stop-hook-integration.md) - Stop hook completion checks
 - [references/ai-agent-vs-human-workflow.md](references/ai-agent-vs-human-workflow.md) - Different workflows for AI vs humans
+- [references/instruction-templates.md](references/instruction-templates.md) - Message and assignment templates
+- [references/failure-scenarios.md](references/failure-scenarios.md) - Failure handling and recovery patterns
 - [references/troubleshooting.md](references/troubleshooting.md) - Common issues and solutions
 
 ---

@@ -1,6 +1,6 @@
 # Instruction Templates
 
-Templates for all task assignments, integration instructions, and communication patterns.
+Templates for all task assignments, integration instructions, and communication patterns used in GitHub Kanban orchestration.
 
 ---
 
@@ -239,3 +239,52 @@ FORMAT:
 Progress: [X%]
 Blockers: [none/description]
 ```
+
+---
+
+## Usage Notes
+
+### When to Use Each Template
+
+| Template | Use Case | Recipient |
+|----------|----------|-----------|
+| Task Assignment | New work assignment | Implementer agent |
+| GitHub Issue | Creating module issues | N/A (GitHub) |
+| Integration Assignment | Merging completed work | Integration agent |
+| Conflict Resolution | Merge conflicts detected | Conflict resolver |
+| Merge Authorization | Final approval to merge | Integration agent |
+| Progress Check-In | Status update request | Any agent |
+
+### AI Maestro Message Format
+
+All templates should be sent via AI Maestro using this format:
+
+```bash
+curl -X POST "http://localhost:23000/api/messages" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "to": "AGENT_SESSION_NAME",
+    "subject": "SUBJECT_HERE",
+    "priority": "high",
+    "content": {
+      "type": "assignment|request|approval",
+      "message": "TEMPLATE_CONTENT_HERE"
+    }
+  }'
+```
+
+### Template Customization
+
+All templates can be customized for specific project needs:
+- Add project-specific verification steps
+- Add custom reporting requirements
+- Add domain-specific completion criteria
+- Adjust reporting formats
+
+### Integration with GitHub Issues
+
+Templates are designed to work with GitHub Issues:
+- Reference GitHub issue numbers with `GH-[number]` format
+- Post detailed logs to GitHub issue comments
+- Link completion reports back to issues
+- Update issue status based on reports
