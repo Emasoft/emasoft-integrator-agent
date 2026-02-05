@@ -2,7 +2,11 @@
 name: eia-label-taxonomy
 description: GitHub label taxonomy reference for the Integrator Agent. Use when managing PR reviews, updating PR status, or applying review labels. Trigger with review label requests.
 compatibility: Requires AI Maestro installed.
-version: 1.0.0
+metadata:
+  author: Emasoft
+  version: 1.0.0
+agent: eia-main
+context: fork
 ---
 
 # EIA Label Taxonomy

@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Requires AI Maestro installed.
 metadata:
   version: 1.0.0
-  author: integrator-agent
+  author: Emasoft
   tags: "github, ci-cd, pull-requests, checks, automation"
   triggers: "verify PR check status, wait for CI to complete, check if PR is ready to merge, get failing check details, monitor check progress"
 agent: api-coordinator

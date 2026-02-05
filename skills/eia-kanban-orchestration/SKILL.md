@@ -4,7 +4,7 @@ description: "Use when managing GitHub Kanban boards. Trigger with board state, 
 license: Apache-2.0
 compatibility: "Requires GitHub CLI authentication, GitHub Projects V2 enabled repository, GraphQL API access, Python 3.8+. Requires AI Maestro installed."
 metadata:
-  author: Anthropic
+  author: Emasoft
   version: 1.0.0
 agent: api-coordinator
 context: fork

@@ -3,9 +3,9 @@ name: eia-multilanguage-pr-review
 description: Use when reviewing PRs in multilanguage repositories. Routes reviews to appropriate language checkers. Trigger with /review-multilang [PR_NUMBER].
 license: Apache-2.0
 compatibility: Requires AI Maestro installed.
-version: 1.0.0
-author: Emasoft
 metadata:
+  author: Emasoft
+  version: 1.0.0
   category: code-review
   complexity: advanced
   requires_tools: "gh, git"

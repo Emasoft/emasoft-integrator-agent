@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Requires AI Maestro installed.
 metadata:
   version: "1.0.0"
-  author: "Integrator Agent"
+  author: Emasoft
   tags: "github, pull-request, code-review, thread-management"
   triggers: "resolve review thread, unresolve thread, reply to comment, track review comments, unaddressed comments, batch resolve threads"
 agent: api-coordinator

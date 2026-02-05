@@ -4,7 +4,7 @@ description: "Use when integrating GitHub Projects. Trigger with GitHub sync, la
 license: Apache-2.0
 compatibility: Requires GitHub CLI version 2.14 or higher, GitHub account with write permissions to target repositories, and basic Git knowledge. Requires AI Maestro installed.
 metadata:
-  author: Anthropic
+  author: Emasoft
   version: 1.0.0
 agent: api-coordinator
 context: fork

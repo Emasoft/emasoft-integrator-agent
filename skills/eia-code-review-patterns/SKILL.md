@@ -11,7 +11,7 @@ triggers:
   - Review this PR
   - Check this code for issues
 metadata:
-  author: Anthropic
+  author: Emasoft
   version: 1.0.0
 agent: eia-main
 context: fork

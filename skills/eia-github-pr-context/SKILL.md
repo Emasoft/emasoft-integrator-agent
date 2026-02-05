@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Requires AI Maestro installed.
 metadata:
   version: 1.0.0
-  author: integrator-agent
+  author: Emasoft
   category: github
   tags: "pull-request, code-review, diff-analysis, github-api"
 agent: api-coordinator

@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Requires AI Maestro installed.
 metadata:
   version: 1.0.0
-  author: integrator-agent
+  author: Emasoft
   tags: "ci, cd, github-actions, debugging, cross-platform, devops"
   platforms: "linux, macos, windows"
   languages: "python, javascript, typescript, rust, go, bash, powershell"

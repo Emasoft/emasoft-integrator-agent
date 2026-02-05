@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Requires AI Maestro installed.
 metadata:
   version: "1.0.0"
-  author: Integrator Agent Team
+  author: Emasoft
   category: github
   tags: "github, issues, labels, milestones, project-management"
   requires_tools: "gh, jq"

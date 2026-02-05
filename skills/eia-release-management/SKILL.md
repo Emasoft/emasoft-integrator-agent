@@ -13,7 +13,7 @@ triggers:
   - Rollback a release
   - Prepare release candidate
 metadata:
-  author: Integrator Agent Team
+  author: Emasoft
   version: 1.0.0
   category: release-management
   tags: "release, versioning, changelog, tagging, rollback, ci-cd"

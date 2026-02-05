@@ -20,12 +20,17 @@ The Integrator Agent handles **quality gates, testing, merging, and release cand
 
 | Agent | Description |
 |-------|-------------|
-| `eia-main.md` | Main integrator agent |
-| `eia-code-reviewer.md` | Reviews code for quality |
-| `eia-pr-evaluator.md` | Evaluates PR readiness |
-| `eia-integration-verifier.md` | Verifies integration success |
+| `eia-integrator-main-agent.md` | Main integrator agent |
+| `eia-api-coordinator.md` | Coordinates GitHub API operations |
 | `eia-bug-investigator.md` | Investigates reported bugs |
+| `eia-code-reviewer.md` | Reviews code for quality |
+| `eia-committer.md` | Handles git commit operations |
+| `eia-debug-specialist.md` | Debugs CI/CD and test failures |
 | `eia-github-sync.md` | Syncs GitHub state |
+| `eia-integration-verifier.md` | Verifies integration success |
+| `eia-pr-evaluator.md` | Evaluates PR readiness |
+| `eia-screenshot-analyzer.md` | Analyzes screenshots for visual regressions |
+| `eia-test-engineer.md` | Manages test execution and coverage |
 
 ### Skills
 
@@ -39,7 +44,6 @@ The Integrator Agent handles **quality gates, testing, merging, and release cand
 | `eia-github-issue-operations` | Issue CRUD operations |
 | `eia-kanban-orchestration` | Kanban board patterns |
 | `eia-github-projects-sync` | Projects sync |
-| `eia-kanban-orchestration` | Kanban board patterns |
 | `eia-github-thread-management` | Thread management |
 | `eia-code-review-patterns` | Code review patterns |
 | `eia-multilanguage-pr-review` | Multi-language reviews |

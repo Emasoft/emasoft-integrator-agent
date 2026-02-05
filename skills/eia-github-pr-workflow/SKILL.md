@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Requires AI Maestro installed.
 metadata:
   version: 1.0.0
-  author: Integrator Agent Team
+  author: Emasoft
   category: workflow
   tags: "pr-review, orchestration, delegation, verification, github"
 agent: api-coordinator

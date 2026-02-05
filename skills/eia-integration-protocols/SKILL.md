@@ -4,7 +4,7 @@ description: "Use when accessing shared utilities and protocols. Trigger with cr
 license: Apache-2.0
 compatibility: Requires AI Maestro installed.
 metadata:
-  author: Anthropic
+  author: Emasoft
   version: 1.0.0
 context: fork
 ---
