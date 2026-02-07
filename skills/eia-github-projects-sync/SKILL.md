@@ -351,6 +351,7 @@ Use the `agent-messaging` skill to send notifications. For example, to notify th
 - **Subject**: Your notification subject
 - **Content**: `{"type": "TYPE", "message": "MSG"}`
 - **Priority**: The appropriate priority level
+- **Verify**: Confirm message delivery via the `agent-messaging` skill's sent messages feature.
 
 ---
 

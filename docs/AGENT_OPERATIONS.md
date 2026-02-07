@@ -437,9 +437,7 @@ Example:
 
 | Variable | Description | Default |
 |----------|-------------|---------|
-| `AIMAESTRO_API` | API base URL | `http://localhost:23000` |
-| `AIMAESTRO_AGENT` | Agent identifier override | (auto-detected) |
-| `AIMAESTRO_POLL_INTERVAL` | Poll interval in seconds | `10` |
+| AI Maestro messaging | Accessed via the `agent-messaging` skill | Configured automatically |
 
 ### Session Variables
 

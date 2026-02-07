@@ -98,7 +98,7 @@ gh pr view <NUMBER> --json closingIssuesReferences
 gh issue close <ISSUE_NUMBER> --comment "Closed by PR #<NUMBER>"
 ```
 
-See [op-close-related-issues.md](../eia-code-review-patterns/references/op-close-related-issues.md)
+See [op-close-related-issues.md](../../eia-code-review-patterns/references/op-close-related-issues.md)
 
 ### Step 6: Apply Gate Decision
 
@@ -188,4 +188,4 @@ Send a message using the `agent-messaging` skill with:
 
 - [op-execute-pre-merge-gate.md](op-execute-pre-merge-gate.md) - Previous gate
 - [op-escalate-failure.md](op-escalate-failure.md) - Escalation Path D for failures
-- [op-close-related-issues.md](../eia-code-review-patterns/references/op-close-related-issues.md) - Issue closure
+- [op-close-related-issues.md](../../eia-code-review-patterns/references/op-close-related-issues.md) - Issue closure

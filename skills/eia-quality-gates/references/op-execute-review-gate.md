@@ -74,7 +74,7 @@ python3 eia_get_pr_diff.py --pr <NUMBER>
 
 ### Step 2: Execute Quick Scan (Stage 1)
 
-See [op-quick-scan.md](../eia-code-review-patterns/references/op-quick-scan.md)
+See [op-quick-scan.md](../../eia-code-review-patterns/references/op-quick-scan.md)
 
 - Assess file structure
 - Review diff magnitude
@@ -83,7 +83,7 @@ See [op-quick-scan.md](../eia-code-review-patterns/references/op-quick-scan.md)
 
 ### Step 3: Execute Deep Dive (Stage 2)
 
-See [op-deep-dive-analysis.md](../eia-code-review-patterns/references/op-deep-dive-analysis.md)
+See [op-deep-dive-analysis.md](../../eia-code-review-patterns/references/op-deep-dive-analysis.md)
 
 Evaluate all 8 dimensions:
 1. Functional Correctness

@@ -112,7 +112,7 @@ EOA ◄────────────────────────�
 #### Step 5: Team Ready Notification
 **Actor**: ECOS (Chief of Staff)
 **Action**:
-- Notify the Manager that the team is set up and ready to follow instructions
+- Notify the Manager using the `agent-messaging` skill that the team is set up and ready to follow instructions
 - Provide team roster with agent names and roles
 
 **Communication**:
@@ -293,7 +293,7 @@ EOA ◄────────────────────────�
 #### Step 20: PR Review Request
 **Actor**: EOA (Orchestrator)
 **Action**:
-- Send message to Integrator agent (EIA) to evaluate all PRs of completed tasks
+- Send message to Integrator agent (EIA) using the `agent-messaging` skill to evaluate all PRs of completed tasks
 - Request merge if they pass all checks
 
 **Communication**:

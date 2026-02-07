@@ -143,7 +143,7 @@ project-root/
 ```markdown
 # Plan: GH-{number} - {Issue Title}
 
-**Issue**: [GH-{number}](link) | **Status**: active | **Updated**: YYYY-MM-DD
+**Issue**: GH-{number} (link to the GitHub issue) | **Status**: active | **Updated**: YYYY-MM-DD
 
 ## Approach
 
@@ -175,7 +175,7 @@ When creating plan file, add this to the issue body (edit first comment):
 ```markdown
 ## Implementation Plan
 
-📋 **Plan File**: [`plans/GH-42-user-auth.md`](../blob/main/plans/GH-42-user-auth.md)
+📋 **Plan File**: `plans/GH-42-user-auth.md`
 
 [Rest of issue content...]
 ```
@@ -183,7 +183,7 @@ When creating plan file, add this to the issue body (edit first comment):
 **OR** add a comment:
 
 ```markdown
-📋 Implementation plan created: [`plans/GH-42-user-auth.md`](../blob/main/plans/GH-42-user-auth.md)
+📋 Implementation plan created: `plans/GH-42-user-auth.md`
 ```
 
 ### Updating Plan During Implementation

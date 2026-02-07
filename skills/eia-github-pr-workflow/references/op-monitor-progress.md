@@ -28,7 +28,7 @@ Track progress of delegated subagents without blocking. Use polling to check sta
    - Review the output file path specified in delegation
    - Check `docs_dev/` for task reports
 
-2. **Check AI Maestro for messages**: Check your inbox using the `agent-messaging` skill. Filter for messages where `content.data.task_id` matches the task being monitored.
+2. **Check AI Maestro for messages**: Check your inbox using the `agent-messaging` skill. Filter for messages where `content.data.task_id` matches the task being monitored. **Verify**: Confirm message delivery via the `agent-messaging` skill's sent messages feature.
 
 3. **Evaluate progress state**:
 

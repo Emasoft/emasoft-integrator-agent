@@ -232,7 +232,7 @@ src/auth.py:67:80: E501 line too long
    ```
 
 2. **Investigate CI failure**:
-   - Check [CI logs](link_to_logs)
+   - Check CI logs (check your CI/CD pipeline dashboard for build logs)
    - Fix any issues and push
 ```
 

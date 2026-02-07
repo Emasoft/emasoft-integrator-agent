@@ -54,6 +54,7 @@ The Integrator uses AI Maestro to communicate with Orchestrator and Assistant Ma
 When AI Maestro is unavailable:
 
 1. **Log the failure**:
+   > **Note**: The `$AIMAESTRO_API` reference below is used for error logging only, not for direct API calls. The `agent-messaging` skill handles all messaging.
    ```bash
    echo "$(date -Iseconds) | AIMAESTRO_UNAVAILABLE | $AIMAESTRO_API | HTTP $STATUS_CODE" >> .claude/logs/maestro-failures.log
    ```
@@ -213,8 +214,9 @@ Send a message using the `agent-messaging` skill with:
 - **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 **Step 2: Urgent Reminder (when state = Unresponsive after Step 1)**
-- Send urgent priority message
+- Send urgent priority message using the `agent-messaging` skill
 - Note: "Review may be reassigned if no response"
+- **Verify**: Confirm message delivery via the `agent-messaging` skill's sent messages feature.
 
 **Step 3: Reassign or escalate to Orchestrator**
 

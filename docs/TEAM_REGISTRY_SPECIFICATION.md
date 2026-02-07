@@ -277,7 +277,7 @@ def get_agent_address(agent_name: str, registry_path: str = ".emasoft/team-regis
 address = get_agent_address("svgbbox-orchestrator")
 # Returns: "svgbbox-orchestrator"
 
-# Then use the agent-messaging skill to send a message to that address.
+# Then use the `agent-messaging` skill to send a message to that address.
 ```
 
 ---
@@ -369,7 +369,7 @@ Fix login validation bug
 2. **Add agents** to the registry when assigning to team
 3. **Update status** when agents hibernate/wake/terminate
 4. **Commit and push** registry changes to GitHub
-5. **Notify all team agents** when registry changes
+5. **Notify all team agents** using the `agent-messaging` skill when registry changes
 
 ### Registry Update Message
 
@@ -392,6 +392,8 @@ When ECOS updates the registry, it sends:
   }
 }
 ```
+
+**Verify**: Confirm message delivery via the `agent-messaging` skill's sent messages feature.
 
 ---
 
