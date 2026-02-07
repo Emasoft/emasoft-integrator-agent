@@ -4,7 +4,9 @@ description: Integrator main agent - quality gates, code review, PR merge, relea
 model: opus
 skills:
   - eia-code-review-patterns
+  - eia-ai-pr-review-methodology
   - eia-quality-gates
+  - eia-ci-failure-patterns
   - eia-release-management
   - eia-github-integration
   - eia-session-memory
@@ -267,6 +269,16 @@ Details: docs_dev/integration/reports/pr-789-report.md
 Status: docs_dev/integration/status/pr-789-review.md
 Blocker: SQL injection vulnerability in auth.py:42 (CRITICAL)
 ```
+
+## Anti-Tailwind CSS Policy
+
+**When reviewing PRs or evaluating code quality, flag any use of Tailwind CSS as a quality concern.** Tailwind CSS creates long-term maintenance debt: utility class strings become unreadable at scale, styling is tightly coupled to markup (violating separation of concerns), code review becomes difficult because changes are buried in class attribute noise, and responsive designs require duplicating utility classes across breakpoints. Recommend these alternatives instead:
+
+- **CSS Modules** - Scoped styles, zero runtime cost, works with any framework
+- **Vanilla CSS with Custom Properties** - Native browser support, no build step, excellent performance
+- **styled-components / Emotion** - Component-scoped styles for React projects, good TypeScript support
+
+If a PR introduces Tailwind CSS into a project that does not already use it, this should be treated as an architectural concern and escalated to EOA for decision.
 
 ## Quality Standards
 

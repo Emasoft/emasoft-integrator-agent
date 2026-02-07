@@ -1,0 +1,427 @@
+---
+name: template-pull-request
+description: "Universal pull request template with AI disclosure, platform testing, and breaking changes sections."
+---
+
+# Universal Pull Request Template
+
+## Table of Contents
+
+- 1. When to Use This Template
+  - 1.1 Installing the template in a repository
+  - 1.2 Choosing the correct base branch for a pull request
+- 2. Template Structure Overview
+  - 2.1 Required sections every pull request must have
+  - 2.2 Optional sections for specific change types
+- 3. Description and Issue Linking
+  - 3.1 Writing a clear pull request description
+  - 3.2 Linking related issues with closing keywords
+- 4. Type of Change Classification
+  - 4.1 Standard change type checkboxes
+  - 4.2 Area designation for large projects
+- 5. Commit Message Format
+  - 5.1 Conventional commits reminder
+  - 5.2 Examples of well-formed commit messages
+- 6. AI Disclosure Section
+  - 6.1 Why AI disclosure matters for code review
+  - 6.2 Testing level classification for AI-generated code
+  - 6.3 Understanding attestation checkbox
+- 7. General Review Checklist
+  - 7.1 Sync and branch hygiene checks
+  - 7.2 Code quality and focus checks
+- 8. Platform Testing Checklist
+  - 8.1 Windows, macOS, and Linux verification
+  - 8.2 When platform testing is required versus optional
+- 9. CI and Testing Requirements
+  - 9.1 Mandatory CI gates
+  - 9.2 Test coverage expectations for new code and bug fixes
+- 10. Screenshots and Visual Changes
+  - 10.1 Before and after comparison table
+- 11. Feature Toggle Section
+  - 11.1 How incomplete features are hidden behind toggles
+  - 11.2 Toggle mechanism options
+- 12. Breaking Changes Section
+  - 12.1 Identifying breaking changes
+  - 12.2 Migration instructions format
+- 13. Complete Template (Ready to Copy)
+- 14. Customization Notes
+  - 14.1 Which sections are universal versus project-specific
+  - 14.2 Adding project-specific fields
+
+---
+
+## 1. When to Use This Template
+
+### 1.1 Installing the template in a repository
+
+Place the template file at `.github/PULL_REQUEST_TEMPLATE.md` in your repository root. GitHub will automatically populate every new pull request with this template content.
+
+```
+your-repo/
+  .github/
+    PULL_REQUEST_TEMPLATE.md   <-- place the template here
+```
+
+### 1.2 Choosing the correct base branch for a pull request
+
+| Situation | Base Branch | Example |
+|-----------|-------------|---------|
+| Normal feature or fix | `develop` (or your default integration branch) | Adding a new CLI command |
+| Hotfix for production | `main` (or your production branch) | Critical security patch |
+| Release preparation | `main` from a release branch | Merging `release/2.1.0` into `main` |
+
+The template includes a reminder at the top so contributors select the right base.
+
+---
+
+## 2. Template Structure Overview
+
+### 2.1 Required sections every pull request must have
+
+Every pull request must include: Description, Type of Change, General Checklist, and CI/Testing Requirements. These are non-negotiable because they provide the minimum information a reviewer needs.
+
+### 2.2 Optional sections for specific change types
+
+The following sections are included in the template but may be marked "N/A" when not applicable: Screenshots (only for UI changes), Feature Toggle (only for incomplete features), Breaking Changes (only when public API or behavior changes), Platform Testing (only for code that touches OS-level functionality).
+
+---
+
+## 3. Description and Issue Linking
+
+### 3.1 Writing a clear pull request description
+
+The description must answer three questions:
+1. What does this change do?
+2. Why is this change needed?
+3. How was this change tested?
+
+Example of a good description:
+
+```markdown
+## Description
+
+Adds retry logic to the HTTP client when requests fail with 5xx status codes.
+Previously, transient server errors caused the entire sync operation to fail.
+Now the client retries up to 3 times with exponential backoff.
+
+Tested by simulating 503 responses with a mock server and verifying
+the client completes after the server recovers on the second attempt.
+```
+
+### 3.2 Linking related issues with closing keywords
+
+Use GitHub closing keywords so the issue is automatically closed when the pull request merges:
+
+```markdown
+Closes #42
+Fixes #108
+Resolves #77
+```
+
+Multiple issues can be linked:
+
+```markdown
+Closes #42, Closes #43
+```
+
+---
+
+## 4. Type of Change Classification
+
+### 4.1 Standard change type checkboxes
+
+```markdown
+- [ ] [BUG] Bug fix (non-breaking change that fixes an issue)
+- [ ] [FEATURE] New feature (non-breaking change that adds functionality)
+- [ ] [DOCS] Documentation only
+- [ ] [REFACTOR] Refactoring (no functional changes, no API changes)
+- [ ] [TEST] Tests (adding or updating tests only)
+- [ ] [BUILD] Build or CI configuration change
+- [ ] [PERF] Performance improvement
+```
+
+### 4.2 Area designation for large projects
+
+For projects with multiple modules, add an area field:
+
+```markdown
+**Area**: <!-- e.g., core, cli, api, ui, auth, database -->
+```
+
+---
+
+## 5. Commit Message Format
+
+### 5.1 Conventional commits reminder
+
+The template includes a reminder to use conventional commit format:
+
+```
+<type>(<scope>): <short summary>
+```
+
+### 5.2 Examples of well-formed commit messages
+
+```
+fix(http): retry on 5xx status codes with exponential backoff
+feat(cli): add --dry-run flag to deploy command
+docs(readme): update installation instructions for Windows
+refactor(auth): extract token validation into separate module
+test(api): add integration tests for user endpoint
+```
+
+---
+
+## 6. AI Disclosure Section
+
+### 6.1 Why AI disclosure matters for code review
+
+When code is generated or substantially assisted by AI tools, reviewers need to know because:
+- AI-generated code may contain subtle logic errors that look syntactically correct
+- The contributor must demonstrate understanding of the generated code
+- Testing standards may need to be higher for AI-assisted contributions
+
+### 6.2 Testing level classification for AI-generated code
+
+```markdown
+## AI Disclosure
+
+- [ ] This pull request includes AI-generated or AI-assisted code
+
+If checked:
+- **Tool used**: <!-- e.g., Claude, GitHub Copilot, ChatGPT, Cursor -->
+- **Testing level**:
+  - [ ] Untested -- AI output used as-is without manual verification
+  - [ ] Lightly tested -- Ran basic scenarios, reviewed output
+  - [ ] Fully tested -- Comprehensive testing, full understanding of all changes
+
+- [ ] I understand what every line of this pull request does and how the underlying code works
+```
+
+### 6.3 Understanding attestation checkbox
+
+The final checkbox ("I understand what every line...") is the most important. It means the contributor has read and comprehended every change, not merely accepted AI output without review.
+
+---
+
+## 7. General Review Checklist
+
+### 7.1 Sync and branch hygiene checks
+
+```markdown
+## General Checklist
+
+- [ ] My branch is up to date with the base branch (rebased or merged)
+- [ ] I have tested these changes locally
+- [ ] My changes follow the project's coding standards and style guide
+```
+
+### 7.2 Code quality and focus checks
+
+```markdown
+- [ ] This pull request is small and focused on a single concern
+- [ ] I have not included unrelated changes or formatting-only diffs
+- [ ] I have added or updated comments where the code is not self-explanatory
+```
+
+---
+
+## 8. Platform Testing Checklist
+
+### 8.1 Windows, macOS, and Linux verification
+
+```markdown
+## Platform Testing
+
+- [ ] Tested on Windows
+- [ ] Tested on macOS
+- [ ] Tested on Linux
+- [ ] N/A -- changes do not involve platform-specific behavior
+
+> Reminder: Use platform abstractions (pathlib, os.path, shutil)
+> instead of hardcoded paths or shell commands.
+```
+
+### 8.2 When platform testing is required versus optional
+
+Platform testing is required when the change touches: file system operations, subprocess calls, environment variable usage, path construction, encoding-sensitive operations, or native library bindings. Platform testing is optional for: pure logic changes, documentation, test-only changes, or API-only changes that do not interact with the OS.
+
+---
+
+## 9. CI and Testing Requirements
+
+### 9.1 Mandatory CI gates
+
+```markdown
+## CI / Testing
+
+- [ ] All CI checks pass
+- [ ] All existing tests pass without modification
+```
+
+### 9.2 Test coverage expectations for new code and bug fixes
+
+```markdown
+- [ ] New features include corresponding tests
+- [ ] Bug fixes include a regression test that would have caught the bug
+- [ ] No test has been disabled or skipped without explanation
+```
+
+---
+
+## 10. Screenshots and Visual Changes
+
+### 10.1 Before and after comparison table
+
+```markdown
+## Screenshots (if applicable)
+
+| Before | After |
+|--------|-------|
+| <!-- paste screenshot --> | <!-- paste screenshot --> |
+```
+
+If there are no visual changes, write "N/A -- no UI changes in this pull request."
+
+---
+
+## 11. Feature Toggle Section
+
+### 11.1 How incomplete features are hidden behind toggles
+
+When a feature is merged before it is fully complete, it must be hidden behind a toggle so it does not affect users.
+
+### 11.2 Toggle mechanism options
+
+```markdown
+## Feature Toggle
+
+How is this incomplete feature hidden from users?
+
+- [ ] Environment variable (e.g., `ENABLE_NEW_FEATURE=true`)
+- [ ] Configuration file setting
+- [ ] Runtime flag (e.g., `--experimental`)
+- [ ] N/A -- feature is complete and ready for all users
+```
+
+---
+
+## 12. Breaking Changes Section
+
+### 12.1 Identifying breaking changes
+
+A change is breaking if it modifies public API signatures, removes or renames exported functions or classes, changes configuration file format, alters CLI argument syntax, or changes default behavior that users depend on.
+
+### 12.2 Migration instructions format
+
+```markdown
+## Breaking Changes
+
+- [ ] Yes -- this pull request includes breaking changes
+- [ ] No -- this pull request is backward compatible
+
+If yes, describe the migration path:
+
+**What changed**: <!-- e.g., renamed `get_user()` to `fetch_user()` -->
+**Migration steps**:
+1. <!-- Step-by-step instructions for consumers -->
+2. <!-- Include code examples where helpful -->
+```
+
+---
+
+## 13. Complete Template (Ready to Copy)
+
+Copy the following into `.github/PULL_REQUEST_TEMPLATE.md`:
+
+```markdown
+> [!NOTE]
+> Target branch: use `develop` for features and fixes, `main` for hotfixes only.
+
+## Description
+
+<!-- What does this change do? Why is it needed? How was it tested? -->
+
+Closes #<!-- issue number -->
+
+## Type of Change
+
+- [ ] [BUG] Bug fix
+- [ ] [FEATURE] New feature
+- [ ] [DOCS] Documentation only
+- [ ] [REFACTOR] Refactoring
+- [ ] [TEST] Tests only
+- [ ] [BUILD] Build or CI configuration
+- [ ] [PERF] Performance improvement
+
+**Area**: <!-- e.g., core, cli, api, ui -->
+
+## AI Disclosure
+
+- [ ] This pull request includes AI-generated or AI-assisted code
+
+If checked:
+- **Tool used**: <!-- e.g., Claude, GitHub Copilot, ChatGPT -->
+- **Testing level**:
+  - [ ] Untested
+  - [ ] Lightly tested
+  - [ ] Fully tested
+- [ ] I understand what every line of this PR does
+
+## General Checklist
+
+- [ ] Branch is up to date with base branch
+- [ ] Tested locally
+- [ ] Follows project coding standards
+- [ ] Small and focused on a single concern
+- [ ] Comments added where code is not self-explanatory
+
+## Platform Testing
+
+- [ ] Windows
+- [ ] macOS
+- [ ] Linux
+- [ ] N/A
+
+## CI / Testing
+
+- [ ] All CI checks pass
+- [ ] Existing tests pass
+- [ ] New features include tests
+- [ ] Bug fixes include regression tests
+
+## Screenshots
+
+| Before | After |
+|--------|-------|
+|        |       |
+
+## Feature Toggle
+
+- [ ] Environment variable
+- [ ] Configuration setting
+- [ ] Runtime flag
+- [ ] N/A -- feature is complete
+
+## Breaking Changes
+
+- [ ] Yes (describe migration below)
+- [ ] No
+
+**Migration steps** (if breaking):
+<!-- Steps here -->
+```
+
+---
+
+## 14. Customization Notes
+
+### 14.1 Which sections are universal versus project-specific
+
+Universal (keep in all projects): Description, Type of Change, AI Disclosure, General Checklist, CI/Testing, Breaking Changes.
+
+Project-specific (customize or remove): Area designation, Platform Testing (only for cross-platform projects), Feature Toggle (only for projects using incremental rollout), Screenshots (only for projects with UI).
+
+### 14.2 Adding project-specific fields
+
+To add project-specific fields, insert new sections between "General Checklist" and "Platform Testing". Keep the core sections in their standard order so reviewers moving between projects always find information in the same place.
