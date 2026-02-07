@@ -257,21 +257,12 @@ Blockers: [none/description]
 
 ### AI Maestro Message Format
 
-All templates should be sent via AI Maestro using this format:
-
-```bash
-curl -X POST "http://localhost:23000/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "to": "AGENT_SESSION_NAME",
-    "subject": "SUBJECT_HERE",
-    "priority": "high",
-    "content": {
-      "type": "assignment|request|approval",
-      "message": "TEMPLATE_CONTENT_HERE"
-    }
-  }'
-```
+All templates should be sent via AI Maestro using the `agent-messaging` skill with:
+- **Recipient**: The target agent session name
+- **Subject**: The subject line from the template
+- **Priority**: `high` (or as specified in the template)
+- **Content**: `{"type": "assignment|request|approval", "message": "TEMPLATE_CONTENT_HERE"}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 ### Template Customization
 

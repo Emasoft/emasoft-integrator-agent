@@ -15,6 +15,8 @@ metadata:
   version: 1.0.0
 agent: eia-main
 context: fork
+workflow-instruction: "Step 21"
+procedure: "proc-evaluate-pr"
 ---
 
 # Code Review Patterns Skill
@@ -389,67 +391,34 @@ If reviewers disagree on findings, see [references/troubleshooting-agreement.md]
 
 ### Template 1: Receiving PR Review Request
 
-When receiving a PR review request from EOA or another agent:
-
-```bash
-# Check for incoming review requests
-curl -s "http://localhost:23000/api/messages?agent=emasoft-integrator&action=list&status=unread" | \
-  jq '.messages[] | select(.content.type == "pr-review-request")'
-```
+When receiving a PR review request from EOA or another agent, check your inbox using the `agent-messaging` skill. Filter for messages with `content.type == "pr-review-request"`.
 
 ### Template 2: Reporting Review Completion to EOA
 
-After completing a code review, notify the requesting agent:
-
-```bash
-curl -X POST "$AIMAESTRO_API/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "to": "orchestrator-eoa",
-    "subject": "Code Review Complete: PR #123",
-    "priority": "normal",
-    "content": {
-      "type": "review-complete",
-      "message": "PR #123 review completed. Confidence: 85%. Decision: APPROVED. Details: docs_dev/integration/reports/pr-123-review.md"
-    }
-  }'
-```
+After completing a code review, notify the requesting agent. Send a message using the `agent-messaging` skill with:
+- **Recipient**: `orchestrator-eoa`
+- **Subject**: `Code Review Complete: PR #123`
+- **Priority**: `normal`
+- **Content**: `{"type": "review-complete", "message": "PR #123 review completed. Confidence: 85%. Decision: APPROVED. Details: docs_dev/integration/reports/pr-123-review.md"}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 ### Template 3: Requesting Clarification from Author
 
-When review requires author input:
-
-```bash
-curl -X POST "$AIMAESTRO_API/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "to": "TARGET_AGENT",
-    "subject": "Review Question: PR #123",
-    "priority": "normal",
-    "content": {
-      "type": "clarification-request",
-      "message": "During review of PR #123, need clarification on: [SPECIFIC QUESTION]. Please respond with context."
-    }
-  }'
-```
+When review requires author input, send a message using the `agent-messaging` skill with:
+- **Recipient**: The PR author agent name
+- **Subject**: `Review Question: PR #123`
+- **Priority**: `normal`
+- **Content**: `{"type": "clarification-request", "message": "During review of PR #123, need clarification on: [SPECIFIC QUESTION]. Please respond with context."}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 ### Template 4: Escalating Quality Gate Failure
 
-When a critical quality gate fails:
-
-```bash
-curl -X POST "$AIMAESTRO_API/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "to": "orchestrator-eoa",
-    "subject": "[QUALITY GATE FAILED] PR #123",
-    "priority": "urgent",
-    "content": {
-      "type": "quality-gate-failure",
-      "message": "PR #123 failed quality gate: SECURITY. Issue: SQL injection in auth.py:42. Action required: reject and request fix."
-    }
-  }'
-```
+When a critical quality gate fails, send a message using the `agent-messaging` skill with:
+- **Recipient**: `orchestrator-eoa`
+- **Subject**: `[QUALITY GATE FAILED] PR #123`
+- **Priority**: `urgent`
+- **Content**: `{"type": "quality-gate-failure", "message": "PR #123 failed quality gate: SECURITY. Issue: SQL injection in auth.py:42. Action required: reject and request fix."}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 ---
 

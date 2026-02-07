@@ -10,6 +10,8 @@ metadata:
   triggers: "verify PR check status, wait for CI to complete, check if PR is ready to merge, get failing check details, monitor check progress"
 agent: api-coordinator
 context: fork
+workflow-instruction: "Step 21"
+procedure: "proc-evaluate-pr"
 ---
 
 # GitHub PR Checks Skill

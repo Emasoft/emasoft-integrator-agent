@@ -8,6 +8,8 @@ metadata:
   version: 1.0.0
 agent: api-coordinator
 context: fork
+workflow-instruction: "Steps 13, 18"
+procedure: "proc-populate-kanban, proc-update-kanban-status"
 ---
 
 # GitHub Kanban Core
@@ -539,35 +541,21 @@ save_state(current_state)
 
 ### AI Maestro Notifications
 
-When changes are detected, notify relevant agents:
+When changes are detected, notify relevant agents using the `agent-messaging` skill.
 
-```bash
-# Notify agent of assignment
-curl -X POST "$AIMAESTRO_API/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "to": "TARGET_AGENT",
-    "subject": "Kanban Update: Issue #123 assigned to you",
-    "priority": "normal",
-    "content": {
-      "type": "kanban-assignment",
-      "message": "Issue #123 has been assigned to you. Current status: Todo. Please move to In Progress when starting."
-    }
-  }'
+**Assignment notification:** Send a message using the `agent-messaging` skill with:
+- **Recipient**: The assigned agent
+- **Subject**: `Kanban Update: Issue #123 assigned to you`
+- **Priority**: `normal`
+- **Content**: `{"type": "kanban-assignment", "message": "Issue #123 has been assigned to you. Current status: Todo. Please move to In Progress when starting."}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
-# Notify orchestrator of status change
-curl -X POST "$AIMAESTRO_API/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "to": "orchestrator-eoa",
-    "subject": "Kanban Update: Issue #123 moved to In Review",
-    "priority": "normal",
-    "content": {
-      "type": "kanban-status-change",
-      "message": "Issue #123 moved from In Progress to In Review by agent-name. PR likely created."
-    }
-  }'
-```
+**Status change notification:** Send a message using the `agent-messaging` skill with:
+- **Recipient**: `orchestrator-eoa`
+- **Subject**: `Kanban Update: Issue #123 moved to In Review`
+- **Priority**: `normal`
+- **Content**: `{"type": "kanban-status-change", "message": "Issue #123 moved from In Progress to In Review by agent-name. PR likely created."}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 ### Proactive Monitoring Checklist
 

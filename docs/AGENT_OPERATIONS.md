@@ -75,18 +75,17 @@ eia-<project>-<descriptive>
 
 **ONLY** ECOS can create EIA instances. EIA **CANNOT** create itself or other agents.
 
-### Creation Command
+### Creation Method
 
-```bash
-SESSION_NAME="eia-<project>-integrator"
+ECOS creates EIA instances using the `ai-maestro-agents-management` skill. The creation specifies:
 
-aimaestro-agent.sh create $SESSION_NAME \
-  --dir ~/agents/$SESSION_NAME \
-  --task "Review and integrate code for <project>" \
-  -- --dangerously-skip-permissions --chrome --add-dir /tmp \
-  --plugin-dir ~/agents/$SESSION_NAME/.claude/plugins/emasoft-integrator-agent \
-  --agent eia-integrator-main-agent
-```
+- **Session name**: `eia-<project>-integrator`
+- **Working directory**: `~/agents/<session-name>`
+- **Task**: `Review and integrate code for <project>`
+- **Plugin**: `emasoft-integrator-agent`
+- **Starting agent**: `eia-integrator-main-agent`
+
+Refer to the `ai-maestro-agents-management` skill for the exact creation commands and syntax.
 
 ### Creation Parameters
 
@@ -231,23 +230,14 @@ EIA **CANNOT** reference or load skills from other plugins:
 
 ### Cross-Role Communication
 
-**ONLY via AI Maestro messaging.**
+**ONLY via AI Maestro messaging.** Use the `agent-messaging` skill for all cross-role communication.
 
-```bash
-# Request information from EOA
-curl -X POST "http://localhost:23000/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "from": "emasoft-integrator",
-    "to": "orchestrator-eoa",
-    "subject": "Need task details for PR #456",
-    "priority": "high",
-    "content": {
-      "type": "information-request",
-      "message": "Please provide task requirements document for PR #456"
-    }
-  }'
-```
+**Example:** To request information from EOA, send a message using the `agent-messaging` skill with:
+- **Recipient**: `orchestrator-eoa`
+- **Subject**: `Need task details for PR #456`
+- **Priority**: `high`
+- **Content**: `{"type": "information-request", "message": "Please provide task requirements document for PR #456"}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 ### Why This Matters
 
@@ -344,29 +334,15 @@ For detailed boundaries, see: [docs/ROLE_BOUNDARIES.md](./ROLE_BOUNDARIES.md)
 
 ## 7. AI Maestro Communication
 
-### API Endpoint
-
-```
-http://localhost:23000/api/messages
-```
-
-### Environment Variable
-
-```bash
-AIMAESTRO_API="http://localhost:23000"
-```
+All AI Maestro communication is done through the `agent-messaging` skill. For the exact commands and syntax, always refer to that skill. Below are the communication patterns with the message content structures.
 
 ### Communication Patterns
 
 #### 1. Receiving Integration Requests (from EOA)
 
-**Check inbox:**
+**Check inbox:** Check your inbox using the `agent-messaging` skill. Filter for messages with `content.type == "integration-request"`.
 
-```bash
-curl -s "http://localhost:23000/api/messages?agent=emasoft-integrator&action=list&status=unread" | jq '.messages[]'
-```
-
-**Message format:**
+**Expected message format:**
 
 ```json
 {
@@ -391,85 +367,36 @@ curl -s "http://localhost:23000/api/messages?agent=emasoft-integrator&action=lis
 
 #### 2. Routing to Sub-Agents
 
-**Send delegation:**
+**Send delegation:** Send a message using the `agent-messaging` skill with:
+- **Recipient**: The appropriate sub-agent (e.g., `eia-code-reviewer`)
+- **Subject**: `Review PR #456: Add auth module`
+- **Priority**: `high`
+- **Content**: `{"type": "task-delegation", "task": "review-pr", "context": {...}, "success_criteria": "...", "callback_agent": "emasoft-integrator"}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
-```bash
-curl -X POST "http://localhost:23000/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "from": "emasoft-integrator",
-    "to": "eia-code-reviewer",
-    "subject": "Review PR #456: Add auth module",
-    "priority": "high",
-    "content": {
-      "type": "task-delegation",
-      "task": "review-pr",
-      "context": {
-        "pr_number": 456,
-        "branch": "feature/add-auth",
-        "files_affected": ["src/auth.py", "tests/test_auth.py"],
-        "description": "New authentication module with JWT support",
-        "focus_areas": ["security", "test coverage", "error handling"]
-      },
-      "success_criteria": "Code quality score > 8/10, no security vulnerabilities, test coverage > 90%",
-      "callback_agent": "emasoft-integrator"
-    }
-  }'
-```
+See `eia-integration-protocols` skill reference `ai-maestro-message-templates.md` for the complete content structure.
 
 #### 3. Reporting Status to EOA
 
-**Send status report:**
+**Send status report:** Send a message using the `agent-messaging` skill with:
+- **Recipient**: `orchestrator-eoa`
+- **Subject**: `Integration Status: PR #456`
+- **Priority**: `normal`
+- **Content**: `{"type": "integration-status", "task_id": "pr-456-review", "status": "COMPLETED", "result": {...}, "next_steps": "..."}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
-```bash
-curl -X POST "http://localhost:23000/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "from": "emasoft-integrator",
-    "to": "orchestrator-eoa",
-    "subject": "Integration Status: PR #456",
-    "priority": "normal",
-    "content": {
-      "type": "integration-status",
-      "task_id": "pr-456-review",
-      "status": "COMPLETED",
-      "result": {
-        "pr_number": 456,
-        "quality_gates": ["code_review: PASS", "tests: PASS", "security: PASS"],
-        "merge_status": "MERGED",
-        "details_file": "docs_dev/integration/reports/pr-456-report.md"
-      },
-      "next_steps": "Issue #123 ready to close, all acceptance criteria met"
-    }
-  }'
-```
+See `eia-integration-protocols` skill reference `ai-maestro-message-templates.md` for the complete content structure.
 
 #### 4. Escalating Blockers
 
-**Send escalation:**
+**Send escalation:** Send a message using the `agent-messaging` skill with:
+- **Recipient**: `orchestrator-eoa`
+- **Subject**: `[BLOCKER] PR #456 Security Issue`
+- **Priority**: `urgent`
+- **Content**: `{"type": "blocker-escalation", "task_id": "pr-456-review", "blocker_type": "QUALITY_GATE_FAILED", "details": {...}, "requires_decision": true}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
-```bash
-curl -X POST "http://localhost:23000/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "from": "emasoft-integrator",
-    "to": "orchestrator-eoa",
-    "subject": "[BLOCKER] PR #456 Security Issue",
-    "priority": "urgent",
-    "content": {
-      "type": "blocker-escalation",
-      "task_id": "pr-456-review",
-      "blocker_type": "QUALITY_GATE_FAILED",
-      "details": {
-        "description": "PR #456 has security vulnerability (SQL injection in auth.py:42)",
-        "severity": "critical",
-        "blocking_gate": "security-scan",
-        "recommendation": "Reject PR, request fix from implementor"
-      },
-      "requires_decision": true
-    }
-  }'
-```
+See `eia-integration-protocols` skill reference `ai-maestro-message-templates.md` for the complete content structure.
 
 ### Message Priority Levels
 
@@ -519,7 +446,7 @@ Example:
 | Variable | Description | Set By |
 |----------|-------------|--------|
 | `SESSION_NAME` | Current session name | ECOS at spawn |
-| `TMUX_SESSION` | tmux session name | aimaestro-agent.sh |
+| `TMUX_SESSION` | tmux session name | Set by `ai-maestro-agents-management` skill at agent creation |
 
 ### GitHub Variables
 

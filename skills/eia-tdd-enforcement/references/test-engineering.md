@@ -924,21 +924,12 @@ Gate 3 (Test Quality): [PASS/WARN/FAIL]
    echo "$REPORT_CONTENT" > "$REPORT_FILE"
    ```
 
-2. **Send AI Maestro message to developer:**
-   ```bash
-   curl -X POST "http://localhost:23000/api/messages" \
-     -H "Content-Type: application/json" \
-     -d '{
-       "from": "eia-test-engineer",
-       "to": "developer-agent-name",
-       "subject": "TDD Compliance Report for PR #'${PR_NUMBER}'",
-       "priority": "high",
-       "content": {
-         "type": "test_report",
-         "message": "TDD enforcement complete. Status: [PASS/FAIL]. Details: '${REPORT_FILE}'"
-       }
-     }'
-   ```
+2. **Send AI Maestro message to developer:** Send a message using the `agent-messaging` skill with:
+   - **Recipient**: The developer agent name
+   - **Subject**: `TDD Compliance Report for PR #<PR_NUMBER>`
+   - **Priority**: `high`
+   - **Content**: `{"type": "test_report", "message": "TDD enforcement complete. Status: [PASS/FAIL]. Details: <REPORT_FILE>"}`
+   - **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 3. **Post PR comment:**
    ```bash
@@ -1080,21 +1071,12 @@ Apply consistent rejection criteria to determine if code can proceed to merge.
    - Include all relevant context
    - Provide recommendation
 
-2. **Notify user via AI Maestro:**
-   ```bash
-   curl -X POST "http://localhost:23000/api/messages" \
-     -H "Content-Type: application/json" \
-     -d '{
-       "from": "eia-test-engineer",
-       "to": "orchestrator-master",
-       "subject": "ESCALATION: Test enforcement decision required",
-       "priority": "urgent",
-       "content": {
-         "type": "escalation",
-         "message": "User decision required for PR #{PR}. See: reports/escalations/escalation-{timestamp}.md"
-       }
-     }'
-   ```
+2. **Notify user via AI Maestro:** Send a message using the `agent-messaging` skill with:
+   - **Recipient**: `orchestrator-master`
+   - **Subject**: `ESCALATION: Test enforcement decision required`
+   - **Priority**: `urgent`
+   - **Content**: `{"type": "escalation", "message": "User decision required for PR #<PR>. See: reports/escalations/escalation-<timestamp>.md"}`
+   - **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 3. **Wait for user response:**
    - Do NOT proceed with automated decision
@@ -1431,11 +1413,8 @@ Define proper usage of Read, Write, and Bash tools for TDD enforcement tasks.
    ```
 
 5. **Send AI Maestro messages:**
-   ```bash
-   curl -X POST "http://localhost:23000/api/messages" \
-     -H "Content-Type: application/json" \
-     -d '{...}'
-   ```
+   Send a message using the `agent-messaging` skill with the appropriate Recipient, Subject, Priority, and Content fields.
+   - **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 6. **Update GitHub PR:**
    ```bash
@@ -1522,18 +1501,12 @@ echo "Report generated: $REPORT_FILE"
 
 # Step 5: Send AI Maestro message
 echo "Step 5: Sending notification..."
-curl -X POST "http://localhost:23000/api/messages" \
-  -H "Content-Type: application/json" \
-  -d "{
-    \"from\": \"eia-test-engineer\",
-    \"to\": \"orchestrator-master\",
-    \"subject\": \"TDD Report for PR #$PR_NUMBER\",
-    \"priority\": \"high\",
-    \"content\": {
-      \"type\": \"test_report\",
-      \"message\": \"G1:$TDD_STATUS G2:$COV_STATUS | Coverage: $LINE_COV% | Report: $REPORT_FILE\"
-    }
-  }"
+# Send a message using the `agent-messaging` skill with:
+# - Recipient: `orchestrator-master`
+# - Subject: `TDD Report for PR #$PR_NUMBER`
+# - Priority: `high`
+# - Content: `{"type": "test_report", "message": "G1:$TDD_STATUS G2:$COV_STATUS | Coverage: $LINE_COV% | Report: $REPORT_FILE"}`
+# - Verify: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 echo "=== Test Enforcement Complete ==="
 ```
@@ -1755,19 +1728,12 @@ Tests run successfully but coverage is below threshold.
 4. **Request additional tests:**
    ```bash
    # Send AI Maestro message to developer
-   curl -X POST "http://localhost:23000/api/messages" \
-     -H "Content-Type: application/json" \
-     -d '{
-       "from": "eia-test-engineer",
-       "to": "developer-agent",
-       "subject": "Coverage gaps in PR #123",
-       "priority": "high",
-       "content": {
-         "type": "coverage_gap",
-         "message": "Coverage is 65%, below 80% threshold. Uncovered: src/module.py lines 45-52, 78-85. See: reports/coverage-gaps-PR123-timestamp.md"
-       }
-     }'
-   ```
+   Send a message using the `agent-messaging` skill with:
+   - **Recipient**: `developer-agent`
+   - **Subject**: `Coverage gaps in PR #123`
+   - **Priority**: `high`
+   - **Content**: `{"type": "coverage_gap", "message": "Coverage is 65%, below 80% threshold. Uncovered: src/module.py lines 45-52, 78-85. See: reports/coverage-gaps-PR123-timestamp.md"}`
+   - **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 5. **Block merge until fixed:**
    ```markdown
@@ -1825,19 +1791,12 @@ Cannot definitively determine if TDD was followed.
 
 3. **Ask developer for TDD evidence:**
    ```bash
-   # Send AI Maestro message
-   curl -X POST "http://localhost:23000/api/messages" \
-     -H "Content-Type: application/json" \
-     -d '{
-       "from": "eia-test-engineer",
-       "to": "developer-agent",
-       "subject": "TDD verification needed for PR #123",
-       "priority": "high",
-       "content": {
-         "type": "request",
-         "message": "Cannot verify TDD compliance from git history. Please confirm: Were tests written before implementation? Can you provide evidence?"
-       }
-     }'
+   # Send AI Maestro message using the `agent-messaging` skill with:
+   # - Recipient: `developer-agent`
+   # - Subject: `TDD verification needed for PR #123`
+   # - Priority: `high`
+   # - Content: `{"type": "request", "message": "Cannot verify TDD compliance from git history. Please confirm: Were tests written before implementation? Can you provide evidence?"}`
+   # - Verify: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
    ```
 
 4. **Document uncertainty:**

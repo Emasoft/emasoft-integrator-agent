@@ -98,8 +98,8 @@ gh issue edit 42 --remove-assignee implementer-1
 # 3. Assign new agent
 gh issue edit 42 --add-assignee implementer-2
 
-# 4. Notify new agent
-curl -X POST "http://localhost:23000/api/messages" ...
+# 4. Notify new agent using the agent-messaging skill
+# Send a message with Recipient: implementer-2, Subject: Assignment handoff, Priority: high
 ```
 
 ### AI to Human Handoff
@@ -227,27 +227,14 @@ When AI agents cannot proceed.
 
 ### Escalation Process
 
-```bash
-# 1. AI agent reports blocker
-curl -X POST "http://localhost:23000/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "to": "orchestrator-master",
-    "subject": "Escalation: Issue #42 Blocked",
-    "priority": "urgent",
-    "content": {
-      "type": "escalation",
-      "message": "Cannot proceed on #42. Need human decision.",
-      "data": {
-        "issue_number": 42,
-        "blocker": "Design ambiguity in API spec",
-        "question": "Should auth tokens be stateless or server-validated?",
-        "impact": "Cannot proceed with implementation",
-        "options": ["Stateless JWT", "Server-side session", "Hybrid"]
-      }
-    }
-  }'
+**Step 1: AI agent reports blocker.** Send a message using the `agent-messaging` skill with:
+- **Recipient**: `orchestrator-master`
+- **Subject**: `Escalation: Issue #42 Blocked`
+- **Priority**: `urgent`
+- **Content**: `{"type": "escalation", "message": "Cannot proceed on #42. Need human decision.", "data": {"issue_number": 42, "blocker": "Design ambiguity in API spec", "question": "Should auth tokens be stateless or server-validated?", "impact": "Cannot proceed with implementation", "options": ["Stateless JWT", "Server-side session", "Hybrid"]}}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
+```bash
 # 2. Orchestrator escalates to human
 gh issue comment 42 --body "$(cat <<'EOF'
 ## Escalation to Human Lead

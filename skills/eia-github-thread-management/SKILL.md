@@ -10,6 +10,8 @@ metadata:
   triggers: "resolve review thread, unresolve thread, reply to comment, track review comments, unaddressed comments, batch resolve threads"
 agent: api-coordinator
 context: fork
+workflow-instruction: "support"
+procedure: "support-skill"
 ---
 
 # GitHub Thread Management Skill

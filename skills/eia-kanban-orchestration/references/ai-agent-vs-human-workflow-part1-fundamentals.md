@@ -70,23 +70,12 @@ gh issue edit 42 --add-assignee $AGENT
 # [GraphQL mutation]
 
 # 4. Notify agent via AI Maestro
-curl -X POST "http://localhost:23000/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "to": "implementer-1",
-    "subject": "Assignment: Issue #42",
-    "priority": "high",
-    "content": {
-      "type": "assignment",
-      "message": "You are assigned to issue #42: [MODULE] auth-core. Move to In Progress when starting.",
-      "data": {
-        "issue_number": 42,
-        "issue_url": "https://github.com/owner/repo/issues/42",
-        "priority": "high",
-        "estimated_hours": 4
-      }
-    }
-  }'
+# Send a message using the agent-messaging skill with:
+#   Recipient: implementer-1
+#   Subject: Assignment: Issue #42
+#   Priority: high
+#   Content: {"type": "assignment", "message": "You are assigned to issue #42: [MODULE] auth-core. Move to In Progress when starting.", "data": {"issue_number": 42, "issue_url": "https://github.com/owner/repo/issues/42", "priority": "high", "estimated_hours": 4}}
+#   Verify: Confirm delivery via the agent-messaging skill send confirmation.
 ```
 
 ### AI Agent Capacity
@@ -205,13 +194,7 @@ Final: Merged, moves to Done
 
 ### Orchestrator Communication
 
-To AI agents:
-```bash
-# AI Maestro message
-curl -X POST "http://localhost:23000/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{"to": "agent-1", "subject": "...", ...}'
-```
+To AI agents: Send a message using the `agent-messaging` skill with the recipient agent name, subject, content, and priority.
 
 To humans:
 ```bash

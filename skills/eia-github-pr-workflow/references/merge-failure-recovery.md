@@ -101,19 +101,12 @@ git push origin main
 
 ### Step 5: Notify Author
 
-```bash
-curl -X POST "$AIMAESTRO_API/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "to": "PR_AUTHOR_AGENT",
-    "subject": "Merge Conflict Resolved: PR #123",
-    "priority": "normal",
-    "content": {
-      "type": "merge-conflict-resolved",
-      "message": "Merge conflicts in PR #123 have been resolved. Files affected: [LIST]. Please verify the resolution."
-    }
-  }'
-```
+Send a message using the `agent-messaging` skill with:
+- **Recipient**: `PR_AUTHOR_AGENT`
+- **Subject**: `Merge Conflict Resolved: PR #123`
+- **Priority**: `normal`
+- **Content**: `{"type": "merge-conflict-resolved", "message": "Merge conflicts in PR #123 have been resolved. Files affected: [LIST]. Please verify the resolution."}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 ## CI Failure During Merge
 
@@ -169,33 +162,19 @@ git push origin main
 
 ### Step 4: Notify Stakeholders
 
-```bash
-# Notify author of failure
-curl -X POST "$AIMAESTRO_API/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "to": "PR_AUTHOR_AGENT",
-    "subject": "[CI FAILURE] PR #123 merge caused test failures",
-    "priority": "urgent",
-    "content": {
-      "type": "ci-failure-post-merge",
-      "message": "PR #123 merge to main caused CI failures. Action taken: [REVERT/HOTFIX]. Failures: [SUMMARY]. Please investigate and resubmit."
-    }
-  }'
+**Notify author of failure:** Send a message using the `agent-messaging` skill with:
+- **Recipient**: `PR_AUTHOR_AGENT`
+- **Subject**: `[CI FAILURE] PR #123 merge caused test failures`
+- **Priority**: `urgent`
+- **Content**: `{"type": "ci-failure-post-merge", "message": "PR #123 merge to main caused CI failures. Action taken: [REVERT/HOTFIX]. Failures: [SUMMARY]. Please investigate and resubmit."}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
-# Notify orchestrator
-curl -X POST "$AIMAESTRO_API/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "to": "orchestrator-eoa",
-    "subject": "[CI FAILURE] Main branch temporarily broken",
-    "priority": "urgent",
-    "content": {
-      "type": "main-branch-issue",
-      "message": "Main branch CI failing after PR #123 merge. Recovery action: [REVERT/HOTFIX]. ETA for resolution: [TIME]."
-    }
-  }'
-```
+**Notify orchestrator:** Send a message using the `agent-messaging` skill with:
+- **Recipient**: `orchestrator-eoa`
+- **Subject**: `[CI FAILURE] Main branch temporarily broken`
+- **Priority**: `urgent`
+- **Content**: `{"type": "main-branch-issue", "message": "Main branch CI failing after PR #123 merge. Recovery action: [REVERT/HOTFIX]. ETA for resolution: [TIME]."}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 ## Partial Merge Recovery
 
@@ -281,55 +260,30 @@ Always notify the PR author when:
 - CI fails after merge
 - Merge is reverted
 
-```bash
-curl -X POST "$AIMAESTRO_API/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "to": "PR_AUTHOR_AGENT",
-    "subject": "[MERGE ISSUE] PR #123 - Action Required",
-    "priority": "high",
-    "content": {
-      "type": "merge-issue",
-      "message": "Issue with PR #123 merge: [DESCRIPTION]. Required action: [ACTION]. Please respond within [TIMEFRAME]."
-    }
-  }'
-```
+Send a message using the `agent-messaging` skill with:
+- **Recipient**: `PR_AUTHOR_AGENT`
+- **Subject**: `[MERGE ISSUE] PR #123 - Action Required`
+- **Priority**: `high`
+- **Content**: `{"type": "merge-issue", "message": "Issue with PR #123 merge: [DESCRIPTION]. Required action: [ACTION]. Please respond within [TIMEFRAME]."}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 ### Notify Code Reviewer
 
-Notify reviewer if their approved PR caused issues:
-
-```bash
-curl -X POST "$AIMAESTRO_API/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "to": "REVIEWER_AGENT",
-    "subject": "[FYI] PR #123 post-merge issue",
-    "priority": "normal",
-    "content": {
-      "type": "review-followup",
-      "message": "PR #123 which you reviewed encountered post-merge issues: [SUMMARY]. This is for awareness only - author has been notified."
-    }
-  }'
-```
+Notify reviewer if their approved PR caused issues. Send a message using the `agent-messaging` skill with:
+- **Recipient**: `REVIEWER_AGENT`
+- **Subject**: `[FYI] PR #123 post-merge issue`
+- **Priority**: `normal`
+- **Content**: `{"type": "review-followup", "message": "PR #123 which you reviewed encountered post-merge issues: [SUMMARY]. This is for awareness only - author has been notified."}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 ### Notify Orchestrator
 
-Always notify orchestrator of significant merge issues:
-
-```bash
-curl -X POST "$AIMAESTRO_API/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "to": "orchestrator-eoa",
-    "subject": "[MERGE STATUS] PR #123",
-    "priority": "high",
-    "content": {
-      "type": "merge-status",
-      "message": "PR #123 merge status: [FAILED/REVERTED/RECOVERED]. Reason: [REASON]. Next steps: [STEPS]."
-    }
-  }'
-```
+Always notify orchestrator of significant merge issues. Send a message using the `agent-messaging` skill with:
+- **Recipient**: `orchestrator-eoa`
+- **Subject**: `[MERGE STATUS] PR #123`
+- **Priority**: `high`
+- **Content**: `{"type": "merge-status", "message": "PR #123 merge status: [FAILED/REVERTED/RECOVERED]. Reason: [REASON]. Next steps: [STEPS]."}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 ## Rollback If Merge Corrupts Main
 
@@ -347,18 +301,12 @@ Rollback immediately if:
 # Prevent further merges
 # (If using branch protection, CI failure should block this automatically)
 
-# Alert team
-curl -X POST "$AIMAESTRO_API/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "to": "orchestrator-eoa",
-    "subject": "[CRITICAL] Main branch corrupted - Rollback in progress",
-    "priority": "urgent",
-    "content": {
-      "type": "critical-rollback",
-      "message": "Main branch corrupted by PR #123. Initiating immediate rollback. All merges blocked until resolved."
-    }
-  }'
+# Alert team: Send a message using the agent-messaging skill with:
+#   Recipient: orchestrator-eoa
+#   Subject: [CRITICAL] Main branch corrupted - Rollback in progress
+#   Priority: urgent
+#   Content: {"type": "critical-rollback", "message": "Main branch corrupted by PR #123. Initiating immediate rollback. All merges blocked until resolved."}
+#   Verify: Confirm delivery via the agent-messaging skill send confirmation.
 ```
 
 ### Step 2: Identify Good State

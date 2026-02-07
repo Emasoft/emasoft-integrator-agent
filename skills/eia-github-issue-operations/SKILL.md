@@ -11,6 +11,8 @@ metadata:
   requires_tools: "gh, jq"
 agent: api-coordinator
 context: fork
+workflow-instruction: "Step 13"
+procedure: "proc-populate-kanban"
 ---
 
 # GitHub Issue Operations Skill

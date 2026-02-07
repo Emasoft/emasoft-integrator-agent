@@ -43,11 +43,11 @@ This document defines standardized protocols for handling edge cases and failure
 
 The Integrator uses AI Maestro to communicate with Orchestrator and Assistant Manager. Detect unavailability through:
 
-| Check | Command | Failure Indicator |
-|-------|---------|-------------------|
-| API Health | `curl -s "$AIMAESTRO_API/health"` | HTTP 503/504 or timeout |
-| Connection Test | `curl -m 10 "$AIMAESTRO_API/api/messages?agent=$SESSION_NAME&action=unread-count"` | Connection timeout after 10 seconds |
-| Agent Registry | `curl -s "$AIMAESTRO_API/api/agents"` | Registry unreachable or empty response |
+| Check | Method | Failure Indicator |
+|-------|--------|-------------------|
+| API Health | Use the `agent-messaging` skill to check service health | HTTP 503/504 or timeout |
+| Connection Test | Use the `agent-messaging` skill to check inbox (with 10s timeout) | Connection timeout after 10 seconds |
+| Agent Registry | Use the `agent-messaging` skill to list known agents | Registry unreachable or empty response |
 
 ### 1.2 Response Workflow
 
@@ -204,16 +204,13 @@ AI agents collaborate asynchronously and may be hibernated for extended periods.
 ### 3.2 Escalation Order
 
 **Step 1: First Reminder (when state = No ACK or No Progress)**
-```bash
-curl -X POST "$AIMAESTRO_API/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "to": "'$AGENT_NAME'",
-    "subject": "Review Check: PR #'$PR_NUMBER'",
-    "priority": "high",
-    "content": {"type": "status_request", "message": "Please provide status update for PR #'$PR_NUMBER' review."}
-  }'
-```
+
+Send a message using the `agent-messaging` skill with:
+- **Recipient**: The assigned reviewer agent
+- **Subject**: `Review Check: PR #<PR_NUMBER>`
+- **Priority**: `high`
+- **Content**: `{"type": "status_request", "message": "Please provide status update for PR #<PR_NUMBER> review."}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 **Step 2: Urgent Reminder (when state = Unresponsive after Step 1)**
 - Send urgent priority message

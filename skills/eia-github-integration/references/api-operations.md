@@ -749,24 +749,12 @@ gh api rate_limit | jq '.resources.core'
 | 10-100 | Orange | Only critical operations |
 | < 10 | Red | STOP all operations, wait for reset |
 
-3. **If in Yellow or Orange zone**, send warning to orchestrator:
-
-```bash
-if [ "$REMAINING" -lt 500 ] && [ "$REMAINING" -ge 100 ]; then
-    # Send AI Maestro message to orchestrator
-    curl -X POST "http://localhost:23000/api/messages" \
-      -H "Content-Type: application/json" \
-      -d '{
-        "to": "orchestrator-master",
-        "subject": "GitHub Rate Limit Warning",
-        "priority": "high",
-        "content": {
-          "type": "warning",
-          "message": "GitHub API rate limit in YELLOW zone: '"$REMAINING"' remaining"
-        }
-      }'
-fi
-```
+3. **If in Yellow or Orange zone**, send warning to orchestrator using the `agent-messaging` skill with:
+   - **Recipient**: `orchestrator-master`
+   - **Subject**: `GitHub Rate Limit Warning`
+   - **Priority**: `high`
+   - **Content**: `{"type": "warning", "message": "GitHub API rate limit in YELLOW zone: <REMAINING> remaining"}`
+   - **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 4. **If in Red zone**, calculate wait time:
 
@@ -1254,18 +1242,9 @@ echo "Gate 5: Rate limit check PASS ($REMAINING remaining)"
 
 **Procedure**:
 
-1. **Check for unread messages**:
+1. **Check for unread messages**: Check your inbox using the `agent-messaging` skill.
 
-```bash
-curl -s "http://localhost:23000/api/messages?agent=$SESSION_NAME&action=list&status=unread" | jq '.messages[]'
-```
-
-2. **Filter for API requests**:
-
-```bash
-curl -s "http://localhost:23000/api/messages?agent=$SESSION_NAME&action=list&status=unread" | \
-  jq '.messages[] | select(.content.type == "api-request")'
-```
+2. **Filter for API requests**: Filter inbox messages for `content.type == "api-request"` using the `agent-messaging` skill.
 
 3. **Parse request message**:
 
@@ -1300,11 +1279,7 @@ CALLBACK=$(echo "$MESSAGE" | jq -r '.content.callback_agent')
 PRIORITY=$(echo "$MESSAGE" | jq -r '.priority')
 ```
 
-5. **Mark message as read**:
-
-```bash
-curl -X POST "http://localhost:23000/api/messages?agent=$SESSION_NAME&action=mark-read&id=msg-123"
-```
+5. **Mark message as read**: Mark the message as read using the `agent-messaging` skill.
 
 6. **Execute the operation** (proceed to section 1.8).
 
@@ -1316,64 +1291,26 @@ curl -X POST "http://localhost:23000/api/messages?agent=$SESSION_NAME&action=mar
 
 **Purpose**: Close the request-response loop via AI Maestro messaging.
 
-**Procedure for successful operations**:
+**Procedure for successful operations**: Send a message using the `agent-messaging` skill with:
+- **Recipient**: The callback agent
+- **Subject**: `API Operation Complete: <OPERATION>`
+- **Priority**: `normal`
+- **Content**: `{"type": "api-response", "operation": "<OPERATION>", "status": "success", "result": {"issue_number": 456, "issue_url": "https://github.com/owner/repo/issues/456"}}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
-```bash
-curl -X POST "http://localhost:23000/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "to": "'"$CALLBACK_AGENT"'",
-    "subject": "API Operation Complete: '"$OPERATION"'",
-    "priority": "normal",
-    "content": {
-      "type": "api-response",
-      "operation": "'"$OPERATION"'",
-      "status": "success",
-      "result": {
-        "issue_number": 456,
-        "issue_url": "https://github.com/owner/repo/issues/456"
-      }
-    }
-  }'
-```
+**Procedure for failed operations**: Send a message using the `agent-messaging` skill with:
+- **Recipient**: The callback agent
+- **Subject**: `API Operation Failed: <OPERATION>`
+- **Priority**: `high`
+- **Content**: `{"type": "api-response", "operation": "<OPERATION>", "status": "failed", "error": "Gate 2 failed: insufficient permissions", "details_file": "logs/api-operations-20250205.log"}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
-**Procedure for failed operations**:
-
-```bash
-curl -X POST "http://localhost:23000/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "to": "'"$CALLBACK_AGENT"'",
-    "subject": "API Operation Failed: '"$OPERATION"'",
-    "priority": "high",
-    "content": {
-      "type": "api-response",
-      "operation": "'"$OPERATION"'",
-      "status": "failed",
-      "error": "Gate 2 failed: insufficient permissions",
-      "details_file": "logs/api-operations-20250205.log"
-    }
-  }'
-```
-
-**Procedure for rate-limited operations**:
-
-```bash
-curl -X POST "http://localhost:23000/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "to": "'"$CALLBACK_AGENT"'",
-    "subject": "API Operation Queued: '"$OPERATION"'",
-    "priority": "normal",
-    "content": {
-      "type": "api-response",
-      "operation": "'"$OPERATION"'",
-      "status": "rate-limited",
-      "message": "Operation queued due to rate limit pressure. Will retry when limit resets.",
-      "retry_after": "2025-02-05T12:00:00Z"
-    }
-  }'
-```
+**Procedure for rate-limited operations**: Send a message using the `agent-messaging` skill with:
+- **Recipient**: The callback agent
+- **Subject**: `API Operation Queued: <OPERATION>`
+- **Priority**: `normal`
+- **Content**: `{"type": "api-response", "operation": "<OPERATION>", "status": "rate-limited", "message": "Operation queued due to rate limit pressure. Will retry when limit resets.", "retry_after": "2025-02-05T12:00:00Z"}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 ---
 
@@ -1445,18 +1382,11 @@ curl -X POST "http://localhost:23000/api/messages" \
    - AI Maestro message (see section 1.7.1)
    - Direct orchestrator delegation (via Task tool invocation)
 
-2. **Extract operation details**:
-
-```bash
-# From AI Maestro message
-MESSAGE=$(curl -s "http://localhost:23000/api/messages?agent=$SESSION_NAME&action=list&status=unread" | \
-  jq '.messages[] | select(.content.type == "api-request") | select(.id == "MSG_ID")')
-
-OPERATION=$(echo "$MESSAGE" | jq -r '.content.operation')
-PARAMS=$(echo "$MESSAGE" | jq -r '.content.params')
-CALLBACK=$(echo "$MESSAGE" | jq -r '.content.callback_agent')
-PRIORITY=$(echo "$MESSAGE" | jq -r '.priority')
-```
+2. **Extract operation details**: Read the incoming message from your inbox using the `agent-messaging` skill. Filter for messages with `content.type == "api-request"`. Extract the following fields from the message:
+   - `OPERATION` = `content.operation`
+   - `PARAMS` = `content.params`
+   - `CALLBACK` = `content.callback_agent`
+   - `PRIORITY` = `priority`
 
 3. **Validate request format**:
 
@@ -1795,76 +1725,32 @@ fi
 
 **Purpose**: Close the request-response loop by notifying the requesting agent of the outcome.
 
-**Procedure for success**:
+**Procedure for success**: Send a message using the `agent-messaging` skill with:
+- **Recipient**: The callback agent
+- **Subject**: `API Operation Complete: <OPERATION>`
+- **Priority**: `normal`
+- **Content**: `{"type": "api-response", "operation": "<OPERATION>", "status": "success", "result": <RESULT_JSON>, "details_file": "<LOG_FILE>"}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
-```bash
-curl -X POST "http://localhost:23000/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "to": "'"$CALLBACK_AGENT"'",
-    "subject": "API Operation Complete: '"$OPERATION"'",
-    "priority": "normal",
-    "content": {
-      "type": "api-response",
-      "operation": "'"$OPERATION"'",
-      "status": "success",
-      "result": '"$RESULT_JSON"',
-      "details_file": "'"$LOG_FILE"'"
-    }
-  }'
+Then output: `[DONE] api-coordinator - <OPERATION> completed successfully`
 
-echo "[DONE] api-coordinator - $OPERATION completed successfully"
-echo "Details: $LOG_FILE"
-```
+**Procedure for failure**: Send a message using the `agent-messaging` skill with:
+- **Recipient**: The callback agent
+- **Subject**: `API Operation Failed: <OPERATION>`
+- **Priority**: `high`
+- **Content**: `{"type": "api-response", "operation": "<OPERATION>", "status": "failed", "error": "<FAILURE_REASON>", "failed_gate": "<FAILED_GATE>", "details_file": "<LOG_FILE>"}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
-**Procedure for failure**:
+Then output: `[FAILED] api-coordinator - <OPERATION> failed: <FAILURE_REASON>`
 
-```bash
-curl -X POST "http://localhost:23000/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "to": "'"$CALLBACK_AGENT"'",
-    "subject": "API Operation Failed: '"$OPERATION"'",
-    "priority": "high",
-    "content": {
-      "type": "api-response",
-      "operation": "'"$OPERATION"'",
-      "status": "failed",
-      "error": "'"$FAILURE_REASON"'",
-      "failed_gate": "'"$FAILED_GATE"'",
-      "details_file": "'"$LOG_FILE"'"
-    }
-  }'
+**Procedure for rate-limited/queued**: Send a message using the `agent-messaging` skill with:
+- **Recipient**: The callback agent
+- **Subject**: `API Operation Queued: <OPERATION>`
+- **Priority**: `normal`
+- **Content**: `{"type": "api-response", "operation": "<OPERATION>", "status": "rate-limited", "message": "Operation queued due to rate limit. Will retry after limit resets.", "retry_after": "<RESET_ISO>", "details_file": "<LOG_FILE>"}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
-echo "[FAILED] api-coordinator - $OPERATION failed: $FAILURE_REASON"
-echo "Details: $LOG_FILE"
-```
-
-**Procedure for rate-limited/queued**:
-
-```bash
-RESET_TIME=$(gh api rate_limit | jq -r '.resources.core.reset')
-RESET_ISO=$(date -r "$RESET_TIME" -Iseconds)
-
-curl -X POST "http://localhost:23000/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "to": "'"$CALLBACK_AGENT"'",
-    "subject": "API Operation Queued: '"$OPERATION"'",
-    "priority": "normal",
-    "content": {
-      "type": "api-response",
-      "operation": "'"$OPERATION"'",
-      "status": "rate-limited",
-      "message": "Operation queued due to rate limit. Will retry after limit resets.",
-      "retry_after": "'"$RESET_ISO"'",
-      "details_file": "'"$LOG_FILE"'"
-    }
-  }'
-
-echo "[QUEUED] api-coordinator - $OPERATION queued due to rate limit"
-echo "Details: $LOG_FILE"
-```
+Then output: `[QUEUED] api-coordinator - <OPERATION> queued due to rate limit`
 
 **Verification**: Check that the message was sent successfully:
 

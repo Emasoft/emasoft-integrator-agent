@@ -233,11 +233,7 @@ tail -f /var/log/github-webhook-handler.log
 pm2 logs github-webhook
 ```
 
-**Check AI Maestro connectivity:**
-```bash
-# Use official AI Maestro CLI (see ~/.claude/skills/agent-messaging/SKILL.md)
-check-aimaestro-messages.sh
-```
+**Check AI Maestro connectivity:** Check your inbox using the `agent-messaging` skill. If messages can be retrieved, connectivity is confirmed.
 
 **Verify event routing:**
 ```bash

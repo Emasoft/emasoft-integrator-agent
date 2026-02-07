@@ -522,22 +522,18 @@ Section: {specific section showing the fix pattern}
 
 ### 1.5.2 AI Maestro message format
 
-**Message structure:**
-
-```bash
-curl -X POST "http://localhost:23000/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "from": "eia-debug-specialist",
-    "to": "{remote-agent-name}",
-    "subject": "[FIX REQUEST] CI failure - {pattern_category}",
-    "priority": "high",
-    "content": {
-      "type": "fix_request",
-      "message": "Root cause: {one_line_summary}\nFix spec: docs_dev/ci-debug/CI-DEBUG-{timestamp}.md\nReference: eia-ci-failure-patterns/references/{pattern-file}.md"
-    }
-  }'
-```
+**Action:** Send a message using the `agent-messaging` skill with:
+- **Recipient**: `{remote-agent-name}` (see routing table below)
+- **Subject**: `[FIX REQUEST] CI failure - {pattern_category}`
+- **Priority**: `high`
+- **Content**:
+  ```json
+  {
+    "type": "fix_request",
+    "message": "Root cause: {one_line_summary}\nFix spec: docs_dev/ci-debug/CI-DEBUG-{timestamp}.md\nReference: eia-ci-failure-patterns/references/{pattern-file}.md"
+  }
+  ```
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 **Agent routing by fix category:**
 

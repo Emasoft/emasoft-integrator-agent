@@ -123,20 +123,12 @@ When handing off to another agent (e.g., Orchestrator, Architect):
 
    Please continue from where I left off. All context is in the handoff document.
    ```
-3. If using AI Maestro messaging, send message to target agent:
-   ```bash
-   curl -X POST "$AIMAESTRO_API/api/messages" \
-     -H "Content-Type: application/json" \
-     -d '{
-       "to": "target-agent-session",
-       "subject": "EIA Integration Handoff",
-       "priority": "high",
-       "content": {
-         "type": "handoff",
-         "message": "Integration work requires continuation. Handoff at thoughts/shared/handoffs/eia-integration/current.md"
-       }
-     }'
-   ```
+3. If using AI Maestro messaging, send a message using the `agent-messaging` skill with:
+   - **Recipient**: `target-agent-session`
+   - **Subject**: `EIA Integration Handoff`
+   - **Priority**: `high`
+   - **Content**: `{"type": "handoff", "message": "Integration work requires continuation. Handoff at thoughts/shared/handoffs/eia-integration/current.md"}`
+   - **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 ## Reading Handoffs (Next Session)
 

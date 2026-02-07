@@ -17,6 +17,8 @@ metadata:
   version: 1.0.0
 agent: eia-main
 context: fork
+workflow-instruction: "Step 21"
+procedure: "proc-evaluate-pr"
 ---
 
 # EIA Quality Gates

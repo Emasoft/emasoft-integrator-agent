@@ -19,6 +19,8 @@ metadata:
   tags: "release, versioning, changelog, tagging, rollback, ci-cd"
 agent: eia-main
 context: fork
+workflow-instruction: "support"
+procedure: "support-skill"
 ---
 
 # Release Management Skill
@@ -399,83 +401,42 @@ python scripts/eia_release_verify.py --repo owner/repo --version 1.2.3 --mode ve
 
 ### Template 1: Receiving Release Request
 
-Check for incoming release requests:
-
-```bash
-# Check for release requests from EOA
-curl -s "http://localhost:23000/api/messages?agent=emasoft-integrator&action=list&status=unread" | \
-  jq '.messages[] | select(.content.type == "release-request")'
-```
+Check for incoming release requests by checking your inbox using the `agent-messaging` skill. Filter for messages with `content.type == "release-request"`.
 
 ### Template 2: Reporting Release Readiness
 
-Notify requesting agent that release verification is complete:
-
-```bash
-curl -X POST "$AIMAESTRO_API/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "to": "orchestrator-eoa",
-    "subject": "Release Verification: v1.2.3",
-    "priority": "high",
-    "content": {
-      "type": "release-ready",
-      "message": "Release v1.2.3 verification complete. All gates passed. Awaiting user approval to publish."
-    }
-  }'
-```
+Notify requesting agent that release verification is complete. Send a message using the `agent-messaging` skill with:
+- **Recipient**: `orchestrator-eoa`
+- **Subject**: `Release Verification: v1.2.3`
+- **Priority**: `high`
+- **Content**: `{"type": "release-ready", "message": "Release v1.2.3 verification complete. All gates passed. Awaiting user approval to publish."}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 ### Template 3: Reporting Release Completion
 
-After successful release:
-
-```bash
-curl -X POST "$AIMAESTRO_API/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "to": "orchestrator-eoa",
-    "subject": "Release Published: v1.2.3",
-    "priority": "normal",
-    "content": {
-      "type": "release-complete",
-      "message": "Release v1.2.3 published successfully. URL: https://github.com/owner/repo/releases/tag/v1.2.3"
-    }
-  }'
-```
+After successful release, send a message using the `agent-messaging` skill with:
+- **Recipient**: `orchestrator-eoa`
+- **Subject**: `Release Published: v1.2.3`
+- **Priority**: `normal`
+- **Content**: `{"type": "release-complete", "message": "Release v1.2.3 published successfully. URL: https://github.com/owner/repo/releases/tag/v1.2.3"}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 ### Template 4: Escalating Release Blocker
 
-When a critical issue blocks release:
-
-```bash
-curl -X POST "$AIMAESTRO_API/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "to": "orchestrator-eoa",
-    "subject": "[RELEASE BLOCKED] v1.2.3",
-    "priority": "urgent",
-    "content": {
-      "type": "release-blocked",
-      "message": "Release v1.2.3 blocked. Blocker: CI pipeline failure in security scan. Requires resolution before release."
-    }
-  }'
-```
+When a critical issue blocks release, send a message using the `agent-messaging` skill with:
+- **Recipient**: `orchestrator-eoa`
+- **Subject**: `[RELEASE BLOCKED] v1.2.3`
+- **Priority**: `urgent`
+- **Content**: `{"type": "release-blocked", "message": "Release v1.2.3 blocked. Blocker: CI pipeline failure in security scan. Requires resolution before release."}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 ### Template 5: Initiating Rollback Notification
 
-When rollback is initiated:
-
-```bash
-curl -X POST "$AIMAESTRO_API/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "to": "orchestrator-eoa",
-    "subject": "[ROLLBACK] v1.2.3 -> v1.2.2",
-    "priority": "urgent",
-    "content": {
-      "type": "rollback-initiated",
-      "message": "Rollback initiated from v1.2.3 to v1.2.2. Reason: Critical regression in API. ETA: 15 minutes."
-    }
+When rollback is initiated, send a message using the `agent-messaging` skill with:
+- **Recipient**: `orchestrator-eoa`
+- **Subject**: `[ROLLBACK] v1.2.3 -> v1.2.2`
+- **Priority**: `urgent`
+- **Content**: `{"type": "rollback-initiated", "message": "Rollback initiated from v1.2.3 to v1.2.2. Reason: Critical regression in API. ETA: 15 minutes."
   }'
 ```
 

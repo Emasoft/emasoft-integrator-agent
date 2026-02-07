@@ -337,22 +337,12 @@ gh issue edit 42 --add-assignee agent-1 --add-assignee agent-2
 
 ### AI Maestro Notification on Assignment
 
-When assigning an issue, notify the agent via AI Maestro:
-
-```bash
-# Send assignment notification
-curl -X POST "http://localhost:23000/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "to": "implementer-1",
-    "subject": "New Assignment: Issue #42",
-    "priority": "high",
-    "content": {
-      "type": "assignment",
-      "message": "You have been assigned to issue #42: [MODULE] auth-core. Please move to In Progress when you start work."
-    }
-  }'
-```
+When assigning an issue, notify the agent via AI Maestro. Send a message using the `agent-messaging` skill with:
+- **Recipient**: `implementer-1`
+- **Subject**: `New Assignment: Issue #42`
+- **Priority**: `high`
+- **Content**: `{"type": "assignment", "message": "You have been assigned to issue #42: [MODULE] auth-core. Please move to In Progress when you start work."}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 ### Notification Template
 
@@ -371,30 +361,16 @@ curl -X POST "http://localhost:23000/api/messages" \
 
 ### Reassignment Notification
 
-```bash
-# Notify old assignee
-curl -X POST "http://localhost:23000/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "to": "agent-1",
-    "subject": "Issue #42 Reassigned",
-    "priority": "normal",
-    "content": {
-      "type": "reassignment",
-      "message": "Issue #42 has been reassigned from you to agent-2. Please hand off any work in progress."
-    }
-  }'
+**Notify old assignee:** Send a message using the `agent-messaging` skill with:
+- **Recipient**: `agent-1` (the old assignee)
+- **Subject**: `Issue #42 Reassigned`
+- **Priority**: `normal`
+- **Content**: `{"type": "reassignment", "message": "Issue #42 has been reassigned from you to agent-2. Please hand off any work in progress."}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
-# Notify new assignee
-curl -X POST "http://localhost:23000/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "to": "agent-2",
-    "subject": "New Assignment: Issue #42 (Reassigned)",
-    "priority": "high",
-    "content": {
-      "type": "assignment",
-      "message": "Issue #42 has been reassigned to you from agent-1. Context: [context]. Please continue work."
-    }
-  }'
-```
+**Notify new assignee:** Send a message using the `agent-messaging` skill with:
+- **Recipient**: `agent-2` (the new assignee)
+- **Subject**: `New Assignment: Issue #42 (Reassigned)`
+- **Priority**: `high`
+- **Content**: `{"type": "assignment", "message": "Issue #42 has been reassigned to you from agent-1. Context: [context]. Please continue work."}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.

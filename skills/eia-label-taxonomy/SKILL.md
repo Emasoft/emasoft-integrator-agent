@@ -7,6 +7,8 @@ metadata:
   version: 1.0.0
 agent: eia-main
 context: fork
+workflow-instruction: "support"
+procedure: "support-skill"
 ---
 
 # EIA Label Taxonomy

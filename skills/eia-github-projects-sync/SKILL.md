@@ -8,6 +8,8 @@ metadata:
   version: 1.0.0
 agent: api-coordinator
 context: fork
+workflow-instruction: "Step 13"
+procedure: "proc-populate-kanban"
 ---
 
 # GitHub Projects Sync
@@ -344,10 +346,11 @@ For all inter-agent messaging, refer to the official AI Maestro skill:
 ~/.claude/skills/agent-messaging/SKILL.md
 ```
 
-Use official CLI scripts for notifications:
-```bash
-send-aimaestro-message.sh orchestrator-master "Subject" '{"type":"TYPE","message":"MSG"}' priority type
-```
+Use the `agent-messaging` skill to send notifications. For example, to notify the orchestrator, send a message using the `agent-messaging` skill with:
+- **Recipient**: `orchestrator-master`
+- **Subject**: Your notification subject
+- **Content**: `{"type": "TYPE", "message": "MSG"}`
+- **Priority**: The appropriate priority level
 
 ---
 

@@ -191,25 +191,12 @@ gh issue comment 42 --body "Blocked by #$BLOCKER_ISSUE"
 
 ### Step 5: Notify Orchestrator
 
-```bash
-curl -X POST "http://localhost:23000/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "to": "orchestrator-master",
-    "subject": "Issue #42 Blocked",
-    "priority": "high",
-    "content": {
-      "type": "blocker",
-      "message": "Issue #42 is blocked. Blocker issue #BLOCKER_ISSUE created. Need DBA action.",
-      "data": {
-        "issue_number": 42,
-        "blocker_issue_number": "BLOCKER_ISSUE",
-        "blocker_type": "access",
-        "what_needed": "DBA to provide credentials"
-      }
-    }
-  }'
-```
+Send a message using the `agent-messaging` skill with:
+- **Recipient**: `orchestrator-master`
+- **Subject**: `Issue #42 Blocked`
+- **Priority**: `high`
+- **Content**: `{"type": "blocker", "message": "Issue #42 is blocked. Blocker issue #BLOCKER_ISSUE created. Need DBA action.", "data": {"issue_number": 42, "blocker_issue_number": "BLOCKER_ISSUE", "blocker_type": "access", "what_needed": "DBA to provide credentials"}}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 ---
 
@@ -363,22 +350,12 @@ gh issue edit 42 --remove-label "blocked"
 # IMPORTANT: Read the "Previous Status" from the blocker comment to determine target column
 # [GraphQL mutation to set status - use PREVIOUS_STATUS from blocker comment, not hardcoded "In Progress"]
 
-# Notify agent
-curl -X POST "http://localhost:23000/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "to": "agent-1",
-    "subject": "Issue #42 Unblocked",
-    "priority": "high",
-    "content": {
-      "type": "unblocked",
-      "message": "Issue #42 is unblocked. Credentials are now in vault. Please resume work.",
-      "data": {
-        "issue_number": 42,
-        "returned_to_column": "In Progress"
-      }
-    }
-  }'
+# Notify agent using the agent-messaging skill:
+#   Recipient: agent-1
+#   Subject: Issue #42 Unblocked
+#   Priority: high
+#   Content: {"type": "unblocked", "message": "Issue #42 is unblocked. Credentials are now in vault. Please resume work.", "data": {"issue_number": 42, "returned_to_column": "In Progress"}}
+#   Verify: Confirm delivery via the agent-messaging skill send confirmation.
 ```
 
 ---

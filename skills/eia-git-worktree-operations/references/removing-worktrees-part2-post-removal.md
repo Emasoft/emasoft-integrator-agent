@@ -151,15 +151,12 @@ The record of which AI agent was working in this worktree.
 
 **Option A - AI Maestro messaging:**
 
-**For messaging, use the official AI Maestro skill:** `~/.claude/skills/agent-messaging/SKILL.md`
-
-```bash
-# Syntax: send-aimaestro-message.sh <to> <subject> <message> [priority] [type]
-send-aimaestro-message.sh code-reviewer-1 \
-  "Worktree review-GH-42 removed" \
-  '{"type":"notification","message":"Worktree review-GH-42 has been removed. You are now available for new assignments."}' \
-  normal notification
-```
+Send a message using the `agent-messaging` skill with:
+- **Recipient**: `code-reviewer-1`
+- **Subject**: `Worktree review-GH-42 removed`
+- **Priority**: `normal`
+- **Content**: `{"type": "notification", "message": "Worktree review-GH-42 has been removed. You are now available for new assignments."}`
+- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 **Option B - Update agent registry:**
 ```bash
@@ -299,16 +296,15 @@ jq "del(.worktrees[] | select(.worktree_id == \"$WORKTREE_ID\"))" \
   "$REGISTRY_PATH" > "$REGISTRY_PATH.tmp" && \
   mv "$REGISTRY_PATH.tmp" "$REGISTRY_PATH"
 
-# Step 6: Notify agent (if assigned) using official CLI
-# See official skill: ~/.claude/skills/agent-messaging/SKILL.md
+# Step 6: Notify agent (if assigned)
+# Use the agent-messaging skill to send this notification.
 if [[ "$AGENT" != "none" ]] && [[ "$AGENT" != "null" ]]; then
   echo "→ Notifying agent: $AGENT..."
-  # Syntax: send-aimaestro-message.sh <to> <subject> <message> [priority] [type]
-  send-aimaestro-message.sh "$AGENT" \
-    "Worktree $WORKTREE_ID removed" \
-    "{\"type\":\"notification\",\"message\":\"Worktree $WORKTREE_ID has been removed.\"}" \
-    normal notification \
-    > /dev/null || echo "  Warning: Could not notify agent"
+  echo "  ACTION REQUIRED: Send a message using the agent-messaging skill:"
+  echo "    Recipient: $AGENT"
+  echo "    Subject: Worktree $WORKTREE_ID removed"
+  echo "    Content: {\"type\":\"notification\",\"message\":\"Worktree $WORKTREE_ID has been removed.\"}"
+  echo "    Priority: normal"
 fi
 
 # Step 7: Log removal

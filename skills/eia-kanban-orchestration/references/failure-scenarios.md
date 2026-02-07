@@ -349,18 +349,12 @@ gh issue comment 42 --body "Task failed: OAuth library incompatible. Creating re
 gh issue edit 43 --add-label "blocked"
 gh issue comment 43 --body "Blocked by GH-42 failure. Awaiting recovery."
 
-# Step 3: Notify agent on GH-43
-curl -X POST "http://localhost:23000/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "to": "agent-2",
-    "subject": "GH-43 Blocked",
-    "priority": "high",
-    "content": {
-      "type": "blocker",
-      "message": "GH-43 is blocked due to GH-42 failure. Pause work until unblocked."
-    }
-  }'
+# Step 3: Notify agent on GH-43 using the agent-messaging skill:
+#   Recipient: agent-2
+#   Subject: GH-43 Blocked
+#   Priority: high
+#   Content: {"type": "blocker", "message": "GH-43 is blocked due to GH-42 failure. Pause work until unblocked."}
+#   Verify: Confirm delivery via the agent-messaging skill send confirmation.
 
 # Step 4: Create recovery task
 gh issue create --title "Recovery: Fix OAuth compatibility in auth module" \
@@ -382,18 +376,12 @@ gh issue create --title "Resolve merge conflicts for feature X integration" \
 # Step 3: Assign to conflict resolver
 gh issue edit 51 --add-assignee conflict-resolver-agent
 
-# Step 4: Notify resolver
-curl -X POST "http://localhost:23000/api/messages" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "to": "conflict-resolver-agent",
-    "subject": "ASSIGNMENT: Resolve conflicts for GH-50",
-    "priority": "high",
-    "content": {
-      "type": "assignment",
-      "message": "Resolve merge conflicts following strategy in GH-51."
-    }
-  }'
+# Step 4: Notify resolver using the agent-messaging skill:
+#   Recipient: conflict-resolver-agent
+#   Subject: ASSIGNMENT: Resolve conflicts for GH-50
+#   Priority: high
+#   Content: {"type": "assignment", "message": "Resolve merge conflicts following strategy in GH-51."}
+#   Verify: Confirm delivery via the agent-messaging skill send confirmation.
 ```
 
 ---
