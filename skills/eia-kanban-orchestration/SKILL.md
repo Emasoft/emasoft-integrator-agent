@@ -124,7 +124,7 @@ Read this FIRST to understand the philosophical foundation.
 Read this when you need to understand what each column means and its requirements.
 
 **Contents:**
-- 2.1 Overview of the 9-column workflow
+- 2.1 Overview of the 8-column workflow
 - 2.2 Backlog column - items not yet scheduled
 - 2.3 Todo column - ready for immediate work
 - 2.4 In Progress column - active development
@@ -181,8 +181,9 @@ Read this when moving cards between columns or validating transitions.
 - 5.4 Backlog to Todo transition rules
 - 5.5 Todo to In Progress transition rules
 - 5.6 In Progress to AI Review transition rules
-- 5.6a AI Review to Human Review transition rules
-- 5.6b AI Review to Merge/Release transition rules
+- 5.6a AI Review to Human Review transition rules (big tasks)
+- 5.6b AI Review to Merge/Release transition rules (small tasks)
+- 5.6c Human Review to Merge/Release transition rules
 - 5.7 Merge/Release to Done transition rules
 - 5.8 Any status to Blocked transition rules
 - 5.9 Blocked to previous status transition rules

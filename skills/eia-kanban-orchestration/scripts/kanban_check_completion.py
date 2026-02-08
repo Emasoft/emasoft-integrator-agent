@@ -150,7 +150,9 @@ def check_completion(items: list[dict[str, Any]]) -> dict[str, Any]:
         "Backlog": 0,
         "Todo": 0,
         "In Progress": 0,
-        "In Review": 0,
+        "AI Review": 0,
+        "Human Review": 0,
+        "Merge/Release": 0,
         "Done": 0,
         "Blocked": 0,
         "Other": 0,
@@ -167,7 +169,7 @@ def check_completion(items: list[dict[str, Any]]) -> dict[str, Any]:
             counts["Other"] += 1
 
         # Track incomplete items (not Backlog, not Done)
-        if status in ["Todo", "In Progress", "In Review"]:
+        if status in ["Todo", "In Progress", "AI Review", "Human Review", "Merge/Release"]:
             incomplete.append(item)
         elif status == "Blocked":
             blocked.append(item)
@@ -216,12 +218,14 @@ def print_result(result: dict[str, Any], verbose: bool = False) -> None:
 
     counts = result["counts"]
     print("\nStatus Summary:")
-    print(f"  Backlog:     {counts['Backlog']}")
-    print(f"  Todo:        {counts['Todo']}")
-    print(f"  In Progress: {counts['In Progress']}")
-    print(f"  In Review:   {counts['In Review']}")
-    print(f"  Blocked:     {counts['Blocked']}")
-    print(f"  Done:        {counts['Done']}")
+    print(f"  Backlog:       {counts['Backlog']}")
+    print(f"  Todo:          {counts['Todo']}")
+    print(f"  In Progress:   {counts['In Progress']}")
+    print(f"  AI Review:     {counts['AI Review']}")
+    print(f"  Human Review:  {counts['Human Review']}")
+    print(f"  Merge/Release: {counts['Merge/Release']}")
+    print(f"  Blocked:       {counts['Blocked']}")
+    print(f"  Done:          {counts['Done']}")
     print(f"\n  Total: {result['total']} | Active: {result['active']} | Done: {result['done']}")
 
     if result["total"] > 0:

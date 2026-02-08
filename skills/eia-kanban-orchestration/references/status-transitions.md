@@ -7,8 +7,11 @@
 - 5.3 [Who can move cards](#53-who-can-move)
 - 5.4 [Backlog to Todo transition rules](#54-backlog-to-todo)
 - 5.5 [Todo to In Progress transition rules](#55-todo-to-in-progress)
-- 5.6 [In Progress to In Review transition rules](#56-in-progress-to-in-review)
-- 5.7 [In Review to Done transition rules](#57-in-review-to-done)
+- 5.6 [In Progress to AI Review transition rules](#56-in-progress-to-ai-review)
+- 5.6a [AI Review to Human Review transition rules (big tasks)](#56a-ai-review-to-human-review)
+- 5.6b [AI Review to Merge/Release transition rules (small tasks)](#56b-ai-review-to-merge-release)
+- 5.6c [Human Review to Merge/Release transition rules](#56c-human-review-to-merge-release)
+- 5.7 [Merge/Release to Done transition rules](#57-merge-release-to-done)
 - 5.8 [Any status to Blocked transition rules](#58-any-to-blocked)
 - 5.9 [Blocked to previous status transition rules](#59-blocked-to-previous)
 - 5.10 [Invalid transitions and handling](#510-invalid-transitions)
@@ -18,20 +21,29 @@
 ## 5.1 Transition Matrix
 
 ```
-FROM ↓ / TO →    │ Backlog │ Todo │ In Progress │ In Review │ Done │ Blocked │
-─────────────────┼─────────┼──────┼─────────────┼───────────┼──────┼─────────┤
-Backlog          │    -    │  ✓   │      ✗      │     ✗     │  ✗   │    ✗    │
-Todo             │    ✓    │  -   │      ✓      │     ✗     │  ✗   │    ✓    │
-In Progress      │    ✗    │  ✓   │      -      │     ✓     │  ✗   │    ✓    │
-In Review        │    ✗    │  ✗   │      ✓      │     -     │  ✓   │    ✓    │
-Done             │    ✗    │  ✗   │      ✗      │     ✗     │  -   │    ✗    │
-Blocked          │    ✗    │  ✓   │      ✓      │     ✗     │  ✗   │    -    │
+FROM ↓ / TO →    │ Backlog │ Todo │ In Progress │ AI Review │ Human Review │ Merge/Release │ Done │ Blocked │
+─────────────────┼─────────┼──────┼─────────────┼───────────┼──────────────┼───────────────┼──────┼─────────┤
+Backlog          │    -    │  ✓   │      ✗      │     ✗     │      ✗       │       ✗       │  ✗   │    ✗    │
+Todo             │    ✓    │  -   │      ✓      │     ✗     │      ✗       │       ✗       │  ✗   │    ✓    │
+In Progress      │    ✗    │  ✓   │      -      │     ✓     │      ✗       │       ✗       │  ✗   │    ✓    │
+AI Review        │    ✗    │  ✗   │      ✓      │     -     │      ✓       │       ✓       │  ✗   │    ✓    │
+Human Review     │    ✗    │  ✗   │      ✓      │     ✗     │      -       │       ✓       │  ✗   │    ✓    │
+Merge/Release    │    ✗    │  ✗   │      ✗      │     ✗     │      ✗       │       -       │  ✓   │    ✓    │
+Done             │    ✗    │  ✗   │      ✗      │     ✗     │      ✗       │       ✗       │  -   │    ✗    │
+Blocked          │    ✗    │  ✓   │      ✓      │     ✗     │      ✗       │       ✗       │  ✗   │    -    │
 ```
 
 **Legend:**
 - ✓ = Valid transition
 - ✗ = Invalid transition
 - `-` = Same status (no transition)
+
+**Task Routing Rules:**
+- **Small tasks**: In Progress → AI Review → Merge/Release → Done (skip Human Review)
+- **Big tasks**: In Progress → AI Review → Human Review → Merge/Release → Done
+- The Integrator agent (EIA) reviews ALL tasks in AI Review
+- Only BIG tasks go to Human Review (user reviews via EAMA Assistant Manager)
+- Any status can move to Blocked (and back)
 
 ---
 
@@ -45,8 +57,11 @@ Conditions that MUST be true BEFORE a transition can occur:
 |------------|---------------|
 | Backlog → Todo | Acceptance criteria defined, dependencies identified |
 | Todo → In Progress | Assignee set, no blocking dependencies |
-| In Progress → In Review | PR created, tests passing, PR linked to issue |
-| In Review → Done | PR merged, CI passed |
+| In Progress → AI Review | PR created, tests passing, PR linked to issue |
+| AI Review → Human Review | Integrator approved, task flagged as BIG |
+| AI Review → Merge/Release | Integrator approved, task is SMALL (no human review needed) |
+| Human Review → Merge/Release | Human approved the changes |
+| Merge/Release → Done | PR merged, CI passed |
 | Any → Blocked | Blocker documented with reason |
 | Blocked → Previous | Blocker resolved, documented in comment |
 
@@ -58,8 +73,11 @@ Actions that MUST happen AFTER a transition:
 |------------|----------------|
 | Backlog → Todo | Notify assignee if set |
 | Todo → In Progress | Feature branch created, start time recorded |
-| In Progress → In Review | Reviewers notified |
-| In Review → Done | Issue closed, parent progress updated |
+| In Progress → AI Review | Integrator notified for review |
+| AI Review → Human Review | User notified via EAMA (Assistant Manager requests review) |
+| AI Review → Merge/Release | PR ready to merge, CI must pass |
+| Human Review → Merge/Release | Human approval recorded, PR ready to merge |
+| Merge/Release → Done | Issue closed, parent progress updated |
 | Any → Blocked | Escalation timer started |
 | Blocked → Previous | Blocker resolution documented |
 
@@ -69,24 +87,30 @@ Actions that MUST happen AFTER a transition:
 
 ### Permission Matrix
 
-| Transition | Orchestrator | Assigned Agent | Any Agent | Automatic |
-|------------|--------------|----------------|-----------|-----------|
-| Backlog → Todo | ✓ | ✗ | ✗ | ✗ |
-| Todo → Backlog | ✓ | ✗ | ✗ | ✗ |
-| Todo → In Progress | ✓ | ✓ | ✗ | ✗ |
-| In Progress → Todo | ✓ | ✓ | ✗ | ✗ |
-| In Progress → In Review | ✓ | ✓ | ✗ | ✗ |
-| In Review → In Progress | ✓ | ✓ | ✗ | ✗ |
-| In Review → Done | ✗ | ✗ | ✗ | ✓ (PR merge) |
-| Any → Blocked | ✓ | ✓ | ✓ | ✗ |
-| Blocked → Previous | ✓ | ✓ | ✗ | ✗ |
+| Transition | Orchestrator | Integrator | Assigned Agent | Any Agent | Human/User | Automatic |
+|------------|--------------|------------|----------------|-----------|------------|-----------|
+| Backlog → Todo | ✓ | ✗ | ✗ | ✗ | ✗ | ✗ |
+| Todo → Backlog | ✓ | ✗ | ✗ | ✗ | ✗ | ✗ |
+| Todo → In Progress | ✓ | ✗ | ✓ | ✗ | ✗ | ✗ |
+| In Progress → Todo | ✓ | ✗ | ✓ | ✗ | ✗ | ✗ |
+| In Progress → AI Review | ✗ | ✗ | ✓ | ✗ | ✗ | ✗ |
+| AI Review → In Progress | ✗ | ✓ | ✗ | ✗ | ✗ | ✗ |
+| AI Review → Human Review | ✗ | ✓ | ✗ | ✗ | ✗ | ✗ |
+| AI Review → Merge/Release | ✗ | ✓ | ✗ | ✗ | ✗ | ✗ |
+| Human Review → In Progress | ✗ | ✗ | ✗ | ✗ | ✓ | ✗ |
+| Human Review → Merge/Release | ✗ | ✗ | ✗ | ✗ | ✓ | ✗ |
+| Merge/Release → Done | ✗ | ✗ | ✗ | ✗ | ✗ | ✓ (PR merge) |
+| Any → Blocked | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |
+| Blocked → Previous | ✓ | ✗ | ✓ | ✗ | ✗ | ✗ |
 
 ### Key Rules
 
 1. **Only orchestrator moves from Backlog** - Prioritization control
-2. **Only orchestrator or assigned agent moves mid-workflow** - Ownership
-3. **Anyone can block** - Safety first
-4. **Done is automatic** - PR merge triggers
+2. **Assigned agent moves In Progress → AI Review** - Author submits for review
+3. **Only Integrator moves from AI Review** - Integrator decides routing (Human Review for big, Merge/Release for small)
+4. **Only Human/User moves from Human Review** - User has final say on big tasks
+5. **Anyone can block** - Safety first
+6. **Done is automatic** - PR merge triggers
 
 ---
 
@@ -167,11 +191,11 @@ Started: 2024-01-15 14:30 UTC
 
 ---
 
-## 5.6 In Progress to In Review
+## 5.6 In Progress to AI Review
 
 ### When to Transition
 
-Move from In Progress to In Review when:
+Move from In Progress to AI Review when:
 - Implementation is complete (from author's perspective)
 - PR is created and linked to issue
 - All local tests pass
@@ -214,18 +238,129 @@ Closes #42
 ### Comment on Issue
 
 ```markdown
-Ready for review.
+Ready for AI review.
 PR: #123
 All tests passing locally.
+Integrator will review and route to Human Review (big tasks) or Merge/Release (small tasks).
 ```
 
 ---
 
-## 5.7 In Review to Done
+## 5.6a AI Review to Human Review
 
 ### When to Transition
 
-Move from In Review to Done when:
+Move from AI Review to Human Review when:
+- Integrator agent (EIA) has reviewed and approved the code changes
+- The task is flagged as BIG (requires human review)
+
+This transition applies ONLY to big tasks. Small tasks skip Human Review and go directly to Merge/Release (see section 5.6b).
+
+### Preconditions Checklist
+
+- [ ] Integrator review is complete
+- [ ] Task has `size:big` label or equivalent size indicator
+- [ ] All AI review comments are resolved
+- [ ] No blocking issues found by Integrator
+
+### Who Can Move
+
+Only the **Integrator agent (EIA)** can move cards from AI Review to Human Review. No other agent or automation has this permission.
+
+### Postconditions
+
+After moving to Human Review:
+1. EAMA (Assistant Manager) notifies the user that a big task needs human review
+2. PR link and summary are included in the notification
+3. Review request is recorded on the PR
+
+### Comment Template
+
+```markdown
+AI Review complete. Routing to Human Review (big task).
+Integrator review: Approved.
+@user please review PR #123.
+```
+
+---
+
+## 5.6b AI Review to Merge/Release
+
+### When to Transition
+
+Move from AI Review to Merge/Release when:
+- Integrator agent (EIA) has reviewed and approved the code changes
+- The task is SMALL (does not require human review)
+
+This is the fast path for small tasks that do not need human approval.
+
+### Preconditions Checklist
+
+- [ ] Integrator review is complete
+- [ ] Task has `size:small` label or no size label (defaults to small)
+- [ ] All CI checks pass
+- [ ] No blocking issues found by Integrator
+
+### Who Can Move
+
+Only the **Integrator agent (EIA)** can move cards from AI Review to Merge/Release. No other agent or automation has this permission.
+
+### Postconditions
+
+After moving to Merge/Release:
+1. PR is marked as ready to merge
+2. CI pipeline must pass before merge can proceed
+
+### Comment Template
+
+```markdown
+AI Review complete. Small task approved. Ready to merge.
+Integrator review: Approved.
+PR #123 is ready for merge.
+```
+
+---
+
+## 5.6c Human Review to Merge/Release
+
+### When to Transition
+
+Move from Human Review to Merge/Release when:
+- Human user has reviewed and approved the big task
+- User gives explicit approval on the PR or issue
+
+### Preconditions Checklist
+
+- [ ] Human has reviewed the PR
+- [ ] Human has given explicit approval (PR approval or comment)
+- [ ] No outstanding human review comments
+
+### Who Can Move
+
+Only the **Human/User** can move cards from Human Review to Merge/Release. The Orchestrator may also perform this transition after receiving explicit human approval.
+
+### Postconditions
+
+After moving to Merge/Release:
+1. Human approval is recorded on the PR
+2. PR is marked as ready to merge
+3. CI pipeline must pass before merge can proceed
+
+### Comment Template
+
+```markdown
+Human review complete. Approved for merge.
+Reviewed by: @user
+PR #123 is ready for merge.
+```
+
+---
+
+## 5.7 Merge/Release to Done
+
+### When to Transition
+
+Move from Merge/Release to Done when:
 - PR is merged (not just approved)
 - This transition should be AUTOMATIC via GitHub
 
@@ -360,11 +495,14 @@ Returning to **In Progress**.
 
 | Attempted | Why Invalid | What to Do |
 |-----------|-------------|------------|
-| Backlog → In Progress | Skips Todo | Move to Todo first, then In Progress |
-| Todo → In Review | Skips In Progress | Move to In Progress first, then In Review |
-| In Review → Backlog | Backwards too far | If abandoning, move to In Progress then Todo then Backlog |
-| Done → Any | Done is terminal | If needs more work, create new issue |
-| In Progress → Done | Skips review | Must create PR, go through review |
+| Backlog → In Progress | Skips Todo | Move to Todo first |
+| Todo → AI Review | Skips In Progress | Move to In Progress first, create PR |
+| In Progress → Human Review | Skips AI Review | Must go through AI Review first |
+| In Progress → Merge/Release | Skips review | Must go through AI Review (and optionally Human Review) |
+| In Progress → Done | Skips review and merge | Must go through full review pipeline |
+| AI Review → Done | Skips Merge/Release | Must go through Merge/Release |
+| Human Review → Done | Skips Merge/Release | Must go through Merge/Release |
+| Done → Any | Done is terminal | Create new issue if more work needed |
 
 ### Handling Invalid Requests
 
@@ -376,10 +514,10 @@ If an agent requests an invalid transition:
 
 Example response:
 ```
-Cannot move directly from Todo to In Review.
+Cannot move directly from Todo to AI Review.
 The correct path is:
 1. Todo → In Progress (start work, create branch)
-2. In Progress → In Review (create PR)
+2. In Progress → AI Review (create PR, submit for review)
 
 Please move to In Progress first.
 ```
@@ -390,10 +528,12 @@ Please move to In Progress first.
 VALID_TRANSITIONS = {
     "Backlog": ["Todo"],
     "Todo": ["Backlog", "In Progress", "Blocked"],
-    "In Progress": ["Todo", "In Review", "Blocked"],
-    "In Review": ["In Progress", "Done", "Blocked"],
+    "In Progress": ["Todo", "AI Review", "Blocked"],
+    "AI Review": ["In Progress", "Human Review", "Merge/Release", "Blocked"],
+    "Human Review": ["In Progress", "Merge/Release", "Blocked"],
+    "Merge/Release": ["Done", "Blocked"],
     "Done": [],  # Terminal
-    "Blocked": ["Todo", "In Progress"]
+    "Blocked": ["Todo", "In Progress"],
 }
 
 def is_valid_transition(from_status, to_status):

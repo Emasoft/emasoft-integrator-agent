@@ -302,7 +302,9 @@ When a blocker is resolved:
 1. Remove the `status:blocked` label
 2. Move the task back to the column it was in BEFORE being blocked:
    - If it was in "In Progress" → return to "In Progress"
-   - If it was in "In Review" → return to "In Review"
+   - If it was in "AI Review" → return to "AI Review"
+   - If it was in "Human Review" → return to "Human Review"
+   - If it was in "Merge/Release" → return to "Merge/Release"
    - If it was in "Todo" → return to "Todo"
    - If it was in "Done" but was re-blocked → return to the appropriate active column
 3. Add a comment to the GitHub issue documenting:

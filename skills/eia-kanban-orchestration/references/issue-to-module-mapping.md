@@ -329,16 +329,16 @@ A module issue moves through these stages:
 ### Stage 4: Review
 
 ```
-[In Progress] -> [In Review]
+[In Progress] -> [AI Review]
 - PR created (Closes #N)
 - Tests passing
-- Status: In Review
+- Status: AI Review
 ```
 
 ### Stage 5: Completion
 
 ```
-[In Review] -> [Done]
+[AI Review] -> [Merge/Release] -> [Done]
 - PR merged
 - Issue auto-closed
 - Status: Done
@@ -351,9 +351,9 @@ A module issue moves through these stages:
                           │ Blocked │
                           └────┬────┘
                                │
-     ┌────────┐  ┌──────┐  ┌───┴───────┐  ┌───────────┐  ┌──────┐
-     │Backlog ├─►│ Todo ├─►│In Progress├─►│ In Review ├─►│ Done │
-     └────────┘  └──────┘  └───────────┘  └───────────┘  └──────┘
+     ┌────────┐  ┌──────┐  ┌───┴───────┐  ┌─────────┐  ┌─────────┐  ┌──────┐
+     │Backlog ├─►│ Todo ├─►│In Progress├─►│AI Review├─►│Merge/Rel├─►│ Done │
+     └────────┘  └──────┘  └───────────┘  └─────────┘  └─────────┘  └──────┘
          │                       │               │
          │                       │               │
          ▼                       ▼               ▼

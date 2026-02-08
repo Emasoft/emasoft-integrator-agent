@@ -26,8 +26,8 @@ See [board-queries-part2-filtered.md](board-queries-part2-filtered.md)
 - 7.4 Blocked Items - Get blocked items with blocker info
   - 7.4.1 Query blocked status with comments
   - 7.4.2 Parse blocker reason from comments
-- 7.5 Items In Review - Get items with PRs awaiting review
-  - 7.5.1 Query In Review status with linked PRs
+- 7.5 Items in AI Review / Human Review / Merge/Release - Get items in review pipeline
+  - 7.5.1 Query review pipeline status with linked PRs
   - 7.5.2 Check review decision status
 - 7.6 Column Summary - Count items per status column
   - 7.6.1 GraphQL count query
@@ -56,7 +56,7 @@ See [board-queries-part3-history.md](board-queries-part3-history.md)
 | By Status | Find items in specific column | Part 1 |
 | By Assignee | Agent workload view | Part 1 |
 | Blocked Items | Identify blockers | Part 2 |
-| In Review | Track PR status | Part 2 |
+| AI Review / Human Review / Merge/Release | Track review pipeline | Part 2 |
 | Column Summary | Progress metrics | Part 2 |
 | Item History | Audit trail | Part 3 |
 | Completion Check | Stop hook validation | Part 3 |

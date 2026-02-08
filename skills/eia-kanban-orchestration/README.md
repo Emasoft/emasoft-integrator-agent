@@ -76,7 +76,9 @@ python3 scripts/kanban_check_completion.py OWNER REPO PROJECT_NUMBER [--verbose]
 | **Backlog** | Not yet scheduled |
 | **Todo** | Ready to start |
 | **In Progress** | Active development |
-| **In Review** | PR awaiting review |
+| **AI Review** | Integrator reviews PR (all tasks) |
+| **Human Review** | User reviews PR (big tasks only) |
+| **Merge/Release** | PR ready to merge |
 | **Done** | Completed and merged |
 | **Blocked** | Cannot proceed |
 

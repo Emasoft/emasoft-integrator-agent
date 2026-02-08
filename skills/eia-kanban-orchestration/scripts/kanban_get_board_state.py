@@ -142,7 +142,9 @@ def parse_board_state(raw_state: dict[str, Any]) -> dict[str, list[dict[str, Any
         "Backlog": [],
         "Todo": [],
         "In Progress": [],
-        "In Review": [],
+        "AI Review": [],
+        "Human Review": [],
+        "Merge/Release": [],
         "Done": [],
         "Blocked": [],
         "Unknown": [],
@@ -205,7 +207,7 @@ def print_table(grouped: dict[str, list[dict[str, Any]]]) -> None:
     print("KANBAN BOARD STATE")
     print("=" * 80)
 
-    column_order = ["Backlog", "Todo", "In Progress", "In Review", "Blocked", "Done"]
+    column_order = ["Backlog", "Todo", "In Progress", "AI Review", "Human Review", "Merge/Release", "Blocked", "Done"]
 
     for status in column_order:
         items = grouped.get(status, [])

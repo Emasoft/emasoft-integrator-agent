@@ -7,8 +7,8 @@ This part covers filtered queries: blocked items, review status, and column summ
 - [7.4 Blocked Items](#74-blocked-items)
   - [Query Blocked Status](#query-blocked-status)
   - [Parse Blocker Reason](#parse-blocker-reason)
-- [7.5 Items In Review](#75-items-in-review)
-  - [Query In Review Status](#query-in-review-status)
+- [7.5 Items in Review Pipeline (AI Review / Human Review / Merge/Release)](#75-items-in-review-pipeline)
+  - [Query Review Pipeline Status](#query-review-pipeline-status)
   - [Check Review Status](#check-review-status)
 - [7.6 Column Summary](#76-column-summary)
   - [GraphQL Query](#graphql-query)
@@ -84,11 +84,11 @@ gh issue view 42 --json body,comments --jq '.comments[-1].body'
 
 ---
 
-## 7.5 Items In Review
+## 7.5 Items in Review Pipeline
 
 Get items that have PRs awaiting review.
 
-### Query In Review Status
+### Query Review Pipeline Status
 
 ```bash
 gh api graphql -f query='
@@ -135,7 +135,7 @@ gh api graphql -f query='
   }
 ' -f projectId="$PROJECT_ID" | jq '
   .data.node.items.nodes[]
-  | select(.fieldValues.nodes[] | select(.field.name == "Status" and .name == "In Review"))
+  | select(.fieldValues.nodes[] | select(.field.name == "Status" and (.name == "AI Review" or .name == "Human Review" or .name == "Merge/Release")))
   | {
       issue: .content.number,
       title: .content.title,
@@ -199,7 +199,9 @@ gh api graphql -f query='
   {"status": "Blocked", "count": 1},
   {"status": "Done", "count": 12},
   {"status": "In Progress", "count": 3},
-  {"status": "In Review", "count": 2},
+  {"status": "AI Review", "count": 1},
+  {"status": "Human Review", "count": 0},
+  {"status": "Merge/Release", "count": 1},
   {"status": "Todo", "count": 4}
 ]
 ```

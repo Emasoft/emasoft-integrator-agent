@@ -2,7 +2,7 @@
 
 ## Table of Contents
 
-- 2.1 [Overview of the 9-column workflow](#21-overview)
+- 2.1 [Overview of the 8-column workflow](#21-overview)
 - 2.2 [Backlog column - items not yet scheduled](#22-backlog)
 - 2.3 [Todo column - ready for immediate work](#23-todo)
 - 2.4 [In Progress column - active development](#24-in-progress)
@@ -18,7 +18,7 @@
 
 ## 2.1 Overview
 
-The EOA orchestration workflow uses exactly 9 columns. Each column has a precise meaning, requirements, and rules about who can move items into it.
+The EOA orchestration workflow uses exactly 8 columns. Each column has a precise meaning, requirements, and rules about who can move items into it.
 
 ```
 ┌──────────┬──────────┬────────────┬───────────┬──────────────┬───────────────┬──────────┬──────────┐

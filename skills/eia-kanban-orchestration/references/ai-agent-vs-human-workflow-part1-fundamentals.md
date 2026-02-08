@@ -4,6 +4,7 @@
 ## Table of Contents
 
 - 9.1 [Key differences in AI vs human workflow](#91-key-differences)
+- 9.1a [Review routing: AI Review vs Human Review](#91a-review-routing)
 - 9.2 [Assignment strategies for AI agents](#92-ai-assignment)
 - 9.3 [Assignment strategies for human developers](#93-human-assignment)
 - 9.4 [Communication channels](#94-communication)
@@ -30,11 +31,17 @@ AI agents and human developers interact with the Kanban board differently.
 ### Workflow Timing
 
 ```
-AI Agent Timeline:
-  Assigned -> Start (seconds) -> PR (hours) -> Review -> Done
+AI Agent Timeline (small task):
+  Assigned -> Start (seconds) -> PR (hours) -> AI Review -> Merge/Release -> Done
 
-Human Developer Timeline:
-  Assigned -> Start (hours/days) -> PR (days) -> Review -> Done
+AI Agent Timeline (big task):
+  Assigned -> Start (seconds) -> PR (hours) -> AI Review -> Human Review -> Merge/Release -> Done
+
+Human Developer Timeline (small task):
+  Assigned -> Start (hours/days) -> PR (days) -> AI Review -> Merge/Release -> Done
+
+Human Developer Timeline (big task):
+  Assigned -> Start (hours/days) -> PR (days) -> AI Review -> Human Review -> Merge/Release -> Done
 ```
 
 ### Session Considerations
@@ -45,6 +52,90 @@ Human Developer Timeline:
 | Context loss | Complete on session end | Partial (notes help) |
 | Branch ownership | May need handoff | Continues |
 | PR ownership | May need handoff | Continues |
+
+---
+
+<a name="91a-review-routing"></a>
+## 9.1a Review Routing: AI Review vs Human Review
+
+The 8-column kanban system splits the old single "Review" column into three distinct columns with specific routing rules.
+
+### The Three Review-Phase Columns
+
+| Column | Code | Who Reviews | Which Tasks |
+|--------|------|-------------|-------------|
+| AI Review | `ai-review` | Integrator agent (EIA) | ALL tasks (both small and big) |
+| Human Review | `human-review` | Human user (via EAMA) | BIG tasks only |
+| Merge/Release | `merge-release` | Automatic (CI/merge) | All approved tasks |
+
+### Task Size Routing
+
+```
+                    ┌─────────────┐
+                    │ In Progress │
+                    └──────┬──────┘
+                           │ PR created
+                           ▼
+                    ┌─────────────┐
+                    │  AI Review  │ ← Integrator reviews ALL tasks
+                    └──────┬──────┘
+                           │
+              ┌────────────┼────────────┐
+              │ (changes   │            │ (changes
+              │  requested)│            │  requested)
+              ▼            │            ▼
+       ┌─────────────┐    │     ┌──────────────┐
+       │ In Progress  │    │     │ In Progress   │
+       └─────────────┘    │     └──────────────┘
+                          │
+            ┌─────────────┴─────────────┐
+            │                           │
+            ▼ SMALL task                ▼ BIG task
+     ┌──────────────┐          ┌──────────────┐
+     │Merge/Release │          │ Human Review  │ ← User reviews via EAMA
+     └──────┬───────┘          └──────┬───────┘
+            │                         │
+            │                  ┌──────┴────────┐
+            │                  │               │
+            │                  ▼ approved      ▼ changes requested
+            │           ┌──────────────┐  ┌─────────────┐
+            │           │Merge/Release │  │ In Progress  │
+            │           └──────┬───────┘  └─────────────┘
+            │                  │
+            └────────┬─────────┘
+                     ▼
+              ┌─────────────┐
+              │    Done     │
+              └─────────────┘
+```
+
+### How Task Size Is Determined
+
+Task size is determined by labels on the GitHub issue:
+
+| Label | Routing | Examples |
+|-------|---------|---------|
+| `size:small` | AI Review → Merge/Release (skip Human Review) | Bug fixes, minor refactors, documentation updates |
+| `size:big` | AI Review → Human Review → Merge/Release | New features, architecture changes, breaking changes |
+| No size label | Treated as small (default) | Quick tasks without explicit sizing |
+
+### Who Decides the Routing
+
+The **Integrator agent (EIA)** decides the routing after completing AI Review:
+
+1. Integrator reviews the PR (code quality, tests, standards)
+2. If changes needed → moves back to In Progress
+3. If approved AND task is small → moves to Merge/Release
+4. If approved AND task is big → moves to Human Review
+
+### Human Review via EAMA
+
+When a big task reaches Human Review:
+
+1. EAMA (Assistant Manager) notifies the user that a review is needed
+2. User reviews the PR on GitHub
+3. User approves → Orchestrator or user moves to Merge/Release
+4. User requests changes → moves back to In Progress
 
 ---
 
@@ -83,7 +174,7 @@ gh issue edit 42 --add-assignee $AGENT
 | Agent Type | Concurrent Items | Typical Duration |
 |------------|------------------|------------------|
 | Implementer | 1 In Progress | 2-8 hours |
-| Code Reviewer | 2-3 In Review | 30 min each |
+| Code Reviewer (Integrator) | 2-3 AI Review | 30 min each |
 | Helper | 1 task | 15-60 min |
 
 ### Reassignment on Session End
@@ -165,7 +256,7 @@ EOF
 Day 1: Assigned, reads issue, asks questions
 Day 2: Starts work, moves to In Progress
 Day 3-5: Development, commits
-Day 6: Creates PR, moves to In Review
+Day 6: Creates PR, moves to AI Review
 Day 7+: Addresses review feedback
 Final: Merged, moves to Done
 ```

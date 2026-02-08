@@ -13,7 +13,7 @@ Arguments:
     REPO            Repository name
     PROJECT_NUMBER  GitHub Project V2 number
     ISSUE_NUMBER    Issue number to move
-    NEW_STATUS      Target status: Backlog, Todo, "In Progress", "In Review", Done, Blocked
+    NEW_STATUS      Target status: Backlog, Todo, "In Progress", "AI Review", "Human Review", "Merge/Release", Done, Blocked
 
 Options:
     --reason        Reason for the status change (added as comment)
@@ -34,8 +34,10 @@ from typing import Any
 VALID_TRANSITIONS: dict[str, list[str]] = {
     "Backlog": ["Todo"],
     "Todo": ["Backlog", "In Progress", "Blocked"],
-    "In Progress": ["Todo", "In Review", "Blocked"],
-    "In Review": ["In Progress", "Done", "Blocked"],
+    "In Progress": ["Todo", "AI Review", "Blocked"],
+    "AI Review": ["In Progress", "Human Review", "Merge/Release", "Blocked"],
+    "Human Review": ["In Progress", "Merge/Release", "Blocked"],
+    "Merge/Release": ["Done", "Blocked"],
     "Done": [],  # Terminal status
     "Blocked": ["Todo", "In Progress"],
 }

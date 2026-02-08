@@ -3,7 +3,8 @@
 <a name="part-2-toc"></a>
 ## Table of Contents
 
-- 9.5 [Review workflow differences](#95-review-workflow)
+- 9.5 [Review workflow differences and routing](#95-review-workflow)
+- 9.5a [Review routing by task size](#95a-review-routing)
 - 9.6 [Handoff protocols](#96-handoff)
 - 9.7 [Mixed team coordination](#97-mixed-team)
 - 9.8 [Escalation paths for AI blockers](#98-escalation)
@@ -12,52 +13,114 @@
 
 ## 9.5 Review Workflow
 
-### AI Agent as Author
+The review workflow uses three columns: AI Review, Human Review, and Merge/Release.
+
+### AI Agent as Author (Submitting for Review)
 
 When AI agent creates PR:
 
-1. AI creates PR with detailed description
-2. PR assigned to reviewer (human or AI)
-3. AI responds to review comments
-4. AI updates code based on feedback
-5. Human/AI approves
-6. PR merged
+1. AI creates PR with detailed description and "Closes #N"
+2. AI moves issue from In Progress to AI Review
+3. Integrator agent (EIA) reviews the PR
+4. Integrator decides routing based on task size:
+   - **Small task**: Integrator moves to Merge/Release
+   - **Big task**: Integrator moves to Human Review
 
-### AI Agent as Reviewer
+### Integrator Agent as Reviewer (AI Review Column)
 
-AI can review but CANNOT approve (policy):
+The Integrator (EIA) reviews ALL tasks in the AI Review column:
 
 ```bash
-# AI reviewer adds comments
+# Integrator reviews PR
 gh pr review 123 --comment --body "$(cat <<'EOF'
-## Review Notes
+## Integrator Review
 
 **Code Quality:** Good
 **Test Coverage:** Adequate
-**Concerns:**
-- Line 42: Consider null check
-- Line 78: Magic number, use constant
+**Standards Compliance:** Pass
 
-**Recommendation:** Address above, then ready for human approval
+**Decision:** Approved
+**Routing:** Merge/Release (small task, no human review needed)
 EOF
 )"
+
+# Move to Merge/Release (small task)
+# [GraphQL mutation to update status]
 ```
 
-### Human as Reviewer
+For big tasks requiring human review:
 
-Human reviewers can:
-- Approve PRs
-- Request changes
-- Merge PRs
-- Final authority on code quality
+```bash
+# Integrator routes to Human Review
+gh pr review 123 --comment --body "$(cat <<'EOF'
+## Integrator Review
 
-### Review Escalation
+**Code Quality:** Good
+**Test Coverage:** Adequate
+**Standards Compliance:** Pass
+
+**Decision:** Approved (AI Review complete)
+**Routing:** Human Review (big task, requires user approval)
+
+@user This is a big task requiring your review. Please review the PR.
+EOF
+)"
+
+# Move to Human Review (big task)
+# [GraphQL mutation to update status]
+```
+
+### Human as Reviewer (Human Review Column)
+
+Human reviewers in the Human Review column can:
+- Approve PRs → task moves to Merge/Release
+- Request changes → task moves back to In Progress
+- Final authority on code quality for big tasks
+
+### Review Routing Summary
 
 ```
-AI Review (suggestions) -> Human Review (approval) -> Merge
+Small tasks:  In Progress → AI Review → Merge/Release → Done
+Big tasks:    In Progress → AI Review → Human Review → Merge/Release → Done
 
-AI agents cannot merge without human approval on critical paths.
+AI Review:     Integrator reviews ALL tasks, decides routing
+Human Review:  User reviews BIG tasks only (notified via EAMA)
+Merge/Release: PR is merged (automatic → Done)
 ```
+
+---
+
+<a name="95a-review-routing"></a>
+## 9.5a Review Routing by Task Size
+
+### How Task Size Affects the Flow
+
+| Task Size | AI Review | Human Review | Merge/Release | Who Decides |
+|-----------|-----------|--------------|---------------|-------------|
+| Small (`size:small` or no label) | Integrator reviews | SKIPPED | PR merged | Integrator |
+| Big (`size:big`) | Integrator reviews | User reviews | PR merged | Integrator routes, User approves |
+
+### Integrator Routing Decision
+
+After completing AI Review, the Integrator checks:
+
+1. Does the issue have a `size:big` label?
+2. Is this a new feature, architecture change, or breaking change?
+3. Does the PR modify critical paths or public APIs?
+
+If YES to any → route to Human Review.
+If NO to all → route to Merge/Release.
+
+### Changes Requested Flow
+
+If changes are requested at any review stage:
+
+```
+AI Review (changes requested)    → Back to In Progress (author fixes)
+Human Review (changes requested) → Back to In Progress (author fixes)
+```
+
+After fixes, the task returns to AI Review (not directly to where it was rejected), so the Integrator can verify the fixes before routing again.
 
 ---
 
@@ -179,7 +242,7 @@ When AI agents and humans work together.
 ```
                     +---------------+
                     | Orchestrator  |
-                    |     (AI)      |
+                    |   (EOA/AI)    |
                     +-------+-------+
                             |
             +---------------+---------------+
@@ -190,15 +253,27 @@ When AI agents and humans work together.
       +----+----+    +------+------+   +----+----+
            |                |               |
            +----------------+---------------+
+                            | PR created
+                      +-----v------+
+                      | AI Review  |
+                      |(Integrator)|
+                      +-----+------+
                             |
-                      +-----v-----+
-                      |Code Review|
-                      | (Human)   |
+              +-------------+-------------+
+              v (small)                   v (big)
+       +------+-------+          +-------+------+
+       | Merge/Release |          | Human Review |
+       +------+-------+          | (User/Lead)  |
+              |                   +-------+------+
+              |                           |
+              |                    +------+-------+
+              |                    | Merge/Release |
+              |                    +------+-------+
+              |                           |
+              +-------------+-------------+
+                            v
                       +-----+-----+
-                            |
-                      +-----v-----+
-                      |Tech Lead  |
-                      | (Human)   |
+                      |   Done    |
                       +-----------+
 ```
 

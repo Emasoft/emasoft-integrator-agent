@@ -77,8 +77,8 @@ gh pr list --search "closes:#42" --json state,merged
 
 **Solution:**
 ```bash
-# If PR not merged, move back to In Review
-# [GraphQL mutation to set Status = "In Review"]
+# If PR not merged, move back to AI Review
+# [GraphQL mutation to set Status = "AI Review"]
 
 # Or close issue if actually done
 gh issue close 42

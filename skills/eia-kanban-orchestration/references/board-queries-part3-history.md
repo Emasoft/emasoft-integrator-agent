@@ -52,7 +52,7 @@ When moving items, always add a comment:
 ```markdown
 **Status Change**
 From: In Progress
-To: In Review
+To: AI Review
 Time: 2024-01-15 14:30 UTC
 Actor: @agent-1
 ```
@@ -118,7 +118,7 @@ BLOCKED=$(echo "$RESULT" | jq '
 
 IN_PROGRESS=$(echo "$RESULT" | jq '
   [.data.node.items.nodes[].fieldValues.nodes[]
-  | select(.field.name == "Status" and (.name == "In Progress" or .name == "In Review" or .name == "Todo"))]
+  | select(.field.name == "Status" and (.name == "In Progress" or .name == "AI Review" or .name == "Human Review" or .name == "Merge/Release" or .name == "Todo"))]
   | length
 ')
 
