@@ -21,7 +21,7 @@ Epics are large features that span multiple smaller issues. They provide high-le
 ```yaml
 name: Epic
 description: Large feature spanning multiple issues
-labels: ["type:epic", "status:needs-triage"]
+labels: ["type:epic", "status:backlog"]
 body:
   - type: markdown
     attributes:

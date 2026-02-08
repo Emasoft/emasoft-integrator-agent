@@ -80,7 +80,7 @@ python3 eia_get_pr_context.py --pr <NUMBER>
     {"path": "src/auth.py", "status": "added", "additions": 150, "deletions": 0},
     {"path": "src/user.py", "status": "modified", "additions": 50, "deletions": 20}
   ],
-  "labels": ["enhancement", "needs-review"],
+  "labels": ["enhancement", "ai-review"],
   "reviewers": ["reviewer1", "reviewer2"],
   "review_decision": "REVIEW_REQUIRED"
 }

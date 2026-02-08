@@ -9,6 +9,7 @@ metadata:
 context: fork
 workflow-instruction: "support"
 procedure: "support-skill"
+user-invocable: false
 ---
 
 # Shared References

@@ -82,12 +82,14 @@ query {
   "todo": [
     {"issue_number": 20, "title": "Ready to start", "assignees": ["dev1"]}
   ],
-  "in_progress": [
+  "in-progress": [
     {"issue_number": 30, "title": "Being worked on", "assignees": ["dev2"]}
   ],
-  "in_review": [
-    {"issue_number": 40, "title": "PR created", "assignees": ["dev1"]}
+  "ai-review": [
+    {"issue_number": 40, "title": "PR created, Integrator reviewing", "assignees": ["dev1"]}
   ],
+  "human-review": [],
+  "merge-release": [],
   "done": [
     {"issue_number": 50, "title": "Completed", "assignees": ["dev2"]}
   ],
@@ -103,8 +105,10 @@ query {
 |--------|------|---------|
 | Backlog | `backlog` | Not scheduled |
 | Todo | `todo` | Ready to start |
-| In Progress | `in_progress` | Active work |
-| In Review | `in_review` | PR awaiting review |
+| In Progress | `in-progress` | Active work |
+| AI Review | `ai-review` | Integrator reviews ALL tasks |
+| Human Review | `human-review` | User reviews BIG tasks only |
+| Merge/Release | `merge-release` | Ready to merge |
 | Done | `done` | Completed and merged |
 | Blocked | `blocked` | Cannot proceed |
 

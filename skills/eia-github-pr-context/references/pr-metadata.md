@@ -158,7 +158,7 @@ Organizational metadata for tracking and categorization.
 {
   "labels": [
     {"name": "enhancement", "color": "a2eeef"},
-    {"name": "needs-review", "color": "fbca04"}
+    {"name": "ai-review", "color": "fbca04"}
   ],
   "milestone": {
     "title": "v2.0 Release",
@@ -168,7 +168,7 @@ Organizational metadata for tracking and categorization.
   "projectCards": [
     {
       "project": {"name": "Q1 Roadmap"},
-      "column": {"name": "In Review"}
+      "column": {"name": "AI Review"}
     }
   ]
 }
@@ -394,9 +394,9 @@ python3 eia_get_pr_context.py --pr 123 | jq -r '.labels[].name'
 
 # Check for specific label
 python3 eia_get_pr_context.py --pr 123 | jq -r '
-  if any(.labels[]; .name == "needs-review")
-  then "Has needs-review label"
-  else "Does not have needs-review label"
+  if any(.labels[]; .name == "ai-review")
+  then "Has ai-review label"
+  else "Does not have ai-review label"
   end'
 
 # Get labels as comma-separated list

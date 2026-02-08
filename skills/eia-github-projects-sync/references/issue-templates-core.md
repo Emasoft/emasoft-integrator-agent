@@ -48,7 +48,7 @@ contact_links:
 ```yaml
 name: Feature Request
 description: Propose new functionality
-labels: ["type:feature", "status:needs-triage"]
+labels: ["type:feature", "status:backlog"]
 body:
   - type: markdown
     attributes:
@@ -182,7 +182,7 @@ body:
 ```yaml
 name: Bug Report
 description: Report something that isn't working correctly
-labels: ["type:bug", "status:needs-triage"]
+labels: ["type:bug", "status:backlog"]
 body:
   - type: markdown
     attributes:

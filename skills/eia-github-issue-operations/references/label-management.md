@@ -82,7 +82,7 @@ Descriptions help team members understand when to apply each label.
 
 **Adding description:**
 ```bash
-gh label create "needs-triage" \
+gh label create "backlog" \
   --repo owner/repo \
   --color "fbca04" \
   --description "Issue requires initial assessment and categorization"
@@ -99,7 +99,6 @@ gh label create "needs-triage" \
 | `bug` | Something isn't working as expected |
 | `feature` | New functionality request |
 | `blocked` | Waiting on external dependency or decision |
-| `needs-info` | More information needed from reporter |
 
 ---
 
@@ -111,7 +110,7 @@ All labels should use lowercase kebab-case (words separated by hyphens).
 
 **Correct:**
 - `bug-fix`
-- `needs-review`
+- `ai-review`
 - `high-priority`
 - `breaking-change`
 
@@ -136,7 +135,7 @@ Use prefixes to group related labels together. Labels sort alphabetically, so pr
 |--------|---------|----------|
 | `type:` | Issue type | `type:bug`, `type:feature`, `type:task` |
 | `priority:` | Priority level | `priority:p0`, `priority:p1` |
-| `status:` | Current state | `status:blocked`, `status:in-progress` |
+| `status:` | Current state | `status:blocked`, `status:in-progress`, `status:ai-review` |
 | `area:` | Code area | `area:frontend`, `area:api`, `area:database` |
 | `effort:` | Estimated effort | `effort:small`, `effort:medium`, `effort:large` |
 
@@ -333,7 +332,7 @@ DEFAULT_LABEL_CONFIGS = {
     # Status labels
     "blocked": {"color": "d73a4a", "description": "Blocked by dependency"},
     "in-progress": {"color": "fbca04", "description": "Work in progress"},
-    "needs-review": {"color": "0e8a16", "description": "Ready for review"},
+    "ai-review": {"color": "0e8a16", "description": "Ready for AI review"},
 }
 
 def get_label_config(label_name: str) -> dict:

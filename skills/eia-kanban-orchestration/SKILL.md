@@ -10,6 +10,7 @@ agent: api-coordinator
 context: fork
 workflow-instruction: "Steps 13, 18"
 procedure: "proc-populate-kanban, proc-update-kanban-status"
+user-invocable: false
 ---
 
 # GitHub Kanban Core
@@ -63,7 +64,7 @@ Copy this checklist and track your progress:
 - [ ] Move ready issues from Backlog to Todo
 - [ ] Assign issues to responsible agents (issue assignee = agent)
 - [ ] Agent moves issue to In Progress when starting work
-- [ ] Agent creates PR linked to issue, moves to In Review
+- [ ] Agent creates PR linked to issue, moves to AI Review
 - [ ] Track card transitions using: `python3 scripts/kanban_move_card.py OWNER REPO PROJECT_NUMBER ISSUE_NUMBER NEW_STATUS`
 - [ ] Handle any blockers: move to Blocked column with `--reason` flag
 - [ ] Resolve blockers and move back to previous status
@@ -89,8 +90,10 @@ Read this skill when:
 |--------|------|---------|-------------------|
 | **Backlog** | `backlog` | Not scheduled | Orchestrator only |
 | **Todo** | `todo` | Ready to start | Orchestrator only |
-| **In Progress** | `in_progress` | Active work | Assigned agent |
-| **In Review** | `in_review` | PR awaiting review | Assigned agent |
+| **In Progress** | `in-progress` | Active work | Assigned agent |
+| **AI Review** | `ai-review` | Integrator reviews ALL tasks | Integrator agent |
+| **Human Review** | `human-review` | User reviews BIG tasks only | User/human reviewer |
+| **Merge/Release** | `merge-release` | Ready to merge | Orchestrator |
 | **Done** | `done` | Completed and merged | Auto (PR merge) |
 | **Blocked** | `blocked` | Cannot proceed | Any (with reason) |
 
@@ -121,11 +124,13 @@ Read this FIRST to understand the philosophical foundation.
 Read this when you need to understand what each column means and its requirements.
 
 **Contents:**
-- 2.1 Overview of the 6-column workflow
+- 2.1 Overview of the 9-column workflow
 - 2.2 Backlog column - items not yet scheduled
 - 2.3 Todo column - ready for immediate work
 - 2.4 In Progress column - active development
-- 2.5 In Review column - PR created, awaiting review
+- 2.5 AI Review column - Integrator reviews ALL tasks
+- 2.5a Human Review column - User reviews BIG tasks only
+- 2.5b Merge/Release column - Ready to merge
 - 2.6 Done column - completed and verified
 - 2.7 Blocked column - cannot proceed
 - 2.8 Column metadata and requirements table
@@ -175,8 +180,10 @@ Read this when moving cards between columns or validating transitions.
 - 5.3 Who can move cards (orchestrator vs agent vs auto)
 - 5.4 Backlog to Todo transition rules
 - 5.5 Todo to In Progress transition rules
-- 5.6 In Progress to In Review transition rules
-- 5.7 In Review to Done transition rules
+- 5.6 In Progress to AI Review transition rules
+- 5.6a AI Review to Human Review transition rules
+- 5.6b AI Review to Merge/Release transition rules
+- 5.7 Merge/Release to Done transition rules
 - 5.8 Any status to Blocked transition rules
 - 5.9 Blocked to previous status transition rules
 - 5.10 Invalid transitions and how to handle them
@@ -365,8 +372,9 @@ python3 scripts/kanban_check_completion.py OWNER REPO PROJECT_NUMBER
 
 1. Orchestrator assigns Todo issues to agents
 2. Agent moves issue to In Progress when starting
-3. Agent creates PR, moves to In Review
-4. PR merge auto-moves to Done
+3. Agent creates PR, moves to AI Review
+4. Integrator reviews, moves to Human Review (big tasks) or Merge/Release (small tasks)
+5. PR merge auto-moves to Done
 5. Board reflects real-time progress
 
 ### Stop Hook Phase
@@ -387,9 +395,10 @@ python3 scripts/kanban_check_completion.py OWNER REPO PROJECT_NUMBER
 ### PR Completion Flow
 
 1. Agent creates PR linked to issue (Closes #N)
-2. Agent moves issue to In Review
-3. Review happens (AI or human)
-4. PR merged triggers auto-move to Done
+2. Agent moves issue to AI Review
+3. Integrator reviews (all tasks go through AI Review)
+4. Integrator moves to Human Review (big tasks) or Merge/Release (small tasks)
+5. PR merged triggers auto-move to Done
 5. Issue closes automatically
 
 ---
@@ -434,7 +443,7 @@ python3 scripts/kanban_get_board_state.py owner repo 1
 
 ```bash
 # Move issue #42 to In Progress
-python3 scripts/kanban_move_card.py owner repo 1 42 in_progress --reason "Starting work"
+python3 scripts/kanban_move_card.py owner repo 1 42 in-progress --reason "Starting work"
 
 # Check if all items are complete (for stop hook)
 python3 scripts/kanban_check_completion.py owner repo 1
@@ -552,9 +561,9 @@ When changes are detected, notify relevant agents using the `agent-messaging` sk
 
 **Status change notification:** Send a message using the `agent-messaging` skill with:
 - **Recipient**: `orchestrator-eoa`
-- **Subject**: `Kanban Update: Issue #123 moved to In Review`
+- **Subject**: `Kanban Update: Issue #123 moved to AI Review`
 - **Priority**: `normal`
-- **Content**: `{"type": "kanban-status-change", "message": "Issue #123 moved from In Progress to In Review by agent-name. PR likely created."}`
+- **Content**: `{"type": "kanban-status-change", "message": "Issue #123 moved from In Progress to AI Review by agent-name. PR likely created."}`
 - **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 ### Proactive Monitoring Checklist

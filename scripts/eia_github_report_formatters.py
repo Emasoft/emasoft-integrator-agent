@@ -62,7 +62,7 @@ def get_at_risk_items(
 
     for item in items:
         status_lower = (item.status or "").lower()
-        if status_lower in ("in progress", "in-progress", "in_progress", "working"):
+        if status_lower in ("in progress", "in-progress", "working"):
             if item.updated_at:
                 days_since_update = (now - item.updated_at.replace(tzinfo=None)).days
                 if days_since_update >= stale_days:

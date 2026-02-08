@@ -2,11 +2,13 @@
 
 ## Table of Contents
 
-- 2.1 [Overview of the 6-column workflow](#21-overview)
+- 2.1 [Overview of the 9-column workflow](#21-overview)
 - 2.2 [Backlog column - items not yet scheduled](#22-backlog)
 - 2.3 [Todo column - ready for immediate work](#23-todo)
 - 2.4 [In Progress column - active development](#24-in-progress)
-- 2.5 [In Review column - PR created, awaiting review](#25-in-review)
+- 2.5 [AI Review column - Integrator reviews ALL tasks](#25-ai-review)
+- 2.5a [Human Review column - User reviews BIG tasks only](#25a-human-review)
+- 2.5b [Merge/Release column - Ready to merge](#25b-merge-release)
 - 2.6 [Done column - completed and verified](#26-done)
 - 2.7 [Blocked column - cannot proceed](#27-blocked)
 - 2.8 [Column metadata and requirements table](#28-metadata-table)
@@ -16,18 +18,18 @@
 
 ## 2.1 Overview
 
-The EOA orchestration workflow uses exactly 6 columns. Each column has a precise meaning, requirements, and rules about who can move items into it.
+The EOA orchestration workflow uses exactly 9 columns. Each column has a precise meaning, requirements, and rules about who can move items into it.
 
 ```
-┌──────────┬──────────┬────────────┬───────────┬──────────┬──────────┐
-│ Backlog  │   Todo   │In Progress │ In Review │   Done   │ Blocked  │
-├──────────┼──────────┼────────────┼───────────┼──────────┼──────────┤
-│ Not yet  │ Ready to │  Active    │ PR open   │ Merged   │ Cannot   │
-│scheduled │  start   │   work     │           │          │ proceed  │
-└──────────┴──────────┴────────────┴───────────┴──────────┴──────────┘
+┌──────────┬──────────┬────────────┬───────────┬──────────────┬───────────────┬──────────┬──────────┐
+│ Backlog  │   Todo   │In Progress │ AI Review │ Human Review │ Merge/Release │   Done   │ Blocked  │
+├──────────┼──────────┼────────────┼───────────┼──────────────┼───────────────┼──────────┼──────────┤
+│ Not yet  │ Ready to │  Active    │ Integrator│ User reviews │ Ready to      │ Merged   │ Cannot   │
+│scheduled │  start   │   work     │ reviews   │ BIG tasks    │ merge         │          │ proceed  │
+└──────────┴──────────┴────────────┴───────────┴──────────────┴───────────────┴──────────┴──────────┘
 ```
 
-**Flow:** Backlog -> Todo -> In Progress -> In Review -> Done
+**Flow:** Backlog -> Todo -> In Progress -> AI Review -> Human Review (big tasks) / Merge/Release (small tasks) -> Done
 
 **Special:** Any status can move to Blocked (and back)
 
@@ -131,7 +133,7 @@ Items in In Progress are:
 | From | Who Can Move |
 |------|--------------|
 | Todo | Assigned agent |
-| In Review | Assigned agent (changes requested) |
+| AI Review | Assigned agent (changes requested) |
 | Blocked | Assigned agent (after unblock) |
 
 ### Expected Duration
@@ -145,26 +147,26 @@ Items in In Progress are:
 When item is In Progress:
 1. Work on the feature branch
 2. Update issue with progress comments
-3. Move to In Review when PR is created
+3. Move to AI Review when PR is created
 4. Move to Blocked if cannot proceed
 
 ---
 
-## 2.5 In Review
+## 2.5 AI Review
 
 ### Meaning
 
-Items in In Review are:
+Items in AI Review are:
 - Have a Pull Request created
-- PR is open and awaiting review
-- Code is ready for merge (from author's perspective)
+- Integrator agent reviews ALL tasks (both small and big)
+- Code is ready for review (from author's perspective)
 
-### Requirements to Enter In Review
+### Requirements to Enter AI Review
 
 - PR created and linked to issue
 - All local tests pass
 - PR description explains changes
-- Ready for reviewer examination
+- Ready for Integrator examination
 
 ### Who Can Move Items Here
 
@@ -176,15 +178,87 @@ Items in In Review are:
 
 - Should not exceed 48 hours
 - Escalate if review is delayed
-- Ping reviewers if no activity
+- Ping Integrator if no activity
+
+### Exit Conditions
+
+| Next Status | Condition |
+|-------------|-----------|
+| Human Review | Big tasks requiring user review |
+| Merge/Release | Small tasks approved by Integrator |
+| In Progress | Changes requested |
+| Blocked | Blocker discovered during review |
+
+---
+
+## 2.5a Human Review
+
+### Meaning
+
+Items in Human Review are:
+- Have passed AI Review by the Integrator
+- Require user/human review due to task size or importance
+- Only BIG tasks go through Human Review
+
+### Requirements to Enter Human Review
+
+- AI Review completed by Integrator
+- Integrator approved the changes
+- Task flagged as requiring human review
+
+### Who Can Move Items Here
+
+| From | Who Can Move |
+|------|--------------|
+| AI Review | Integrator agent |
+
+### Expected Duration
+
+- Depends on human availability
+- Escalate if no response in 72 hours
+
+### Exit Conditions
+
+| Next Status | Condition |
+|-------------|-----------|
+| Merge/Release | Human approves |
+| In Progress | Human requests changes |
+| Blocked | Blocker discovered during review |
+
+---
+
+## 2.5b Merge/Release
+
+### Meaning
+
+Items in Merge/Release are:
+- Ready to be merged to the target branch
+- All reviews (AI and optionally Human) have been completed
+- Awaiting final merge action
+
+### Requirements to Enter Merge/Release
+
+- AI Review completed (all tasks)
+- Human Review completed (big tasks only)
+- All CI checks passing
+
+### Who Can Move Items Here
+
+| From | Who Can Move |
+|------|--------------|
+| AI Review | Integrator (small tasks) |
+| Human Review | Orchestrator (big tasks) |
+
+### Expected Duration
+
+- Should be merged promptly (within 24 hours)
 
 ### Exit Conditions
 
 | Next Status | Condition |
 |-------------|-----------|
 | Done | PR merged |
-| In Progress | Changes requested |
-| Blocked | Blocker discovered during review |
+| Blocked | Merge conflict or CI failure |
 
 ---
 
@@ -207,7 +281,7 @@ Items in Done are:
 
 | From | Who Can Move |
 |------|--------------|
-| In Review | Automatic (PR merge) |
+| Merge/Release | Automatic (PR merge) |
 | Manual | Orchestrator (exceptional cases) |
 
 ### Terminal Status
@@ -272,8 +346,10 @@ When moving to Blocked, MUST provide:
 |--------|------|-------------|---------------------|-----------------|-------------|
 | Backlog | `backlog` | No | No | No | No |
 | Todo | `todo` | No | Yes (to start) | No | No |
-| In Progress | `in_progress` | No | Yes | Yes | No |
-| In Review | `in_review` | No | Yes | Yes | Yes |
+| In Progress | `in-progress` | No | Yes | Yes | No |
+| AI Review | `ai-review` | No | Yes | Yes | Yes |
+| Human Review | `human-review` | No | Yes | Yes | Yes |
+| Merge/Release | `merge-release` | No | Yes | Yes | Yes |
 | Done | `done` | Yes | No | No | No |
 | Blocked | `blocked` | No | Yes | - | - |
 
@@ -283,24 +359,24 @@ When moving to Blocked, MUST provide:
 
 ```
 GitHub Project Board: "Project Alpha - Sprint 3"
-┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃ Backlog (3)   │ Todo (2)      │ In Progress (2) │ In Review (1) │ Done (5) │ Blocked (1) ┃
-┣━━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━┿━━━━━━━━━━┿━━━━━━━━━━━━━┫
-┃ ┌───────────┐ │ ┌───────────┐ │ ┌─────────────┐ │ ┌───────────┐ │          │ ┌─────────┐ ┃
-┃ │ #12       │ │ │ #8        │ │ │ #5          │ │ │ #7        │ │          │ │ #9      │ ┃
-┃ │ User prefs│ │ │ Auth API  │ │ │ Data model  │ │ │ UI tests  │ │          │ │ CI setup│ ┃
-┃ │           │ │ │ @agent-1  │ │ │ @agent-1    │ │ │ @agent-2  │ │          │ │ @agent-3│ ┃
-┃ └───────────┘ │ └───────────┘ │ └─────────────┘ │ └───────────┘ │          │ └─────────┘ ┃
-┃ ┌───────────┐ │ ┌───────────┐ │ ┌─────────────┐ │               │          │             ┃
-┃ │ #13       │ │ │ #10       │ │ │ #6          │ │               │          │             ┃
-┃ │ Export    │ │ │ Logging   │ │ │ Validation  │ │               │          │             ┃
-┃ │           │ │ │ @agent-2  │ │ │ @agent-2    │ │               │          │             ┃
-┃ └───────────┘ │ └───────────┘ │ └─────────────┘ │               │          │             ┃
-┃ ┌───────────┐ │               │                 │               │          │             ┃
-┃ │ #14       │ │               │                 │               │          │             ┃
-┃ │ Analytics │ │               │                 │               │          │             ┃
-┃ └───────────┘ │               │                 │               │          │             ┃
-┗━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━━┛
+┏━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━━━┯━━━━━━━━━━┯━━━━━━━━━━━━━┓
+┃ Backlog (3)   │ Todo (2)      │ In Progress (2) │ AI Review (1) │ Human Rev (0)  │ Merge/Rel (0)   │ Done (5) │ Blocked (1) ┃
+┣━━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━━━┿━━━━━━━━━━┿━━━━━━━━━━━━━┫
+┃ ┌───────────┐ │ ┌───────────┐ │ ┌─────────────┐ │ ┌───────────┐ │                │                 │          │ ┌─────────┐ ┃
+┃ │ #12       │ │ │ #8        │ │ │ #5          │ │ │ #7        │ │                │                 │          │ │ #9      │ ┃
+┃ │ User prefs│ │ │ Auth API  │ │ │ Data model  │ │ │ UI tests  │ │                │                 │          │ │ CI setup│ ┃
+┃ │           │ │ │ @agent-1  │ │ │ @agent-1    │ │ │ @agent-2  │ │                │                 │          │ │ @agent-3│ ┃
+┃ └───────────┘ │ └───────────┘ │ └─────────────┘ │ └───────────┘ │                │                 │          │ └─────────┘ ┃
+┃ ┌───────────┐ │ ┌───────────┐ │ ┌─────────────┐ │               │                │                 │          │             ┃
+┃ │ #13       │ │ │ #10       │ │ │ #6          │ │               │                │                 │          │             ┃
+┃ │ Export    │ │ │ Logging   │ │ │ Validation  │ │               │                │                 │          │             ┃
+┃ │           │ │ │ @agent-2  │ │ │ @agent-2    │ │               │                │                 │          │             ┃
+┃ └───────────┘ │ └───────────┘ │ └─────────────┘ │               │                │                 │          │             ┃
+┃ ┌───────────┐ │               │                 │               │                │                 │          │             ┃
+┃ │ #14       │ │               │                 │               │                │                 │          │             ┃
+┃ │ Analytics │ │               │                 │               │                │                 │          │             ┃
+┃ └───────────┘ │               │                 │               │                │                 │          │             ┃
+┗━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━━━┷━━━━━━━━━━┷━━━━━━━━━━━━━┛
 ```
 
 **Reading the Board:**

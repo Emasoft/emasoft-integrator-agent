@@ -113,9 +113,9 @@ def update_issue_labels(issue_num: str, status: str) -> bool:
         "pending": "status-todo",
         "planned": "status-todo",
         "assigned": "status-in-progress",
-        "in_progress": "status-in-progress",
-        "pending_verification": "status-review",
-        "complete": "status-done"
+        "in-progress": "status-in-progress",
+        "pending_verification": "status-ai-review",
+        "complete": "status-done",
     }
 
     new_label = status_labels.get(status, "status-todo")
@@ -223,7 +223,7 @@ def main() -> int:
             continue
 
         # Update labels for status changes
-        if status in ("assigned", "in_progress", "pending_verification", "complete"):
+        if status in ("assigned", "in-progress", "pending_verification", "complete"):
             if args.dry_run:
                 print(f"  Would update labels for {issue}: {status}")
                 updated += 1

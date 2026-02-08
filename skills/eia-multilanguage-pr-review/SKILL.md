@@ -14,6 +14,7 @@ agent: code-reviewer
 context: fork
 workflow-instruction: "Step 21"
 procedure: "proc-evaluate-pr"
+user-invocable: false
 ---
 
 # Multilanguage PR Review Skill

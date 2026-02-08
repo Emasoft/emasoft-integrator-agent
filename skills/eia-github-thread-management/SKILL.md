@@ -12,6 +12,7 @@ agent: api-coordinator
 context: fork
 workflow-instruction: "support"
 procedure: "support-skill"
+user-invocable: false
 ---
 
 # GitHub Thread Management Skill

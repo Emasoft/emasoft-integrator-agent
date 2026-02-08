@@ -145,8 +145,8 @@ The orchestrator can exit when these criteria are met.
 | Todo | >0 | Only if unassigned or deferred |
 | In Progress | 0 | Yes |
 | In Progress | >0 | No |
-| In Review | 0 | Yes |
-| In Review | >0 | No (unless handoff) |
+| AI Review | 0 | Yes |
+| AI Review | >0 | No (unless handoff) |
 | Done | Any | Yes |
 | Blocked | 0 | Yes |
 | Blocked | >0 | Only if acknowledged |
@@ -154,7 +154,7 @@ The orchestrator can exit when these criteria are met.
 ### Simple Rule
 
 ```
-CAN_EXIT = (In Progress == 0) AND (In Review == 0 OR handoff) AND (Blocked == 0 OR acknowledged)
+CAN_EXIT = (In Progress == 0) AND (AI Review == 0 OR handoff) AND (Blocked == 0 OR acknowledged)
 ```
 
 ### Exit Decision Logic
@@ -162,7 +162,7 @@ CAN_EXIT = (In Progress == 0) AND (In Review == 0 OR handoff) AND (Blocked == 0 
 ```python
 def can_exit(board_state):
     in_progress = count_status(board_state, "In Progress")
-    in_review = count_status(board_state, "In Review")
+    in_review = count_status(board_state, "AI Review")
     blocked = count_status(board_state, "Blocked")
 
     if in_progress > 0:

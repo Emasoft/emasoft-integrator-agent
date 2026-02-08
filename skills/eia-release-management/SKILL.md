@@ -21,6 +21,7 @@ agent: eia-main
 context: fork
 workflow-instruction: "support"
 procedure: "support-skill"
+user-invocable: false
 ---
 
 # Release Management Skill
@@ -147,6 +148,17 @@ Complete detailed procedures are in reference files:
 
 ### 8. CI/CD Integration
 [references/cicd-integration.md](references/cicd-integration.md) - Pipeline configuration and automation
+
+### 9. Tag-Branch Collision Troubleshooting
+
+For tag-branch collision troubleshooting, see [troubleshooting-tag-branch-collision.md](references/troubleshooting-tag-branch-collision.md):
+- What is a tag-branch name collision
+- How collisions cause HTTP 300 errors
+- How to detect collisions using eia_cleanup_version_branches.sh
+- How to resolve collisions safely
+- Best practices to prevent future collisions
+
+**Script**: `scripts/eia_cleanup_version_branches.sh` — Detects and reports version tag/branch name collisions (safe, print-only)
 
 ---
 
@@ -296,6 +308,17 @@ python scripts/eia_rollback.py --repo owner/repo --from v1.2.3 --to v1.2.2 --rea
     "Created rollback issue #456"
   ]
 }
+```
+
+### eia_cleanup_version_branches.sh
+**Location**: `scripts/eia_cleanup_version_branches.sh`
+**Purpose**: Detect and report version tag/branch name collisions
+**When to use**: When HTTP 300 errors occur on release downloads, or as a periodic maintenance check
+**Output**: Colored terminal output listing collisions and safe deletion commands (print-only, does not auto-delete)
+
+```bash
+# Usage
+bash scripts/eia_cleanup_version_branches.sh
 ```
 
 ---
@@ -452,6 +475,7 @@ When rollback is initiated, send a message using the `agent-messaging` skill wit
 - [references/post-release-verification.md](references/post-release-verification.md) - Post-release checklist
 - [references/rollback-procedures.md](references/rollback-procedures.md) - Rollback execution guide
 - [references/cicd-integration.md](references/cicd-integration.md) - CI/CD pipeline configuration
+- [references/troubleshooting-tag-branch-collision.md](references/troubleshooting-tag-branch-collision.md) - Tag-branch collision troubleshooting
 
 ## Getting Started
 

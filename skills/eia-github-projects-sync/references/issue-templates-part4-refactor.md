@@ -21,7 +21,7 @@ Refactoring improves code structure without changing external behavior. This tem
 ```yaml
 name: Refactoring
 description: Code improvement without behavior change
-labels: ["type:refactor", "status:needs-triage"]
+labels: ["type:refactor", "status:backlog"]
 body:
   - type: markdown
     attributes:

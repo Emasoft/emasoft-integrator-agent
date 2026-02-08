@@ -7,7 +7,7 @@ with sensible defaults for priority and type labels.
 
 Usage:
     atlas_set_issue_labels.py --repo owner/repo --issue 123 --add "bug,P1"
-    atlas_set_issue_labels.py --repo owner/repo --issue 123 --remove "needs-triage"
+    atlas_set_issue_labels.py --repo owner/repo --issue 123 --remove "backlog"
     atlas_set_issue_labels.py --repo owner/repo --issue 123 --set "bug,P1,in-progress"
     atlas_set_issue_labels.py --repo owner/repo --issue 123 --add "custom-label" --auto-create
 
@@ -53,7 +53,9 @@ DEFAULT_LABEL_CONFIGS: dict[str, dict[str, str]] = {
     "docs": {"color": "0075ca", "description": "Documentation"},
     "blocked": {"color": "d73a4a", "description": "Blocked by dependency"},
     "in-progress": {"color": "fbca04", "description": "Work in progress"},
-    "needs-review": {"color": "0e8a16", "description": "Ready for review"},
+    "ai-review": {"color": "0e8a16", "description": "Ready for AI review"},
+    "human-review": {"color": "1d76db", "description": "Ready for human review"},
+    "merge-release": {"color": "5319e7", "description": "Ready for merge/release"},
 }
 
 

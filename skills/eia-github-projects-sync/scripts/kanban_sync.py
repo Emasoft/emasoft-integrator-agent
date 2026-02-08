@@ -25,8 +25,10 @@ from aimaestro_notify import notify_task_blocked  # type: ignore[import-not-foun
 STATUS_COLUMNS = {
     "Backlog": "backlog",
     "Todo": "todo",
-    "In Progress": "in_progress",
-    "In Review": "in_review",
+    "In Progress": "in-progress",
+    "AI Review": "ai-review",
+    "Human Review": "human-review",
+    "Merge/Release": "merge-release",
     "Done": "done",
     "Blocked": "blocked",
 }
@@ -122,19 +124,19 @@ def determine_new_status(status: IssueStatus) -> Optional[str]:
     if status.pr_status == "merged" and status.current_status != "done":
         return "done"
 
-    # If PR open with passing CI, should be in_review
+    # If PR open with passing CI, should be ai-review
     if status.pr_status == "open" and status.ci_status == "passing":
-        if status.current_status not in ("in_review", "done"):
-            return "in_review"
+        if status.current_status not in ("ai-review", "human-review", "merge-release", "done"):
+            return "ai-review"
 
-    # If review approved, still in_review (waiting for merge)
-    if status.review_status == "approved" and status.current_status != "in_review":
-        return "in_review"
+    # If review approved, move to human-review (waiting for human sign-off)
+    if status.review_status == "approved" and status.current_status not in ("human-review", "merge-release", "done"):
+        return "human-review"
 
-    # If changes requested, should be in_progress
+    # If changes requested, should be in-progress
     if status.review_status == "changes requested":
-        if status.current_status == "in_review":
-            return "in_progress"
+        if status.current_status in ("ai-review", "human-review"):
+            return "in-progress"
 
     return None
 
@@ -278,7 +280,7 @@ def on_ci_status_change(
                 # Check if was blocked due to CI
                 issue_status = get_issue_status(owner, repo, pr_number)
                 if issue_status.current_status == "blocked":
-                    update_issue_status(owner, repo, pr_number, "in_review")
+                    update_issue_status(owner, repo, pr_number, "ai-review")
 
 
 # CLI

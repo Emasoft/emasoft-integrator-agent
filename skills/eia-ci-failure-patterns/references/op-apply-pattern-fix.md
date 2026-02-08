@@ -137,7 +137,7 @@ For missing labels:
 
 ```bash
 # Create label before workflow runs
-gh label create "needs-review" --color "0E8A16" --description "PR needs review"
+gh label create "ai-review" --color "0E8A16" --description "PR needs AI review"
 ```
 
 ### Step 4: Validate the Fix Syntax

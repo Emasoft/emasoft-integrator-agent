@@ -74,7 +74,7 @@ Each field can have:
 ```yaml
 name: Bug Report
 description: Report a bug or unexpected behavior
-labels: ["bug", "needs-triage"]
+labels: ["bug", "backlog"]
 assignees: []
 ```
 
@@ -290,16 +290,16 @@ The `render: shell` attribute automatically wraps pasted text in a code block. T
 ### 4.1 Default labels for bug reports
 
 ```yaml
-labels: ["bug", "needs-triage"]
+labels: ["bug", "backlog"]
 ```
 
 - `bug` -- identifies the issue type for filtering and project boards
-- `needs-triage` -- signals that a maintainer has not yet reviewed and prioritized the issue
+- `backlog` -- signals that a maintainer has not yet reviewed and prioritized the issue
 
 ### 4.2 How labels integrate with triage workflows
 
 After a maintainer reviews the issue:
-1. Remove `needs-triage`
+1. Remove `backlog`
 2. Add priority label (e.g., `priority-high`, `priority-low`)
 3. Add area label if different from the dropdown selection
 4. Assign to a milestone if applicable
@@ -313,7 +313,7 @@ Copy the following into `.github/ISSUE_TEMPLATE/bug_report.yml`:
 ```yaml
 name: Bug Report
 description: Report a bug or unexpected behavior
-labels: ["bug", "needs-triage"]
+labels: ["bug", "backlog"]
 assignees: []
 body:
   - type: checkboxes

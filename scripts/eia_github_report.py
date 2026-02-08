@@ -313,7 +313,7 @@ def calculate_metrics(
                 if days_ago <= velocity_days:
                     completed_in_period += 1
 
-        elif status_lower in ("in progress", "in-progress", "in_progress", "working"):
+        elif status_lower in ("in progress", "in-progress", "working"):
             metrics.in_progress_count += 1
 
             # Track oldest in-progress
@@ -328,7 +328,7 @@ def calculate_metrics(
             metrics.blocked_count += 1
 
         # Check at-risk: in progress > 7 days without update
-        if status_lower in ("in progress", "in-progress", "in_progress"):
+        if status_lower in ("in progress", "in-progress"):
             if item.updated_at:
                 days_since_update = (now - item.updated_at.replace(tzinfo=None)).days
                 if days_since_update > 7:

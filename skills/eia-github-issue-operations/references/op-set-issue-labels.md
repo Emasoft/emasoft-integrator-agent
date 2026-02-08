@@ -45,14 +45,14 @@ Add, remove, or set labels on a GitHub Issue. Supports auto-creating missing lab
 ./scripts/eia_set_issue_labels.py \
   --repo owner/repo \
   --issue 123 \
-  --add "in-progress,needs-review" \
+  --add "in-progress,ai-review" \
   --auto-create
 
 # Remove labels
 ./scripts/eia_set_issue_labels.py \
   --repo owner/repo \
   --issue 123 \
-  --remove "needs-triage"
+  --remove "backlog"
 
 # Set exact labels (replaces all existing)
 ./scripts/eia_set_issue_labels.py \
@@ -65,10 +65,10 @@ Add, remove, or set labels on a GitHub Issue. Supports auto-creating missing lab
 
 ```bash
 # Add labels
-gh issue edit 123 --repo owner/repo --add-label "in-progress,needs-review"
+gh issue edit 123 --repo owner/repo --add-label "in-progress,ai-review"
 
 # Remove labels
-gh issue edit 123 --repo owner/repo --remove-label "needs-triage"
+gh issue edit 123 --repo owner/repo --remove-label "backlog"
 ```
 
 ## Output
@@ -76,9 +76,9 @@ gh issue edit 123 --repo owner/repo --remove-label "needs-triage"
 ```json
 {
   "issue_number": 123,
-  "labels_added": ["in-progress", "needs-review"],
+  "labels_added": ["in-progress", "ai-review"],
   "labels_removed": [],
-  "current_labels": ["bug", "P1", "in-progress", "needs-review"]
+  "current_labels": ["bug", "P1", "in-progress", "ai-review"]
 }
 ```
 
@@ -89,7 +89,7 @@ When `--auto-create` is specified and a label doesn't exist:
 ```bash
 # Default colors by category
 gh label create "in-progress" --color "FEF2C0" --description "Work in progress"
-gh label create "needs-review" --color "C2E0C6" --description "Ready for review"
+gh label create "ai-review" --color "C2E0C6" --description "Ready for AI review"
 ```
 
 ### Default Colors by Category

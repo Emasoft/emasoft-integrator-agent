@@ -10,6 +10,7 @@ agent: api-coordinator
 context: fork
 workflow-instruction: "Step 13"
 procedure: "proc-populate-kanban"
+user-invocable: false
 ---
 
 # GitHub Projects Sync

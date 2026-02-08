@@ -135,11 +135,11 @@ When someone checks this box, a maintainer should assign them to the issue and p
 ### 3.1 Default labels for documentation issues
 
 ```yaml
-labels: ["documentation", "needs-triage", "help wanted"]
+labels: ["documentation", "backlog", "help wanted"]
 ```
 
 - `documentation` -- identifies the issue type for filtering
-- `needs-triage` -- signals that a maintainer has not yet reviewed and prioritized the issue
+- `backlog` -- signals that a maintainer has not yet reviewed and prioritized the issue
 - `help wanted` -- invites community contributions
 
 ### 3.2 Why "help wanted" is included by default
@@ -161,7 +161,7 @@ Copy the following into `.github/ISSUE_TEMPLATE/docs.yml`:
 ```yaml
 name: Documentation Improvement
 description: Report missing, incorrect, or improvable documentation
-labels: ["documentation", "needs-triage", "help wanted"]
+labels: ["documentation", "backlog", "help wanted"]
 assignees: []
 body:
   - type: markdown

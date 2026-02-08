@@ -39,8 +39,10 @@ This document defines the complete status lifecycle for project items, including
 |--------|------|-------------|-------|
 | **Backlog** | `backlog` | Not yet scheduled | Gray |
 | **Todo** | `todo` | Scheduled for current/next sprint | Blue |
-| **In Progress** | `in_progress` | Active development | Yellow |
-| **In Review** | `in_review` | PR created, awaiting review | Purple |
+| **In Progress** | `in-progress` | Active development | Yellow |
+| **AI Review** | `ai-review` | Integrator reviews ALL tasks | Purple |
+| **Human Review** | `human-review` | User reviews BIG tasks only | Pink |
+| **Merge/Release** | `merge-release` | Ready to merge | Light Green |
 | **Blocked** | `blocked` | Cannot proceed | Red |
 | **Done** | `done` | Completed and merged | Green |
 | **Cancelled** | `cancelled` | Will not be implemented | Gray |
@@ -64,16 +66,32 @@ This document defines the complete status lifecycle for project items, including
       "requires_assignment": true,
       "requires_branch": false
     },
-    "in_progress": {
+    "in-progress": {
       "name": "In Progress",
       "description": "Active development underway",
       "is_terminal": false,
       "requires_assignment": true,
       "requires_branch": true
     },
-    "in_review": {
-      "name": "In Review",
-      "description": "PR created, awaiting code review",
+    "ai-review": {
+      "name": "AI Review",
+      "description": "Integrator reviews ALL tasks",
+      "is_terminal": false,
+      "requires_assignment": true,
+      "requires_branch": true,
+      "requires_pr": true
+    },
+    "human-review": {
+      "name": "Human Review",
+      "description": "User reviews BIG tasks only",
+      "is_terminal": false,
+      "requires_assignment": true,
+      "requires_branch": true,
+      "requires_pr": true
+    },
+    "merge-release": {
+      "name": "Merge/Release",
+      "description": "Ready to merge, all reviews completed",
       "is_terminal": false,
       "requires_assignment": true,
       "requires_branch": true,
@@ -110,7 +128,9 @@ This document defines the complete status lifecycle for project items, including
 | Backlog | No | No | No | No |
 | Todo | No | Yes | No | No |
 | In Progress | No | Yes | Yes | No |
-| In Review | No | Yes | Yes | Yes |
+| AI Review | No | Yes | Yes | Yes |
+| Human Review | No | Yes | Yes | Yes |
+| Merge/Release | No | Yes | Yes | Yes |
 | Blocked | No | Yes | - | - |
 | Done | Yes | No | - | - |
 | Cancelled | Yes | No | - | - |

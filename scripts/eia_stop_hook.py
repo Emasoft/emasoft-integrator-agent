@@ -4,7 +4,7 @@ eia_stop_hook.py - Stop Hook for Integrator Agent.
 
 Blocks the integrator agent from exiting with incomplete work. Checks:
 1. Pending PRs awaiting review (via gh pr list)
-2. GitHub Projects items in "In Progress" or "In Review" status
+2. GitHub Projects items in "In Progress" or "AI Review" status
 3. Claude Tasks with pending/in_progress status (if transcript available)
 4. Incomplete quality gates
 
@@ -182,7 +182,7 @@ def get_pending_prs(log_file: Path) -> list[dict]:
 
 
 def get_project_items_in_progress(project_number: Optional[int], log_file: Path) -> list[dict]:
-    """Get GitHub Projects items in "In Progress" or "In Review" status.
+    """Get GitHub Projects items in "In Progress" or "AI Review" status.
 
     Args:
         project_number: GitHub Projects number to check
@@ -254,7 +254,7 @@ def get_project_items_in_progress(project_number: Optional[int], log_file: Path)
         items = data["data"]["repository"]["projectV2"]["items"]["nodes"]
 
         in_progress = []
-        active_statuses = {"In Progress", "In Review", "In Development", "Working", "Active"}
+        active_statuses = {"In Progress", "AI Review", "Human Review", "Merge/Release", "Working", "Active"}
 
         for item in items:
             content = item.get("content")

@@ -130,7 +130,7 @@ Parse the response to extract:
 
 **Labels** (9-label classification system):
 - **Priority**: `priority-critical`, `priority-high`, `priority-medium`, `priority-low`
-- **Status**: `status-todo`, `status-in-progress`, `status-review`, `status-done`
+- **Status**: `status-todo`, `status-in-progress`, `status-ai-review`, `status-done`
 - **Type**: `type-feature`, `type-bug`, `type-refactor`, `type-docs`
 
 **Custom fields**:
@@ -177,7 +177,7 @@ Query the orchestrator's internal state to identify changes:
 1. **Read modified task entries** from orchestrator's tracking system
 2. **Identify changes requiring GitHub updates**:
    - Label additions or removals
-   - Status transitions (todo → in-progress → review → done)
+   - Status transitions (todo → in-progress → ai-review → done)
    - Task checklist updates
    - Priority or type changes
 
@@ -265,7 +265,7 @@ The 9-label classification system organizes issues across three dimensions:
 | Category | Purpose | Values |
 |----------|---------|--------|
 | **Priority** | Urgency level | `priority-critical`, `priority-high`, `priority-medium`, `priority-low` |
-| **Status** | Workflow state | `status-todo`, `status-in-progress`, `status-review`, `status-done` |
+| **Status** | Workflow state | `status-todo`, `status-in-progress`, `status-ai-review`, `status-done` |
 | **Type** | Work category | `type-feature`, `type-bug`, `type-refactor`, `type-docs` |
 
 ### Label Management Operations
@@ -453,7 +453,7 @@ Details: docs_dev/github-sync-20250131-143022.log
 
 **Solutions**:
 1. **Implement priority rules** for competing labels:
-   - Status: `done` > `review` > `in-progress` > `todo`
+   - Status: `done` > `ai-review` > `in-progress` > `todo`
    - Priority: `critical` > `high` > `medium` > `low`
 2. **Document label precedence** in project wiki
 3. **Create label consolidation script** to clean up conflicts

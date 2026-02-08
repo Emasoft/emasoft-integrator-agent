@@ -116,7 +116,7 @@ gh issue view ISSUE_NUMBER --repo owner/repo --json state
 gh issue edit ISSUE_NUMBER --repo owner/repo --title "New title" --body "New body"
 
 # Add labels
-gh issue edit ISSUE_NUMBER --repo owner/repo --add-label "enhancement,needs-review"
+gh issue edit ISSUE_NUMBER --repo owner/repo --add-label "enhancement,ai-review"
 
 # Remove labels
 gh issue edit ISSUE_NUMBER --repo owner/repo --remove-label "wontfix"

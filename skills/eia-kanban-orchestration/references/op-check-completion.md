@@ -48,13 +48,15 @@ python3 scripts/kanban_check_completion.py OWNER REPO PROJECT_NUMBER
   "summary": {
     "backlog": 2,
     "todo": 3,
-    "in_progress": 1,
-    "in_review": 2,
+    "in-progress": 1,
+    "ai-review": 1,
+    "human-review": 1,
+    "merge-release": 0,
     "done": 10,
     "blocked": 1
   },
   "blocking_items": [
-    {"issue_number": 42, "status": "in_progress", "assignee": "dev1"},
+    {"issue_number": 42, "status": "in-progress", "assignee": "dev1"},
     {"issue_number": 60, "status": "blocked", "reason": "Missing credentials"}
   ],
   "recommendation": "Complete or defer 6 pending items before exit"
@@ -66,7 +68,7 @@ python3 scripts/kanban_check_completion.py OWNER REPO PROJECT_NUMBER
 | Condition | Complete? | Exit Code |
 |-----------|-----------|-----------|
 | All items in Done | Yes | 0 |
-| Items in Todo/In Progress/In Review | No | 1 |
+| Items in Todo/In Progress/AI Review/Human Review/Merge Release | No | 1 |
 | Items in Blocked | No | 2 |
 
 ## Exit Codes
@@ -100,8 +102,9 @@ If completion check fails:
 
 1. **Items in progress** - Wait for completion or reassign
 2. **Items blocked** - Resolve blockers or escalate to user
-3. **Items in review** - Complete reviews or merge PRs
-4. **Items deferred** - Explicitly mark as deferred with reason
+3. **Items in AI review or human review** - Complete reviews or merge PRs
+4. **Items in merge/release** - Merge PRs promptly
+5. **Items deferred** - Explicitly mark as deferred with reason
 
 ## Error Handling
 

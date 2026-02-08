@@ -240,7 +240,7 @@ Manage labels across multiple issues efficiently.
 # add-label-to-matching.sh
 
 FILTER_LABEL="bug"
-ADD_LABEL="needs-triage"
+ADD_LABEL="backlog"
 
 # Get all issues with filter label
 ISSUES=$(gh issue list --label "$FILTER_LABEL" --json number --jq '.[].number')
@@ -403,7 +403,7 @@ exec > >(tee -a "$LOG_FILE")
 exec 2>&1
 
 echo "=== Batch Operation Started at $(date) ==="
-echo "Operation: Add 'needs-review' label to all 'feature' issues"
+echo "Operation: Add 'ai-review' label to all 'feature' issues"
 echo ""
 
 ISSUES=$(gh issue list --label "feature" --json number --jq '.[].number')
@@ -415,7 +415,7 @@ echo ""
 for ISSUE in $ISSUES; do
   echo "[$(date +%H:%M:%S)] Processing issue #$ISSUE"
 
-  if gh issue edit "$ISSUE" --add-label "needs-review"; then
+  if gh issue edit "$ISSUE" --add-label "ai-review"; then
     echo "  ✓ Success"
   else
     echo "  ✗ Failed"

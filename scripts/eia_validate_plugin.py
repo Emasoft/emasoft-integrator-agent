@@ -91,7 +91,7 @@ def validate_plugin(plugin_dir: Path, _verbose: bool = False) -> ValidationResul
 
     # Parse plugin.json
     try:
-        with open(plugin_json) as f:
+        with open(plugin_json, encoding="utf-8") as f:
             manifest = json.load(f)
         result.success("plugin.json is valid JSON")
     except json.JSONDecodeError as e:
@@ -139,7 +139,7 @@ def validate_plugin(plugin_dir: Path, _verbose: bool = False) -> ValidationResul
     hooks_json = plugin_dir / "hooks" / "hooks.json"
     if hooks_json.exists():
         try:
-            with open(hooks_json) as f:
+            with open(hooks_json, encoding="utf-8") as f:
                 hooks_data = json.load(f)
             result.success("hooks.json is valid JSON")
 
@@ -176,7 +176,7 @@ def validate_plugin(plugin_dir: Path, _verbose: bool = False) -> ValidationResul
 
         # Check scripts are executable
         for script in scripts:
-            content = script.read_text()
+            content = script.read_text(encoding="utf-8")
             if not content.startswith("#!/usr/bin/env python3"):
                 result.warning(f"Script missing shebang: {script.name}")
 

@@ -18,6 +18,7 @@ agent: eia-main
 context: fork
 workflow-instruction: "support"
 procedure: "support-skill"
+user-invocable: false
 ---
 
 # EIA Session Memory Skill

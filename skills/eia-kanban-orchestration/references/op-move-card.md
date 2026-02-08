@@ -26,8 +26,11 @@ Move a project item (card) from its current column to a new status column, with 
 |------|----|--------------|--------------|
 | Backlog | Todo | Orchestrator | Work prioritized |
 | Todo | In Progress | Assigned agent | Agent starts work |
-| In Progress | In Review | Assigned agent | PR created |
-| In Review | Done | Auto (PR merge) | PR merged |
+| In Progress | AI Review | Assigned agent | PR created |
+| AI Review | Human Review | Integrator | Big task needing user review |
+| AI Review | Merge/Release | Integrator | Small task approved |
+| Human Review | Merge/Release | Orchestrator | Human approves |
+| Merge/Release | Done | Auto (PR merge) | PR merged |
 | Any | Blocked | Any (with reason) | Blocker identified |
 | Blocked | Previous | Any | Blocker resolved |
 
@@ -56,7 +59,7 @@ Move a project item (card) from its current column to a new status column, with 
 python3 scripts/kanban_move_card.py OWNER REPO PROJECT_NUMBER ISSUE_NUMBER NEW_STATUS [--reason "Reason"]
 
 # Examples:
-python3 scripts/kanban_move_card.py owner repo 1 42 in_progress
+python3 scripts/kanban_move_card.py owner repo 1 42 in-progress
 python3 scripts/kanban_move_card.py owner repo 1 42 blocked --reason "Missing credentials"
 ```
 
@@ -86,7 +89,7 @@ mutation {
   "success": true,
   "issue_number": 42,
   "previous_status": "todo",
-  "new_status": "in_progress",
+  "new_status": "in-progress",
   "moved_by": "orchestrator"
 }
 ```

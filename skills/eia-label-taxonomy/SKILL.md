@@ -9,6 +9,7 @@ agent: eia-main
 context: fork
 workflow-instruction: "support"
 procedure: "support-skill"
+user-invocable: false
 ---
 
 # EIA Label Taxonomy
@@ -95,11 +96,34 @@ PR created → review:needed → review:in-progress → review:approved OR revie
                                               changes made → review:in-progress (repeat)
 ```
 
+### Kanban Columns (Canonical 8-Column System)
+
+The full workflow uses these 8 status columns:
+
+| # | Column Code | Display Name | Label | Description |
+|---|-------------|-------------|-------|-------------|
+| 1 | `backlog` | Backlog | `status:backlog` | Entry point for new tasks |
+| 2 | `todo` | Todo | `status:todo` | Ready to start |
+| 3 | `in-progress` | In Progress | `status:in-progress` | Active work |
+| 4 | `ai-review` | AI Review | `status:ai-review` | Integrator agent reviews ALL tasks |
+| 5 | `human-review` | Human Review | `status:human-review` | User reviews BIG tasks only (via EAMA) |
+| 6 | `merge-release` | Merge/Release | `status:merge-release` | Ready to merge |
+| 7 | `done` | Done | `status:done` | Completed |
+| 8 | `blocked` | Blocked | `status:blocked` | Blocked at any stage |
+
+**Task Routing Rules:**
+- **Small tasks**: In Progress -> AI Review -> Merge/Release -> Done
+- **Big tasks**: In Progress -> AI Review -> Human Review -> Merge/Release -> Done
+- **Human Review** is requested via EAMA (Assistant Manager asks user to test/review)
+- Not all tasks go through Human Review -- only significant changes requiring human judgment
+
 ### Status Labels EIA Updates
 
 | Label | When EIA Sets It |
 |-------|------------------|
-| `status:needs-review` | When PR is ready for review |
+| `status:ai-review` | When task/PR is ready for AI review |
+| `status:human-review` | When significant task needs user review (escalates via EAMA) |
+| `status:merge-release` | When AI review passes and task is ready to merge |
 | `status:blocked` | When PR has conflicts or CI failures |
 | `status:done` | After PR merged and verified |
 
@@ -158,7 +182,7 @@ gh pr edit $PR_NUMBER --remove-label "review:in-progress" --add-label "review:ch
 
 ```bash
 # Update issue status to done
-gh issue edit $ISSUE_NUMBER --remove-label "status:needs-review" --add-label "status:done"
+gh issue edit $ISSUE_NUMBER --remove-label "status:ai-review" --add-label "status:done"
 # Remove assignment
 gh issue edit $ISSUE_NUMBER --remove-label "assign:$AGENT_NAME"
 ```
@@ -194,7 +218,7 @@ gh pr review 45 --request-changes --body "Please address the following issues: .
 gh pr edit 45 --remove-label "review:in-progress" --add-label "review:approved"
 gh pr review 45 --approve
 # After merge: Update parent issue
-gh issue edit 78 --remove-label "status:needs-review" --add-label "status:done"
+gh issue edit 78 --remove-label "status:ai-review" --add-label "status:done"
 ```
 
 ### Example 4: Blocked PR

@@ -97,9 +97,9 @@ Send a message using the `agent-messaging` skill with:
 
 Send a message using the `agent-messaging` skill with:
 - **Recipient**: `orchestrator-eoa`
-- **Subject**: `Kanban Update: Issue #123 moved to In Review`
+- **Subject**: `Kanban Update: Issue #123 moved to AI Review`
 - **Priority**: `normal`
-- **Content**: `{"type": "kanban-status-change", "message": "Issue #123 moved from In Progress to In Review by agent-name. PR likely created."}`
+- **Content**: `{"type": "kanban-status-change", "message": "Issue #123 moved from In Progress to AI Review by agent-name. PR likely created."}`
 - **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
 
 ## Output
@@ -109,7 +109,7 @@ Send a message using the `agent-messaging` skill with:
   "poll_timestamp": "2024-01-15T10:00:00Z",
   "changes_detected": 3,
   "changes": [
-    {"type": "status_change", "issue": 42, "from": "todo", "to": "in_progress"},
+    {"type": "status_change", "issue": 42, "from": "todo", "to": "in-progress"},
     {"type": "new_item", "issue": 50},
     {"type": "assignment_change", "issue": 30, "new_assignee": "dev2"}
   ],
@@ -124,7 +124,7 @@ Flag items with no movement in 24+ hours:
 ```python
 for item in current_state:
     if item.last_updated < (now - 24_hours):
-        if item.status in ["in_progress", "in_review"]:
+        if item.status in ["in-progress", "ai-review", "human-review", "merge-release"]:
             notify_orchestrator("Stale item", item)
 ```
 

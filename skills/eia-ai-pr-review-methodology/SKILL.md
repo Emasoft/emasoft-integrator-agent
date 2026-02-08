@@ -19,6 +19,7 @@ agent: eia-main
 context: fork
 workflow-instruction: "Step 21"
 procedure: "proc-deep-pr-review"
+user-invocable: false
 ---
 
 # AI PR Review Methodology Skill

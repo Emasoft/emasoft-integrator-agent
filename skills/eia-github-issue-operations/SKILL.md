@@ -13,6 +13,7 @@ agent: api-coordinator
 context: fork
 workflow-instruction: "Step 13"
 procedure: "proc-populate-kanban"
+user-invocable: false
 ---
 
 # GitHub Issue Operations Skill
@@ -214,14 +215,14 @@ Need to work with GitHub Issues?
 ./scripts/eia_set_issue_labels.py \
   --repo owner/repo \
   --issue 123 \
-  --add "in-progress,needs-review" \
+  --add "in-progress,ai-review" \
   --auto-create
 
 # Remove labels
 ./scripts/eia_set_issue_labels.py \
   --repo owner/repo \
   --issue 123 \
-  --remove "needs-triage"
+  --remove "backlog"
 ```
 
 ### Assign Milestone

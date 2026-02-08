@@ -56,7 +56,7 @@ jobs:
               { name: 'bug', color: 'd73a4a', description: 'Something isn\'t working' },
               { name: 'enhancement', color: 'a2eeef', description: 'New feature or request' },
               { name: 'ci-passed', color: '0e8a16', description: 'CI tests passed' },
-              { name: 'needs-review', color: 'fbca04', description: 'Awaiting code review' }
+              { name: 'ai-review', color: 'fbca04', description: 'Awaiting code review' }
             ];
 
             for (const label of labels) {
@@ -156,7 +156,7 @@ permissions:
 ### 5.1.3 Label Naming Conventions
 
 **Best Practices**:
-- Use lowercase with hyphens: `needs-review` not `Needs Review`
+- Use lowercase with hyphens: `ai-review` not `AI Review`
 - Prefix with category: `type/bug`, `status/in-progress`, `priority/high`
 - Keep names short but descriptive
 

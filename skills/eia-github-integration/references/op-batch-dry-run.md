@@ -145,7 +145,7 @@ gh issue list --label "stale" --state open --json number,title,updatedAt | \
 ### Bulk assignee dry-run
 
 ```bash
-gh issue list --label "needs-triage" --state open --json number,title,assignees | \
+gh issue list --label "backlog" --state open --json number,title,assignees | \
   jq '.[] | {
     number,
     title,

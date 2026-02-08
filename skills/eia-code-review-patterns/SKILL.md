@@ -17,6 +17,7 @@ agent: eia-main
 context: fork
 workflow-instruction: "Step 21"
 procedure: "proc-evaluate-pr"
+user-invocable: false
 ---
 
 # Code Review Patterns Skill

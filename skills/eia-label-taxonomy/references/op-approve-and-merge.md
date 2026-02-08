@@ -77,7 +77,7 @@ gh pr merge $PR_NUMBER --merge --delete-branch
 
 ```bash
 if [ -n "$LINKED_ISSUE" ]; then
-  gh issue edit $LINKED_ISSUE --remove-label "status:needs-review" --add-label "status:done"
+  gh issue edit $LINKED_ISSUE --remove-label "status:ai-review" --add-label "status:done"
 
   # Remove assignment if issue is complete
   ASSIGN_LABEL=$(gh issue view $LINKED_ISSUE --json labels --jq '.labels[].name | select(startswith("assign:"))')
@@ -121,7 +121,7 @@ Ready to merge."
 gh pr merge 45 --squash --delete-branch
 
 # Step 5: Update linked issue
-gh issue edit 78 --remove-label "status:needs-review" --add-label "status:done"
+gh issue edit 78 --remove-label "status:ai-review" --add-label "status:done"
 gh issue edit 78 --remove-label "assign:implementer-1"
 
 # Step 6: Verify

@@ -32,6 +32,8 @@ All documents (.md files) shared between agents MUST follow this protocol:
 
 ### Message Format
 
+> **Note**: Use the `agent-messaging` skill to send messages. The JSON structure below shows the message content.
+
 ```json
 {
   "to": "{{AGENT_SESSION}}",

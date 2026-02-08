@@ -1036,6 +1036,68 @@ Question: Can we close with partial acceptance criteria met?
 
 ---
 
+## Kanban Column System
+
+All projects use the canonical **8-column kanban system** on GitHub Projects:
+
+| Column | Code | Label |
+|--------|------|-------|
+| Backlog | `backlog` | `status:backlog` |
+| Todo | `todo` | `status:todo` |
+| In Progress | `in-progress` | `status:in-progress` |
+| AI Review | `ai-review` | `status:ai-review` |
+| Human Review | `human-review` | `status:human-review` |
+| Merge/Release | `merge-release` | `status:merge-release` |
+| Done | `done` | `status:done` |
+| Blocked | `blocked` | `status:blocked` |
+
+**Task routing**:
+- Small tasks: In Progress → AI Review → Merge/Release → Done
+- Big tasks: In Progress → AI Review → Human Review → Merge/Release → Done
+
+---
+
+## Wave 1-7 Skill Additions
+
+The following skills were added to EIA (2026-02-06 — 2026-02-07):
+
+| Skill | Purpose |
+|-------|---------|
+| `eia-ci-cd-pipeline` | CI/CD pipeline management, GitHub Actions workflows |
+| `eia-pr-review-workflow` | PR review automation, code quality checks |
+| `eia-release-management` | Version management, changelog generation, release automation |
+| `eia-quality-gates` | Code quality enforcement, linting, type checking |
+| `eia-github-projects-sync` | GitHub Projects kanban synchronization |
+| `eia-kanban-management` | Kanban column management and task routing |
+
+---
+
+## Scripts Reference
+
+| Script | Purpose |
+|--------|---------|
+| `scripts/pre-push-hook.py` | Pre-push validation (manifest, hooks, lint, Unicode compliance) |
+| `scripts/eia_validate_plugin.py` | Plugin structure validation |
+| `scripts/eia_download.py` | Plugin download utility |
+| `scripts/eia_unicode_compliance.py` | Unicode compliance checker (BOM, line endings, encoding, non-ASCII) |
+| `skills/eia-quality-gates/scripts/eia_check_encoding.py` | Python file encoding parameter checker |
+| `skills/eia-release-management/scripts/eia_cleanup_version_branches.sh` | Tag/branch collision detection |
+
+---
+
+## Recent Changes (2026-02-07)
+
+- Added 8-column canonical kanban system (unified from 5 conflicting systems)
+- Added Wave 1-7 skills: ci-cd-pipeline, pr-review-workflow, release-management, quality-gates, github-projects-sync, kanban-management
+- Added Unicode compliance check (step 4) to pre-push hook
+- Added `encoding="utf-8"` to all Python file operations
+- Created `eia_check_encoding.py` for encoding parameter validation
+- Created `eia_cleanup_version_branches.sh` for tag/branch collision detection
+- Created `eia_unicode_compliance.py` for full Unicode compliance auditing
+- Synchronized FULL_PROJECT_WORKFLOW.md, TEAM_REGISTRY_SPECIFICATION.md, ROLE_BOUNDARIES.md across all plugins
+
+---
+
 ## Document Status
 
 **This document is the SINGLE SOURCE OF TRUTH for EIA operations.**

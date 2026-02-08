@@ -19,6 +19,7 @@ agent: eia-main
 context: fork
 workflow-instruction: "Step 21"
 procedure: "proc-evaluate-pr"
+user-invocable: false
 ---
 
 # EIA Quality Gates
@@ -263,6 +264,29 @@ These scripts manage design documents for quality gate integration:
 | `eia_design_search.py` | Search design documents by UUID, type, or status | `python scripts/eia_design_search.py --type <TYPE> --status <STATUS>` |
 | `eia_design_validate.py` | Validate design document frontmatter compliance | `python scripts/eia_design_validate.py --all` |
 
+### Encoding Compliance Scripts
+
+**Script**: `scripts/eia_check_encoding.py` — Checks Python files for missing UTF-8 encoding parameters
+
+For encoding compliance checking, see [encoding-compliance-checker.md](references/encoding-compliance-checker.md):
+- When to run the encoding compliance checker
+- How to run eia_check_encoding.py on specific files
+- How to run eia_check_encoding.py on an entire directory
+- What the checker verifies (5 checks)
+- How to fix each type of encoding violation
+- Integrating with pre-push hooks
+
+### Unicode Enforcement Scripts
+
+**Script**: `../../scripts/eia_unicode_compliance.py` — Full Unicode compliance checker (BOM, line endings, encoding, non-ASCII identifiers)
+
+For Unicode enforcement hook details, see [unicode-enforcement-hook.md](references/unicode-enforcement-hook.md):
+- When the Unicode enforcement hook runs
+- What the hook checks (4 checks)
+- How to fix each type of Unicode violation
+- Running the standalone Unicode compliance checker
+- Configuring the hook in pre-push scripts
+
 ### PR Gate Scripts
 
 These scripts enforce quality gates on pull requests:
@@ -288,6 +312,10 @@ All scripts are located at `../../scripts/` relative to this skill.
 - [references/review-gate.md](references/review-gate.md) - Review Gate details
 - [references/pre-merge-gate.md](references/pre-merge-gate.md) - Pre-Merge Gate details
 - [references/post-merge-gate.md](references/post-merge-gate.md) - Post-Merge Gate details
+
+### Code Quality Checks
+- [references/encoding-compliance-checker.md](references/encoding-compliance-checker.md) - UTF-8 encoding compliance checker
+- [references/unicode-enforcement-hook.md](references/unicode-enforcement-hook.md) - Unicode enforcement hook (BOM, line endings, encoding, non-ASCII identifiers)
 
 ### Procedures and Examples
 - [references/gate-examples.md](references/gate-examples.md) - Practical examples for all gates

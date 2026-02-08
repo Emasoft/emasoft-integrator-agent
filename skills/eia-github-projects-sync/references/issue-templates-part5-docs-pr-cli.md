@@ -19,7 +19,7 @@ This YAML file defines the structure for documentation requests. Place it in `.g
 ```yaml
 name: Documentation
 description: Documentation improvements
-labels: ["type:docs", "status:needs-triage"]
+labels: ["type:docs", "status:backlog"]
 body:
   - type: markdown
     attributes:

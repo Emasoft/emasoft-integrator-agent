@@ -50,13 +50,13 @@ Track current state (supplements project board status).
 
 | Label | Color | Description |
 |-------|-------|-------------|
-| `status:needs-triage` | `#D4C5F9` (light purple) | Needs review and prioritization |
+| `status:backlog` | `#D4C5F9` (light purple) | Not yet scheduled, needs prioritization |
 | `status:ready` | `#0E8A16` (green) | Ready to be worked on |
 | `status:in-progress` | `#FBCA04` (yellow) | Currently being worked on |
 | `status:blocked` | `#D73A4A` (red) | Cannot proceed |
-| `status:needs-review` | `#1D76DB` (blue) | PR ready for review |
-| `status:needs-info` | `#D876E3` (pink) | Waiting for more information |
-| `status:on-hold` | `#CFD3D7` (gray) | Intentionally paused |
+| `status:ai-review` | `#1D76DB` (blue) | Integrator reviews ALL tasks |
+| `status:human-review` | `#D876E3` (pink) | User reviews BIG tasks only |
+| `status:merge-release` | `#C2E0C6` (light green) | Ready to merge |
 
 ### Component Labels
 
@@ -189,12 +189,13 @@ gh label create "priority:normal" --color "FBCA04" --description "Standard prior
 gh label create "priority:low" --color "0E8A16" --description "Nice to have" --repo "$REPO" --force
 
 # Status labels
-gh label create "status:needs-triage" --color "D4C5F9" --description "Needs review and prioritization" --repo "$REPO" --force
+gh label create "status:backlog" --color "D4C5F9" --description "Not yet scheduled, needs prioritization" --repo "$REPO" --force
 gh label create "status:ready" --color "0E8A16" --description "Ready to be worked on" --repo "$REPO" --force
 gh label create "status:in-progress" --color "FBCA04" --description "Currently being worked on" --repo "$REPO" --force
 gh label create "status:blocked" --color "D73A4A" --description "Cannot proceed" --repo "$REPO" --force
-gh label create "status:needs-review" --color "1D76DB" --description "PR ready for review" --repo "$REPO" --force
-gh label create "status:needs-info" --color "D876E3" --description "Waiting for more information" --repo "$REPO" --force
+gh label create "status:ai-review" --color "1D76DB" --description "Integrator reviews ALL tasks" --repo "$REPO" --force
+gh label create "status:human-review" --color "D876E3" --description "User reviews BIG tasks only" --repo "$REPO" --force
+gh label create "status:merge-release" --color "C2E0C6" --description "Ready to merge" --repo "$REPO" --force
 
 # Effort labels
 gh label create "effort:xs" --color "0E8A16" --description "< 1 hour" --repo "$REPO" --force
@@ -222,16 +223,16 @@ gh label list --repo owner/repo --json name,color,description
 
 | Issue Type | Automatic Labels |
 |------------|------------------|
-| Feature request | `type:feature`, `status:needs-triage` |
-| Bug report | `type:bug`, `status:needs-triage` |
-| Documentation | `type:docs`, `status:needs-triage` |
+| Feature request | `type:feature`, `status:backlog` |
+| Bug report | `type:bug`, `status:backlog` |
+| Documentation | `type:docs`, `status:backlog` |
 
 ### On Agent Assignment
 
 ```
 WHEN issue assigned to agent:
   ADD "agent:{agent-id}" label
-  REMOVE "status:needs-triage" label
+  REMOVE "status:backlog" label
   ADD "status:ready" label
 ```
 
@@ -248,7 +249,7 @@ WHEN agent starts work:
 ```
 WHEN PR created for issue:
   REMOVE "status:in-progress" label
-  ADD "status:needs-review" label
+  ADD "status:ai-review" label
   ADD "review:needed" label
 ```
 

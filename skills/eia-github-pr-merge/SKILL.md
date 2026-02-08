@@ -13,6 +13,7 @@ agent: api-coordinator
 context: fork
 workflow-instruction: "Step 21"
 procedure: "proc-evaluate-pr"
+user-invocable: false
 ---
 
 # GitHub PR Merge Operations

@@ -20,7 +20,7 @@ This YAML file defines the structure for feature request issues. Place it in `.g
 ```yaml
 name: Feature Request
 description: Propose new functionality
-labels: ["type:feature", "status:needs-triage"]
+labels: ["type:feature", "status:backlog"]
 body:
   - type: markdown
     attributes:

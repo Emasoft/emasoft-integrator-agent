@@ -10,6 +10,7 @@ agent: test-engineer
 context: fork
 workflow-instruction: "Step 21"
 procedure: "proc-evaluate-pr"
+user-invocable: false
 ---
 
 # TDD Enforcement Skill

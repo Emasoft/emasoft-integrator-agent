@@ -6,9 +6,11 @@
    - 1.1 [Valid Transitions Matrix](#valid-transitions-matrix)
    - 1.2 [Backlog to Todo transition](#backlog--todo)
    - 1.3 [Todo to In Progress transition](#todo--in-progress)
-   - 1.4 [In Progress to In Review transition](#in-progress--in-review)
-   - 1.5 [In Review to Done transition](#in-review--done)
-   - 1.6 [In Review to In Progress (changes requested)](#in-review--in-progress-changes-requested)
+   - 1.4 [In Progress to AI Review transition](#in-progress--ai-review)
+   - 1.4a [AI Review to Human Review transition](#ai-review--human-review)
+   - 1.4b [AI Review to Merge/Release transition](#ai-review--merge-release)
+   - 1.5 [Merge/Release to Done transition](#merge-release--done)
+   - 1.6 [AI Review to In Progress (changes requested)](#ai-review--in-progress-changes-requested)
    - 1.7 [Moving any status to Blocked](#any--blocked)
    - 1.8 [Unblocking items](#blocked--todoin-progress)
    - 1.9 [Cancelling items](#any--cancelled)
@@ -26,15 +28,17 @@
 ### Valid Transitions Matrix
 
 ```
-FROM ↓ / TO →    | backlog | todo | in_progress | in_review | blocked | done | cancelled |
------------------|---------|------|-------------|-----------|---------|------|-----------|
-backlog          |    -    |  ✓   |      ✗      |     ✗     |    ✗    |  ✗   |     ✓     |
-todo             |    ✓    |  -   |      ✓      |     ✗     |    ✓    |  ✗   |     ✓     |
-in_progress      |    ✗    |  ✓   |      -      |     ✓     |    ✓    |  ✗   |     ✓     |
-in_review        |    ✗    |  ✗   |      ✓      |     -     |    ✓    |  ✓   |     ✓     |
-blocked          |    ✗    |  ✓   |      ✓      |     ✗     |    -    |  ✗   |     ✓     |
-done             |    ✗    |  ✗   |      ✗      |     ✗     |    ✗    |  -   |     ✗     |
-cancelled        |    ✓    |  ✗   |      ✗      |     ✗     |    ✗    |  ✗   |     -     |
+FROM ↓ / TO →     | backlog | todo | in-progress | ai-review | human-review | merge-release | blocked | done | cancelled |
+------------------|---------|------|-------------|-----------|--------------|---------------|---------|------|-----------|
+backlog           |    -    |  ✓   |      ✗      |     ✗     |      ✗       |       ✗       |    ✗    |  ✗   |     ✓     |
+todo              |    ✓    |  -   |      ✓      |     ✗     |      ✗       |       ✗       |    ✓    |  ✗   |     ✓     |
+in-progress       |    ✗    |  ✓   |      -      |     ✓     |      ✗       |       ✗       |    ✓    |  ✗   |     ✓     |
+ai-review         |    ✗    |  ✗   |      ✓      |     -     |      ✓       |       ✓       |    ✓    |  ✗   |     ✓     |
+human-review      |    ✗    |  ✗   |      ✓      |     ✗     |      -       |       ✓       |    ✓    |  ✗   |     ✓     |
+merge-release     |    ✗    |  ✗   |      ✗      |     ✗     |      ✗       |       -       |    ✓    |  ✓   |     ✓     |
+blocked           |    ✗    |  ✓   |      ✓      |     ✗     |      ✗       |       ✗       |    -    |  ✗   |     ✓     |
+done              |    ✗    |  ✗   |      ✗      |     ✗     |      ✗       |       ✗       |    ✗    |  -   |     ✗     |
+cancelled         |    ✓    |  ✗   |      ✗      |     ✗     |      ✗       |       ✗       |    ✗    |  ✗   |     -     |
 ```
 
 ### Transition Conditions
@@ -64,7 +68,7 @@ cancelled        |    ✓    |  ✗   |      ✗      |     ✗     |    ✗    
 - Record start timestamp
 - Send notification to orchestrator
 
-#### In Progress → In Review
+#### In Progress → AI Review
 
 **Preconditions**:
 - Feature branch has commits
@@ -73,11 +77,43 @@ cancelled        |    ✓    |  ✗   |      ✗      |     ✗     |    ✗    
 
 **Actions**:
 - Link PR to issue
-- Add "needs-review" label
+- Add "ai-review" label
 - Remove "in-progress" label
-- Notify reviewers
+- Notify Integrator agent
 
-#### In Review → Done
+#### AI Review → Human Review
+
+**Preconditions**:
+- Integrator has reviewed and approved
+- Task is flagged as BIG (requires human review)
+
+**Actions**:
+- Remove "ai-review" label
+- Add "human-review" label
+- Notify user/human reviewer
+
+#### AI Review → Merge/Release
+
+**Preconditions**:
+- Integrator has reviewed and approved
+- Task is small (no human review needed)
+
+**Actions**:
+- Remove "ai-review" label
+- Add "merge-release" label
+- PR ready for merge
+
+#### Human Review → Merge/Release
+
+**Preconditions**:
+- Human reviewer has approved
+
+**Actions**:
+- Remove "human-review" label
+- Add "merge-release" label
+- PR ready for merge
+
+#### Merge/Release → Done
 
 **Preconditions**:
 - PR approved by required reviewers (see [100% Approval Rule](./iteration-cycle-rules.md#100-approval-rule))
@@ -93,14 +129,14 @@ cancelled        |    ✓    |  ✗   |      ✗      |     ✗     |    ✗    
 - Archive project item (optional)
 - Update parent issue progress
 
-#### In Review → In Progress (Changes Requested)
+#### AI Review → In Progress (Changes Requested)
 
 **Preconditions**:
-- PR review requests changes
+- Integrator review requests changes
 - Reviewer comments addressed
 
 **Actions**:
-- Remove "needs-review" label
+- Remove "ai-review" label
 - Add "in-progress" label
 - Notify assignee of required changes
 
@@ -149,7 +185,7 @@ cancelled        |    ✓    |  ✗   |      ✗      |     ✗     |    ✗    
 |-------|--------|---------------|
 | Issue assigned | GitHub | Check if Todo |
 | Branch created | GitHub | → In Progress |
-| PR opened | GitHub | → In Review |
+| PR opened | GitHub | → AI Review |
 | PR merged | GitHub | → Done |
 | PR closed without merge | GitHub | → In Progress |
 | Label "blocked" added | GitHub | → Blocked |
@@ -178,9 +214,9 @@ When GitHub state and project status conflict:
 | Conflict | Resolution |
 |----------|------------|
 | Issue closed, status not Done | Set to Done |
-| PR merged, status In Review | Set to Done |
+| PR merged, status AI Review | Set to Done |
 | No activity 24h, status In Progress | Query agent, consider Blocked |
-| Agent reports complete, status not In Review | Verify PR, update accordingly |
+| Agent reports complete, status not AI Review | Verify PR, update accordingly |
 
 ---
 

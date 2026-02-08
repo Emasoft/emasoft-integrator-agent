@@ -25,7 +25,7 @@ gh issue edit ISSUE --add-label "status:in-progress"
 # Also update project item status via GraphQL
 
 # When PR created
-gh issue edit ISSUE --add-label "status:needs-review"
+gh issue edit ISSUE --add-label "status:ai-review"
 ```
 
 ### Add Meaningful Comments
@@ -104,7 +104,7 @@ An issue is resolved ONLY when:
 Check actual state before changing status:
 
 ```bash
-# Verify PR exists before marking "In Review"
+# Verify PR exists before marking "AI Review"
 gh pr list --head BRANCH --json number,state
 
 # Verify CI passes before approving

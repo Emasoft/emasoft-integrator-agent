@@ -201,13 +201,13 @@ python3 scripts/bulk-label-assignment.py \
   --add-label "feature"
 ```
 
-**Example 3: Add "needs-triage" to recent bugs**
+**Example 3: Add "backlog" to recent bugs**
 ```bash
 python3 scripts/bulk-label-assignment.py \
   --owner "myorg" \
   --repo "backend-api" \
   --filter "is:issue is:open label:bug created:>2024-01-01" \
-  --add-label "needs-triage"
+  --add-label "backlog"
 ```
 
 ### Expected Output
@@ -441,7 +441,7 @@ Generated: 2024-01-15 14:30:00
 - **Open**: 28 (67%)
 - **Closed**: 14 (33%)
 - **In Progress**: 8
-- **In Review**: 5
+- **AI Review**: 5
 
 ## By Label (9-Label System)
 

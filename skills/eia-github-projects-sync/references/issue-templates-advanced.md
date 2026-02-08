@@ -18,7 +18,7 @@
 ```yaml
 name: Epic
 description: Large feature spanning multiple issues
-labels: ["type:epic", "status:needs-triage"]
+labels: ["type:epic", "status:backlog"]
 body:
   - type: markdown
     attributes:
@@ -117,7 +117,7 @@ body:
 ```yaml
 name: Refactoring
 description: Code improvement without behavior change
-labels: ["type:refactor", "status:needs-triage"]
+labels: ["type:refactor", "status:backlog"]
 body:
   - type: markdown
     attributes:
@@ -205,7 +205,7 @@ body:
 ```yaml
 name: Documentation
 description: Documentation improvements
-labels: ["type:docs", "status:needs-triage"]
+labels: ["type:docs", "status:backlog"]
 body:
   - type: markdown
     attributes:
