@@ -191,7 +191,7 @@ def print_failure(version: str, changelog_path: str) -> None:
         version: The version number that was not found.
         changelog_path: The path to the changelog file that was searched.
     """
-    print(f"ERROR: CHANGELOG VALIDATION FAILED", file=sys.stderr)
+    print("ERROR: CHANGELOG VALIDATION FAILED", file=sys.stderr)
     print(file=sys.stderr)
     print(
         f"  Version {version} was not found in {changelog_path}.",
@@ -205,11 +205,11 @@ def print_failure(version: str, changelog_path: str) -> None:
     print(file=sys.stderr)
     print(f"    ## {version} - Your Release Title", file=sys.stderr)
     print(file=sys.stderr)
-    print(f"    ### Features", file=sys.stderr)
-    print(f"    - Description of new feature", file=sys.stderr)
+    print("    ### Features", file=sys.stderr)
+    print("    - Description of new feature", file=sys.stderr)
     print(file=sys.stderr)
-    print(f"    ### Bug Fixes", file=sys.stderr)
-    print(f"    - Description of bug fix", file=sys.stderr)
+    print("    ### Bug Fixes", file=sys.stderr)
+    print("    - Description of bug fix", file=sys.stderr)
     print(file=sys.stderr)
     print(
         f"  Then commit and push the updated {changelog_path}.",
