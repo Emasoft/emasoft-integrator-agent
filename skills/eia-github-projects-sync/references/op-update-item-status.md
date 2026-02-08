@@ -64,7 +64,9 @@ query {
     {"id": "47fc9ee4", "name": "Backlog"},
     {"id": "98236657", "name": "Todo"},
     {"id": "f75ad846", "name": "In Progress"},
-    {"id": "47fc9ee5", "name": "In Review"},
+    {"id": "47fc9ee5", "name": "AI Review"},
+    {"id": "a1b2c3d4", "name": "Human Review"},
+    {"id": "e5f6g7h8", "name": "Merge/Release"},
     {"id": "98236658", "name": "Done"},
     {"id": "f75ad847", "name": "Blocked"}
   ]
@@ -141,7 +143,9 @@ gh project item-edit \
 | Backlog | Varies per project |
 | Todo | Varies per project |
 | In Progress | Varies per project |
-| In Review | Varies per project |
+| AI Review | Varies per project |
+| Human Review | Varies per project |
+| Merge/Release | Varies per project |
 | Done | Varies per project |
 | Blocked | Varies per project |
 

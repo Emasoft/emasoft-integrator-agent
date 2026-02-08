@@ -128,10 +128,10 @@ query {
 
 Parse the response to extract:
 
-**Labels** (9-label classification system):
-- **Priority**: `priority-critical`, `priority-high`, `priority-medium`, `priority-low`
-- **Status**: `status-todo`, `status-in-progress`, `status-ai-review`, `status-done`
-- **Type**: `type-feature`, `type-bug`, `type-refactor`, `type-docs`
+**Labels** (classification system):
+- **Priority**: `priority:critical`, `priority:high`, `priority:normal`, `priority:low`
+- **Status**: `status:backlog`, `status:todo`, `status:in-progress`, `status:ai-review`, `status:human-review`, `status:merge-release`, `status:blocked`, `status:done`
+- **Type**: `type:feature`, `type:bug`, `type:refactor`, `type:docs`
 
 **Custom fields**:
 - Extract field values from Project V2 custom field schema
@@ -177,7 +177,7 @@ Query the orchestrator's internal state to identify changes:
 1. **Read modified task entries** from orchestrator's tracking system
 2. **Identify changes requiring GitHub updates**:
    - Label additions or removals
-   - Status transitions (todo → in-progress → ai-review → done)
+   - Status transitions (backlog → todo → in-progress → ai-review → human-review → merge-release → done, or blocked)
    - Task checklist updates
    - Priority or type changes
 
@@ -191,9 +191,9 @@ Map local task state to GitHub API operations:
 
 | Local Change | GitHub Operation |
 |--------------|------------------|
-| Status change | Update `status-*` label + move on board |
-| Priority change | Update `priority-*` label |
-| Type change | Update `type-*` label |
+| Status change | Update `status:*` label + move on board |
+| Priority change | Update `priority:*` label |
+| Type change | Update `type:*` label |
 | Task completion | Update issue body checklist |
 | Custom field | Update Project V2 field via GraphQL |
 
@@ -203,10 +203,10 @@ Use `gh issue edit` to apply label changes:
 
 ```bash
 # Add labels
-gh issue edit <issue_number> --add-label "status-in-progress,priority-high"
+gh issue edit <issue_number> --add-label "status:in-progress,priority:high"
 
 # Remove labels
-gh issue edit <issue_number> --remove-label "status-todo"
+gh issue edit <issue_number> --remove-label "status:todo"
 ```
 
 **Batch operations**:
@@ -258,15 +258,15 @@ mutation {
 
 ## 1.6 Managing GitHub issue labels across priority, status, and type dimensions
 
-The 9-label classification system organizes issues across three dimensions:
+The label classification system organizes issues across three dimensions:
 
 ### Label Categories
 
 | Category | Purpose | Values |
 |----------|---------|--------|
-| **Priority** | Urgency level | `priority-critical`, `priority-high`, `priority-medium`, `priority-low` |
-| **Status** | Workflow state | `status-todo`, `status-in-progress`, `status-ai-review`, `status-done` |
-| **Type** | Work category | `type-feature`, `type-bug`, `type-refactor`, `type-docs` |
+| **Priority** | Urgency level | `priority:critical`, `priority:high`, `priority:normal`, `priority:low` |
+| **Status** | Workflow state | `status:backlog`, `status:todo`, `status:in-progress`, `status:ai-review`, `status:human-review`, `status:merge-release`, `status:blocked`, `status:done` |
+| **Type** | Work category | `type:feature`, `type:bug`, `type:refactor`, `type:docs` |
 
 ### Label Management Operations
 
@@ -279,7 +279,7 @@ The 9-label classification system organizes issues across three dimensions:
 When multiple labels from the same category are present:
 
 1. **Priority rules** (highest priority wins):
-   - `priority-critical` > `priority-high` > `priority-medium` > `priority-low`
+   - `priority:critical` > `priority:high` > `priority:normal` > `priority:low`
 2. **Document label precedence** in project wiki
 3. **Log conflicts** for manual review
 
@@ -453,8 +453,8 @@ Details: docs_dev/github-sync-20250131-143022.log
 
 **Solutions**:
 1. **Implement priority rules** for competing labels:
-   - Status: `done` > `ai-review` > `in-progress` > `todo`
-   - Priority: `critical` > `high` > `medium` > `low`
+   - Status: `done` > `merge-release` > `human-review` > `ai-review` > `in-progress` > `todo` > `backlog` (and `blocked` is orthogonal)
+   - Priority: `critical` > `high` > `normal` > `low`
 2. **Document label precedence** in project wiki
 3. **Create label consolidation script** to clean up conflicts
 4. **Log conflicts** in sync report for manual review

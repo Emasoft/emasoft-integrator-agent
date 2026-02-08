@@ -46,18 +46,19 @@ python3 scripts/kanban_check_completion.py OWNER REPO PROJECT_NUMBER
 {
   "complete": false,
   "summary": {
-    "backlog": 2,
-    "todo": 3,
-    "in-progress": 1,
-    "ai-review": 1,
-    "human-review": 1,
-    "merge-release": 0,
-    "done": 10,
-    "blocked": 1
+    "Backlog": 2,
+    "Todo": 3,
+    "In Progress": 1,
+    "AI Review": 1,
+    "Human Review": 1,
+    "Merge/Release": 0,
+    "Done": 10,
+    "Blocked": 1,
+    "Other": 0
   },
   "blocking_items": [
-    {"issue_number": 42, "status": "in-progress", "assignee": "dev1"},
-    {"issue_number": 60, "status": "blocked", "reason": "Missing credentials"}
+    {"issue_number": 42, "status": "In Progress", "assignee": "dev1"},
+    {"issue_number": 60, "status": "Blocked", "reason": "Missing credentials"}
   ],
   "recommendation": "Complete or defer 6 pending items before exit"
 }

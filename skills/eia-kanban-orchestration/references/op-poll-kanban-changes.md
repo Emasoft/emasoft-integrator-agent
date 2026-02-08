@@ -1,5 +1,7 @@
 # Operation: Poll Kanban Board for Changes
 
+> **Note**: The `kanban_poll_changes.py` script referenced in this document is not yet implemented. Use `kanban_get_board_state.py` with periodic polling as a workaround.
+
 ## Metadata
 
 | Field | Value |
@@ -109,7 +111,7 @@ Send a message using the `agent-messaging` skill with:
   "poll_timestamp": "2024-01-15T10:00:00Z",
   "changes_detected": 3,
   "changes": [
-    {"type": "status_change", "issue": 42, "from": "todo", "to": "in-progress"},
+    {"type": "status_change", "issue": 42, "from": "Todo", "to": "In Progress"},
     {"type": "new_item", "issue": 50},
     {"type": "assignment_change", "issue": 30, "new_assignee": "dev2"}
   ],
@@ -124,7 +126,7 @@ Flag items with no movement in 24+ hours:
 ```python
 for item in current_state:
     if item.last_updated < (now - 24_hours):
-        if item.status in ["in-progress", "ai-review", "human-review", "merge-release"]:
+        if item.status in ["In Progress", "AI Review", "Human Review", "Merge & Release"]:
             notify_orchestrator("Stale item", item)
 ```
 

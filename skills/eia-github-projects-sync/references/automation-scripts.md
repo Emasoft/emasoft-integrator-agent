@@ -157,10 +157,10 @@ python scripts/ci_webhook_handler.py --port 9000
 
 | Event | Action | Trigger |
 |-------|--------|---------|
-| `workflow_run` (success) | Update → In Review | CI passes |
+| `workflow_run` (success) | Update → AI Review | CI passes |
 | `workflow_run` (failure) | Update → Blocked | CI fails |
 | `check_run` (failure) | Notify orchestrator | Check fails |
-| `pull_request` (opened) | Update → In Review | PR created |
+| `pull_request` (opened) | Update → AI Review | PR created |
 | `pull_request` (merged) | Update → Done | PR merged |
 | `issues` (labeled) | Update status | Status label added |
 
@@ -226,11 +226,13 @@ python scripts/kanban_sync.py --owner OWNER --repo REPO --project NUMBER
 
 | Condition | Current Status | New Status |
 |-----------|----------------|------------|
-| CI passes | In Progress | In Review |
+| CI passes | In Progress | AI Review |
 | CI fails | Any | Blocked |
-| PR merged | In Review | Done |
-| Changes requested | In Review | In Progress |
-| Review approved | In Progress | In Review |
+| PR merged | Merge/Release | Done |
+| Changes requested | AI Review | In Progress |
+| Review approved (small task) | AI Review | Merge/Release |
+| Review approved (big task) | AI Review | Human Review |
+| Human review approved | Human Review | Merge/Release |
 
 ### Example Run
 
@@ -252,10 +254,10 @@ Checking 12 items...
 [#42] Implement login
   Current: In Progress
   PR: #52 (CI: passing)
-  Action: Update → In Review
+  Action: Update → AI Review
 
 [#43] Fix auth bug
-  Current: In Review
+  Current: AI Review
   PR: #53 (CI: failing)
   Action: Update → Blocked
   Notification: Sent to orchestrator
@@ -285,7 +287,7 @@ class GitHubThresholds:
     # Hours before inactive "In Progress" items are flagged
     INACTIVE_HOURS = 24
 
-    # Hours before "In Review" items are escalated
+    # Hours before "AI Review" items are escalated
     LONG_REVIEW_HOURS = 48
 
     # Hours before blocked items are escalated to user

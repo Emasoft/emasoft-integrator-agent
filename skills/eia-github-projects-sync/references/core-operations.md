@@ -352,7 +352,7 @@ gh issue comment ISSUE_NUMBER --body "Status changed to **In Progress**. Agent d
 gh issue comment ISSUE_NUMBER --body "$(cat <<'EOF'
 ## Progress Update
 
-**Status**: In Progress → In Review
+**Status**: In Progress → AI Review
 **Agent**: dev-agent-1
 **Time**: 2024-01-15 14:30 UTC
 

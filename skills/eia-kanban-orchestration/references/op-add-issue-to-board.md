@@ -28,7 +28,7 @@ Add a GitHub Issue to a Projects V2 board, placing it in the Backlog column by d
 | `repo` | string | Yes | Repository name |
 | `project_number` | int | Yes | GitHub Project number |
 | `issue_number` | int | Yes | Issue to add |
-| `initial_status` | string | No | Initial column (default: backlog) |
+| `initial_status` | string | No | Initial column (default: Backlog) |
 
 ## Procedure
 
@@ -86,7 +86,7 @@ gh api graphql -f query='
   "added": true,
   "issue_number": 42,
   "project_item_id": "PVTI_...",
-  "initial_status": "backlog"
+  "initial_status": "Backlog"
 }
 ```
 
@@ -96,7 +96,7 @@ After adding, move to desired column:
 
 ```bash
 # Move to Todo if ready to start
-python3 scripts/kanban_move_card.py OWNER REPO PROJECT_NUMBER ISSUE_NUMBER todo
+python3 scripts/kanban_move_card.py OWNER REPO PROJECT_NUMBER ISSUE_NUMBER Todo
 ```
 
 ## Error Handling

@@ -235,7 +235,7 @@ When issue is **In Progress**:
 
 ### Referencing Plans (During Review)
 
-When issue is **In Review**:
+When issue is in **AI Review**:
 
 1. Reviewer reads plan to understand intended approach
 2. Reviewer verifies implementation matches plan

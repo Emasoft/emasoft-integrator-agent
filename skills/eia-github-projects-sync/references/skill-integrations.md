@@ -19,6 +19,8 @@ GitHub Projects Sync integrates with other EOA (Emasoft Orchestrator Agent) skil
 - Report Generator: Project status in reports
 - AI Maestro: Notification delivery
 
+> **Note:** See `eia-kanban-orchestration` skill for the canonical 8-column system definition.
+
 ## Remote Agent Coordinator
 
 When assigning a task to an agent via Remote Agent Coordinator:
@@ -63,7 +65,7 @@ When agent reports status:
 | `STARTED` | Update status → "In Progress", add in-progress label |
 | `PROGRESS` | Add progress comment |
 | `BLOCKED` | Update status → "Blocked", add blocked label |
-| `COMPLETE` | Verify PR exists, update status → "In Review" |
+| `COMPLETE` | Verify PR exists, update status → "AI Review" |
 | `FAILED` | Add error comment, keep status, notify orchestrator |
 
 ### Completion Verification
@@ -104,7 +106,7 @@ After Code Reviewer completes PR review:
 ```
 1. REMOVE "review:needed" label
 2. ADD "review:approved" label
-3. UPDATE project item status → "In Review" (ready to merge)
+3. UPDATE project item status → "Merge/Release" (ready to merge)
 4. ADD comment with approval summary
 ```
 
@@ -175,7 +177,9 @@ Include GitHub Projects data in generated reports.
 | Backlog | 12 |
 | Todo | 5 |
 | In Progress | 3 |
-| In Review | 2 |
+| AI Review | 1 |
+| Human Review | 1 |
+| Merge/Release | 0 |
 | Blocked | 1 |
 | Done | 8 |
 

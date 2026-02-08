@@ -76,24 +76,24 @@ query {
 
 ```json
 {
-  "backlog": [
+  "Backlog": [
     {"issue_number": 10, "title": "Future feature", "assignees": []}
   ],
-  "todo": [
+  "Todo": [
     {"issue_number": 20, "title": "Ready to start", "assignees": ["dev1"]}
   ],
-  "in-progress": [
+  "In Progress": [
     {"issue_number": 30, "title": "Being worked on", "assignees": ["dev2"]}
   ],
-  "ai-review": [
+  "AI Review": [
     {"issue_number": 40, "title": "PR created, Integrator reviewing", "assignees": ["dev1"]}
   ],
-  "human-review": [],
-  "merge-release": [],
-  "done": [
+  "Human Review": [],
+  "Merge/Release": [],
+  "Done": [
     {"issue_number": 50, "title": "Completed", "assignees": ["dev2"]}
   ],
-  "blocked": [
+  "Blocked": [
     {"issue_number": 60, "title": "Waiting for input", "assignees": ["dev1"]}
   ]
 }

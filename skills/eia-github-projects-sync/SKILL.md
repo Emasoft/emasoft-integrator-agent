@@ -159,7 +159,7 @@ Read this when managing issue/item status transitions.
 - 3.8 When deciding whether to close inactive issues (NO STALE policy)
 - 3.9 When following status management best practices
 
-**Standard Columns:** Backlog -> Todo -> In Progress -> In Review -> Done (+ Blocked)
+**Standard Columns:** Backlog -> Todo -> In Progress -> AI Review -> Human Review -> Merge/Release -> Done (+ Blocked)
 
 ---
 

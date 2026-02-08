@@ -1,5 +1,7 @@
 # Label Management Reference
 
+> **Canonical Reference**: See `eia-label-taxonomy` skill for the authoritative label taxonomy.
+
 ## Table of Contents
 
 - 1.1 Creating labels via GitHub API
@@ -9,13 +11,13 @@
 - 1.2 Label naming conventions
   - 1.2.1 Kebab-case standard
   - 1.2.2 Category prefixes
-- 1.3 Priority labels (P0-P4)
+- 1.3 Priority labels (critical, high, normal, low)
   - 1.3.1 Priority definitions
   - 1.3.2 Color scheme for priorities
   - 1.3.3 When to use each priority
 - 1.4 Category labels
   - 1.4.1 Type labels (bug, feature, task, docs)
-  - 1.4.2 Status labels (in-progress, blocked, review)
+  - 1.4.2 Status labels (backlog, todo, in-progress, ai-review, human-review, merge-release, blocked, done)
   - 1.4.3 Component labels
 - 1.5 Auto-creating missing labels
   - 1.5.1 Detection logic
@@ -62,7 +64,7 @@ Label colors are specified as 6-character hex codes WITHOUT the leading `#`.
 
 **Color parameter:**
 ```bash
-gh label create "priority-high" --color "d93f0b" --repo owner/repo
+gh label create "priority:high" --color "d93f0b" --repo owner/repo
 ```
 
 **Common color codes:**
@@ -134,8 +136,8 @@ Use prefixes to group related labels together. Labels sort alphabetically, so pr
 | Prefix | Purpose | Examples |
 |--------|---------|----------|
 | `type:` | Issue type | `type:bug`, `type:feature`, `type:task` |
-| `priority:` | Priority level | `priority:p0`, `priority:p1` |
-| `status:` | Current state | `status:blocked`, `status:in-progress`, `status:ai-review` |
+| `priority:` | Priority level | `priority:critical`, `priority:high`, `priority:normal`, `priority:low` |
+| `status:` | Current state | `status:backlog`, `status:todo`, `status:in-progress`, `status:ai-review`, `status:human-review`, `status:merge-release`, `status:blocked`, `status:done` |
 | `area:` | Code area | `area:frontend`, `area:api`, `area:database` |
 | `effort:` | Estimated effort | `effort:small`, `effort:medium`, `effort:large` |
 
@@ -143,64 +145,59 @@ Use prefixes to group related labels together. Labels sort alphabetically, so pr
 
 Some teams prefer no prefix for frequently used labels:
 - `bug` instead of `type:bug`
-- `P0` instead of `priority:p0`
 
-Choose one convention and apply it consistently across all repositories.
+**Note:** Priority and status labels MUST always use the `priority:` and `status:` prefixes respectively. Choose one convention and apply it consistently across all repositories.
 
 ---
 
-## 1.3 Priority Labels (P0-P4)
+## 1.3 Priority Labels (critical, high, normal, low)
 
 ### 1.3.1 Priority Definitions
 
-| Priority | Name | Definition | Response Time |
-|----------|------|------------|---------------|
-| P0 | Critical | System down, data loss, security breach | Immediate (drop everything) |
-| P1 | High | Major feature broken, no workaround | Within 24 hours |
-| P2 | Medium | Feature degraded, workaround exists | Within 1 week |
-| P3 | Low | Minor issue, cosmetic problems | Within 1 month |
-| P4 | Trivial | Nice to have, polish items | As time permits |
+| Label | Definition | Response Time |
+|-------|------------|---------------|
+| `priority:critical` | System down, data loss, security breach | Immediate (drop everything) |
+| `priority:high` | Major feature broken, no workaround | Within 24 hours |
+| `priority:normal` | Feature degraded, workaround exists | Within 1 week |
+| `priority:low` | Minor issue, cosmetic problems, nice to have | Within 1 month |
 
 ### 1.3.2 Color Scheme for Priorities
 
-Use a gradient from red (urgent) to gray (low priority):
+Use a gradient from red (urgent) to green (low priority):
 
 ```bash
 # Create priority labels with appropriate colors
-gh label create "P0" --color "b60205" --description "Critical: System down or security issue" --repo owner/repo
-gh label create "P1" --color "d93f0b" --description "High: Major feature broken, no workaround" --repo owner/repo
-gh label create "P2" --color "fbca04" --description "Medium: Feature degraded, workaround exists" --repo owner/repo
-gh label create "P3" --color "0e8a16" --description "Low: Minor issue or enhancement" --repo owner/repo
-gh label create "P4" --color "cfd3d7" --description "Trivial: Nice to have" --repo owner/repo
+gh label create "priority:critical" --color "b60205" --description "Critical: System down or security issue" --repo owner/repo
+gh label create "priority:high" --color "d93f0b" --description "High: Major feature broken, no workaround" --repo owner/repo
+gh label create "priority:normal" --color "fbca04" --description "Normal: Feature degraded, workaround exists" --repo owner/repo
+gh label create "priority:low" --color "0e8a16" --description "Low: Minor issue, cosmetic, or nice to have" --repo owner/repo
 ```
 
 ### 1.3.3 When to Use Each Priority
 
-**P0 - Critical:**
+**priority:critical:**
 - Production service is completely down
 - Data corruption or loss occurring
 - Security vulnerability actively exploited
 - Compliance violation detected
 
-**P1 - High:**
+**priority:high:**
 - Core feature not working for all users
 - Performance degradation affecting many users
 - Blocking issue for upcoming release
 - Regression from recent deployment
 
-**P2 - Medium:**
+**priority:normal:**
 - Feature works but with significant friction
 - Issue affects subset of users
 - Workaround available but inconvenient
 - Important but not blocking release
 
-**P3 - Low:**
+**priority:low:**
 - Minor UI inconsistencies
 - Edge case bugs
 - Documentation improvements
 - Small enhancements
-
-**P4 - Trivial:**
 - Cosmetic polish
 - Code style improvements
 - Speculative features
@@ -234,23 +231,25 @@ gh label create "test" --color "bfd4f2" --description "Test coverage or test inf
 | `refactor` | Code restructuring without behavior change |
 | `test` | Adding or fixing tests |
 
-### 1.4.2 Status Labels (in-progress, blocked, review)
+### 1.4.2 Status Labels (backlog, todo, in-progress, ai-review, human-review, merge-release, blocked, done)
 
 Status labels track where an issue is in the workflow:
 
 ```bash
 # Create status labels
-gh label create "status:triage" --color "d4c5f9" --description "Needs initial assessment" --repo owner/repo
-gh label create "status:ready" --color "c2e0c6" --description "Ready to be worked on" --repo owner/repo
+gh label create "status:backlog" --color "d4c5f9" --description "In backlog, needs assessment and prioritization" --repo owner/repo
+gh label create "status:todo" --color "c2e0c6" --description "Ready to be worked on" --repo owner/repo
 gh label create "status:in-progress" --color "fbca04" --description "Currently being worked on" --repo owner/repo
-gh label create "status:blocked" --color "d73a4a" --description "Waiting on external dependency" --repo owner/repo
-gh label create "status:review" --color "0e8a16" --description "PR submitted, awaiting review" --repo owner/repo
-gh label create "status:done" --color "0e8a16" --description "Completed" --repo owner/repo
+gh label create "status:ai-review" --color "1d76db" --description "PR submitted, awaiting AI agent review" --repo owner/repo
+gh label create "status:human-review" --color "0e8a16" --description "AI review passed, awaiting human review" --repo owner/repo
+gh label create "status:merge-release" --color "0e8a16" --description "Approved, ready to merge and release" --repo owner/repo
+gh label create "status:blocked" --color "d73a4a" --description "Waiting on external dependency or decision" --repo owner/repo
+gh label create "status:done" --color "006b75" --description "Completed" --repo owner/repo
 ```
 
 **Status flow:**
 ```
-triage → ready → in-progress → review → done
+backlog → todo → in-progress → ai-review → human-review → merge-release → done
                       ↓
                    blocked
 ```
@@ -317,11 +316,10 @@ When auto-creating labels, use sensible defaults based on label name patterns:
 ```python
 DEFAULT_LABEL_CONFIGS = {
     # Priority labels
-    "P0": {"color": "b60205", "description": "Critical priority"},
-    "P1": {"color": "d93f0b", "description": "High priority"},
-    "P2": {"color": "fbca04", "description": "Medium priority"},
-    "P3": {"color": "0e8a16", "description": "Low priority"},
-    "P4": {"color": "cfd3d7", "description": "Trivial priority"},
+    "priority:critical": {"color": "b60205", "description": "Critical priority"},
+    "priority:high": {"color": "d93f0b", "description": "High priority"},
+    "priority:normal": {"color": "fbca04", "description": "Normal priority"},
+    "priority:low": {"color": "0e8a16", "description": "Low priority"},
 
     # Type labels
     "bug": {"color": "d73a4a", "description": "Something isn't working"},
@@ -330,9 +328,14 @@ DEFAULT_LABEL_CONFIGS = {
     "docs": {"color": "0075ca", "description": "Documentation"},
 
     # Status labels
-    "blocked": {"color": "d73a4a", "description": "Blocked by dependency"},
-    "in-progress": {"color": "fbca04", "description": "Work in progress"},
-    "ai-review": {"color": "0e8a16", "description": "Ready for AI review"},
+    "status:backlog": {"color": "d4c5f9", "description": "In backlog, needs assessment"},
+    "status:todo": {"color": "c2e0c6", "description": "Ready to be worked on"},
+    "status:in-progress": {"color": "fbca04", "description": "Work in progress"},
+    "status:ai-review": {"color": "1d76db", "description": "Ready for AI agent review"},
+    "status:human-review": {"color": "0e8a16", "description": "Awaiting human review"},
+    "status:merge-release": {"color": "0e8a16", "description": "Approved, ready to merge"},
+    "status:blocked": {"color": "d73a4a", "description": "Blocked by dependency"},
+    "status:done": {"color": "006b75", "description": "Completed"},
 }
 
 def get_label_config(label_name: str) -> dict:

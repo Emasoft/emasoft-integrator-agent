@@ -79,7 +79,7 @@ Create the 9-label system:
 ### Phase 3: GitHub Projects V2 Setup
 
 Configure project with:
-- Status field: Backlog, Ready, In Progress, In Review, Done
+- Status field: Backlog, Todo, In Progress, AI Review, Human Review, Merge/Release, Done, Blocked
 - Priority field: High, Medium, Low
 - Automation rules for auto-add and auto-archive
 

@@ -136,7 +136,7 @@ Output:
   {"status": "Blocked", "count": 1},
   {"status": "Done", "count": 8},
   {"status": "In Progress", "count": 3},
-  {"status": "In Review", "count": 2},
+  {"status": "AI Review", "count": 2},
   {"status": "Todo", "count": 5}
 ]
 ```
@@ -168,7 +168,7 @@ THEN:
 ### Long Review
 
 ```
-IF item.status == "In Review"
+IF item.status == "AI Review"
 AND item.time_in_status > 48 hours
 THEN:
   - Ping reviewers

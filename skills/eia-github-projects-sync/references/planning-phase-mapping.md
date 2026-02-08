@@ -21,7 +21,7 @@ Maps planning-patterns phases to GitHub Projects board columns for status tracki
 | Planning (Risk) | Todo | Risk identification in progress |
 | Planning (Roadmap) | Todo | Roadmap creation in progress |
 | Implementation | In Progress | Code/work being done |
-| Quality Review | In Review | PR created, awaiting review |
+| Quality Review | AI Review | PR created, awaiting AI review |
 | Complete | Done | Work merged and verified |
 | Blocked | Blocked | External dependency blocking |
 
@@ -39,12 +39,22 @@ Triggered when:
 - First commit on feature branch
 - Agent claims task
 
-### In Progress → In Review
+### In Progress → AI Review
 Triggered when:
 - PR opened linking issue
 - All implementation tasks marked complete in plan
 
-### In Review → Done
+### AI Review → Human Review (for large/risky tasks)
+Triggered when:
+- AI review passes all automated checks
+- Issue is labeled `size:L`, `size:XL`, or `risk:high`
+
+### AI Review → Done (for small/routine tasks)
+Triggered when:
+- AI review passes all automated checks
+- Issue is NOT labeled for human review
+
+### Human Review → Done
 Triggered when:
 - PR merged
 - Verification patterns confirm success

@@ -59,8 +59,8 @@ Move a project item (card) from its current column to a new status column, with 
 python3 scripts/kanban_move_card.py OWNER REPO PROJECT_NUMBER ISSUE_NUMBER NEW_STATUS [--reason "Reason"]
 
 # Examples:
-python3 scripts/kanban_move_card.py owner repo 1 42 in-progress
-python3 scripts/kanban_move_card.py owner repo 1 42 blocked --reason "Missing credentials"
+python3 scripts/kanban_move_card.py owner repo 1 42 "In Progress"
+python3 scripts/kanban_move_card.py owner repo 1 42 Blocked --reason "Missing credentials"
 ```
 
 ## GraphQL Mutation
@@ -88,8 +88,8 @@ mutation {
 {
   "success": true,
   "issue_number": 42,
-  "previous_status": "todo",
-  "new_status": "in-progress",
+  "previous_status": "Todo",
+  "new_status": "In Progress",
   "moved_by": "orchestrator"
 }
 ```
@@ -102,8 +102,8 @@ mutation {
   "issue_number": 42,
   "error": "INVALID_TRANSITION",
   "message": "Cannot move directly from Backlog to Done",
-  "current_status": "backlog",
-  "requested_status": "done"
+  "current_status": "Backlog",
+  "requested_status": "Done"
 }
 ```
 

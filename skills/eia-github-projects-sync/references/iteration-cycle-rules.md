@@ -42,7 +42,7 @@ Partial completion is NOT completion. A PR cannot be merged until it achieves 10
                              │
                              ▼
                     ┌─────────────────┐
-              ┌────►│   In Review     │◄────┐
+              ┌────►│   AI Review     │◄────┐
               │     └────────┬────────┘     │
               │              │              │
               │              ▼              │

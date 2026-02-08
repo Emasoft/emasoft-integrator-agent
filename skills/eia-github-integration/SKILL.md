@@ -64,7 +64,7 @@ This skill covers:
 This skill covers:
 - Bidirectional synchronization between agent tasks and GitHub Projects V2
 - Creating and configuring project boards
-- Status column management (Backlog, Ready, In Progress, In Review, Done)
+- Status column management (Backlog, Todo, In Progress, AI Review, Human Review, Merge/Release, Done, Blocked)
 - Custom field configuration (Priority, Due Date, Effort)
 - Automation rules (auto-add, auto-archive, status transitions)
 - Conflict resolution and sync health monitoring

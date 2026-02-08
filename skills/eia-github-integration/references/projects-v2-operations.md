@@ -143,12 +143,15 @@ Update issue status within Projects V2 board.
 
 ### Understanding Status Fields
 
-Projects V2 uses custom fields for status. Common status values:
-- **Backlog** - Not yet started
-- **Ready** - Ready to be worked on
-- **In Progress** - Currently being worked on
-- **In Review** - Pull request submitted, awaiting review
+Projects V2 uses custom fields for status. The canonical 8-column system uses these status values:
+- **Backlog** - Not yet scheduled for work
+- **Todo** - Ready to start, prioritized
+- **In Progress** - Active work by assigned agent
+- **AI Review** - Integrator (EIA) reviews the PR
+- **Human Review** - User reviews (big tasks only)
+- **Merge/Release** - Approved and ready to merge
 - **Done** - Completed and merged
+- **Blocked** - Cannot proceed at any stage
 
 ### Get Field IDs
 
@@ -210,7 +213,7 @@ NEW_STATUS=$3
 
 if [ -z "$PROJECT_ID" ] || [ -z "$ISSUE_URL" ] || [ -z "$NEW_STATUS" ]; then
   echo "Usage: ./update-status.sh <project_id> <issue_url> <status>"
-  echo "Status values: Backlog, Ready, In Progress, In Review, Done"
+  echo "Status values: Backlog, Todo, In Progress, AI Review, Human Review, Merge/Release, Done, Blocked"
   exit 1
 fi
 
@@ -328,7 +331,7 @@ Auto-add to project: ON
 Repositories: backend-api, frontend-app
 Issue type: Issues and pull requests
 Labels: feature, bug (from 9-label system)
-Default status: Backlog
+Default status: Backlog (or Todo for pre-prioritized items)
 ```
 
 ### Configuring Auto-archive Workflow
@@ -366,12 +369,12 @@ jobs:
             const itemId = 'ITEM_ID';
             const statusFieldId = 'STATUS_FIELD_ID';
 
-            // Update status based on event
+            // Update status based on event (canonical 8-column system)
             let newStatus = 'Backlog';
             if (context.payload.action === 'opened') {
-              newStatus = 'Ready';
+              newStatus = 'Todo';
             } else if (context.payload.pull_request?.draft === false) {
-              newStatus = 'In Review';
+              newStatus = 'AI Review';
             } else if (context.payload.action === 'closed') {
               newStatus = 'Done';
             }

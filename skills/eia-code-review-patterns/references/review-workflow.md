@@ -472,7 +472,7 @@ gh pr edit 123 --add-label "approved"
 Move PR card on GitHub Projects board:
 ```bash
 gh project item-edit --project-id PROJECT_ID \
-  --field "Status" --value "In Review"
+  --field "Status" --value "AI Review"
 ```
 
 ### 8.3 Posting PR Summary Comments

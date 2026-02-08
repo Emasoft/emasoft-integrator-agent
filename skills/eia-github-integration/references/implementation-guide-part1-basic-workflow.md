@@ -79,10 +79,13 @@ Use this checklist to systematically implement GitHub integration in your projec
 - [ ] **Configure Project Fields**
   - [ ] Add Status field (via web UI):
     - Backlog
-    - Ready
+    - Todo
     - In Progress
-    - In Review
+    - AI Review
+    - Human Review
+    - Merge/Release
     - Done
+    - Blocked
   - [ ] Add Priority field (via web UI):
     - High
     - Medium
@@ -112,8 +115,8 @@ Use this checklist to systematically implement GitHub integration in your projec
   - [ ] Verify issue appears in Projects V2 with correct status
 
 - [ ] **Test Issue Lifecycle**
-  - [ ] Move issue from Backlog → Ready
-  - [ ] Move issue from Ready → In Progress
+  - [ ] Move issue from Backlog → Todo
+  - [ ] Move issue from Todo → In Progress
   - [ ] Create branch: `git checkout -b feature/issue-1`
   - [ ] Make changes and commit
   - [ ] Create PR linked to issue (see Phase 5)

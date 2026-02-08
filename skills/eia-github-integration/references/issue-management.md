@@ -17,8 +17,8 @@
   - [Typical Issue Lifecycle](#typical-issue-lifecycle)
   - [Phase 1: Issue Creation](#phase-1-issue-creation)
   - [Phase 2: Issue Transition (Backlog → In Progress)](#phase-2-issue-transition-backlog--in-progress)
-  - [Phase 3: Work Completion (In Progress → In Review)](#phase-3-work-completion-in-progress--in-review)
-  - [Phase 4: Issue Closure (In Review → Done)](#phase-4-issue-closure-in-review--done)
+  - [Phase 3: Work Completion (In Progress → AI Review)](#phase-3-work-completion-in-progress--ai-review)
+  - [Phase 4: Issue Closure (AI Review → Done)](#phase-4-issue-closure-ai-review--done)
 - [Linking Issues to PRs](#linking-issues-to-prs)
   - [Linking Keywords](#linking-keywords)
   - [Multiple Issue Linking](#multiple-issue-linking)
@@ -200,7 +200,7 @@ Issues progress through several states from creation to closure.
 ### Typical Issue Lifecycle
 
 ```
-Created → Backlog → Ready → In Progress → In Review → Done → Closed
+Created → Backlog → Todo → In Progress → AI Review → Done → Closed
 ```
 
 ### Phase 1: Issue Creation
@@ -208,7 +208,7 @@ Created → Backlog → Ready → In Progress → In Review → Done → Closed
 When an issue is first created:
 - Assign appropriate label from 9-label system
 - Link to GitHub Projects V2 board
-- Set initial status (e.g., "Backlog" or "Ready")
+- Set initial status (e.g., "Backlog" or "Todo")
 - Assign owner if known
 
 **Commands:**
@@ -239,11 +239,11 @@ gh project item-edit <project_id> \
 gh issue edit <issue_number> --assignee "@username"
 ```
 
-### Phase 3: Work Completion (In Progress → In Review)
+### Phase 3: Work Completion (In Progress → AI Review)
 
 When work is complete and a pull request is created:
 - Link pull request to issue (see [Linking Issues to PRs](#linking-issues-to-prs))
-- Update status to "In Review"
+- Update status to "AI Review"
 - Request code review
 
 **Commands:**
@@ -254,10 +254,10 @@ gh pr create \
   --body "Closes #123" \
   --head "feature/issue-123"
 
-# Status updates to "In Review" automatically when PR is created (if automation is configured)
+# Status updates to "AI Review" automatically when PR is created (if automation is configured)
 ```
 
-### Phase 4: Issue Closure (In Review → Done)
+### Phase 4: Issue Closure (AI Review → Done)
 
 When pull request is merged:
 - GitHub automatically closes issue (if linked with "Closes #123")

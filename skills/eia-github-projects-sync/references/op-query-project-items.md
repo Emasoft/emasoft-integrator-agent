@@ -109,7 +109,7 @@ gh project item-list PROJECT_NUMBER --owner OWNER --format json
     },
     {
       "id": "PVTI_...",
-      "status": "In Review",
+      "status": "AI Review",
       "content_type": "PullRequest",
       "number": 50,
       "title": "Add feature X",

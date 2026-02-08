@@ -174,7 +174,7 @@ git worktree repair
 
 ## Integration with Status Flow
 
-### When Status Changes to "In Review"
+### When Status Changes to "AI Review"
 
 1. Orchestrator receives notification that PR is ready
 2. Create review worktree:
