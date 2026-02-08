@@ -54,9 +54,9 @@ The Integrator uses AI Maestro to communicate with Orchestrator and Assistant Ma
 When AI Maestro is unavailable:
 
 1. **Log the failure**:
-   > **Note**: The `$AIMAESTRO_API` reference below is used for error logging only, not for direct API calls. The `agent-messaging` skill handles all messaging.
+   > **Note**: The log entry below records service unavailability for diagnostics. The `agent-messaging` skill handles all messaging; AMP handles routing automatically.
    ```bash
-   echo "$(date -Iseconds) | AIMAESTRO_UNAVAILABLE | $AIMAESTRO_API | HTTP $STATUS_CODE" >> .claude/logs/maestro-failures.log
+   echo "$(date -Iseconds) | AIMAESTRO_UNAVAILABLE | AMP_SERVICE | HTTP $STATUS_CODE" >> .claude/logs/maestro-failures.log
    ```
 
 2. **Queue outgoing messages**:
