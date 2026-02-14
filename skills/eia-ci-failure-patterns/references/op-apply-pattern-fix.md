@@ -7,6 +7,26 @@ description: "Apply the recommended fix based on identified CI failure pattern"
 
 # Operation: Apply Pattern Fix
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [Prerequisites](#prerequisites)
+- [Inputs](#inputs)
+- [Procedure](#procedure)
+  - [Step 1: Read the Reference Document Section](#step-1-read-the-reference-document-section)
+  - [Step 2: Understand the Fix](#step-2-understand-the-fix)
+  - [Step 3: Apply the Fix by Category](#step-3-apply-the-fix-by-category)
+  - [Step 4: Validate the Fix Syntax](#step-4-validate-the-fix-syntax)
+  - [Step 5: Document the Change](#step-5-document-the-change)
+- [Quick Fix Reference](#quick-fix-reference)
+- [Output](#output)
+- [Verification](#verification)
+- [Error Handling](#error-handling)
+  - [Fix causes new errors](#fix-causes-new-errors)
+  - [Fix doesn't match the pattern](#fix-doesnt-match-the-pattern)
+- [Next Operation](#next-operation)
+
 ## Purpose
 
 This operation applies the recommended fix for a CI failure based on the identified pattern category.

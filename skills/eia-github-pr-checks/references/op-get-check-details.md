@@ -7,6 +7,33 @@ workflow-instruction: Step 21 - PR Evaluation
 
 # Operation: Get Check Details
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Input](#input)
+- [Output](#output)
+- [Steps](#steps)
+  - [Step 1: Run the Check Details Script](#step-1-run-the-check-details-script)
+  - [Step 2: Parse the Output](#step-2-parse-the-output)
+  - [Step 3: Analyze Failure](#step-3-analyze-failure)
+- [Command Variants](#command-variants)
+  - [Basic Check Details](#basic-check-details)
+  - [Include Logs URL](#include-logs-url)
+  - [Check with Spaces in Name](#check-with-spaces-in-name)
+- [Alternative: Direct gh CLI](#alternative-direct-gh-cli)
+- [Understanding Check Output](#understanding-check-output)
+  - [Output Structure](#output-structure)
+  - [Annotations](#annotations)
+- [Common Failure Patterns](#common-failure-patterns)
+- [Example: Investigating Test Failure](#example-investigating-test-failure)
+- [Example: Build Failure](#example-build-failure)
+- [Exit Codes](#exit-codes)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## Purpose
 
 Retrieve detailed information about a specific CI check to investigate failures or understand check behavior.

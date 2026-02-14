@@ -7,6 +7,26 @@ description: "Run eia_diagnose_ci_failure.py to identify CI failure patterns"
 
 # Operation: Run Diagnostic Script
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [Prerequisites](#prerequisites)
+- [Inputs](#inputs)
+- [Procedure](#procedure)
+  - [Step 1: Verify Script Availability](#step-1-verify-script-availability)
+  - [Step 2: Run the Diagnostic Script](#step-2-run-the-diagnostic-script)
+  - [Step 3: Interpret the Output](#step-3-interpret-the-output)
+  - [Step 4: Handle Multiple Patterns](#step-4-handle-multiple-patterns)
+- [Output](#output)
+- [JSON Output Format](#json-output-format)
+- [Verification](#verification)
+- [Error Handling](#error-handling)
+  - [Script not found](#script-not-found)
+  - [No patterns detected](#no-patterns-detected)
+  - [Invalid log file](#invalid-log-file)
+- [Next Operation](#next-operation)
+
 ## Purpose
 
 This operation runs the `eia_diagnose_ci_failure.py` script to automatically analyze CI failure logs and identify known failure patterns.

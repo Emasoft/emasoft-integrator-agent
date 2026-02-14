@@ -7,6 +7,23 @@ procedure: "support-skill"
 
 # Operation: Start PR Review
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Verify PR Exists and Status](#step-1-verify-pr-exists-and-status)
+  - [Step 2: Check Priority and Type](#step-2-check-priority-and-type)
+  - [Step 3: Update Review Label](#step-3-update-review-label)
+  - [Step 4: Comment on PR (Optional)](#step-4-comment-on-pr-optional)
+  - [Step 5: Verify Label Update](#step-5-verify-label-update)
+- [Example](#example)
+- [Review Depth by Type](#review-depth-by-type)
+- [Error Handling](#error-handling)
+- [Notes](#notes)
+
 ## Purpose
 
 Mark a pull request as under active review by updating the review label from `review:needed` to `review:in-progress`.

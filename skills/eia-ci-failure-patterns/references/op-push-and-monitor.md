@@ -7,6 +7,30 @@ description: "Push CI fix and monitor workflow run to confirm resolution"
 
 # Operation: Push and Monitor
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [Prerequisites](#prerequisites)
+- [Inputs](#inputs)
+- [Procedure](#procedure)
+  - [Step 1: Stage and Commit Changes](#step-1-stage-and-commit-changes)
+  - [Step 2: Push to Remote](#step-2-push-to-remote)
+  - [Step 3: Monitor the Workflow Run](#step-3-monitor-the-workflow-run)
+  - [Step 4: Wait for Completion](#step-4-wait-for-completion)
+  - [Step 5: Verify Success](#step-5-verify-success)
+  - [Step 6: Handle Results](#step-6-handle-results)
+- [Commit Message Template](#commit-message-template)
+- [Output](#output)
+- [Monitoring Checklist](#monitoring-checklist)
+- [Error Handling](#error-handling)
+  - [Push rejected](#push-rejected)
+  - [Workflow not triggered](#workflow-not-triggered)
+  - [Same failure persists](#same-failure-persists)
+  - [Different failure occurs](#different-failure-occurs)
+- [Next Operations](#next-operations)
+- [Time Expectations](#time-expectations)
+
 ## Purpose
 
 This operation pushes the CI fix to the remote repository and monitors the workflow run to confirm the fix resolved the failure.

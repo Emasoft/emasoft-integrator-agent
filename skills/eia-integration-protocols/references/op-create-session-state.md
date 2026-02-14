@@ -7,6 +7,32 @@ workflow-instruction: support
 
 # Operation: Create Session State
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Identify state components](#step-1-identify-state-components)
+  - [Step 2: Build the state object](#step-2-build-the-state-object)
+  - [Step 3: Generate session ID (if new)](#step-3-generate-session-id-if-new)
+  - [Step 4: Add timestamps](#step-4-add-timestamps)
+  - [Step 5: Validate state structure](#step-5-validate-state-structure)
+- [Input](#input)
+- [Output](#output)
+- [Example Output](#example-output)
+- [Session State Schema](#session-state-schema)
+  - [Minimal State](#minimal-state)
+  - [Full State](#full-state)
+- [Phase Names](#phase-names)
+- [Storage Locations](#storage-locations)
+- [Error Handling](#error-handling)
+  - [Missing current phase](#missing-current-phase)
+  - [Invalid timestamp format](#invalid-timestamp-format)
+  - [State too large](#state-too-large)
+- [Verification](#verification)
+
 ## Purpose
 
 Create a structured session state snapshot that captures the current work context for preservation across session boundaries or context compactions.

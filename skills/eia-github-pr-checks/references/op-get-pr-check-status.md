@@ -7,6 +7,31 @@ workflow-instruction: Step 21 - PR Evaluation
 
 # Operation: Get PR Check Status
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Input](#input)
+- [Output](#output)
+- [Steps](#steps)
+  - [Step 1: Run the Check Status Script](#step-1-run-the-check-status-script)
+  - [Step 2: Parse the JSON Output](#step-2-parse-the-json-output)
+  - [Step 3: Interpret Results](#step-3-interpret-results)
+- [Command Variants](#command-variants)
+  - [Get All Checks](#get-all-checks)
+  - [Get Only Required Checks](#get-only-required-checks)
+  - [Get Summary Only](#get-summary-only)
+  - [Specify Repository](#specify-repository)
+- [Alternative: Direct gh CLI](#alternative-direct-gh-cli)
+- [Check Conclusions Reference](#check-conclusions-reference)
+- [Example](#example)
+- [Decision Flow](#decision-flow)
+- [Exit Codes](#exit-codes)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## Purpose
 
 Retrieve the current status of all CI/CD checks for a Pull Request to determine if it's ready to merge or requires attention.

@@ -1,5 +1,21 @@
 # Operation: Get Board State
 
+
+## Contents
+
+- [Metadata](#metadata)
+- [Purpose](#purpose)
+- [Preconditions](#preconditions)
+- [Input](#input)
+- [Procedure](#procedure)
+- [Command](#command)
+- [GraphQL Query](#graphql-query)
+- [Output](#output)
+- [Column Definitions](#column-definitions)
+- [Error Handling](#error-handling)
+- [Exit Codes](#exit-codes)
+- [Related Operations](#related-operations)
+
 ## Metadata
 
 | Field | Value |

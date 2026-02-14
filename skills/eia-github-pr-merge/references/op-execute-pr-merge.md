@@ -7,6 +7,24 @@ workflow-instruction: Step 21 - PR Evaluation
 
 # Operation: Execute PR Merge
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Input](#input)
+- [Output](#output)
+- [Exit Codes](#exit-codes)
+- [Merge Strategies](#merge-strategies)
+- [Procedure](#procedure)
+- [Command](#command)
+- [Example](#example)
+- [Strategy Selection Guide](#strategy-selection-guide)
+- [Safety Warnings](#safety-warnings)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## Purpose
 
 Execute the actual merge of a pull request using the specified merge strategy (merge commit, squash, or rebase).

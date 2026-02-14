@@ -7,6 +7,26 @@ workflow-instruction: Step 21 - PR Evaluation
 
 # Operation: Configure Auto-Merge
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Input](#input)
+- [Output](#output)
+- [Exit Codes](#exit-codes)
+- [Procedure](#procedure)
+  - [Enable Auto-Merge](#enable-auto-merge)
+  - [Disable Auto-Merge](#disable-auto-merge)
+- [Command](#command)
+- [Example](#example)
+- [Requirements for Auto-Merge](#requirements-for-auto-merge)
+- [Auto-Merge Trigger Conditions](#auto-merge-trigger-conditions)
+- [When Auto-Merge is Canceled](#when-auto-merge-is-canceled)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## Purpose
 
 Enable or disable automatic merging of a pull request. Auto-merge will merge the PR automatically when all required conditions are met (CI passes, reviews approved).

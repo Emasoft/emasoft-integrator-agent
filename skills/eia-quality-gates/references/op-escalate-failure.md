@@ -7,6 +7,35 @@ workflow-instruction: Step 21 - PR Evaluation
 
 # Operation: Escalate Gate Failure
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Input](#input)
+- [Output](#output)
+- [Escalation Paths by Gate](#escalation-paths-by-gate)
+- [Severity Levels](#severity-levels)
+- [Escalation Path A: Pre-Review Gate Failure](#escalation-path-a-pre-review-gate-failure)
+  - [Steps](#steps)
+  - [Actions by Failure Type](#actions-by-failure-type)
+- [Escalation Path B: Review Gate Failure](#escalation-path-b-review-gate-failure)
+  - [Steps](#steps)
+  - [Override Authority Matrix](#override-authority-matrix)
+- [Escalation Path C: Pre-Merge Gate Failure](#escalation-path-c-pre-merge-gate-failure)
+  - [Steps](#steps)
+  - [Actions by Failure Type](#actions-by-failure-type)
+- [Escalation Path D: Post-Merge Gate Failure (Critical)](#escalation-path-d-post-merge-gate-failure-critical)
+  - [Steps](#steps)
+  - [Revert Authority Matrix](#revert-authority-matrix)
+- [Example: Complete Escalation](#example-complete-escalation)
+- [Review Gate Failed - Security Threshold Not Met](#review-gate-failed-security-threshold-not-met)
+  - [Security Issues Found](#security-issues-found)
+  - [Required Actions](#required-actions)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## Purpose
 
 Follow the appropriate escalation path when a quality gate fails. Ensures proper notification and action based on failure type and severity.

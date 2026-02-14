@@ -1,5 +1,38 @@
 # Operation: Create Issue
 
+
+## Contents
+
+- [Metadata](#metadata)
+- [Purpose](#purpose)
+- [Preconditions](#preconditions)
+- [Input](#input)
+- [Procedure](#procedure)
+- [Command](#command)
+- [Alternative: Direct gh CLI](#alternative-direct-gh-cli)
+- [Output](#output)
+- [Issue Body Templates](#issue-body-templates)
+  - [Feature Request](#feature-request)
+- [Description](#description)
+- [Motivation](#motivation)
+- [Acceptance Criteria](#acceptance-criteria)
+- [Technical Notes](#technical-notes)
+  - [Bug Report](#bug-report)
+- [Description](#description)
+- [Steps to Reproduce](#steps-to-reproduce)
+- [Expected Behavior](#expected-behavior)
+- [Actual Behavior](#actual-behavior)
+- [Environment](#environment)
+  - [Task](#task)
+- [Description](#description)
+- [Requirements](#requirements)
+- [Dependencies](#dependencies)
+- [Acceptance Criteria](#acceptance-criteria)
+- [Error Handling](#error-handling)
+- [Exit Codes](#exit-codes)
+- [Auto-Create Labels](#auto-create-labels)
+- [Related Operations](#related-operations)
+
 ## Metadata
 
 | Field | Value |

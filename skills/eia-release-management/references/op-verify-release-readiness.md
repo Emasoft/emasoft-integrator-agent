@@ -7,6 +7,30 @@ workflow-instruction: support
 
 # Operation: Verify Release Readiness
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Verify all tests pass](#step-1-verify-all-tests-pass)
+  - [Step 2: Check for critical bugs](#step-2-check-for-critical-bugs)
+  - [Step 3: Verify documentation updated](#step-3-verify-documentation-updated)
+  - [Step 4: Check dependency vulnerabilities](#step-4-check-dependency-vulnerabilities)
+  - [Step 5: Check CI/CD status](#step-5-check-cicd-status)
+  - [Step 6: Check for breaking changes (if major release)](#step-6-check-for-breaking-changes-if-major-release)
+  - [Step 7: Generate verification report](#step-7-generate-verification-report)
+- [Input](#input)
+- [Output](#output)
+- [Example Output](#example-output)
+- [Quality Gates](#quality-gates)
+- [Error Handling](#error-handling)
+  - [Tests fail](#tests-fail)
+  - [Critical bugs open](#critical-bugs-open)
+  - [CI not available](#ci-not-available)
+- [Verification Script](#verification-script)
+
 ## Purpose
 
 Execute a comprehensive pre-release verification checklist to ensure all quality gates pass before approving a release.

@@ -7,6 +7,22 @@ workflow-instruction: Step 21 - PR Evaluation
 
 # Operation: Check Merge Readiness
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Input](#input)
+- [Output](#output)
+- [Exit Codes](#exit-codes)
+- [Procedure](#procedure)
+- [Command](#command)
+- [Example](#example)
+- [MergeStateStatus Values](#mergestatestatus-values)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## Purpose
 
 Verify that all requirements are met for merging a pull request. This includes CI status, review approvals, merge conflicts, and unresolved threads.

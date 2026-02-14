@@ -7,6 +7,25 @@ workflow-instruction: support
 
 # Operation: Batch Label Add
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: List target issues](#step-1-list-target-issues)
+  - [Step 2: Preview changes (dry-run)](#step-2-preview-changes-dry-run)
+  - [Step 3: Execute batch add](#step-3-execute-batch-add)
+  - [Step 4: Verify changes](#step-4-verify-changes)
+- [Input](#input)
+- [Output](#output)
+- [Example Output](#example-output)
+- [Error Handling](#error-handling)
+  - [Label does not exist](#label-does-not-exist)
+  - [Permission denied](#permission-denied)
+- [Verification](#verification)
+
 ## Purpose
 
 Add one or more labels to multiple GitHub issues in a single operation.

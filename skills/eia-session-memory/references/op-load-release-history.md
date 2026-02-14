@@ -7,6 +7,35 @@ workflow-instruction: support
 
 # Operation: Load Release History
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Locate release history file](#step-1-locate-release-history-file)
+  - [Step 2: Check file exists](#step-2-check-file-exists)
+  - [Step 3: Load file content](#step-3-load-file-content)
+  - [Step 4: Parse release entries](#step-4-parse-release-entries)
+  - [Step 5: Get latest release](#step-5-get-latest-release)
+  - [Step 6: Check for rollbacks](#step-6-check-for-rollbacks)
+  - [Step 7: Verify against GitHub releases](#step-7-verify-against-github-releases)
+- [Input](#input)
+- [Output](#output)
+- [Example Output](#example-output)
+- [Release History Format](#release-history-format)
+- [Releases](#releases)
+- [Rollback History](#rollback-history)
+- [Notes](#notes)
+- [Version Extraction Patterns](#version-extraction-patterns)
+- [Error Handling](#error-handling)
+  - [File not found](#file-not-found)
+  - [Out of sync with GitHub](#out-of-sync-with-github)
+  - [Malformed entries](#malformed-entries)
+- [Initialize from Git Tags](#initialize-from-git-tags)
+- [Verification](#verification)
+
 ## Purpose
 
 Load the release history document to understand past releases, version progression, and any rollback events for informed release decision-making.

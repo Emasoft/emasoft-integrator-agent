@@ -7,6 +7,30 @@ workflow-instruction: Step 21 - PR Evaluation
 
 # Operation: Interpret Check Conclusions
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Input](#input)
+- [Output](#output)
+- [Conclusion Values Reference](#conclusion-values-reference)
+- [Detailed Interpretation](#detailed-interpretation)
+  - [success](#success)
+  - [failure](#failure)
+  - [pending](#pending)
+  - [skipped](#skipped)
+  - [cancelled](#cancelled)
+  - [timed_out](#timed_out)
+  - [action_required](#action_required)
+  - [neutral](#neutral)
+  - [stale](#stale)
+- [Decision Matrix](#decision-matrix)
+- [Example: Evaluating Check Results](#example-evaluating-check-results)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## Purpose
 
 Understand what each check conclusion value means and determine the appropriate action to take.

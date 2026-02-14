@@ -7,6 +7,29 @@ workflow-instruction: support
 
 # Operation: Detect State Triggers
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Parse user prompt for indicators](#step-1-parse-user-prompt-for-indicators)
+  - [Step 2: Extract identifiers](#step-2-extract-identifiers)
+  - [Step 3: Determine trigger type](#step-3-determine-trigger-type)
+  - [Step 4: Check for existing memory](#step-4-check-for-existing-memory)
+  - [Step 5: Return trigger analysis](#step-5-return-trigger-analysis)
+- [Input](#input)
+- [Output](#output)
+- [Example Output](#example-output)
+- [Trigger Types](#trigger-types)
+- [Recommended Actions](#recommended-actions)
+- [Error Handling](#error-handling)
+  - [Cannot parse user prompt](#cannot-parse-user-prompt)
+  - [GitHub access fails](#github-access-fails)
+  - [Multiple triggers detected](#multiple-triggers-detected)
+- [Verification](#verification)
+
 ## Purpose
 
 Analyze the user prompt and context at session start to determine what type of work is being resumed and what memory should be loaded.

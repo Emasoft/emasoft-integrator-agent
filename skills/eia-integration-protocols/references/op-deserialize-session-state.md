@@ -7,6 +7,37 @@ workflow-instruction: support
 
 # Operation: Deserialize Session State
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Locate state file](#step-1-locate-state-file)
+  - [Step 2: Read state file](#step-2-read-state-file)
+  - [Step 3: Parse JSON](#step-3-parse-json)
+  - [Step 4: Extract fields](#step-4-extract-fields)
+  - [Step 5: Validate loaded state](#step-5-validate-loaded-state)
+  - [Step 6: Log loaded state](#step-6-log-loaded-state)
+- [Input](#input)
+- [Output](#output)
+- [Example Output](#example-output)
+- [Storage Locations](#storage-locations)
+  - [Primary Location](#primary-location)
+  - [Alternative Locations](#alternative-locations)
+- [Deserialization Patterns](#deserialization-patterns)
+  - [From File](#from-file)
+  - [From PR Comment](#from-pr-comment)
+  - [From Environment Variable](#from-environment-variable)
+- [Complete Deserialization Script](#complete-deserialization-script)
+- [Error Handling](#error-handling)
+  - [File not found](#file-not-found)
+  - [Invalid JSON](#invalid-json)
+  - [Empty file](#empty-file)
+  - [Corrupted data](#corrupted-data)
+- [Verification](#verification)
+
 ## Purpose
 
 Load and parse session state from JSON storage into usable form for resuming work.

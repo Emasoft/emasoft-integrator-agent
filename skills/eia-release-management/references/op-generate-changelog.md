@@ -7,6 +7,36 @@ workflow-instruction: support
 
 # Operation: Generate Changelog
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Identify version range](#step-1-identify-version-range)
+  - [Step 2: Fetch commits in range](#step-2-fetch-commits-in-range)
+  - [Step 3: Categorize commits](#step-3-categorize-commits)
+  - [Step 4: Format changelog](#step-4-format-changelog)
+  - [Step 5: Save changelog](#step-5-save-changelog)
+- [Input](#input)
+- [Output](#output)
+- [Example Output](#example-output)
+- [Changelog Format](#changelog-format)
+- [[1.2.4] - 2025-02-05](#124-2025-02-05)
+  - [Breaking Changes](#breaking-changes)
+  - [Features](#features)
+  - [Bug Fixes](#bug-fixes)
+  - [Documentation](#documentation)
+  - [Maintenance](#maintenance)
+- [Category Detection Rules](#category-detection-rules)
+- [Error Handling](#error-handling)
+  - [No commits in range](#no-commits-in-range)
+  - [Invalid tag](#invalid-tag)
+  - [No commit convention](#no-commit-convention)
+- [Complete Changelog Script](#complete-changelog-script)
+- [Verification](#verification)
+
 ## Purpose
 
 Compile a categorized changelog from commit history between two versions, formatted for release notes.

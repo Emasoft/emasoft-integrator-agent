@@ -7,6 +7,30 @@ procedure: "support-skill"
 
 # Operation: Mark Blocked PR
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Identify Blocker Type](#step-1-identify-blocker-type)
+  - [Step 2: Add Blocked Label](#step-2-add-blocked-label)
+  - [Step 3: Comment with Blocker Details](#step-3-comment-with-blocker-details)
+  - [Step 4: Notify Author (if agent)](#step-4-notify-author-if-agent)
+  - [Step 5: Verify Label Update](#step-5-verify-label-update)
+- [Example](#example)
+- [Blocker Templates](#blocker-templates)
+  - [Merge Conflicts](#merge-conflicts)
+- [Review Blocked: Merge Conflicts](#review-blocked-merge-conflicts)
+  - [CI Failing](#ci-failing)
+- [Review Blocked: CI Failures](#review-blocked-ci-failures)
+  - [Dependent PR](#dependent-pr)
+- [Review Blocked: Dependency](#review-blocked-dependency)
+- [Unblocking a PR](#unblocking-a-pr)
+- [Error Handling](#error-handling)
+- [Notes](#notes)
+
 ## Purpose
 
 Mark a PR as blocked when review cannot proceed due to merge conflicts, CI failures, missing dependencies, or other blockers.

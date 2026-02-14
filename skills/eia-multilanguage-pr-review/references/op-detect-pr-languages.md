@@ -7,6 +7,25 @@ workflow-instruction: Step 21 - PR Evaluation
 
 # Operation: Detect PR Languages
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Input](#input)
+- [Output](#output)
+- [Output Structure](#output-structure)
+- [Procedure](#procedure)
+- [Command](#command)
+- [Example](#example)
+- [Detection Methods](#detection-methods)
+- [Supported Languages](#supported-languages)
+- [Handling Special Cases](#handling-special-cases)
+- [Next Steps After Detection](#next-steps-after-detection)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## Purpose
 
 Identify all programming languages present in the files changed by a pull request. This determines which language-specific review patterns and linters to apply.

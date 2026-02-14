@@ -7,6 +7,32 @@ workflow-instruction: support
 
 # Operation: Validate Session State
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Check JSON validity](#step-1-check-json-validity)
+  - [Step 2: Check required fields](#step-2-check-required-fields)
+  - [Step 3: Validate timestamp formats](#step-3-validate-timestamp-formats)
+  - [Step 4: Validate array fields](#step-4-validate-array-fields)
+  - [Step 5: Check for staleness](#step-5-check-for-staleness)
+- [Input](#input)
+- [Output](#output)
+- [Example Output](#example-output)
+- [Validation Rules](#validation-rules)
+  - [Required Fields](#required-fields)
+  - [Optional Fields](#optional-fields)
+  - [Checkpoint Object](#checkpoint-object)
+- [Complete Validation Script](#complete-validation-script)
+- [Error Handling](#error-handling)
+  - [Invalid JSON](#invalid-json)
+  - [Missing required field](#missing-required-field)
+  - [Stale state](#stale-state)
+- [Verification](#verification)
+
 ## Purpose
 
 Verify that a session state object is properly structured and contains valid data before using it to resume work.

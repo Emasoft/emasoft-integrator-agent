@@ -7,6 +7,32 @@ workflow-instruction: support
 
 # Operation: Archive Stale Memory
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Identify stale memory sources](#step-1-identify-stale-memory-sources)
+  - [Step 2: Check handoff document staleness](#step-2-check-handoff-document-staleness)
+  - [Step 3: Check PR state (if PR-related)](#step-3-check-pr-state-if-pr-related)
+  - [Step 4: Archive handoff document](#step-4-archive-handoff-document)
+  - [Step 5: Archive session state JSON](#step-5-archive-session-state-json)
+  - [Step 6: Clean up PR state comments (optional)](#step-6-clean-up-pr-state-comments-optional)
+  - [Step 7: Report archival actions](#step-7-report-archival-actions)
+- [Input](#input)
+- [Output](#output)
+- [Example Output](#example-output)
+- [Staleness Criteria](#staleness-criteria)
+- [Archive Structure](#archive-structure)
+- [Error Handling](#error-handling)
+  - [Archive directory not writable](#archive-directory-not-writable)
+  - [File move fails](#file-move-fails)
+  - [PR lookup fails](#pr-lookup-fails)
+- [Complete Archive Script](#complete-archive-script)
+- [Verification](#verification)
+
 ## Purpose
 
 Move outdated or no-longer-relevant memory state to an archive location, preventing it from being incorrectly loaded in future sessions.

@@ -7,6 +7,33 @@ workflow-instruction: Step 21 - PR Evaluation
 
 # Operation: Compile Multilanguage Review
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Input](#input)
+- [Output](#output)
+- [Review Summary Template](#review-summary-template)
+- [Multilanguage PR Review Summary](#multilanguage-pr-review-summary)
+  - [Languages Detected](#languages-detected)
+  - [Linter Results](#linter-results)
+  - [Cross-Language Interface Review](#cross-language-interface-review)
+  - [Summary](#summary)
+  - [Recommendation](#recommendation)
+  - [Detailed Findings](#detailed-findings)
+- [Procedure](#procedure)
+- [Categorizing Issues](#categorizing-issues)
+  - [Blocking Issues](#blocking-issues)
+  - [Warnings](#warnings)
+  - [Suggestions](#suggestions)
+- [Example Review Workflow](#example-review-workflow)
+- [Review Status Decision Tree](#review-status-decision-tree)
+- [Formatting Best Practices](#formatting-best-practices)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## Purpose
 
 Aggregate all findings from language detection, linting, and cross-language analysis into a comprehensive review summary. This becomes the final review comment on the PR.

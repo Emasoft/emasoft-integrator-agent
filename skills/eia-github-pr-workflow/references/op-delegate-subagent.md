@@ -1,5 +1,28 @@
 # Operation: Delegate to Subagent
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Steps](#steps)
+- [Prompt Template](#prompt-template)
+- [Task](#task)
+- [Context](#context)
+- [Success Criteria](#success-criteria)
+- [Output Requirements](#output-requirements)
+- [Constraints](#constraints)
+- [Output](#output)
+- [Critical Rules](#critical-rules)
+- [Error Handling](#error-handling)
+- [Example](#example)
+- [Task](#task)
+- [Context](#context)
+- [Success Criteria](#success-criteria)
+- [Output Requirements](#output-requirements)
+- [Constraints](#constraints)
+
 ---
 procedure: proc-request-pr-review
 workflow-instruction: Step 20 - PR Review Request

@@ -7,6 +7,32 @@ workflow-instruction: support
 
 # Operation: Validate Handoff Payload
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Check JSON validity](#step-1-check-json-validity)
+  - [Step 2: Check required fields](#step-2-check-required-fields)
+  - [Step 3: Validate field types](#step-3-validate-field-types)
+  - [Step 4: Validate handoff type value](#step-4-validate-handoff-type-value)
+  - [Step 5: Validate timestamp format (if present)](#step-5-validate-timestamp-format-if-present)
+- [Input](#input)
+- [Output](#output)
+- [Example Output](#example-output)
+- [Validation Rules](#validation-rules)
+  - [Required Fields](#required-fields)
+  - [Optional Fields](#optional-fields)
+  - [Recognized Handoff Types](#recognized-handoff-types)
+- [Complete Validation Script](#complete-validation-script)
+- [Error Handling](#error-handling)
+  - [Invalid JSON](#invalid-json)
+  - [Missing required field](#missing-required-field)
+  - [Invalid field type](#invalid-field-type)
+- [Verification](#verification)
+
 ## Purpose
 
 Verify that a handoff payload contains all required fields and follows the correct schema before sending to another agent.

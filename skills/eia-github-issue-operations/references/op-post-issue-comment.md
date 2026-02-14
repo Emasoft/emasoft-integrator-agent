@@ -1,5 +1,38 @@
 # Operation: Post Issue Comment
 
+
+## Contents
+
+- [Metadata](#metadata)
+- [Purpose](#purpose)
+- [Preconditions](#preconditions)
+- [Input](#input)
+- [Marker-Based Idempotency](#marker-based-idempotency)
+- [Status Update](#status-update)
+- [Procedure](#procedure)
+- [Command](#command)
+- [Alternative: Direct gh CLI](#alternative-direct-gh-cli)
+- [Output](#output)
+- [Comment Templates](#comment-templates)
+  - [Status Update](#status-update)
+- [Status Update](#status-update)
+  - [Progress](#progress)
+  - [Next Steps](#next-steps)
+  - [Blocker Report](#blocker-report)
+- [Blocker Reported](#blocker-reported)
+  - [Description](#description)
+  - [Impact](#impact)
+  - [Needed](#needed)
+  - [Completion Notice](#completion-notice)
+- [Task Completed](#task-completed)
+  - [Summary](#summary)
+  - [PR](#pr)
+  - [Notes](#notes)
+- [Error Handling](#error-handling)
+- [Exit Codes](#exit-codes)
+- [Best Practices](#best-practices)
+- [Related Operations](#related-operations)
+
 ## Metadata
 
 | Field | Value |

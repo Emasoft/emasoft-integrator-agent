@@ -7,6 +7,36 @@ workflow-instruction: support
 
 # Operation: GitHub CLI Prerequisites Check
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Check if gh is installed](#step-1-check-if-gh-is-installed)
+  - [Step 2: Check version](#step-2-check-version)
+  - [Step 3: Parse and compare version](#step-3-parse-and-compare-version)
+  - [Step 4: Check configuration](#step-4-check-configuration)
+  - [Step 5: Verify extensions (optional)](#step-5-verify-extensions-optional)
+- [Input](#input)
+- [Output](#output)
+- [Example Output](#example-output)
+- [Installation Instructions](#installation-instructions)
+  - [macOS (Homebrew)](#macos-homebrew)
+  - [macOS (MacPorts)](#macos-macports)
+  - [Linux (apt)](#linux-apt)
+  - [Windows (winget)](#windows-winget)
+- [Upgrade Instructions](#upgrade-instructions)
+  - [macOS](#macos)
+  - [Linux (apt)](#linux-apt)
+- [Error Handling](#error-handling)
+  - [Command not found](#command-not-found)
+  - [Version too old](#version-too-old)
+  - [PATH issues](#path-issues)
+- [Verification Script](#verification-script)
+- [Next Steps](#next-steps)
+
 ## Purpose
 
 Verify that the GitHub CLI is properly installed and configured with the required version before performing any GitHub operations.

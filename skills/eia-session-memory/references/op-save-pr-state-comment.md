@@ -7,6 +7,42 @@ workflow-instruction: support
 
 # Operation: Save PR State Comment
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Prepare state data](#step-1-prepare-state-data)
+  - [Step 2: Build comment body](#step-2-build-comment-body)
+- [EIA Review State](#eia-review-state)
+  - [Patterns Observed](#patterns-observed)
+  - [Blockers](#blockers)
+  - [Next Steps](#next-steps)
+  - [Step 3: Check for existing state comment](#step-3-check-for-existing-state-comment)
+  - [Step 4: Update or create comment](#step-4-update-or-create-comment)
+  - [Step 5: Verify comment was saved](#step-5-verify-comment-was-saved)
+- [Input](#input)
+- [Output](#output)
+- [Example Output](#example-output)
+- [State Comment Format](#state-comment-format)
+- [EIA Review State](#eia-review-state)
+  - [Patterns Observed](#patterns-observed)
+  - [Blockers](#blockers)
+  - [Next Steps](#next-steps)
+- [Status Values](#status-values)
+- [Error Handling](#error-handling)
+  - [Permission denied](#permission-denied)
+  - [PR not found](#pr-not-found)
+  - [Comment too long](#comment-too-long)
+  - [Update failed](#update-failed)
+- [Complete Save Script](#complete-save-script)
+- [EIA Review State](#eia-review-state)
+  - [Patterns Observed](#patterns-observed)
+  - [Next Steps](#next-steps)
+- [Verification](#verification)
+
 ## Purpose
 
 Persist the current PR review session state as a comment on the GitHub PR, enabling state recovery in future sessions.

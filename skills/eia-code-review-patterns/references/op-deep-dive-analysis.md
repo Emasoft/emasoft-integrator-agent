@@ -7,6 +7,35 @@ workflow-instruction: Step 21 - PR Evaluation
 
 # Operation: Deep Dive Analysis (Stage 2)
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Input](#input)
+- [Output](#output)
+- [The 8 Dimensions](#the-8-dimensions)
+- [Steps](#steps)
+  - [Step 1: Functional Correctness (20%)](#step-1-functional-correctness-20)
+  - [Step 2: Security (20%)](#step-2-security-20)
+  - [Step 3: Testing (15%)](#step-3-testing-15)
+  - [Step 4: Architecture & Design (15%)](#step-4-architecture-design-15)
+  - [Step 5: Backward Compatibility (15%)](#step-5-backward-compatibility-15)
+  - [Step 6: Code Quality (10%)](#step-6-code-quality-10)
+  - [Step 7: Performance (5%)](#step-7-performance-5)
+  - [Step 8: Documentation (5%)](#step-8-documentation-5)
+  - [Step 9: Calculate Final Confidence Score](#step-9-calculate-final-confidence-score)
+  - [Step 10: Make Final Decision](#step-10-make-final-decision)
+- [Deep Dive Output Template](#deep-dive-output-template)
+- [Deep Dive Report: PR #<NUMBER>](#deep-dive-report-pr-number)
+  - [Dimension Scores](#dimension-scores)
+  - [Findings](#findings)
+  - [Final Decision](#final-decision)
+- [Example](#example)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## Purpose
 
 Perform comprehensive multi-dimensional analysis of the PR across 8 quality dimensions to make a final approval/rejection decision.

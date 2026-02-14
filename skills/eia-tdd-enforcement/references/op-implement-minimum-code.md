@@ -7,6 +7,23 @@ workflow-instruction: Step 21 - PR Evaluation
 
 # Operation: Implement Minimum Code (GREEN Phase)
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Input](#input)
+- [Output](#output)
+- [The GREEN Phase Rule](#the-green-phase-rule)
+- [Procedure](#procedure)
+- [Example: Python](#example-python)
+- [Minimum Code Guidelines](#minimum-code-guidelines)
+- [Validation Checklist](#validation-checklist)
+- [Common Mistakes](#common-mistakes)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## Purpose
 
 Write the minimum amount of production code necessary to make the failing test pass. No more, no less. The goal is to make the test green as quickly as possible.

@@ -7,6 +7,23 @@ workflow-instruction: Step 21 - PR Evaluation
 
 # Operation: Write Failing Test (RED Phase)
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Input](#input)
+- [Output](#output)
+- [The Iron Law](#the-iron-law)
+- [Procedure](#procedure)
+- [Test Structure Pattern](#test-structure-pattern)
+- [Example: Python (pytest)](#example-python-pytest)
+- [Validation Checklist](#validation-checklist)
+- [Common Mistakes](#common-mistakes)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## Purpose
 
 Create a test that documents the intended behavior of code that does not yet exist. This test MUST fail initially, confirming that the feature is not implemented.

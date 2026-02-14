@@ -7,6 +7,29 @@ workflow-instruction: Step 21 - PR Evaluation
 
 # Operation: Apply Gate Label
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Input](#input)
+- [Output](#output)
+- [Label Format](#label-format)
+- [Warning Labels](#warning-labels)
+- [Steps](#steps)
+  - [Step 1: Remove Previous Status Labels for Same Gate](#step-1-remove-previous-status-labels-for-same-gate)
+  - [Step 2: Add New Status Label](#step-2-add-new-status-label)
+  - [Step 3: Add Warning Labels (If Applicable)](#step-3-add-warning-labels-if-applicable)
+  - [Step 4: Verify Labels Applied](#step-4-verify-labels-applied)
+- [Label Application Rules](#label-application-rules)
+- [Example: Gate Passed](#example-gate-passed)
+- [Example: Gate Failed with Warnings](#example-gate-failed-with-warnings)
+- [Label Creation](#label-creation)
+- [Batch Label Script](#batch-label-script)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## Purpose
 
 Apply the correct gate status label to a PR based on gate evaluation results. Labels communicate gate status to all stakeholders.

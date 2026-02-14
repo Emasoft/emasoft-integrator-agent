@@ -7,6 +7,27 @@ workflow-instruction: Step 21 - PR Evaluation
 
 # Operation: Close Related Issues
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Input](#input)
+- [Output](#output)
+- [Steps](#steps)
+  - [Step 1: Get PR Details and Linked Issues](#step-1-get-pr-details-and-linked-issues)
+  - [Step 2: Parse Linked Issues](#step-2-parse-linked-issues)
+  - [Step 3: Verify Each Issue](#step-3-verify-each-issue)
+  - [Step 4: Close Open Issues](#step-4-close-open-issues)
+  - [Step 5: Document Closures](#step-5-document-closures)
+- [Automatic Closure Behavior](#automatic-closure-behavior)
+- [Example](#example)
+- [Complete Script](#complete-script)
+- [Verification Checklist](#verification-checklist)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## Purpose
 
 After a PR is merged, close all issues that were linked to and resolved by the PR.

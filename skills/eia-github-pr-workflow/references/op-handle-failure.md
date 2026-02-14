@@ -1,5 +1,25 @@
 # Operation: Handle PR Workflow Failures
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Steps](#steps)
+- [Failure Types in Detail](#failure-types-in-detail)
+  - [Verification Failures](#verification-failures)
+  - [Subagent Failures](#subagent-failures)
+  - [CI Failures](#ci-failures)
+- [Output](#output)
+- [Error Handling](#error-handling)
+- [Example](#example)
+- [PR #123 Verification Failed](#pr-123-verification-failed)
+  - [Failing Criteria](#failing-criteria)
+  - [Recovery Approach](#recovery-approach)
+  - [Next Steps](#next-steps)
+- [Critical Rule](#critical-rule)
+
 ---
 procedure: proc-request-pr-review
 workflow-instruction: Step 20 - PR Review Request

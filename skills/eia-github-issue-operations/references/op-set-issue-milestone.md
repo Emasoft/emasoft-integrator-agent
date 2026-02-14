@@ -1,5 +1,25 @@
 # Operation: Set Issue Milestone
 
+
+## Contents
+
+- [Metadata](#metadata)
+- [Purpose](#purpose)
+- [Preconditions](#preconditions)
+- [Input](#input)
+- [Procedure](#procedure)
+- [Command](#command)
+- [Alternative: Direct gh CLI](#alternative-direct-gh-cli)
+- [Output](#output)
+- [Creating Milestones](#creating-milestones)
+- [Milestone Conventions](#milestone-conventions)
+- [Remove Milestone](#remove-milestone)
+- [Query Milestone Progress](#query-milestone-progress)
+- [Error Handling](#error-handling)
+- [Exit Codes](#exit-codes)
+- [Best Practices](#best-practices)
+- [Related Operations](#related-operations)
+
 ## Metadata
 
 | Field | Value |

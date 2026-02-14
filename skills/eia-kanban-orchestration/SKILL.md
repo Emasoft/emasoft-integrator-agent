@@ -359,48 +359,16 @@ python3 scripts/kanban_check_completion.py OWNER REPO PROJECT_NUMBER
 
 ---
 
-## Integration Points
+## Integration Points ([references/integration-points.md](references/integration-points.md))
 
-### Planning Phase
+Read this when understanding how Kanban connects to planning, orchestration, stop hooks, assignments, and PR completion.
 
-1. Orchestrator breaks work into modules
-2. Each module becomes a GitHub Issue
-3. Issues are added to project board in Backlog
-4. Orchestrator moves ready issues to Todo
-5. Board reflects complete work breakdown
-
-### Orchestration Phase
-
-1. Orchestrator assigns Todo issues to agents
-2. Agent moves issue to In Progress when starting
-3. Agent creates PR, moves to AI Review
-4. Integrator reviews, moves to Human Review (big tasks) or Merge/Release (small tasks)
-5. PR merge auto-moves to Done
-5. Board reflects real-time progress
-
-### Stop Hook Phase
-
-1. Stop hook queries board state
-2. Checks: all assigned items Done or explicitly deferred
-3. If incomplete items exist, prevents exit
-4. Orchestrator must resolve or defer before exit
-
-### Assignment Flow
-
-1. Orchestrator identifies next Todo item
-2. Orchestrator assigns to available agent
-3. Assignment appears as GitHub issue assignee
-4. Agent receives notification via AI Maestro
-5. Assignment visible on board
-
-### PR Completion Flow
-
-1. Agent creates PR linked to issue (Closes #N)
-2. Agent moves issue to AI Review
-3. Integrator reviews (all tasks go through AI Review)
-4. Integrator moves to Human Review (big tasks) or Merge/Release (small tasks)
-5. PR merged triggers auto-move to Done
-5. Issue closes automatically
+**Contents:**
+- IP.1 Planning Phase workflow
+- IP.2 Orchestration Phase workflow
+- IP.3 Stop Hook Phase workflow
+- IP.4 Assignment Flow
+- IP.5 PR Completion Flow
 
 ---
 
@@ -498,83 +466,18 @@ python3 scripts/kanban_check_completion.py owner repo 1
 
 ---
 
-## Proactive Kanban Monitoring
+## Proactive Kanban Monitoring ([references/proactive-kanban-monitoring.md](references/proactive-kanban-monitoring.md))
 
-### Overview
+Read this when setting up or running proactive board monitoring during orchestration sessions.
 
-The orchestrator must PROACTIVELY monitor the GitHub Project Kanban board for changes, rather than waiting for events. This ensures timely response to card movements, status changes, and assignment updates.
-
-### Polling Configuration
-
-**Poll Frequency**: Every 5 minutes during active orchestration sessions.
-
-**Polling Command**:
-```bash
-# Get all items from the project board
-gh project item-list --owner Emasoft --format json
-```
-
-### What to Check on Each Poll
-
-| Check | Command | Action When Detected |
-|-------|---------|---------------------|
-| Card movements | Compare `status` field with previous poll | Notify relevant agent of status change |
-| New assignees | Compare `assignees` field | Welcome new assignee, provide context |
-| Due date changes | Compare `dueDate` field | Alert if due date approaches or passes |
-| New items added | Check for new `id` values | Add to backlog, notify orchestrator |
-| Items removed | Check for missing `id` values | Log removal, update internal state |
-
-### Polling Script
-
-```bash
-# Poll and detect changes (run every 5 minutes)
-python scripts/kanban_poll_changes.py --owner Emasoft --project PROJECT_NUMBER --interval 300
-```
-
-### Change Detection Logic
-
-```python
-# Pseudocode for change detection
-previous_state = load_previous_state()
-current_state = gh_project_item_list()
-
-for item in current_state:
-    if item.id not in previous_state:
-        notify("New item added", item)
-    elif item.status != previous_state[item.id].status:
-        notify("Card moved", item, previous_state[item.id].status, item.status)
-    elif item.assignees != previous_state[item.id].assignees:
-        notify("Assignment changed", item)
-
-save_state(current_state)
-```
-
-### AI Maestro Notifications
-
-When changes are detected, notify relevant agents using the `agent-messaging` skill.
-
-**Assignment notification:** Send a message using the `agent-messaging` skill with:
-- **Recipient**: The assigned agent
-- **Subject**: `Kanban Update: Issue #123 assigned to you`
-- **Priority**: `normal`
-- **Content**: `{"type": "kanban-assignment", "message": "Issue #123 has been assigned to you. Current status: Todo. Please move to In Progress when starting."}`
-- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
-
-**Status change notification:** Send a message using the `agent-messaging` skill with:
-- **Recipient**: `orchestrator-eoa`
-- **Subject**: `Kanban Update: Issue #123 moved to AI Review`
-- **Priority**: `normal`
-- **Content**: `{"type": "kanban-status-change", "message": "Issue #123 moved from In Progress to AI Review by agent-name. PR likely created."}`
-- **Verify**: Confirm the message was delivered by checking the `agent-messaging` skill send confirmation.
-
-### Proactive Monitoring Checklist
-
-- [ ] Set up polling script to run every 5 minutes
-- [ ] Configure state persistence for change detection
-- [ ] Set up AI Maestro notifications for detected changes
-- [ ] Monitor for stale items (no movement in 24+ hours)
-- [ ] Alert on blocked items without resolution progress
-- [ ] Track due date proximity (warn at 24h, 48h, 1 week)
+**Contents:**
+- M.1 Overview of proactive monitoring
+- M.2 Polling configuration and frequency
+- M.3 What to check on each poll (detection table)
+- M.4 Running the polling script
+- M.5 Change detection logic (pseudocode)
+- M.6 AI Maestro notifications for detected changes
+- M.7 Proactive monitoring checklist
 
 ---
 

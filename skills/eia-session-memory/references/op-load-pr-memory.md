@@ -7,6 +7,32 @@ workflow-instruction: support
 
 # Operation: Load PR Memory
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Verify PR exists and is accessible](#step-1-verify-pr-exists-and-is-accessible)
+  - [Step 2: Fetch PR comments](#step-2-fetch-pr-comments)
+  - [Step 3: Find EIA state comment](#step-3-find-eia-state-comment)
+  - [Step 4: Parse state from comment](#step-4-parse-state-from-comment)
+  - [Step 5: Extract state fields](#step-5-extract-state-fields)
+  - [Step 6: Verify state freshness](#step-6-verify-state-freshness)
+- [Input](#input)
+- [Output](#output)
+- [Example Output](#example-output)
+- [State Comment Format](#state-comment-format)
+- [EIA Review State](#eia-review-state)
+- [State Fields](#state-fields)
+- [Error Handling](#error-handling)
+  - [PR not found](#pr-not-found)
+  - [No state comment found](#no-state-comment-found)
+  - [Invalid state JSON](#invalid-state-json)
+  - [State is stale](#state-is-stale)
+- [Verification](#verification)
+
 ## Purpose
 
 Retrieve session state that was stored in GitHub PR comments from a previous session, enabling continuation of PR review work.

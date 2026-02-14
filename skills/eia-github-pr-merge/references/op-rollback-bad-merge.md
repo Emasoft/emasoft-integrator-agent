@@ -7,6 +7,24 @@ workflow-instruction: Step 21 - PR Evaluation
 
 # Operation: Rollback Bad Merge
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Input](#input)
+- [Rollback Options](#rollback-options)
+- [Procedure: Option 1 - Revert Commit (Recommended)](#procedure-option-1-revert-commit-recommended)
+- [Procedure: Option 2 - Hotfix PR](#procedure-option-2-hotfix-pr)
+- [Procedure: Option 3 - Force Reset (DESTRUCTIVE)](#procedure-option-3-force-reset-destructive)
+- [Example: Standard Revert Workflow](#example-standard-revert-workflow)
+- [Safety Checklist](#safety-checklist)
+- [Post-Rollback Actions](#post-rollback-actions)
+- [Error Handling](#error-handling)
+- [Critical Warnings](#critical-warnings)
+- [Related Operations](#related-operations)
+
 ## Purpose
 
 Revert or undo a merge that introduced bugs, broken code, or other issues to the target branch. This operation should be used when a merged PR causes problems that need immediate resolution.

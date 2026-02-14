@@ -1,5 +1,23 @@
 # Operation: Find GitHub Project
 
+
+## Contents
+
+- [Metadata](#metadata)
+- [Purpose](#purpose)
+- [Preconditions](#preconditions)
+- [Input](#input)
+- [Procedure](#procedure)
+- [Command: List All Projects](#command-list-all-projects)
+- [Command: Get Specific Project](#command-get-specific-project)
+- [Alternative: Using gh CLI](#alternative-using-gh-cli)
+- [Output](#output)
+- [Project ID Format](#project-id-format)
+- [Error Handling](#error-handling)
+- [Project Scope Types](#project-scope-types)
+- [Verification](#verification)
+- [Related Operations](#related-operations)
+
 ## Metadata
 
 | Field | Value |

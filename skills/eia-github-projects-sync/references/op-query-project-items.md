@@ -1,5 +1,21 @@
 # Operation: Query Project Items
 
+
+## Contents
+
+- [Metadata](#metadata)
+- [Purpose](#purpose)
+- [Preconditions](#preconditions)
+- [Input](#input)
+- [Procedure](#procedure)
+- [GraphQL Query](#graphql-query)
+- [Command: Using gh CLI](#command-using-gh-cli)
+- [Output](#output)
+- [Filtering by Status](#filtering-by-status)
+- [Pagination](#pagination)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## Metadata
 
 | Field | Value |

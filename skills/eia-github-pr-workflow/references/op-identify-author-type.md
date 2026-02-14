@@ -1,5 +1,20 @@
 # Operation: Identify PR Author Type
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Steps](#steps)
+- [Output](#output)
+- [Handling Rules](#handling-rules)
+  - [Human PRs](#human-prs)
+  - [AI/Bot PRs](#aibot-prs)
+- [Error Handling](#error-handling)
+- [Example](#example)
+- [Critical Rule](#critical-rule)
+
 ---
 procedure: proc-request-pr-review
 workflow-instruction: Step 20 - PR Review Request

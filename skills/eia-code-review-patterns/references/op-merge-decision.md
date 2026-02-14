@@ -7,6 +7,33 @@ workflow-instruction: Step 21 - PR Evaluation
 
 # Operation: Merge Decision Execution
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Input](#input)
+- [Output](#output)
+- [Decision Matrix](#decision-matrix)
+- [Steps](#steps)
+  - [For APPROVED Decision (>= 80%)](#for-approved-decision-80)
+- [Review Approved](#review-approved)
+  - [For CHANGES_REQUESTED Decision (60-79%)](#for-changes_requested-decision-60-79)
+- [Changes Requested](#changes-requested)
+  - [Required Changes](#required-changes)
+  - [Issues Found](#issues-found)
+  - [For REJECTED Decision (< 60%)](#for-rejected-decision-60)
+- [Review Rejected](#review-rejected)
+  - [Critical Issues](#critical-issues)
+  - [Recommended Action](#recommended-action)
+- [Post-Decision Actions](#post-decision-actions)
+  - [Notify Stakeholders](#notify-stakeholders)
+  - [Update Related Issues](#update-related-issues)
+- [Example](#example)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## Purpose
 
 Execute the final merge or rejection decision based on the review results, applying appropriate labels and communicating the outcome.

@@ -1,5 +1,18 @@
 # Operation: Classify Work Needed
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Steps](#steps)
+- [Classification Decision Tree](#classification-decision-tree)
+- [Work Types](#work-types)
+- [Output](#output)
+- [Error Handling](#error-handling)
+- [Example](#example)
+
 ---
 procedure: proc-request-pr-review
 workflow-instruction: Step 20 - PR Review Request

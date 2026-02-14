@@ -1,5 +1,23 @@
 # Operation: Add Issue to Project Board
 
+
+## Contents
+
+- [Metadata](#metadata)
+- [Purpose](#purpose)
+- [Preconditions](#preconditions)
+- [Input](#input)
+- [Procedure](#procedure)
+- [Command](#command)
+- [GraphQL Mutation](#graphql-mutation)
+- [Getting Issue Node ID](#getting-issue-node-id)
+- [Output](#output)
+- [Setting Initial Status](#setting-initial-status)
+- [Error Handling](#error-handling)
+- [Verification](#verification)
+- [Bulk Add Issues](#bulk-add-issues)
+- [Related Operations](#related-operations)
+
 ## Metadata
 
 | Field | Value |

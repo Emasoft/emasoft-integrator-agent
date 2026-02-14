@@ -1,5 +1,38 @@
 # Sub-Agent Role Boundaries Template
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [Core Identity: Worker Agent (Not Orchestrator)](#core-identity-worker-agent-not-orchestrator)
+  - [What Worker Agents Are](#what-worker-agents-are)
+  - [What Worker Agents Are NOT](#what-worker-agents-are-not)
+- [Standard Output Format](#standard-output-format)
+  - [Minimal Report to Orchestrator](#minimal-report-to-orchestrator)
+  - [Detailed Reports in Files](#detailed-reports-in-files)
+- [Communication Rules](#communication-rules)
+  - [Report to Main Agent Only](#report-to-main-agent-only)
+  - [AI Maestro Messaging Protocol](#ai-maestro-messaging-protocol)
+  - [GitHub Projects Integration](#github-projects-integration)
+- [Tool Restrictions](#tool-restrictions)
+  - [Standard Permissions Table](#standard-permissions-table)
+  - [Exceptions by Agent Type](#exceptions-by-agent-type)
+- [Common Constraints Template](#common-constraints-template)
+  - [Agent Specifications Table](#agent-specifications-table)
+  - [IRON RULES Section Template](#iron-rules-section-template)
+- [IRON RULES](#iron-rules)
+  - [What This Agent DOES](#what-this-agent-does)
+  - [What This Agent NEVER DOES](#what-this-agent-never-does)
+- [Success/Completion Conditions](#successcompletion-conditions)
+  - [Task Completion Criteria](#task-completion-criteria)
+  - [Reporting Completion](#reporting-completion)
+- [Anti-Patterns to Avoid](#anti-patterns-to-avoid)
+  - [DO NOT: Verbose Context Pollution](#do-not-verbose-context-pollution)
+  - [DO NOT: Decision Making](#do-not-decision-making)
+  - [DO NOT: Autonomous Task Selection](#do-not-autonomous-task-selection)
+- [Template Usage](#template-usage)
+- [References](#references)
+
 ## Purpose
 
 This template defines the standard role boundaries and communication patterns that **all EIA sub-agents** must follow. Sub-agents are **worker agents**, not orchestrators. They execute assigned tasks and report results to the main Integrator Agent.

@@ -1,5 +1,23 @@
 # Operation: Get Issue Context
 
+
+## Contents
+
+- [Metadata](#metadata)
+- [Purpose](#purpose)
+- [Preconditions](#preconditions)
+- [Input](#input)
+- [Procedure](#procedure)
+- [Command](#command)
+- [Alternative: Direct gh CLI](#alternative-direct-gh-cli)
+- [Output](#output)
+- [With Comments Included](#with-comments-included)
+- [GraphQL Query](#graphql-query)
+- [Error Handling](#error-handling)
+- [Exit Codes](#exit-codes)
+- [Use Cases](#use-cases)
+- [Related Operations](#related-operations)
+
 ## Metadata
 
 | Field | Value |

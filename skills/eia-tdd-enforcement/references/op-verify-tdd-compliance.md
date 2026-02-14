@@ -7,6 +7,25 @@ workflow-instruction: Step 21 - PR Evaluation
 
 # Operation: Verify TDD Compliance
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Input](#input)
+- [Output](#output)
+- [TDD Commit Pattern](#tdd-commit-pattern)
+- [Verification Procedure](#verification-procedure)
+- [Example Verification](#example-verification)
+- [Compliance Criteria](#compliance-criteria)
+- [Verification Script](#verification-script)
+- [Violation Types](#violation-types)
+- [Handling Violations](#handling-violations)
+- [Validation Checklist](#validation-checklist)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## Purpose
 
 Verify that code changes in a pull request or branch follow proper TDD discipline by examining commit history and ensuring tests were written before implementation.

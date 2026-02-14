@@ -7,6 +7,28 @@ workflow-instruction: support
 
 # Operation: GitHub CLI Authentication Check
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Check authentication status](#step-1-check-authentication-status)
+  - [Step 2: Verify required scopes](#step-2-verify-required-scopes)
+  - [Step 3: Test API access](#step-3-test-api-access)
+  - [Step 4: Verify repository access](#step-4-verify-repository-access)
+- [Input](#input)
+- [Output](#output)
+- [Example Output](#example-output)
+- [Error Handling](#error-handling)
+  - [Not logged in](#not-logged-in)
+  - [Token expired](#token-expired)
+  - [Insufficient scopes](#insufficient-scopes)
+  - [Wrong account](#wrong-account)
+- [Verification](#verification)
+- [Related Operations](#related-operations)
+
 ## Purpose
 
 Verify that the GitHub CLI is properly authenticated before performing any GitHub operations.

@@ -7,6 +7,36 @@ workflow-instruction: Step 21 - PR Evaluation
 
 # Operation: Get PR Diff
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Input](#input)
+- [Output](#output)
+- [Steps](#steps)
+  - [Step 1: Run the Diff Script](#step-1-run-the-diff-script)
+  - [Step 2: Review the Output](#step-2-review-the-output)
+- [Command Variants](#command-variants)
+  - [Full Diff](#full-diff)
+  - [Statistics Only](#statistics-only)
+  - [Specific Files](#specific-files)
+  - [Combine with Other Tools](#combine-with-other-tools)
+- [Alternative: Direct gh CLI](#alternative-direct-gh-cli)
+- [Understanding Unified Diff Format](#understanding-unified-diff-format)
+  - [Hunk Header Explained](#hunk-header-explained)
+- [Filtering Diff Output](#filtering-diff-output)
+  - [Find Added Lines](#find-added-lines)
+  - [Find Removed Lines](#find-removed-lines)
+  - [Find Files with Specific Changes](#find-files-with-specific-changes)
+- [Example: Security Review](#example-security-review)
+- [Example: Test Coverage Check](#example-test-coverage-check)
+- [Large Diffs](#large-diffs)
+- [Exit Codes](#exit-codes)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## Purpose
 
 Retrieve the actual code changes (diff) for a Pull Request to review the specific modifications made.

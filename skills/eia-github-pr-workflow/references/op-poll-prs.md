@@ -1,5 +1,18 @@
 # Operation: Poll for PRs Requiring Attention
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Steps](#steps)
+- [Output](#output)
+- [Status Values](#status-values)
+- [Action Values](#action-values)
+- [Error Handling](#error-handling)
+- [Example](#example)
+
 ---
 procedure: proc-request-pr-review
 workflow-instruction: Step 20 - PR Review Request

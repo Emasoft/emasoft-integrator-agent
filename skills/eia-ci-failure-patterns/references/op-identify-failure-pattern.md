@@ -7,6 +7,28 @@ description: "Use decision tree to manually identify CI failure pattern category
 
 # Operation: Identify Failure Pattern
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [Prerequisites](#prerequisites)
+- [Inputs](#inputs)
+- [Procedure](#procedure)
+  - [Step 1: Extract the Primary Error Message](#step-1-extract-the-primary-error-message)
+  - [Step 2: Follow the Decision Tree](#step-2-follow-the-decision-tree)
+  - [Step 3: Record the Classification](#step-3-record-the-classification)
+  - [Step 4: Verify Classification](#step-4-verify-classification)
+- [Decision Tree Quick Reference](#decision-tree-quick-reference)
+- [Output](#output)
+- [Example Classifications](#example-classifications)
+  - [Example 1: Path Error](#example-1-path-error)
+  - [Example 2: Exit Code Error](#example-2-exit-code-error)
+  - [Example 3: Import Error](#example-3-import-error)
+- [Error Handling](#error-handling)
+  - [No category matches](#no-category-matches)
+  - [Multiple categories could apply](#multiple-categories-could-apply)
+- [Next Operation](#next-operation)
+
 ## Purpose
 
 This operation uses the Diagnosis Decision Tree to manually classify a CI failure when the diagnostic script does not identify the pattern automatically.

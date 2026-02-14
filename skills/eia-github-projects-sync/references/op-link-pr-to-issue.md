@@ -1,5 +1,27 @@
 # Operation: Link PR to Issue
 
+
+## Contents
+
+- [Metadata](#metadata)
+- [Purpose](#purpose)
+- [Preconditions](#preconditions)
+- [Linking Methods](#linking-methods)
+  - [Method 1: PR Description Keywords](#method-1-pr-description-keywords)
+  - [Method 2: PR Title](#method-2-pr-title)
+  - [Method 3: Commit Messages](#method-3-commit-messages)
+- [Procedure](#procedure)
+- [Command: Create Linked PR](#command-create-linked-pr)
+- [Changes](#changes)
+- [Command: Update Existing PR](#command-update-existing-pr)
+- [Verify Link](#verify-link)
+- [Output](#output)
+- [Cross-Repository Linking](#cross-repository-linking)
+- [Behavior on Merge](#behavior-on-merge)
+- [Error Handling](#error-handling)
+- [Best Practices](#best-practices)
+- [Related Operations](#related-operations)
+
 ## Metadata
 
 | Field | Value |

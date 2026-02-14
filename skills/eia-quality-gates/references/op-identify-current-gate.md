@@ -7,6 +7,27 @@ workflow-instruction: Step 21 - PR Evaluation
 
 # Operation: Identify Current Gate
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Input](#input)
+- [Output](#output)
+- [Gate Label Mapping](#gate-label-mapping)
+- [Steps](#steps)
+  - [Step 1: Get PR Labels](#step-1-get-pr-labels)
+  - [Step 2: Filter Gate Labels](#step-2-filter-gate-labels)
+  - [Step 3: Determine Current Gate](#step-3-determine-current-gate)
+  - [Step 4: Determine Gate Status](#step-4-determine-gate-status)
+  - [Step 5: Return Gate Information](#step-5-return-gate-information)
+- [Gate Progression Flow](#gate-progression-flow)
+- [Example](#example)
+- [Decision Logic Script](#decision-logic-script)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## Purpose
 
 Determine which quality gate a PR is currently at by examining its labels. This is the first step in quality gate enforcement.

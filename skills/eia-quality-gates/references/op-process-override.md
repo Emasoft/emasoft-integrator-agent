@@ -7,6 +7,50 @@ workflow-instruction: Step 21 - PR Evaluation
 
 # Operation: Process Gate Override
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Input](#input)
+- [Output](#output)
+- [Override Authority Matrix](#override-authority-matrix)
+- [Non-Overridable Conditions](#non-overridable-conditions)
+- [Steps](#steps)
+  - [Step 1: Verify Override Request](#step-1-verify-override-request)
+  - [Step 2: Check Authority Level](#step-2-check-authority-level)
+  - [Step 3: Validate Against Authority Matrix](#step-3-validate-against-authority-matrix)
+  - [Step 4: Check for Non-Overridable Conditions](#step-4-check-for-non-overridable-conditions)
+  - [Step 5: Document Override](#step-5-document-override)
+- [Gate Override Applied](#gate-override-applied)
+  - [Justification](#justification)
+  - [Override Conditions](#override-conditions)
+  - [Follow-up Required](#follow-up-required)
+  - [Tracking](#tracking)
+  - [Step 6: Apply Override Label](#step-6-apply-override-label)
+  - [Step 7: Advance to Next Gate](#step-7-advance-to-next-gate)
+  - [Step 8: Log Override for Audit](#step-8-log-override-for-audit)
+- [Override Request Template](#override-request-template)
+- [Override Request](#override-request)
+  - [Justification](#justification)
+  - [Risk Assessment](#risk-assessment)
+  - [Follow-up Commitment](#follow-up-commitment)
+  - [Requested By](#requested-by)
+- [Example: Approved Override](#example-approved-override)
+- [Gate Override Applied](#gate-override-applied)
+  - [Justification](#justification)
+  - [Override Conditions](#override-conditions)
+  - [Follow-up Required](#follow-up-required)
+  - [Tracking](#tracking)
+- [Example: Denied Override](#example-denied-override)
+- [Override Request DENIED](#override-request-denied)
+  - [Denial Reason](#denial-reason)
+  - [Required Action](#required-action)
+  - [Security Issues to Fix](#security-issues-to-fix)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## Purpose
 
 Handle authorized gate override requests that allow PRs to proceed despite not meeting standard thresholds. Overrides require proper authorization and documentation.

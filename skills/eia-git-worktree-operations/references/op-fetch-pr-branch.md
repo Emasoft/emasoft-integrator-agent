@@ -7,6 +7,34 @@ workflow-instruction: support
 
 # Operation: Fetch PR Branch
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Verify PR exists](#step-1-verify-pr-exists)
+  - [Step 2: Determine local branch name](#step-2-determine-local-branch-name)
+  - [Step 3: Fetch the PR branch](#step-3-fetch-the-pr-branch)
+  - [Step 4: Verify fetch success](#step-4-verify-fetch-success)
+  - [Step 5: Show branch info](#step-5-show-branch-info)
+- [Input](#input)
+- [Output](#output)
+- [Example Output](#example-output)
+- [Fetch Patterns](#fetch-patterns)
+  - [Standard PR fetch](#standard-pr-fetch)
+  - [Fetch and checkout](#fetch-and-checkout)
+  - [Fetch without local branch](#fetch-without-local-branch)
+  - [Update existing PR branch](#update-existing-pr-branch)
+- [Error Handling](#error-handling)
+  - [PR not found](#pr-not-found)
+  - [Network error](#network-error)
+  - [Branch already exists](#branch-already-exists)
+  - [Permission denied](#permission-denied)
+- [Complete Fetch Script](#complete-fetch-script)
+- [Verification](#verification)
+
 ## Purpose
 
 Fetch a pull request branch from the remote repository into a local branch, preparing it for worktree creation or local review.

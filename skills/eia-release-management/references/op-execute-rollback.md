@@ -7,6 +7,38 @@ workflow-instruction: support
 
 # Operation: Execute Rollback
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Identify versions](#step-1-identify-versions)
+  - [Step 2: Verify target version exists](#step-2-verify-target-version-exists)
+  - [Step 3: Document rollback decision](#step-3-document-rollback-decision)
+- [Impact Assessment](#impact-assessment)
+- [Actions Taken](#actions-taken)
+  - [Step 4: Mark bad release as deprecated (GitHub)](#step-4-mark-bad-release-as-deprecated-github)
+  - [Step 5: Handle package registry (npm)](#step-5-handle-package-registry-npm)
+  - [Step 6: Handle package registry (PyPI)](#step-6-handle-package-registry-pypi)
+  - [Step 7: Create rollback issue](#step-7-create-rollback-issue)
+- [Actions Taken](#actions-taken)
+- [Root Cause](#root-cause)
+- [Prevention](#prevention)
+  - [Step 8: Notify stakeholders](#step-8-notify-stakeholders)
+  - [Step 9: Verify rollback success](#step-9-verify-rollback-success)
+- [Input](#input)
+- [Output](#output)
+- [Example Output](#example-output)
+- [CRITICAL: User Approval Required](#critical-user-approval-required)
+- [Error Handling](#error-handling)
+  - [Target version not found](#target-version-not-found)
+  - [GitHub release edit fails](#github-release-edit-fails)
+  - [npm deprecation fails](#npm-deprecation-fails)
+- [Complete Rollback Script](#complete-rollback-script)
+- [Verification](#verification)
+
 ## Purpose
 
 Revert to a previous stable version when a release causes critical issues, including deprecating the bad release and restoring the previous state.

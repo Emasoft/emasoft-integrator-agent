@@ -7,6 +7,35 @@ workflow-instruction: Step 21 - PR Evaluation
 
 # Operation: Get PR Context
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Input](#input)
+- [Output](#output)
+- [Steps](#steps)
+  - [Step 1: Run the Context Script](#step-1-run-the-context-script)
+  - [Step 2: Parse the JSON Output](#step-2-parse-the-json-output)
+  - [Step 3: Use Context for Review Planning](#step-3-use-context-for-review-planning)
+- [Command Variants](#command-variants)
+  - [Basic Context](#basic-context)
+  - [Specific Repository](#specific-repository)
+- [Alternative: Direct gh CLI](#alternative-direct-gh-cli)
+- [Context Fields Explained](#context-fields-explained)
+  - [Mergeable Status](#mergeable-status)
+  - [Review Decision](#review-decision)
+  - [File Status](#file-status)
+- [Example: Review Planning](#example-review-planning)
+- [Extracting Specific Information](#extracting-specific-information)
+  - [Get Just File Paths](#get-just-file-paths)
+  - [Get Mergeable Status Only](#get-mergeable-status-only)
+  - [Get Author](#get-author)
+- [Exit Codes](#exit-codes)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## Purpose
 
 Retrieve comprehensive context about a Pull Request including metadata, changed files, mergeable status, and related information needed for review planning.

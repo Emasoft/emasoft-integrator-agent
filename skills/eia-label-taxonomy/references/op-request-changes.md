@@ -7,6 +7,30 @@ procedure: "support-skill"
 
 # Operation: Request Changes
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Update Review Label](#step-1-update-review-label)
+  - [Step 2: Submit Review with Changes Requested](#step-2-submit-review-with-changes-requested)
+  - [Issues Found](#issues-found)
+  - [Before Re-review](#before-re-review)
+  - [Step 3: Notify Author (via AI Maestro if agent)](#step-3-notify-author-via-ai-maestro-if-agent)
+  - [Step 4: Verify Label Update](#step-4-verify-label-update)
+- [Example](#example)
+  - [Issues Found](#issues-found)
+  - [Before Re-review](#before-re-review)
+- [Review Comment Templates](#review-comment-templates)
+  - [Missing Tests](#missing-tests)
+- [Changes Requested: Missing Test Coverage](#changes-requested-missing-test-coverage)
+  - [Code Quality Issues](#code-quality-issues)
+- [Changes Requested: Code Quality](#changes-requested-code-quality)
+- [Error Handling](#error-handling)
+- [Notes](#notes)
+
 ## Purpose
 
 After finding issues during PR review, formally request changes by updating labels and leaving a review with specific feedback.

@@ -1,5 +1,22 @@
 # Operation: Move Card Between Columns
 
+
+## Contents
+
+- [Metadata](#metadata)
+- [Purpose](#purpose)
+- [Preconditions](#preconditions)
+- [Valid Transition Matrix](#valid-transition-matrix)
+- [Input](#input)
+- [Procedure](#procedure)
+- [Command](#command)
+- [GraphQL Mutation](#graphql-mutation)
+- [Output](#output)
+- [Error Output](#error-output)
+- [Error Handling](#error-handling)
+- [Exit Codes](#exit-codes)
+- [Related Operations](#related-operations)
+
 ## Metadata
 
 | Field | Value |

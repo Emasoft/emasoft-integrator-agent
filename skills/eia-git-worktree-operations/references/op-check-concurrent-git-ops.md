@@ -7,6 +7,31 @@ workflow-instruction: support
 
 # Operation: Check Concurrent Git Operations
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Find git directory](#step-1-find-git-directory)
+  - [Step 2: Check main repository locks](#step-2-check-main-repository-locks)
+  - [Step 3: Check worktree locks](#step-3-check-worktree-locks)
+  - [Step 4: Check for running git processes](#step-4-check-for-running-git-processes)
+  - [Step 5: Check lock file age](#step-5-check-lock-file-age)
+  - [Step 6: Generate status report](#step-6-generate-status-report)
+- [Input](#input)
+- [Output](#output)
+- [Example Output](#example-output)
+- [Lock File Types](#lock-file-types)
+- [Handling Stale Locks](#handling-stale-locks)
+- [Error Handling](#error-handling)
+  - [Lock file present](#lock-file-present)
+  - [Stale lock](#stale-lock)
+  - [Git process hung](#git-process-hung)
+- [Complete Check Script](#complete-check-script)
+- [Verification](#verification)
+
 ## Purpose
 
 Verify that no other git operations are currently running before starting a new git operation, preventing deadlocks and corruption.

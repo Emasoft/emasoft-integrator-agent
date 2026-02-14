@@ -7,6 +7,31 @@ workflow-instruction: Step 21 - PR Evaluation
 
 # Operation: Execute Pre-Review Gate
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Input](#input)
+- [Output](#output)
+- [Required Checks](#required-checks)
+- [Warning Checks (Non-Blocking)](#warning-checks-non-blocking)
+- [Steps](#steps)
+  - [Step 1: Check CI Status](#step-1-check-ci-status)
+  - [Step 2: Verify Tests Pass](#step-2-verify-tests-pass)
+  - [Step 3: Verify Linting Clean](#step-3-verify-linting-clean)
+  - [Step 4: Verify Build Success](#step-4-verify-build-success)
+  - [Step 5: Verify PR Description](#step-5-verify-pr-description)
+  - [Step 6: Evaluate Warnings](#step-6-evaluate-warnings)
+  - [Step 7: Apply Gate Decision](#step-7-apply-gate-decision)
+- [Gate Pass Criteria](#gate-pass-criteria)
+- [Example](#example)
+- [Failure Handling](#failure-handling)
+- [Pre-Review Gate Failed](#pre-review-gate-failed)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## Purpose
 
 Run automated checks before human review begins. This gate ensures basic code health before investing reviewer time.

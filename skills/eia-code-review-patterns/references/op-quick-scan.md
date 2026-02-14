@@ -7,6 +7,33 @@ workflow-instruction: Step 21 - PR Evaluation
 
 # Operation: Quick Scan (Stage 1)
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Input](#input)
+- [Output](#output)
+- [Steps](#steps)
+  - [Step 1: Assess File Structure](#step-1-assess-file-structure)
+  - [Step 2: Review Diff Magnitude](#step-2-review-diff-magnitude)
+  - [Step 3: Obvious Issue Scan](#step-3-obvious-issue-scan)
+  - [Step 4: Immediate Red Flags Detection](#step-4-immediate-red-flags-detection)
+  - [Step 5: Calculate Initial Confidence](#step-5-calculate-initial-confidence)
+  - [Step 6: Make Go/No-Go Decision](#step-6-make-gono-go-decision)
+- [Quick Scan Output Template](#quick-scan-output-template)
+- [Quick Scan Report: PR #<NUMBER>](#quick-scan-report-pr-number)
+  - [File Structure Assessment](#file-structure-assessment)
+  - [Diff Magnitude](#diff-magnitude)
+  - [Obvious Issues](#obvious-issues)
+  - [Red Flags](#red-flags)
+  - [Initial Confidence Score](#initial-confidence-score)
+  - [Decision](#decision)
+- [Example](#example)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## Purpose
 
 Perform a surface-level assessment of the PR to identify obvious issues and determine if a full deep dive review is warranted. This is a time-efficient first pass.

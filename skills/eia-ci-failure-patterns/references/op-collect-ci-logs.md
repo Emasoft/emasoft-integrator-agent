@@ -7,6 +7,25 @@ description: "Collect CI failure logs from GitHub Actions workflow run"
 
 # Operation: Collect CI Failure Logs
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [Prerequisites](#prerequisites)
+- [Inputs](#inputs)
+- [Procedure](#procedure)
+  - [Step 1: Identify the Failed Workflow Run](#step-1-identify-the-failed-workflow-run)
+  - [Step 2: Download the Workflow Logs](#step-2-download-the-workflow-logs)
+  - [Step 3: Extract Relevant Sections](#step-3-extract-relevant-sections)
+  - [Step 4: Save Logs for Analysis](#step-4-save-logs-for-analysis)
+- [Output](#output)
+- [Verification](#verification)
+- [Error Handling](#error-handling)
+  - [Authentication failure](#authentication-failure)
+  - [Run not found](#run-not-found)
+  - [Permission denied](#permission-denied)
+- [Next Operation](#next-operation)
+
 ## Purpose
 
 This operation retrieves the complete failure logs from a GitHub Actions workflow run to enable diagnosis of CI failures.

@@ -7,6 +7,40 @@ workflow-instruction: Step 21 - PR Evaluation
 
 # Operation: Create Review Report
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Input](#input)
+- [Output](#output)
+- [Report Structure](#report-structure)
+- [Summary](#summary)
+- [Stage 1: Quick Scan Results](#stage-1-quick-scan-results)
+  - [File Structure](#file-structure)
+  - [Diff Statistics](#diff-statistics)
+  - [Initial Assessment](#initial-assessment)
+  - [Obvious Issues Found](#obvious-issues-found)
+  - [Red Flags](#red-flags)
+- [Stage 2: Deep Dive Analysis](#stage-2-deep-dive-analysis)
+  - [Dimension Scores](#dimension-scores)
+  - [Detailed Findings](#detailed-findings)
+- [Final Decision](#final-decision)
+  - [Required Actions Before Merge](#required-actions-before-merge)
+  - [Blocking Issues](#blocking-issues)
+- [Reviewer Information](#reviewer-information)
+- [Steps](#steps)
+  - [Step 1: Gather All Data](#step-1-gather-all-data)
+  - [Step 2: Generate Report Using Script](#step-2-generate-report-using-script)
+  - [Step 3: Review Generated Report](#step-3-review-generated-report)
+  - [Step 4: Save Report](#step-4-save-report)
+  - [Step 5: Return Report Path](#step-5-return-report-path)
+- [Example](#example)
+- [Report File Naming Convention](#report-file-naming-convention)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## Purpose
 
 Generate the final comprehensive review document that combines Quick Scan results, Deep Dive analysis, confidence scores, and the final decision with rationale.

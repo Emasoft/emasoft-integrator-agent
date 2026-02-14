@@ -7,6 +7,29 @@ workflow-instruction: Step 21 - PR Evaluation
 
 # Operation: Get Language Linters
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Input](#input)
+- [Output](#output)
+- [Output Structure](#output-structure)
+- [Procedure](#procedure)
+- [Command](#command)
+- [Example](#example)
+- [Language Linter Reference](#language-linter-reference)
+  - [Python](#python)
+  - [JavaScript/TypeScript](#javascripttypescript)
+  - [Rust](#rust)
+  - [Go](#go)
+  - [Shell/Bash](#shellbash)
+- [Linter Installation](#linter-installation)
+- [Customizing Linter Commands](#customizing-linter-commands)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## Purpose
 
 Retrieve the appropriate linters, type checkers, and static analysis tools for each programming language detected in a PR. This includes install commands and run commands.

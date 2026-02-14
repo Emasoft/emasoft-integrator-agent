@@ -7,6 +7,35 @@ workflow-instruction: Step 21 - PR Evaluation
 
 # Operation: Get PR Files
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Input](#input)
+- [Output](#output)
+- [Steps](#steps)
+  - [Step 1: Run the Files Script](#step-1-run-the-files-script)
+  - [Step 2: Parse the Output](#step-2-parse-the-output)
+  - [Step 3: Analyze File Distribution](#step-3-analyze-file-distribution)
+- [Command Variants](#command-variants)
+  - [Basic File List](#basic-file-list)
+  - [Include Patch Content](#include-patch-content)
+  - [Specific Repository](#specific-repository)
+- [Alternative: Direct gh CLI](#alternative-direct-gh-cli)
+- [File Status Values](#file-status-values)
+- [Analyzing File Distribution](#analyzing-file-distribution)
+  - [By Directory](#by-directory)
+  - [By File Type](#by-file-type)
+  - [By Change Magnitude](#by-change-magnitude)
+- [Example: Review Delegation](#example-review-delegation)
+- [Example: With Patch Content](#example-with-patch-content)
+- [Large PRs (>100 files)](#large-prs-100-files)
+- [Exit Codes](#exit-codes)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## Purpose
 
 Retrieve the list of files changed in a Pull Request, including status (added/modified/deleted), line changes, and optionally the patch content.

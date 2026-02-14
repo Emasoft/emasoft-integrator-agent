@@ -7,6 +7,30 @@ workflow-instruction: support
 
 # Operation: Batch Dry Run
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Build the filter query](#step-1-build-the-filter-query)
+  - [Step 2: Preview target issues](#step-2-preview-target-issues)
+  - [Step 3: Count affected issues](#step-3-count-affected-issues)
+  - [Step 4: Preview specific changes](#step-4-preview-specific-changes)
+  - [Step 5: Generate dry-run report](#step-5-generate-dry-run-report)
+- [Input](#input)
+- [Output](#output)
+- [Example Output](#example-output)
+- [Dry-Run Patterns](#dry-run-patterns)
+  - [Label addition dry-run](#label-addition-dry-run)
+  - [Close operation dry-run](#close-operation-dry-run)
+  - [Bulk assignee dry-run](#bulk-assignee-dry-run)
+- [Error Handling](#error-handling)
+  - [Empty result set](#empty-result-set)
+  - [Permission preview mismatch](#permission-preview-mismatch)
+- [Verification](#verification)
+
 ## Purpose
 
 Preview the effects of a batch operation without making any changes. Essential for validating batch commands before execution.

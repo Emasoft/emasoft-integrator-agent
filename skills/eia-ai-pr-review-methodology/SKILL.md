@@ -1,6 +1,6 @@
 ---
 name: eia-ai-pr-review-methodology
-description: "Use when performing deep evidence-based PR reviews. Trigger when reviewing complex PRs, investigating false-positive fixes, or validating system integration changes."
+description: "Use when performing deep evidence-based PR reviews. Trigger with /eia-ai-pr-review or when reviewing pull requests with AI assistance. Trigger when reviewing complex PRs, investigating false-positive fixes, or validating system integration changes."
 license: Apache-2.0
 compatibility: Requires intermediate software development experience and familiarity with code review basics. Designed for reviewers performing deep, evidence-based pull request reviews using a 4-phase, 5-dimension evaluation framework. Requires access to the full codebase and ability to run verification commands.
 triggers:
@@ -264,22 +264,27 @@ Before submitting your review, run through the quick reference checklist. Read [
 
 ---
 
-## Checklist Summary
+## Checklist
 
-Use this abbreviated checklist as a quick sanity check. The full checklist with explanations is in [quick-reference-checklist.md](references/quick-reference-checklist.md).
+Copy this checklist and track your progress through the PR review workflow:
 
-1. Read complete files, not just the diff
-2. Understood the actual problem and its root cause
-3. Verified no duplicate or existing solution covers this case
-4. Validated all referenced paths and commands exist on target systems
-5. Checked cross-platform compatibility
-6. Confirmed testing is adequate (before/after, edge cases, automated tests)
-7. Reviewed for security implications
-8. Assessed maintainability and long-term impact
-9. Challenged assumptions with evidence
-10. Applied the reversibility test ("remove the change -- does the problem return?")
-11. Requested any missing evidence from the author
-12. Provided constructive, specific, actionable feedback
+- [ ] Read complete files affected by the PR, not just the diff (Phase 1, Action 1)
+- [ ] Search for existing solutions and duplicates in the codebase (Phase 1, Action 2)
+- [ ] Understand the actual problem and its root cause (Phase 1, Action 3)
+- [ ] Verify all claims made in the PR description (Phase 1, Action 4)
+- [ ] Apply Dimension 1: Problem Verification (confirm fix addresses root cause)
+- [ ] Apply Dimension 2: Redundancy Check (ensure no duplicate functionality)
+- [ ] Apply Dimension 3: System Integration Validation (verify paths, commands, platforms)
+- [ ] Apply Dimension 4: Senior Developer Review (architecture, security, maintainability)
+- [ ] Apply Dimension 5: False Positive Detection (reversibility test, cargo cult check)
+- [ ] Compile list of missing evidence the author must provide (Phase 3)
+- [ ] Apply scenario-specific protocol if applicable (path changes, bug fixes, performance, dependencies)
+- [ ] Generate structured review output using the template (Phase 4)
+- [ ] Confirm cross-platform compatibility for all changes
+- [ ] Confirm testing is adequate (before/after, edge cases, automated tests)
+- [ ] Provide constructive, specific, actionable feedback
+
+The full checklist with detailed explanations is in [quick-reference-checklist.md](references/quick-reference-checklist.md).
 
 ---
 

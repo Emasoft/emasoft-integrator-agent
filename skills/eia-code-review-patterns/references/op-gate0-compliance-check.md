@@ -7,6 +7,25 @@ workflow-instruction: Step 21 - PR Evaluation
 
 # Operation: Gate 0 Compliance Check
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Input](#input)
+- [Output](#output)
+- [Steps](#steps)
+  - [Step 1: Retrieve PR Context](#step-1-retrieve-pr-context)
+  - [Step 2: Check Requirement Traceability](#step-2-check-requirement-traceability)
+  - [Step 3: Check Technology Compliance](#step-3-check-technology-compliance)
+  - [Step 4: Check Scope Compliance](#step-4-check-scope-compliance)
+  - [Step 5: Document Findings](#step-5-document-findings)
+- [Decision Criteria](#decision-criteria)
+- [Example](#example)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## Purpose
 
 Verify that the PR meets basic requirement compliance before starting the two-stage review process. This is a pre-flight check that ensures the PR is even eligible for review.

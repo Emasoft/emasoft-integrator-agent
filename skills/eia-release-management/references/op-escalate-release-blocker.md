@@ -7,6 +7,40 @@ workflow-instruction: support
 
 # Operation: Escalate Release Blocker
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Document the blocker](#step-1-document-the-blocker)
+  - [Step 2: Assess impact](#step-2-assess-impact)
+  - [Step 3: Prepare escalation message](#step-3-prepare-escalation-message)
+  - [Description](#description)
+  - [Impact](#impact)
+  - [What Was Attempted](#what-was-attempted)
+  - [Decision Required](#decision-required)
+  - [Recommended Action](#recommended-action)
+  - [Step 4: Create GitHub issue (if not exists)](#step-4-create-github-issue-if-not-exists)
+  - [Step 5: Notify via AI Maestro](#step-5-notify-via-ai-maestro)
+  - [Step 6: Update release state](#step-6-update-release-state)
+- [Blocker: v$VERSION ($TIMESTAMP)](#blocker-vversion-timestamp)
+  - [Step 7: Wait for decision](#step-7-wait-for-decision)
+- [Input](#input)
+- [Output](#output)
+- [Example Output](#example-output)
+- [Blocker Types](#blocker-types)
+- [Severity Levels](#severity-levels)
+- [Error Handling](#error-handling)
+  - [Cannot create issue](#cannot-create-issue)
+  - [AI Maestro unavailable](#ai-maestro-unavailable)
+  - [Orchestrator unresponsive](#orchestrator-unresponsive)
+- [Complete Escalation Script](#complete-escalation-script)
+  - [Description](#description)
+  - [Decision Required](#decision-required)
+- [Verification](#verification)
+
 ## Purpose
 
 Properly escalate a release-blocking issue when the release coordinator cannot resolve it independently, ensuring appropriate visibility and decision-making.

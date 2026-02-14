@@ -1,5 +1,26 @@
 # Operation: Poll Kanban Board for Changes
 
+
+## Contents
+
+- [Metadata](#metadata)
+- [Purpose](#purpose)
+- [Preconditions](#preconditions)
+- [Polling Configuration](#polling-configuration)
+- [Input](#input)
+- [Procedure](#procedure)
+- [Command](#command)
+- [Change Detection Logic](#change-detection-logic)
+- [What to Check on Each Poll](#what-to-check-on-each-poll)
+- [AI Maestro Notifications](#ai-maestro-notifications)
+  - [Assignment Notification](#assignment-notification)
+  - [Status Change Notification](#status-change-notification)
+- [Output](#output)
+- [Stale Item Detection](#stale-item-detection)
+- [Error Handling](#error-handling)
+- [Checklist for Proactive Monitoring](#checklist-for-proactive-monitoring)
+- [Related Operations](#related-operations)
+
 > **Note**: The `kanban_poll_changes.py` script referenced in this document is not yet implemented. Use `kanban_get_board_state.py` with periodic polling as a workaround.
 
 ## Metadata

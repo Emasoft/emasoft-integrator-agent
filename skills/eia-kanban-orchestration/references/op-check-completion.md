@@ -1,5 +1,22 @@
 # Operation: Check Board Completion
 
+
+## Contents
+
+- [Metadata](#metadata)
+- [Purpose](#purpose)
+- [Preconditions](#preconditions)
+- [Input](#input)
+- [Procedure](#procedure)
+- [Command](#command)
+- [Output](#output)
+- [Completion Criteria](#completion-criteria)
+- [Exit Codes](#exit-codes)
+- [Stop Hook Integration](#stop-hook-integration)
+- [Handling Incomplete Work at Exit](#handling-incomplete-work-at-exit)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## Metadata
 
 | Field | Value |

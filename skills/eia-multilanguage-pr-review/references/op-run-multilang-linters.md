@@ -7,6 +7,29 @@ workflow-instruction: Step 21 - PR Evaluation
 
 # Operation: Run Multilanguage Linters
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Input](#input)
+- [Output](#output)
+- [Output Structure](#output-structure)
+- [Procedure](#procedure)
+- [Command Examples](#command-examples)
+  - [Python Linting](#python-linting)
+  - [TypeScript/JavaScript Linting](#typescriptjavascript-linting)
+  - [Rust Linting](#rust-linting)
+  - [Go Linting](#go-linting)
+  - [Shell Linting](#shell-linting)
+- [Scope Linting to Changed Files](#scope-linting-to-changed-files)
+- [Handling Linter Failures](#handling-linter-failures)
+- [Aggregation Strategy](#aggregation-strategy)
+- [Example Workflow](#example-workflow)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## Purpose
 
 Execute the appropriate linters for each programming language detected in a PR. Collect and aggregate results from all linters for comprehensive code quality assessment.

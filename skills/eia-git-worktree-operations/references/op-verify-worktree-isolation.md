@@ -7,6 +7,30 @@ workflow-instruction: support
 
 # Operation: Verify Worktree Isolation
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Identify paths](#step-1-identify-paths)
+  - [Step 2: Check main repo for unexpected changes](#step-2-check-main-repo-for-unexpected-changes)
+  - [Step 3: Check for files modified in both locations](#step-3-check-for-files-modified-in-both-locations)
+  - [Step 4: Check for files outside worktree](#step-4-check-for-files-outside-worktree)
+  - [Step 5: Verify worktree integrity](#step-5-verify-worktree-integrity)
+  - [Step 6: Generate isolation report](#step-6-generate-isolation-report)
+- [Input](#input)
+- [Output](#output)
+- [Example Output](#example-output)
+- [Isolation Violations](#isolation-violations)
+- [Error Handling](#error-handling)
+  - [Worktree path doesn't exist](#worktree-path-doesnt-exist)
+  - [Cannot determine main repo](#cannot-determine-main-repo)
+  - [Conflicts detected](#conflicts-detected)
+- [Complete Verification Script](#complete-verification-script)
+- [Verification](#verification)
+
 ## Purpose
 
 Verify that all file operations have remained within the designated worktree boundaries, detecting any isolation violations that could cause merge conflicts or data corruption.

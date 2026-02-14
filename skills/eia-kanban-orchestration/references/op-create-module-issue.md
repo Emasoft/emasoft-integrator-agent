@@ -1,5 +1,33 @@
 # Operation: Create Module Issue
 
+
+## Contents
+
+- [Metadata](#metadata)
+- [Purpose](#purpose)
+- [The 1:1 Principle](#the-11-principle)
+- [Preconditions](#preconditions)
+- [Input](#input)
+- [Module Issue Template](#module-issue-template)
+- [Module: <module-name>](#module-module-name)
+  - [Description](#description)
+  - [Requirements](#requirements)
+  - [Dependencies](#dependencies)
+  - [Acceptance Criteria](#acceptance-criteria)
+  - [Technical Notes](#technical-notes)
+- [Procedure](#procedure)
+- [Command](#command)
+- [Module: authentication-service](#module-authentication-service)
+  - [Description](#description)
+  - [Requirements](#requirements)
+  - [Dependencies](#dependencies)
+  - [Acceptance Criteria](#acceptance-criteria)
+  - [Technical Notes](#technical-notes)
+- [Output](#output)
+- [Naming Conventions](#naming-conventions)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## Metadata
 
 | Field | Value |

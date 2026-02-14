@@ -7,6 +7,29 @@ workflow-instruction: support
 
 # Operation: Batch Issue Filter
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Define filter criteria](#step-1-define-filter-criteria)
+  - [Step 2: Build filter command](#step-2-build-filter-command)
+  - [Step 3: Apply date filtering](#step-3-apply-date-filtering)
+  - [Step 4: Extract issue numbers](#step-4-extract-issue-numbers)
+- [Input](#input)
+- [Output](#output)
+- [Example Output](#example-output)
+- [Common Filter Patterns](#common-filter-patterns)
+  - [Stale issues (no update in 30 days)](#stale-issues-no-update-in-30-days)
+  - [Unassigned high-priority bugs](#unassigned-high-priority-bugs)
+  - [Issues without labels](#issues-without-labels)
+- [Error Handling](#error-handling)
+  - [No issues match filter](#no-issues-match-filter)
+  - [Invalid label name](#invalid-label-name)
+- [Verification](#verification)
+
 ## Purpose
 
 Filter GitHub issues using multiple criteria (labels, state, assignee, date) to build a target set for batch operations.

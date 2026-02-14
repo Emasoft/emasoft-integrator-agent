@@ -7,6 +7,31 @@ workflow-instruction: Step 21 - PR Evaluation
 
 # Operation: Execute Post-Merge Gate
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Input](#input)
+- [Output](#output)
+- [Required Checks](#required-checks)
+- [Steps](#steps)
+  - [Step 1: Verify Merge Completed](#step-1-verify-merge-completed)
+  - [Step 2: Check Main Branch CI](#step-2-check-main-branch-ci)
+  - [Step 3: Wait for CI to Complete](#step-3-wait-for-ci-to-complete)
+  - [Step 4: Verify No Regressions](#step-4-verify-no-regressions)
+  - [Step 5: Close Related Issues](#step-5-close-related-issues)
+  - [Step 6: Apply Gate Decision](#step-6-apply-gate-decision)
+- [Gate Pass Criteria](#gate-pass-criteria)
+- [Example](#example)
+- [Failure Handling: Main Branch Broken](#failure-handling-main-branch-broken)
+  - [Severity Assessment](#severity-assessment)
+  - [Revert Procedure](#revert-procedure)
+  - [Notification](#notification)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## Purpose
 
 Verify main branch health after merge. Ensures the merge did not break the main branch and production remains stable.

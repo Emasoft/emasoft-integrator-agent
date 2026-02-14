@@ -7,6 +7,32 @@ description: "Run eia_detect_platform_issue.py to scan source code for cross-pla
 
 # Operation: Detect Platform Issues
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [Prerequisites](#prerequisites)
+- [Inputs](#inputs)
+- [Procedure](#procedure)
+  - [Step 1: Verify Script Availability](#step-1-verify-script-availability)
+  - [Step 2: Run the Platform Issue Scanner](#step-2-run-the-platform-issue-scanner)
+  - [Step 3: Interpret the Results](#step-3-interpret-the-results)
+  - [Step 4: Review Findings](#step-4-review-findings)
+  - [Step 5: Prioritize Fixes](#step-5-prioritize-fixes)
+- [Output](#output)
+- [JSON Output Format](#json-output-format)
+- [Common Patterns Detected](#common-patterns-detected)
+  - [Hardcoded Paths](#hardcoded-paths)
+  - [Path Separators](#path-separators)
+  - [OS-Specific Commands](#os-specific-commands)
+  - [Environment Variables](#environment-variables)
+- [Verification](#verification)
+- [Error Handling](#error-handling)
+  - [Permission denied](#permission-denied)
+  - [Unsupported file type](#unsupported-file-type)
+- [When to Use This Operation](#when-to-use-this-operation)
+- [Next Operations](#next-operations)
+
 ## Purpose
 
 This operation runs the `eia_detect_platform_issue.py` script to proactively scan source code for patterns that may cause CI failures on different platforms (Windows, Linux, macOS).

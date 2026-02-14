@@ -1,5 +1,32 @@
 # EIA Sub-Agent Routing and Delegation Checklist
 
+
+## Contents
+
+- [Sub-Agent Routing Table](#sub-agent-routing-table)
+- [Routing Decision Guidelines](#routing-decision-guidelines)
+  - [Route to code-reviewer when:](#route-to-code-reviewer-when)
+  - [Route to bug-investigator when:](#route-to-bug-investigator-when)
+  - [Handle PR directly when:](#handle-pr-directly-when)
+  - [Spawn verifier when:](#spawn-verifier-when)
+  - [Escalate to orchestrator when:](#escalate-to-orchestrator-when)
+- [Priority Triage](#priority-triage)
+- [Success Criteria Checklist](#success-criteria-checklist)
+  - [Integration Request Received](#integration-request-received)
+  - [Routing Decision Made](#routing-decision-made)
+  - [Sub-Agent Completed](#sub-agent-completed)
+  - [Quality Verified](#quality-verified)
+- [Routing Decision Checklist](#routing-decision-checklist)
+  - [Step 1: Identify Request Type](#step-1-identify-request-type)
+  - [Step 2: Check Request Completeness](#step-2-check-request-completeness)
+  - [Step 3: Select Appropriate Sub-Agent](#step-3-select-appropriate-sub-agent)
+  - [Step 4: Prepare Handoff Context](#step-4-prepare-handoff-context)
+  - [Step 5: Draft Delegation Message](#step-5-draft-delegation-message)
+  - [Step 6: Log Routing Decision](#step-6-log-routing-decision)
+  - [Step 7: Execute Delegation](#step-7-execute-delegation)
+  - [Step 8: Monitor Completion](#step-8-monitor-completion)
+  - [Step 9: Report to EOA](#step-9-report-to-eoa)
+
 This document provides the complete routing decision framework and delegation procedures for the Emasoft Integrator Agent (EIA) Main Agent.
 
 ## Sub-Agent Routing Table

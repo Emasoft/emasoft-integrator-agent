@@ -7,6 +7,39 @@ workflow-instruction: support
 
 # Operation: Log Release Decision
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Locate release history file](#step-1-locate-release-history-file)
+  - [Step 2: Initialize if not exists](#step-2-initialize-if-not-exists)
+- [Releases](#releases)
+- [Rollback History](#rollback-history)
+- [Notes](#notes)
+  - [Step 3: Prepare release entry](#step-3-prepare-release-entry)
+  - [Step 4: Add release entry](#step-4-add-release-entry)
+  - [Step 5: Update timestamp](#step-5-update-timestamp)
+  - [Step 6: Log rollback (if applicable)](#step-6-log-rollback-if-applicable)
+  - [Step 7: Verify entry was added](#step-7-verify-entry-was-added)
+- [Input](#input)
+- [Output](#output)
+- [Example Output](#example-output)
+- [Release History Format](#release-history-format)
+- [Releases](#releases)
+- [Rollback History](#rollback-history)
+- [Notes](#notes)
+- [Error Handling](#error-handling)
+  - [File not writable](#file-not-writable)
+  - [Duplicate entry](#duplicate-entry)
+  - [Malformed table](#malformed-table)
+- [Complete Logging Script](#complete-logging-script)
+- [Releases](#releases)
+- [Rollback History](#rollback-history)
+- [Verification](#verification)
+
 ## Purpose
 
 Record a release decision (approval, deployment, rollback) in the release history document for future reference and audit trail.

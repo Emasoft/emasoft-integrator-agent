@@ -7,6 +7,29 @@ workflow-instruction: support
 
 # Operation: List Worktrees
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Run basic list command](#step-1-run-basic-list-command)
+  - [Step 2: Get detailed information (porcelain format)](#step-2-get-detailed-information-porcelain-format)
+  - [Step 3: Parse into structured format](#step-3-parse-into-structured-format)
+  - [Step 4: Check worktree health](#step-4-check-worktree-health)
+  - [Step 5: Count worktrees](#step-5-count-worktrees)
+- [Input](#input)
+- [Output](#output)
+- [Example Output](#example-output)
+- [Worktree Status Values](#worktree-status-values)
+- [Detecting Specific Worktrees](#detecting-specific-worktrees)
+- [Error Handling](#error-handling)
+  - [Not in a git repository](#not-in-a-git-repository)
+  - [Stale worktree entries](#stale-worktree-entries)
+- [Complete List Script](#complete-list-script)
+- [Verification](#verification)
+
 ## Purpose
 
 Display all active git worktrees for the repository, showing their paths, branches, and status.

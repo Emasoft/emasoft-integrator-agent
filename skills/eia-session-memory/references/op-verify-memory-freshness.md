@@ -7,6 +7,30 @@ workflow-instruction: support
 
 # Operation: Verify Memory Freshness
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Extract memory timestamp](#step-1-extract-memory-timestamp)
+  - [Step 2: Calculate memory age](#step-2-calculate-memory-age)
+  - [Step 3: Check age thresholds](#step-3-check-age-thresholds)
+  - [Step 4: Compare with GitHub state (for PR)](#step-4-compare-with-github-state-for-pr)
+  - [Step 5: Compare with GitHub state (for release)](#step-5-compare-with-github-state-for-release)
+  - [Step 6: Generate freshness report](#step-6-generate-freshness-report)
+- [Input](#input)
+- [Output](#output)
+- [Example Output](#example-output)
+- [Freshness Levels](#freshness-levels)
+- [Recommendations by Scenario](#recommendations-by-scenario)
+- [Error Handling](#error-handling)
+  - [Cannot parse timestamp](#cannot-parse-timestamp)
+  - [GitHub API failure](#github-api-failure)
+  - [No timestamp in memory](#no-timestamp-in-memory)
+- [Verification Script](#verification-script)
+
 ## Purpose
 
 Validate that loaded memory state is still accurate by comparing timestamps and checking for updates in the actual GitHub state (PRs, issues, releases).

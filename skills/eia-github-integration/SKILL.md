@@ -154,6 +154,19 @@ Use when:
 7. After completing your GitHub operation, verify the result by checking the repository state (e.g., `gh issue view <number>`, `gh pr status`).
 8. If errors occur, consult the **Error Handling** section below or the detailed [references/troubleshooting.md](references/troubleshooting.md).
 
+### Checklist
+
+Copy this checklist and track your progress:
+
+- [ ] Verify GitHub CLI version 2.14+ is installed: `gh --version`
+- [ ] Confirm authentication: `gh auth status`
+- [ ] Identify task type from the Decision Tree (PR, Projects V2, Kanban, Worktrees, API, Multi-User)
+- [ ] Navigate to the specialized skill or use Batch Operations if task spans multiple areas
+- [ ] For batch operations: run dry-run preview first (`gh issue list` or `gh pr list`)
+- [ ] Execute the GitHub operation using the appropriate skill or batch command
+- [ ] Verify the result by checking repository state (`gh issue view`, `gh pr status`)
+- [ ] If errors occurred, consult Error Handling section or [references/troubleshooting.md](references/troubleshooting.md)
+
 ## Output
 
 This skill produces the following outputs depending on the operation performed:

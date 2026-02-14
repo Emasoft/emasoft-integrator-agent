@@ -7,6 +7,33 @@ workflow-instruction: Step 21 - PR Evaluation
 
 # Operation: Wait for Checks
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Input](#input)
+- [Output](#output)
+- [Steps](#steps)
+  - [Step 1: Run the Wait Script](#step-1-run-the-wait-script)
+  - [Step 2: Monitor Progress](#step-2-monitor-progress)
+  - [Step 3: Parse Final Output](#step-3-parse-final-output)
+- [Command Variants](#command-variants)
+  - [Standard Wait (10 minute timeout)](#standard-wait-10-minute-timeout)
+  - [Wait for Required Checks Only](#wait-for-required-checks-only)
+  - [Custom Polling Interval](#custom-polling-interval)
+  - [Long-Running CI (30 minute timeout)](#long-running-ci-30-minute-timeout)
+- [Timeout Recommendations](#timeout-recommendations)
+- [Polling Strategy](#polling-strategy)
+- [Example](#example)
+- [Example: Timeout Scenario](#example-timeout-scenario)
+- [Decision Flow After Waiting](#decision-flow-after-waiting)
+- [Exit Codes](#exit-codes)
+- [Error Handling](#error-handling)
+- [Handling Long-Running CI](#handling-long-running-ci)
+- [Related Operations](#related-operations)
+
 ## Purpose
 
 Poll GitHub and wait for all PR checks to complete before proceeding with merge or review decisions.

@@ -1,5 +1,33 @@
 # Integration Phase Procedures
 
+
+## Contents
+
+- [Phase 1: Request Reception](#phase-1-request-reception)
+  - [1. Check AI Maestro Inbox](#1-check-ai-maestro-inbox)
+  - [2. Extract Request Details](#2-extract-request-details)
+  - [3. Log Request](#3-log-request)
+- [Phase 2: Routing Decision](#phase-2-routing-decision)
+  - [1. Analyze Request Type](#1-analyze-request-type)
+  - [2. Check Sub-Agent Availability](#2-check-sub-agent-availability)
+  - [3. Prepare Context Package](#3-prepare-context-package)
+  - [4. Create Status Tracking File](#4-create-status-tracking-file)
+- [Phase 3: Delegation](#phase-3-delegation)
+  - [1. Draft Delegation Message](#1-draft-delegation-message)
+  - [2. Send to Sub-Agent](#2-send-to-sub-agent)
+  - [3. Log Delegation](#3-log-delegation)
+- [Phase 4: Monitor Completion](#phase-4-monitor-completion)
+  - [1. Wait for Sub-Agent Response](#1-wait-for-sub-agent-response)
+  - [2. Validate Response Format](#2-validate-response-format)
+  - [3. Read Result Details](#3-read-result-details)
+  - [4. Update Status File](#4-update-status-file)
+- [Phase 5: Report to EOA](#phase-5-report-to-eoa)
+  - [1. Prepare Status Report](#1-prepare-status-report)
+  - [2. Send to EOA](#2-send-to-eoa)
+  - [3. Handle Blockers (If Any)](#3-handle-blockers-if-any)
+  - [4. Final Logging](#4-final-logging)
+- [Verification Summary](#verification-summary)
+
 This document provides step-by-step procedures for each integration phase. Follow these procedures in order to ensure consistent and reliable integration operations.
 
 ---

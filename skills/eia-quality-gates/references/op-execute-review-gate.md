@@ -7,6 +7,33 @@ workflow-instruction: Step 21 - PR Evaluation
 
 # Operation: Execute Review Gate
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Input](#input)
+- [Output](#output)
+- [Required Checks](#required-checks)
+- [The 8 Dimensions](#the-8-dimensions)
+- [Steps](#steps)
+  - [Step 1: Gather PR Context](#step-1-gather-pr-context)
+  - [Step 2: Execute Quick Scan (Stage 1)](#step-2-execute-quick-scan-stage-1)
+  - [Step 3: Execute Deep Dive (Stage 2)](#step-3-execute-deep-dive-stage-2)
+  - [Step 4: Calculate Confidence Score](#step-4-calculate-confidence-score)
+  - [Step 5: Check Blocking Thresholds](#step-5-check-blocking-thresholds)
+  - [Step 6: Generate Review Report](#step-6-generate-review-report)
+  - [Step 7: Apply Gate Decision](#step-7-apply-gate-decision)
+- [Gate Pass Criteria](#gate-pass-criteria)
+- [Example](#example)
+- [Failure Handling](#failure-handling)
+- [Review Gate Failed](#review-gate-failed)
+  - [Dimension Scores](#dimension-scores)
+  - [Required Changes](#required-changes)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## Purpose
 
 Perform comprehensive code review using the 8-dimension analysis framework. This is the human/AI review gate that evaluates code quality across multiple dimensions.

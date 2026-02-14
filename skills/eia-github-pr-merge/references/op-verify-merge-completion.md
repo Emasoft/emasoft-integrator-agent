@@ -7,6 +7,24 @@ workflow-instruction: Step 21 - PR Evaluation
 
 # Operation: Verify Merge Completion
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Input](#input)
+- [Output](#output)
+- [Exit Codes](#exit-codes)
+- [Procedure](#procedure)
+- [Command](#command)
+- [Example](#example)
+- [Verification Workflow](#verification-workflow)
+- [When Verification Fails](#when-verification-fails)
+- [Retry Logic](#retry-logic)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## Purpose
 
 Confirm that a merge operation completed successfully after executing a merge or enabling auto-merge. This provides authoritative verification via GraphQL.

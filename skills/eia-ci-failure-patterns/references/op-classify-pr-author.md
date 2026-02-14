@@ -7,6 +7,30 @@ description: "Classify PR author category for automated handling decisions"
 
 # Operation: Classify PR Author
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [Prerequisites](#prerequisites)
+- [Inputs](#inputs)
+- [Author Categories](#author-categories)
+- [Procedure](#procedure)
+  - [Step 1: Get PR Author Information](#step-1-get-pr-author-information)
+  - [Step 2: Check Against Bot Patterns](#step-2-check-against-bot-patterns)
+  - [Step 3: Classify the Author](#step-3-classify-the-author)
+  - [Step 4: Apply Category-Specific Handling](#step-4-apply-category-specific-handling)
+- [Output](#output)
+- [Decision Matrix](#decision-matrix)
+- [Reliability Interpretation](#reliability-interpretation)
+  - [Agent-Controlled (100%)](#agent-controlled-100)
+  - [Mention-Triggered (60-70%)](#mention-triggered-60-70)
+  - [Human (Variable)](#human-variable)
+- [Error Handling](#error-handling)
+  - [Cannot determine author type](#cannot-determine-author-type)
+  - [Unknown bot](#unknown-bot)
+- [Integration with CI Failure Handling](#integration-with-ci-failure-handling)
+- [See Also](#see-also)
+
 ## Purpose
 
 This operation classifies the author of a Pull Request into categories that determine how automated CI failure handling should proceed. Different author categories have different reliability expectations for automated fixes.

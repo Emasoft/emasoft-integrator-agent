@@ -7,6 +7,34 @@ workflow-instruction: Step 21 - PR Evaluation
 
 # Operation: Execute Pre-Merge Gate
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Input](#input)
+- [Output](#output)
+- [Required Checks](#required-checks)
+- [Steps](#steps)
+  - [Step 1: Check CI Status](#step-1-check-ci-status)
+  - [Step 2: Check Mergeable Status](#step-2-check-mergeable-status)
+  - [Step 3: Check for Conflicts](#step-3-check-for-conflicts)
+  - [Step 4: Verify Approval Validity](#step-4-verify-approval-validity)
+  - [Step 5: Check Branch Freshness](#step-5-check-branch-freshness)
+  - [Step 6: Apply Gate Decision](#step-6-apply-gate-decision)
+- [Gate Pass Criteria](#gate-pass-criteria)
+- [Example](#example)
+- [Handling Specific Failures](#handling-specific-failures)
+  - [Merge Conflicts](#merge-conflicts)
+- [Pre-Merge Gate Failed: Merge Conflicts](#pre-merge-gate-failed-merge-conflicts)
+  - [CI Failing](#ci-failing)
+- [Pre-Merge Gate Failed: CI Checks Failing](#pre-merge-gate-failed-ci-checks-failing)
+  - [Approval Invalidated](#approval-invalidated)
+- [Pre-Merge Gate Failed: Approval Invalidated](#pre-merge-gate-failed-approval-invalidated)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## Purpose
 
 Final automated checks before merge. Ensures the PR is in a mergeable state with passing CI, no conflicts, and valid approvals.

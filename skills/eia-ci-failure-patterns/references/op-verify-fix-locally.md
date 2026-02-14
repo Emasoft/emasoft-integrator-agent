@@ -7,6 +7,31 @@ description: "Verify CI fix locally before pushing to remote"
 
 # Operation: Verify Fix Locally
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [Prerequisites](#prerequisites)
+- [Inputs](#inputs)
+- [Procedure](#procedure)
+  - [Step 1: Check Environment Parity](#step-1-check-environment-parity)
+  - [Step 2: Run Linting and Type Checks](#step-2-run-linting-and-type-checks)
+  - [Step 3: Run Unit Tests](#step-3-run-unit-tests)
+  - [Step 4: Simulate CI Environment (if possible)](#step-4-simulate-ci-environment-if-possible)
+  - [Step 5: Test the Specific Fix](#step-5-test-the-specific-fix)
+  - [Step 6: Run Full Test Suite](#step-6-run-full-test-suite)
+- [Local Verification Checklist](#local-verification-checklist)
+- [Output](#output)
+- [Platform-Specific Verification](#platform-specific-verification)
+  - [For Cross-Platform Fixes](#for-cross-platform-fixes)
+  - [For Exit Code Fixes](#for-exit-code-fixes)
+  - [For Syntax Fixes](#for-syntax-fixes)
+- [Error Handling](#error-handling)
+  - [Tests fail locally after fix](#tests-fail-locally-after-fix)
+  - [Cannot replicate CI environment](#cannot-replicate-ci-environment)
+  - [Tests pass locally but different versions](#tests-pass-locally-but-different-versions)
+- [Next Operation](#next-operation)
+
 ## Purpose
 
 This operation verifies that the applied CI fix works locally before pushing to trigger a new CI run. Local verification catches issues early and avoids wasting CI resources.

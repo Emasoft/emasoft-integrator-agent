@@ -7,6 +7,24 @@ workflow-instruction: Step 21 - PR Evaluation
 
 # Operation: Refactor Code (REFACTOR Phase)
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Input](#input)
+- [Output](#output)
+- [The REFACTOR Phase Rule](#the-refactor-phase-rule)
+- [Procedure](#procedure)
+- [Refactoring Techniques](#refactoring-techniques)
+- [Example: Python](#example-python)
+- [Validation Checklist](#validation-checklist)
+- [Common Mistakes](#common-mistakes)
+- [When Tests Fail During Refactoring](#when-tests-fail-during-refactoring)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## Purpose
 
 Improve the quality, readability, and design of the code while ensuring all tests continue to pass. Refactoring changes the structure of code without changing its behavior.

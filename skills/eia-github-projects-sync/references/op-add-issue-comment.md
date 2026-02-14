@@ -1,5 +1,37 @@
 # Operation: Add Issue Comment
 
+
+## Contents
+
+- [Metadata](#metadata)
+- [Purpose](#purpose)
+- [Preconditions](#preconditions)
+- [Input](#input)
+- [Procedure](#procedure)
+- [Command: Basic Comment](#command-basic-comment)
+- [Command: With Marker (Idempotent)](#command-with-marker-idempotent)
+- [GraphQL Mutation](#graphql-mutation)
+- [Output](#output)
+- [Comment Templates](#comment-templates)
+  - [Status Update](#status-update)
+- [Status Update](#status-update)
+  - [Progress](#progress)
+  - [Blockers](#blockers)
+  - [Next Steps](#next-steps)
+  - [Blocker Report](#blocker-report)
+- [Blocker Reported](#blocker-reported)
+  - [Blocker Description](#blocker-description)
+  - [Impact](#impact)
+  - [Needed Action](#needed-action)
+  - [Completion Notice](#completion-notice)
+- [Task Completed](#task-completed)
+  - [Summary](#summary)
+  - [PR Link](#pr-link)
+  - [Notes](#notes)
+- [Error Handling](#error-handling)
+- [Best Practices](#best-practices)
+- [Related Operations](#related-operations)
+
 ## Metadata
 
 | Field | Value |

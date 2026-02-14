@@ -1,5 +1,26 @@
 # Operation: Report PR Status to User
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Steps](#steps)
+- [Output](#output)
+- [Report Types](#report-types)
+- [Error Handling](#error-handling)
+- [Example Reports](#example-reports)
+  - [Ready to Merge](#ready-to-merge)
+- [PR #456 Status: Ready to Merge](#pr-456-status-ready-to-merge)
+  - [Verification Results](#verification-results)
+  - [Recommendation](#recommendation)
+  - [Needs Work](#needs-work)
+- [PR #456 Status: Needs Work](#pr-456-status-needs-work)
+  - [Failing Criteria](#failing-criteria)
+  - [Recommended Actions](#recommended-actions)
+- [Critical Rule](#critical-rule)
+
 ---
 procedure: proc-request-pr-review
 workflow-instruction: Step 20 - PR Review Request

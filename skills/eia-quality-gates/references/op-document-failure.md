@@ -7,6 +7,56 @@ workflow-instruction: Step 21 - PR Evaluation
 
 # Operation: Document Gate Failure
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Input](#input)
+- [Output](#output)
+- [Documentation Structure](#documentation-structure)
+- [<Gate Name> Gate Failed](#gate-name-gate-failed)
+  - [Summary](#summary)
+  - [Issues Found](#issues-found)
+  - [Required Actions](#required-actions)
+  - [Next Steps](#next-steps)
+- [Steps](#steps)
+  - [Step 1: Categorize Issues by Severity](#step-1-categorize-issues-by-severity)
+  - [Step 2: Format Issue Details](#step-2-format-issue-details)
+  - [Step 3: Create Comment](#step-3-create-comment)
+- [<GATE> Gate Failed](#gate-gate-failed)
+  - [Summary](#summary)
+  - [Critical Issues (Must Fix)](#critical-issues-must-fix)
+  - [Major Issues (Should Fix)](#major-issues-should-fix)
+  - [Required Actions](#required-actions)
+  - [Next Steps](#next-steps)
+  - [Step 4: Add Code Suggestions (Optional)](#step-4-add-code-suggestions-optional)
+- [Templates by Gate Type](#templates-by-gate-type)
+  - [Pre-Review Gate Failure](#pre-review-gate-failure)
+- [Pre-Review Gate Failed](#pre-review-gate-failed)
+  - [CI Check Failures](#ci-check-failures)
+  - [Test Failures](#test-failures)
+  - [Linting Errors](#linting-errors)
+  - [Required Actions](#required-actions)
+  - [Review Gate Failure](#review-gate-failure)
+- [Review Gate Failed](#review-gate-failed)
+  - [Dimension Scores](#dimension-scores)
+  - [Critical Issues](#critical-issues)
+  - [Pre-Merge Gate Failure](#pre-merge-gate-failure)
+- [Pre-Merge Gate Failed](#pre-merge-gate-failed)
+  - [Blocking Issues](#blocking-issues)
+  - [Resolution Steps](#resolution-steps)
+- [Example](#example)
+- [Review Gate Failed](#review-gate-failed)
+  - [Summary](#summary)
+  - [Critical Issues (Must Fix)](#critical-issues-must-fix)
+  - [Major Issues (Should Fix)](#major-issues-should-fix)
+  - [Required Actions](#required-actions)
+  - [Next Steps](#next-steps)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## Purpose
 
 Create clear, actionable documentation of gate failures in PR comments so authors and reviewers understand exactly what needs to be fixed.

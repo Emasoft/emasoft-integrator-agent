@@ -1,5 +1,19 @@
 # Operation: Verify PR Completion Criteria
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Steps](#steps)
+- [Completion Criteria Explained](#completion-criteria-explained)
+- [Output](#output)
+- [Recommendations](#recommendations)
+- [Error Handling](#error-handling)
+- [Example](#example)
+- [Critical Rule](#critical-rule)
+
 ---
 procedure: proc-request-pr-review
 workflow-instruction: Step 20 - PR Review Request

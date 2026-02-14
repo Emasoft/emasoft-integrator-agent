@@ -7,6 +7,26 @@ procedure: "support-skill"
 
 # Operation: Approve and Merge
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Verify All Checks Pass](#step-1-verify-all-checks-pass)
+  - [Step 2: Update Review Label to Approved](#step-2-update-review-label-to-approved)
+  - [Step 3: Submit Approval Review](#step-3-submit-approval-review)
+  - [Step 4: Get Linked Issue Number](#step-4-get-linked-issue-number)
+  - [Step 5: Merge PR (if authorized)](#step-5-merge-pr-if-authorized)
+  - [Step 6: Update Linked Issue Status](#step-6-update-linked-issue-status)
+  - [Step 7: Verify Merge](#step-7-verify-merge)
+- [Example](#example)
+- [Merge Strategies](#merge-strategies)
+- [Post-Merge Checklist](#post-merge-checklist)
+- [Error Handling](#error-handling)
+- [Notes](#notes)
+
 ## Purpose
 
 After successful review, approve the PR, update labels, and either merge or prepare for merge.

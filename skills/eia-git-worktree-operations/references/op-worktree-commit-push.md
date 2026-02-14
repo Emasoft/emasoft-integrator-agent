@@ -7,6 +7,32 @@ workflow-instruction: support
 
 # Operation: Worktree Commit Push
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Navigate to worktree](#step-1-navigate-to-worktree)
+  - [Step 2: Verify no concurrent operations](#step-2-verify-no-concurrent-operations)
+  - [Step 3: Check for changes to commit](#step-3-check-for-changes-to-commit)
+  - [Step 4: Stage changes](#step-4-stage-changes)
+  - [Step 5: Commit changes](#step-5-commit-changes)
+  - [Step 6: Push to remote](#step-6-push-to-remote)
+  - [Step 7: Verify push success](#step-7-verify-push-success)
+- [Input](#input)
+- [Output](#output)
+- [Example Output](#example-output)
+- [Commit Message Format](#commit-message-format)
+- [Error Handling](#error-handling)
+  - [Nothing to commit](#nothing-to-commit)
+  - [Push rejected](#push-rejected)
+  - [Commit message empty](#commit-message-empty)
+  - [Lock file present](#lock-file-present)
+- [Complete Commit/Push Script](#complete-commitpush-script)
+- [Verification](#verification)
+
 ## Purpose
 
 Safely commit changes and push to remote from within a git worktree, ensuring no concurrent git operations and proper isolation.

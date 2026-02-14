@@ -7,6 +7,31 @@ workflow-instruction: support
 
 # Operation: Create Handoff Payload
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Identify handoff type](#step-1-identify-handoff-type)
+  - [Step 2: Gather context data](#step-2-gather-context-data)
+  - [Step 3: Build the payload](#step-3-build-the-payload)
+  - [Step 4: Validate required fields](#step-4-validate-required-fields)
+  - [Step 5: Add timestamps](#step-5-add-timestamps)
+- [Input](#input)
+- [Output](#output)
+- [Example Output](#example-output)
+- [Handoff Type Templates](#handoff-type-templates)
+  - [Task Delegation](#task-delegation)
+  - [Review Request](#review-request)
+  - [Escalation](#escalation)
+- [Error Handling](#error-handling)
+  - [Missing required field](#missing-required-field)
+  - [Invalid timestamp format](#invalid-timestamp-format)
+  - [Unknown handoff type](#unknown-handoff-type)
+- [Verification](#verification)
+
 ## Purpose
 
 Create a properly structured JSON payload for handing off work between agents in a multi-agent workflow.

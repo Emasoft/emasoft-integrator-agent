@@ -7,6 +7,29 @@ workflow-instruction: Step 21 - PR Evaluation
 
 # Operation: Analyze PR Complexity
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Input](#input)
+- [Output](#output)
+- [Complexity Factors](#complexity-factors)
+- [Steps](#steps)
+  - [Step 1: Gather Metrics](#step-1-gather-metrics)
+  - [Step 2: Calculate Size Category](#step-2-calculate-size-category)
+  - [Step 3: Identify Sensitive Files](#step-3-identify-sensitive-files)
+  - [Step 4: Assess Module Spread](#step-4-assess-module-spread)
+  - [Step 5: Check Test Coverage](#step-5-check-test-coverage)
+  - [Step 6: Calculate Final Score](#step-6-calculate-final-score)
+  - [Step 7: Generate Review Time Estimate](#step-7-generate-review-time-estimate)
+  - [Step 8: Create Delegation Recommendation](#step-8-create-delegation-recommendation)
+- [Example: Complete Analysis](#example-complete-analysis)
+- [Complexity Score Guide](#complexity-score-guide)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## Purpose
 
 Assess the complexity of a Pull Request to determine review effort, delegation strategy, and time estimates.

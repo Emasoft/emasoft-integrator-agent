@@ -1,5 +1,23 @@
 # Operation: Update Project Item Status
 
+
+## Contents
+
+- [Metadata](#metadata)
+- [Purpose](#purpose)
+- [Preconditions](#preconditions)
+- [Input](#input)
+- [Getting Field and Option IDs](#getting-field-and-option-ids)
+  - [Get Status Field ID](#get-status-field-id)
+  - [Example Response](#example-response)
+- [GraphQL Mutation](#graphql-mutation)
+- [Command](#command)
+- [Using gh CLI](#using-gh-cli)
+- [Output](#output)
+- [Standard Status Options](#standard-status-options)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## Metadata
 
 | Field | Value |

@@ -1,5 +1,24 @@
 # Operation: Set Issue Labels
 
+
+## Contents
+
+- [Metadata](#metadata)
+- [Purpose](#purpose)
+- [Preconditions](#preconditions)
+- [Input](#input)
+- [Procedure](#procedure)
+- [Command](#command)
+- [Alternative: Direct gh CLI](#alternative-direct-gh-cli)
+- [Output](#output)
+- [Label Auto-Creation](#label-auto-creation)
+  - [Default Colors by Category](#default-colors-by-category)
+- [Standard Label Categories](#standard-label-categories)
+- [Error Handling](#error-handling)
+- [Exit Codes](#exit-codes)
+- [Best Practices](#best-practices)
+- [Related Operations](#related-operations)
+
 ## Metadata
 
 | Field | Value |

@@ -7,6 +7,32 @@ workflow-instruction: support
 
 # Operation: Create Worktree
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Verify git version](#step-1-verify-git-version)
+  - [Step 2: Check no concurrent git operations](#step-2-check-no-concurrent-git-operations)
+  - [Step 3: Fetch PR branch](#step-3-fetch-pr-branch)
+  - [Step 4: Determine worktree path](#step-4-determine-worktree-path)
+  - [Step 5: Create worktree](#step-5-create-worktree)
+  - [Step 6: Verify worktree creation](#step-6-verify-worktree-creation)
+  - [Step 7: Output worktree info](#step-7-output-worktree-info)
+- [Input](#input)
+- [Output](#output)
+- [Example Output](#example-output)
+- [Worktree Path Rules](#worktree-path-rules)
+- [Error Handling](#error-handling)
+  - [Branch already checked out](#branch-already-checked-out)
+  - [Fetch fails](#fetch-fails)
+  - [Path already exists](#path-already-exists)
+  - [Permission denied](#permission-denied)
+- [Complete Creation Script](#complete-creation-script)
+- [Verification](#verification)
+
 ## Purpose
 
 Create a new git worktree directory for working on a PR in isolation, enabling parallel development without branch switching.

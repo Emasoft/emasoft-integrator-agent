@@ -7,6 +7,30 @@ workflow-instruction: support
 
 # Operation: Bump Version
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Identify version files](#step-1-identify-version-files)
+  - [Step 2: Get current version](#step-2-get-current-version)
+  - [Step 3: Update each file](#step-3-update-each-file)
+  - [Step 4: Update lock files (if applicable)](#step-4-update-lock-files-if-applicable)
+  - [Step 5: Verify updates](#step-5-verify-updates)
+  - [Step 6: Generate report](#step-6-generate-report)
+- [Input](#input)
+- [Output](#output)
+- [Example Output](#example-output)
+- [Supported File Types](#supported-file-types)
+- [Error Handling](#error-handling)
+  - [File not writable](#file-not-writable)
+  - [Version mismatch after update](#version-mismatch-after-update)
+  - [Lock file update fails](#lock-file-update-fails)
+- [Complete Bump Script](#complete-bump-script)
+- [Verification](#verification)
+
 ## Purpose
 
 Update the version number consistently across all project files that contain version information.

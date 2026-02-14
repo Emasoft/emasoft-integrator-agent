@@ -7,6 +7,30 @@ workflow-instruction: support
 
 # Operation: Determine Version
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Get current version](#step-1-get-current-version)
+  - [Step 2: Parse version components](#step-2-parse-version-components)
+  - [Step 3: Analyze changes since last release](#step-3-analyze-changes-since-last-release)
+  - [Step 4: Determine version increment](#step-4-determine-version-increment)
+  - [Step 5: Handle pre-release versions](#step-5-handle-pre-release-versions)
+- [Input](#input)
+- [Output](#output)
+- [Example Output](#example-output)
+- [Semantic Versioning Rules](#semantic-versioning-rules)
+- [Commit Convention Keywords](#commit-convention-keywords)
+- [Error Handling](#error-handling)
+  - [No version found](#no-version-found)
+  - [Invalid version format](#invalid-version-format)
+  - [No commits since last release](#no-commits-since-last-release)
+- [Complete Version Script](#complete-version-script)
+- [Verification](#verification)
+
 ## Purpose
 
 Calculate the correct next version number based on the type of changes being released, following semantic versioning rules.

@@ -7,6 +7,50 @@ workflow-instruction: support
 
 # Operation: Create Handoff Document
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Create handoff directory](#step-1-create-handoff-directory)
+  - [Step 2: Archive existing handoff (if present)](#step-2-archive-existing-handoff-if-present)
+  - [Step 3: Prepare handoff content](#step-3-prepare-handoff-content)
+  - [Step 4: Create handoff document](#step-4-create-handoff-document)
+- [Task](#task)
+- [Progress](#progress)
+- [Findings](#findings)
+  - [Security Issues Found](#security-issues-found)
+  - [Code Quality Notes](#code-quality-notes)
+- [Blockers](#blockers)
+- [Next Steps](#next-steps)
+- [Context Links](#context-links)
+- [Session Context](#session-context)
+  - [Step 5: Verify handoff was created](#step-5-verify-handoff-was-created)
+- [Input](#input)
+- [Output](#output)
+- [Example Output](#example-output)
+- [Handoff Document Template](#handoff-document-template)
+- [Task](#task)
+- [Progress](#progress)
+- [Findings](#findings)
+- [Blockers](#blockers)
+- [Next Steps](#next-steps)
+- [Context Links](#context-links)
+- [Session Context](#session-context)
+- [Error Handling](#error-handling)
+  - [Directory creation fails](#directory-creation-fails)
+  - [Archive fails](#archive-fails)
+  - [Write fails](#write-fails)
+- [Complete Script](#complete-script)
+- [Task](#task)
+- [Progress](#progress)
+- [Blockers](#blockers)
+- [Next Steps](#next-steps)
+- [Context Links](#context-links)
+- [Verification](#verification)
+
 ## Purpose
 
 Create a structured handoff document that captures the current state of work, enabling another session to continue seamlessly.

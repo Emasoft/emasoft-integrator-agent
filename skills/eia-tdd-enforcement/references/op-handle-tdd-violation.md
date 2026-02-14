@@ -7,6 +7,31 @@ workflow-instruction: Step 21 - PR Evaluation
 
 # Operation: Handle TDD Violation
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Input](#input)
+- [Output](#output)
+- [Common Violations](#common-violations)
+- [Recovery Procedure](#recovery-procedure)
+  - [Option 1: Retroactive Test (Preferred)](#option-1-retroactive-test-preferred)
+  - [Option 2: Rebase and Reorder (If safe)](#option-2-rebase-and-reorder-if-safe)
+  - [Option 3: New PR with Proper TDD](#option-3-new-pr-with-proper-tdd)
+- [Violation Documentation Template](#violation-documentation-template)
+- [TDD Violation Report](#tdd-violation-report)
+  - [What happened](#what-happened)
+  - [Impact](#impact)
+  - [Recovery action taken](#recovery-action-taken)
+  - [Prevention](#prevention)
+- [Example: Retroactive Test Recovery](#example-retroactive-test-recovery)
+- [Validation After Recovery](#validation-after-recovery)
+- [Prevention Measures](#prevention-measures)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## Purpose
 
 Detect, document, and recover from violations of TDD discipline. When production code is written without a failing test first, this operation guides the correction process.

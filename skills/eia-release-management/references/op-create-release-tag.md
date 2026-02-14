@@ -7,6 +7,33 @@ workflow-instruction: support
 
 # Operation: Create Release Tag
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Verify working directory is clean](#step-1-verify-working-directory-is-clean)
+  - [Step 2: Verify version bump is committed](#step-2-verify-version-bump-is-committed)
+  - [Step 3: Check tag doesn't already exist](#step-3-check-tag-doesnt-already-exist)
+  - [Step 4: Create tag annotation message](#step-4-create-tag-annotation-message)
+  - [Step 5: Create annotated tag](#step-5-create-annotated-tag)
+  - [Step 6: Verify tag](#step-6-verify-tag)
+  - [Step 7: Push tag to remote](#step-7-push-tag-to-remote)
+- [Input](#input)
+- [Output](#output)
+- [Example Output](#example-output)
+- [Tag Naming Convention](#tag-naming-convention)
+- [Signed Tags](#signed-tags)
+- [Error Handling](#error-handling)
+  - [Tag already exists](#tag-already-exists)
+  - [Working directory dirty](#working-directory-dirty)
+  - [Push fails](#push-fails)
+  - [GPG signing fails](#gpg-signing-fails)
+- [Complete Tag Script](#complete-tag-script)
+- [Verification](#verification)
+
 ## Purpose
 
 Create an annotated git tag marking the release commit, with proper annotation message.

@@ -7,6 +7,33 @@ workflow-instruction: support
 
 # Operation: Cleanup Worktree
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Verify worktree exists](#step-1-verify-worktree-exists)
+  - [Step 2: Check for uncommitted changes](#step-2-check-for-uncommitted-changes)
+  - [Step 3: Check for unpushed commits](#step-3-check-for-unpushed-commits)
+  - [Step 4: Navigate out of worktree](#step-4-navigate-out-of-worktree)
+  - [Step 5: Remove worktree](#step-5-remove-worktree)
+  - [Step 6: Verify removal](#step-6-verify-removal)
+  - [Step 7: Prune stale entries (optional)](#step-7-prune-stale-entries-optional)
+- [Input](#input)
+- [Output](#output)
+- [Example Output](#example-output)
+- [Safe Removal Checklist](#safe-removal-checklist)
+- [Force Removal](#force-removal)
+- [Error Handling](#error-handling)
+  - [Worktree is dirty](#worktree-is-dirty)
+  - [Cannot remove: still checked out](#cannot-remove-still-checked-out)
+  - [Lock file present](#lock-file-present)
+  - [Directory still exists after removal](#directory-still-exists-after-removal)
+- [Complete Cleanup Script](#complete-cleanup-script)
+- [Verification](#verification)
+
 ## Purpose
 
 Safely remove a git worktree after the PR work is complete, ensuring no uncommitted changes are lost.

@@ -7,6 +7,30 @@ workflow-instruction: Step 21 - PR Evaluation
 
 # Operation: Calculate Confidence Score
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Input](#input)
+- [Output](#output)
+- [Weight Distribution](#weight-distribution)
+- [Calculation Formula](#calculation-formula)
+- [Decision Thresholds](#decision-thresholds)
+- [Score Interpretation Guidelines](#score-interpretation-guidelines)
+  - [For Individual Dimensions](#for-individual-dimensions)
+  - [Critical Dimension Failures](#critical-dimension-failures)
+- [Steps](#steps)
+  - [Step 1: Validate Input Scores](#step-1-validate-input-scores)
+  - [Step 2: Apply Weights](#step-2-apply-weights)
+  - [Step 3: Sum Contributions](#step-3-sum-contributions)
+  - [Step 4: Check Critical Thresholds](#step-4-check-critical-thresholds)
+  - [Step 5: Determine Decision](#step-5-determine-decision)
+- [Example](#example)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## Purpose
 
 Calculate the final weighted confidence score from individual dimension evaluations to determine PR approval status.

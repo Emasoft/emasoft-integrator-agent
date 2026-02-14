@@ -7,6 +7,37 @@ workflow-instruction: support
 
 # Operation: Load Handoff Documents
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Procedure](#procedure)
+  - [Step 1: Define handoff directory](#step-1-define-handoff-directory)
+  - [Step 2: Check directory exists](#step-2-check-directory-exists)
+  - [Step 3: Load current handoff](#step-3-load-current-handoff)
+  - [Step 4: Load patterns learned](#step-4-load-patterns-learned)
+  - [Step 5: Load session state JSON (if exists)](#step-5-load-session-state-json-if-exists)
+  - [Step 6: Parse current handoff](#step-6-parse-current-handoff)
+- [Input](#input)
+- [Output](#output)
+- [Example Output](#example-output)
+- [Handoff Directory Structure](#handoff-directory-structure)
+- [Current Handoff Format](#current-handoff-format)
+- [Task](#task)
+- [Progress](#progress)
+- [Blockers](#blockers)
+- [Next Steps](#next-steps)
+- [Context Links](#context-links)
+- [Error Handling](#error-handling)
+  - [Directory not found](#directory-not-found)
+  - [File permission denied](#file-permission-denied)
+  - [Corrupted JSON](#corrupted-json)
+  - [Empty files](#empty-files)
+- [Complete Loading Script](#complete-loading-script)
+- [Verification](#verification)
+
 ## Purpose
 
 Load handoff documents from the standard EIA integration directory to restore session context and continue work from a previous session.

@@ -7,6 +7,27 @@ workflow-instruction: Step 21 - PR Evaluation
 
 # Operation: Review Cross-Language Interfaces
 
+
+## Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Prerequisites](#prerequisites)
+- [Input](#input)
+- [Output](#output)
+- [Cross-Language Interface Types](#cross-language-interface-types)
+  - [1. API Contracts](#1-api-contracts)
+  - [2. Data Serialization](#2-data-serialization)
+  - [3. FFI Boundaries](#3-ffi-boundaries)
+  - [4. Shared Configuration](#4-shared-configuration)
+- [Procedure](#procedure)
+- [Example: Backend/Frontend API Change](#example-backendfrontend-api-change)
+- [Example: FFI Boundary (Rust + Python)](#example-ffi-boundary-rust-python)
+- [Common Compatibility Issues](#common-compatibility-issues)
+- [Review Checklist](#review-checklist)
+- [Error Handling](#error-handling)
+- [Related Operations](#related-operations)
+
 ## Purpose
 
 Identify and review interfaces between different programming languages in a multilanguage PR. This includes API contracts, FFI boundaries, shared configuration, and data serialization.
