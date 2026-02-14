@@ -345,8 +345,8 @@ A PR replaces a linear search with a hash map lookup, claiming 10x speedup. Duri
 
 ## Resources
 
-- [eia-code-review-patterns](../eia-code-review-patterns/SKILL.md) -- General code review patterns and anti-patterns that complement the PR-specific methodology in this skill.
-- [eia-quality-gates](../eia-quality-gates/SKILL.md) -- Quality gate definitions and thresholds used to determine when a PR meets the bar for approval.
-- [eia-github-pr-workflow](../eia-github-pr-workflow/SKILL.md) -- The end-to-end GitHub PR workflow including creation, review assignment, and merge procedures.
-- [eia-tdd-enforcement](../eia-tdd-enforcement/SKILL.md) -- Test-driven development enforcement rules, relevant when evaluating whether a PR includes adequate test coverage.
-- [eia-multilanguage-pr-review](../eia-multilanguage-pr-review/SKILL.md) -- Language-specific review considerations for PRs that span multiple programming languages.
+- **eia-code-review-patterns** skill -- General code review patterns and anti-patterns that complement the PR-specific methodology in this skill.
+- **eia-quality-gates** skill -- Quality gate definitions and thresholds used to determine when a PR meets the bar for approval.
+- **eia-github-pr-workflow** skill -- The end-to-end GitHub PR workflow including creation, review assignment, and merge procedures.
+- **eia-tdd-enforcement** skill -- Test-driven development enforcement rules, relevant when evaluating whether a PR includes adequate test coverage.
+- **eia-multilanguage-pr-review** skill -- Language-specific review considerations for PRs that span multiple programming languages.
