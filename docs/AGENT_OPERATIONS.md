@@ -1077,7 +1077,7 @@ The following skills were added to EIA (2026-02-06 — 2026-02-07):
 | Script | Purpose |
 |--------|---------|
 | `scripts/pre-push-hook.py` | Pre-push validation (manifest, hooks, lint, Unicode compliance) |
-| `scripts/eia_validate_plugin.py` | Plugin structure validation |
+| `scripts/validate_plugin.py` | Plugin structure validation |
 | `scripts/eia_download.py` | Plugin download utility |
 | `scripts/eia_unicode_compliance.py` | Unicode compliance checker (BOM, line endings, encoding, non-ASCII) |
 | `skills/eia-quality-gates/scripts/eia_check_encoding.py` | Python file encoding parameter checker |

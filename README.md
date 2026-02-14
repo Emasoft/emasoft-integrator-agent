@@ -87,6 +87,6 @@ claude --plugin-dir ./OUTPUT_SKILLS/integrator-agent
 ## Validation
 
 ```bash
-cd OUTPUT_SKILLS/integrator-agent
-uv run python scripts/eia_validate_plugin.py --verbose
+cd OUTPUT_SKILLS/emasoft-integrator-agent
+uv run python scripts/validate_plugin.py . --verbose
 ```
