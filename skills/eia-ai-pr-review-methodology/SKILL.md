@@ -308,3 +308,45 @@ Reiterate that evidence requirements are standard practice, not personal critici
 ### The PR is a dependency update with no visible code changes
 
 Even if the code diff is small, dependency updates require their own review protocol. See [scenario-dependency-updates.md](references/scenario-dependency-updates.md) for the full checklist including security scanning, license checking, and bundle size assessment.
+
+---
+
+## Error Handling
+
+### Error: Reviewer skips Phase 1 and jumps directly to analysis
+
+Skipping context gathering (Phase 1) leads to incorrect conclusions because the reviewer is working from partial information (the diff alone). Resolution: Always complete all 4 actions in [phase-1-context-gathering.md](references/phase-1-context-gathering.md) before writing any analysis. If you realize mid-review that you skipped context gathering, stop the analysis, go back to Phase 1, and restart from Step 1.
+
+### Error: Conflicting findings across analysis dimensions
+
+When Dimension 1 (Problem Verification) says the fix is correct but Dimension 5 (False Positive Detection) flags it as a potential false positive, this is not a contradiction -- it means the fix addresses the symptom but may not address the root cause. Resolution: Apply the reversibility test from [dimension-5-false-positive-detection.md](references/dimension-5-false-positive-detection.md) section D5.7. If removing the change brings the problem back, the fix is real. If it does not, the fix is a false positive regardless of what Dimension 1 found.
+
+### Error: Insufficient evidence to complete the review
+
+When the PR lacks enough information to evaluate one or more dimensions (for example, no test output, no reproduction steps, or no cross-platform verification), do not guess or assume. Resolution: Issue a REQUEST CHANGES recommendation listing exactly which evidence items are missing. Use the evidence categories from Step 3 (Phase 3) as your checklist. Do not approve a PR when any required evidence category is empty.
+
+---
+
+## Examples
+
+### Example 1: Reviewing a false-positive bug fix
+
+A PR claims to fix a "file not found" error by adding a new search path to a configuration array. During Phase 1, the reviewer reads the complete configuration file and discovers that the path is already present three entries above the new addition. During Dimension 2 (Redundancy Check), the reviewer confirms the duplication. During Dimension 5 (False Positive Detection), the reviewer applies the reversibility test: removing the new entry does not reintroduce the error, proving the fix is a false positive. The reviewer issues REQUEST CHANGES with evidence showing the existing entry and the reversibility test result.
+
+### Example 2: Reviewing a cross-platform path change
+
+A PR adds `$HOME/.local/bin` to the PATH lookup for a CLI tool. During Phase 1, the reviewer verifies the path exists on Linux (`ls -la ~/.local/bin/toolname`). During Dimension 3 (System Integration Validation), the reviewer checks macOS (where the tool installs to `/opt/homebrew/bin/`) and Windows (where the path convention is entirely different). The reviewer requests the author provide terminal output from all three platforms. The final review is REQUEST CHANGES until cross-platform evidence is provided.
+
+### Example 3: Reviewing a performance optimization PR
+
+A PR replaces a linear search with a hash map lookup, claiming 10x speedup. During Phase 1, the reviewer reads the full module to understand the data flow. During Dimension 1, the reviewer confirms the linear search was indeed the bottleneck. During Dimension 4 (Senior Developer Review), the reviewer notes the hash map increases memory usage and checks whether the tradeoff is acceptable for the expected data sizes. The reviewer requests benchmark output showing before/after timing across at least 3 runs with statistical variance. The review is COMMENT with a list of required benchmark evidence, referencing the protocol in [scenario-performance.md](references/scenario-performance.md).
+
+---
+
+## Resources
+
+- [eia-code-review-patterns](../eia-code-review-patterns/SKILL.md) -- General code review patterns and anti-patterns that complement the PR-specific methodology in this skill.
+- [eia-quality-gates](../eia-quality-gates/SKILL.md) -- Quality gate definitions and thresholds used to determine when a PR meets the bar for approval.
+- [eia-github-pr-workflow](../eia-github-pr-workflow/SKILL.md) -- The end-to-end GitHub PR workflow including creation, review assignment, and merge procedures.
+- [eia-tdd-enforcement](../eia-tdd-enforcement/SKILL.md) -- Test-driven development enforcement rules, relevant when evaluating whether a PR includes adequate test coverage.
+- [eia-multilanguage-pr-review](../eia-multilanguage-pr-review/SKILL.md) -- Language-specific review considerations for PRs that span multiple programming languages.

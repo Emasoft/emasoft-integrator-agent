@@ -143,6 +143,78 @@ Use when:
 - Importing issues from CSV/JSON (`bulk-create-issues.py`)
 - Generating project status reports (`generate-project-report.py`)
 
+## Instructions
+
+1. Verify that GitHub CLI version 2.14 or higher is installed by running `gh --version` in your terminal.
+2. Confirm authentication status with `gh auth status`. If not authenticated, run `gh auth login` and follow the prompts.
+3. Identify your task type by consulting the **Decision Tree** section above (Pull Requests, Projects V2, Kanban, Worktrees, API Operations, or Multi-User).
+4. Navigate to the specialized skill indicated by the decision tree (e.g., `eia-github-pr-workflow` for PR tasks).
+5. If your task spans multiple areas (e.g., bulk label changes across issues and PRs), use the **Batch Operations** section in this skill directly.
+6. For batch operations, always run a dry-run first by previewing the affected items with `gh issue list` or `gh pr list` before executing changes.
+7. After completing your GitHub operation, verify the result by checking the repository state (e.g., `gh issue view <number>`, `gh pr status`).
+8. If errors occur, consult the **Error Handling** section below or the detailed [references/troubleshooting.md](references/troubleshooting.md).
+
+## Output
+
+This skill produces the following outputs depending on the operation performed:
+
+- **Routing decision**: The name of the specialized skill to invoke (e.g., `eia-github-pr-workflow`, `eia-github-projects-sync`).
+- **Batch operation results**: A summary of affected items (issue numbers, PR numbers) and the changes applied (labels added/removed, statuses changed).
+- **Automation script output**: JSON or plain-text reports from the Python automation scripts (e.g., `generate-project-report.py` produces a Markdown status report).
+- **Verification output**: Confirmation messages from `gh` CLI commands showing the current state of issues, PRs, or project boards after modifications.
+- **Dry-run previews**: Lists of items that would be affected by a batch operation, displayed before execution for review.
+
+## Error Handling
+
+| Error | Cause | Resolution |
+|-------|-------|------------|
+| `gh: command not found` | GitHub CLI is not installed or not in PATH | Install with `brew install gh` (macOS) or see [references/prerequisites-and-setup.md](references/prerequisites-and-setup.md) |
+| `HTTP 401 - Bad credentials` | Authentication token expired or revoked | Re-authenticate with `gh auth login` and verify with `gh auth status` |
+| `HTTP 403 - Resource not accessible` | Insufficient permissions on the target repository | Request write access from the repository owner, or check that your token has the required scopes (`repo`, `project`) |
+| `HTTP 422 - Validation Failed` | Invalid field values (e.g., non-existent label name, malformed project field) | Verify the label exists with `gh label list` or check project field names with `gh project field-list` |
+| `API rate limit exceeded` | Too many API calls in a short period | Wait for the rate limit reset (check `gh api rate-limit`), or use GraphQL to batch multiple queries into one request |
+| `Could not resolve to a Project` | Wrong project number or the project is in a different organization | Verify the project number with `gh project list --owner <org>` and ensure you are targeting the correct owner |
+| `xargs: gh: terminated by signal 13` | Pipe broken during batch operation, often due to API errors mid-stream | Re-run the batch operation with smaller batch sizes or add error handling with `xargs -I {} sh -c 'gh issue edit {} --add-label "label" || true'` |
+
+## Examples
+
+**Example 1: Route to the correct skill for a PR task**
+
+You receive a request: "Create a PR for the feature branch and link it to issue #42."
+This is a Pull Request task. According to the decision tree, invoke `eia-github-pr-workflow`:
+```bash
+# Switch to eia-github-pr-workflow skill, then run:
+gh pr create --base main --head feature-branch --title "Implement feature X" \
+  --body "Closes #42" --assignee "@me"
+```
+
+**Example 2: Bulk add a label to all open bug issues**
+
+You need to add the `priority:critical` label to all issues labeled `bug` that are currently open:
+```bash
+# Step 1: Preview affected issues (dry-run)
+gh issue list --label "bug" --state open --json number,title --jq '.[] | "\(.number): \(.title)"'
+
+# Step 2: Apply the label change
+gh issue list --label "bug" --state open --json number --jq '.[].number' | \
+  xargs -I {} gh issue edit {} --add-label "priority:critical"
+
+# Step 3: Verify a sample issue
+gh issue view 15 --json labels --jq '.labels[].name'
+```
+
+**Example 3: Check which skill to use for a Projects V2 sync request**
+
+You receive a request: "Sync the agent task board with the GitHub Project for repository X."
+This is a GitHub Projects V2 synchronization task. According to the decision tree, invoke `eia-github-projects-sync`:
+```bash
+# Verify the project exists first
+gh project list --owner Emasoft --format json
+
+# Then follow the eia-github-projects-sync skill instructions for bidirectional sync
+uv run python scripts/sync-projects-v2.py --repo Emasoft/repo-x --project 3 --direction bidirectional
+```
+
 ## Troubleshooting
 
 If you encounter issues with any GitHub integration task, see [references/troubleshooting.md](references/troubleshooting.md) for:
