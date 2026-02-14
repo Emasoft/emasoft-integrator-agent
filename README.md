@@ -78,10 +78,32 @@ The Integrator Agent handles **quality gates, testing, merging, and release cand
 6. Merges when approved
 7. Reports to Assistant Manager
 
-## Installation
+## Installation (Production)
+
+Install from the Emasoft marketplace. Use `--scope local` to install only for the current project directory, or `--scope global` for all projects.
 
 ```bash
-claude --plugin-dir ./OUTPUT_SKILLS/integrator-agent
+# Add Emasoft marketplace (first time only)
+claude plugin marketplace add emasoft-plugins --url https://github.com/Emasoft/emasoft-plugins
+
+# Install plugin (--scope local = this project only, recommended)
+claude plugin install emasoft-integrator-agent@emasoft-plugins --scope local
+
+# RESTART Claude Code after installing (required!)
+```
+
+Once installed, start a session with the main agent:
+
+```bash
+claude --agent eia-integrator-main-agent
+```
+
+## Development Only (--plugin-dir)
+
+`--plugin-dir` loads a plugin directly from a local directory without marketplace installation. Use only during plugin development.
+
+```bash
+claude --plugin-dir ./OUTPUT_SKILLS/emasoft-integrator-agent
 ```
 
 ## Validation
