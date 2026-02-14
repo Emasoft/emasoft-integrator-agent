@@ -1,6 +1,6 @@
 ---
 name: eia-ai-pr-review-methodology
-description: "Use when performing deep evidence-based PR reviews. Trigger with /eia-ai-pr-review or when reviewing pull requests with AI assistance. Trigger when reviewing complex PRs, investigating false-positive fixes, or validating system integration changes."
+description: "Trigger with /eia-ai-pr-review. Use when performing deep evidence-based PR reviews, investigating false-positive fixes, or validating integration changes."
 license: Apache-2.0
 compatibility: Requires intermediate software development experience and familiarity with code review basics. Designed for reviewers performing deep, evidence-based pull request reviews using a 4-phase, 5-dimension evaluation framework. Requires access to the full codebase and ability to run verification commands.
 triggers:

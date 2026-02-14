@@ -419,6 +419,18 @@ For worked examples (finding/querying projects, updating issue status) and inlin
 
 For comprehensive error handling patterns, see also [references/error-handling.md](references/error-handling.md).
 
+## Error Handling
+
+When GitHub API calls or sync operations fail, consult [references/error-handling.md](references/error-handling.md) for retry logic, rate-limit handling, and authentication troubleshooting. All errors should be logged and, if unresolvable after retries, escalated via AI Maestro.
+
+---
+
+## Examples
+
+For worked examples of finding projects, querying items, and updating issue status, see [references/examples-and-inline-troubleshooting.md](references/examples-and-inline-troubleshooting.md). That reference also covers inline troubleshooting for common failures such as missing projects, sync conflicts, and rate limiting.
+
+---
+
 ## Resources
 
 - [references/core-operations.md](references/core-operations.md) - Day-to-day operations
