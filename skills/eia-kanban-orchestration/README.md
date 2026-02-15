@@ -22,9 +22,9 @@ github-kanban-core/
 ├── SKILL.md                              # Main skill file with TOC
 ├── README.md                             # This file
 ├── scripts/
-│   ├── kanban_get_board_state.py         # Get full board state
-│   ├── kanban_move_card.py               # Move card between columns
-│   └── kanban_check_completion.py        # Check completion for stop hook
+│   ├── eia_kanban_get_board_state.py         # Get full board state
+│   ├── eia_kanban_move_card.py               # Move card between columns
+│   └── eia_kanban_check_completion.py        # Check completion for stop hook
 └── references/
     ├── kanban-as-truth.md                # Why Kanban is single source of truth
     ├── board-column-semantics.md         # Column meanings and requirements
@@ -40,28 +40,28 @@ github-kanban-core/
 
 ## Scripts
 
-### kanban_get_board_state.py
+### eia_kanban_get_board_state.py
 
 Get complete board state with all items grouped by status column.
 
 ```bash
-python3 scripts/kanban_get_board_state.py OWNER REPO PROJECT_NUMBER [--json] [--summary]
+python3 scripts/eia_kanban_get_board_state.py OWNER REPO PROJECT_NUMBER [--json] [--summary]
 ```
 
-### kanban_move_card.py
+### eia_kanban_move_card.py
 
 Move a card to a different status column with validation.
 
 ```bash
-python3 scripts/kanban_move_card.py OWNER REPO PROJECT_NUMBER ISSUE_NUMBER NEW_STATUS [--reason "Reason"]
+python3 scripts/eia_kanban_move_card.py OWNER REPO PROJECT_NUMBER ISSUE_NUMBER NEW_STATUS [--reason "Reason"]
 ```
 
-### kanban_check_completion.py
+### eia_kanban_check_completion.py
 
 Check if all board items are complete (for stop hook).
 
 ```bash
-python3 scripts/kanban_check_completion.py OWNER REPO PROJECT_NUMBER [--verbose] [--json]
+python3 scripts/eia_kanban_check_completion.py OWNER REPO PROJECT_NUMBER [--verbose] [--json]
 ```
 
 **Exit codes:**

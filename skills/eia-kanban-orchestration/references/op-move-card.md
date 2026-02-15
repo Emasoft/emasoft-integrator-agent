@@ -73,11 +73,11 @@ Move a project item (card) from its current column to a new status column, with 
 ## Command
 
 ```bash
-python3 scripts/kanban_move_card.py OWNER REPO PROJECT_NUMBER ISSUE_NUMBER NEW_STATUS [--reason "Reason"]
+python3 scripts/eia_kanban_move_card.py OWNER REPO PROJECT_NUMBER ISSUE_NUMBER NEW_STATUS [--reason "Reason"]
 
 # Examples:
-python3 scripts/kanban_move_card.py owner repo 1 42 "In Progress"
-python3 scripts/kanban_move_card.py owner repo 1 42 Blocked --reason "Missing credentials"
+python3 scripts/eia_kanban_move_card.py owner repo 1 42 "In Progress"
+python3 scripts/eia_kanban_move_card.py owner repo 1 42 Blocked --reason "Missing credentials"
 ```
 
 ## GraphQL Mutation

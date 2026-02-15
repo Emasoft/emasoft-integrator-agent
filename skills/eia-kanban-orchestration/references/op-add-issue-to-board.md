@@ -114,7 +114,7 @@ After adding, move to desired column:
 
 ```bash
 # Move to Todo if ready to start
-python3 scripts/kanban_move_card.py OWNER REPO PROJECT_NUMBER ISSUE_NUMBER Todo
+python3 scripts/eia_kanban_move_card.py OWNER REPO PROJECT_NUMBER ISSUE_NUMBER Todo
 ```
 
 ## Error Handling

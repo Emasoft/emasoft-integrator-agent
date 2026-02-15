@@ -45,12 +45,12 @@ Before using this skill, ensure:
 Follow these steps when using GitHub Kanban as the orchestration source of truth:
 
 1. **Initialize board access** - Verify GitHub CLI authentication and Projects V2 access
-2. **Query current state** - Use `kanban_get_board_state.py` to see all items and their columns
+2. **Query current state** - Use `eia_kanban_get_board_state.py` to see all items and their columns
 3. **Create module issues** - For new work, create GitHub Issues following the issue-to-module mapping (see references/issue-to-module-mapping.md)
 4. **Assign work** - Set issue assignees to designate responsible agents (see references/agent-assignment-via-board.md)
 5. **Track transitions** - Move cards between columns as work progresses (see references/status-transitions.md)
 6. **Handle blockers** - Mark items as Blocked with reason when cannot proceed (see references/blocking-workflow.md)
-7. **Verify completion** - Before exit, use `kanban_check_completion.py` to ensure all items are Done
+7. **Verify completion** - Before exit, use `eia_kanban_check_completion.py` to ensure all items are Done
 
 ### Checklist
 
@@ -58,17 +58,17 @@ Copy this checklist and track your progress:
 
 - [ ] Verify GitHub CLI authentication: `gh auth status`
 - [ ] Verify Projects V2 access for the repository
-- [ ] Query current board state: `python3 scripts/kanban_get_board_state.py OWNER REPO PROJECT_NUMBER`
+- [ ] Query current board state: `python3 scripts/eia_kanban_get_board_state.py OWNER REPO PROJECT_NUMBER`
 - [ ] Create module issues for new work (1 issue = 1 module)
 - [ ] Add issues to project board in Backlog column
 - [ ] Move ready issues from Backlog to Todo
 - [ ] Assign issues to responsible agents (issue assignee = agent)
 - [ ] Agent moves issue to In Progress when starting work
 - [ ] Agent creates PR linked to issue, moves to AI Review
-- [ ] Track card transitions using: `python3 scripts/kanban_move_card.py OWNER REPO PROJECT_NUMBER ISSUE_NUMBER NEW_STATUS`
+- [ ] Track card transitions using: `python3 scripts/eia_kanban_move_card.py OWNER REPO PROJECT_NUMBER ISSUE_NUMBER NEW_STATUS`
 - [ ] Handle any blockers: move to Blocked column with `--reason` flag
 - [ ] Resolve blockers and move back to previous status
-- [ ] Verify completion before exit: `python3 scripts/kanban_check_completion.py OWNER REPO PROJECT_NUMBER`
+- [ ] Verify completion before exit: `python3 scripts/eia_kanban_check_completion.py OWNER REPO PROJECT_NUMBER`
 - [ ] Ensure exit code is 0 (all items Done) before exiting
 
 ### When to Use This Skill
@@ -320,36 +320,36 @@ The `/create-issue-tasks` command creates Claude Tasks checklists for handling i
 
 ## Python Scripts
 
-### Get Board State ([scripts/kanban_get_board_state.py](scripts/kanban_get_board_state.py))
+### Get Board State ([scripts/eia_kanban_get_board_state.py](scripts/eia_kanban_get_board_state.py))
 
 Get complete board state with all items grouped by column.
 
 ```bash
-python3 scripts/kanban_get_board_state.py OWNER REPO PROJECT_NUMBER
+python3 scripts/eia_kanban_get_board_state.py OWNER REPO PROJECT_NUMBER
 ```
 
 **Output:** JSON with items grouped by status column.
 
 ---
 
-### Move Card ([scripts/kanban_move_card.py](scripts/kanban_move_card.py))
+### Move Card ([scripts/eia_kanban_move_card.py](scripts/eia_kanban_move_card.py))
 
 Move a card to a different column with validation.
 
 ```bash
-python3 scripts/kanban_move_card.py OWNER REPO PROJECT_NUMBER ISSUE_NUMBER NEW_STATUS [--reason "Reason"]
+python3 scripts/eia_kanban_move_card.py OWNER REPO PROJECT_NUMBER ISSUE_NUMBER NEW_STATUS [--reason "Reason"]
 ```
 
 **Validates:** Transition is allowed, preconditions met.
 
 ---
 
-### Check Completion ([scripts/kanban_check_completion.py](scripts/kanban_check_completion.py))
+### Check Completion ([scripts/eia_kanban_check_completion.py](scripts/eia_kanban_check_completion.py))
 
 Check if all board items are complete (for stop hook).
 
 ```bash
-python3 scripts/kanban_check_completion.py OWNER REPO PROJECT_NUMBER
+python3 scripts/eia_kanban_check_completion.py OWNER REPO PROJECT_NUMBER
 ```
 
 **Exit codes:**
@@ -379,9 +379,9 @@ github-kanban-core/
 ├── SKILL.md                              # This file (map/TOC)
 ├── README.md                             # Skill overview
 ├── scripts/
-│   ├── kanban_get_board_state.py         # Get full board state
-│   ├── kanban_move_card.py               # Move card between columns
-│   └── kanban_check_completion.py        # Check completion for stop hook
+│   ├── eia_kanban_get_board_state.py         # Get full board state
+│   ├── eia_kanban_move_card.py               # Move card between columns
+│   └── eia_kanban_check_completion.py        # Check completion for stop hook
 └── references/
     ├── kanban-as-truth.md                # Why Kanban is single source of truth
     ├── board-column-semantics.md         # Column meanings and requirements
@@ -403,7 +403,7 @@ github-kanban-core/
 
 ```bash
 # Get full board state with all items
-python3 scripts/kanban_get_board_state.py owner repo 1
+python3 scripts/eia_kanban_get_board_state.py owner repo 1
 
 # Output: JSON with items grouped by status column (Backlog, Todo, In Progress, etc.)
 ```
@@ -412,10 +412,10 @@ python3 scripts/kanban_get_board_state.py owner repo 1
 
 ```bash
 # Move issue #42 to In Progress
-python3 scripts/kanban_move_card.py owner repo 1 42 in-progress --reason "Starting work"
+python3 scripts/eia_kanban_move_card.py owner repo 1 42 in-progress --reason "Starting work"
 
 # Check if all items are complete (for stop hook)
-python3 scripts/kanban_check_completion.py owner repo 1
+python3 scripts/eia_kanban_check_completion.py owner repo 1
 # Exit code 0 = all done, 1 = items pending, 2 = blocked items exist
 ```
 
@@ -425,9 +425,9 @@ python3 scripts/kanban_check_completion.py owner repo 1
 
 | Output Type | Format | Description | When Generated |
 |-------------|--------|-------------|----------------|
-| **Board State JSON** | JSON object | All items grouped by status column | Via `kanban_get_board_state.py` |
-| **Transition Result** | JSON object | Success/failure of card move with validation | Via `kanban_move_card.py` |
-| **Completion Status** | Exit code + JSON | 0=all done, 1=pending, 2=blocked | Via `kanban_check_completion.py` |
+| **Board State JSON** | JSON object | All items grouped by status column | Via `eia_kanban_get_board_state.py` |
+| **Transition Result** | JSON object | Success/failure of card move with validation | Via `eia_kanban_move_card.py` |
+| **Completion Status** | Exit code + JSON | 0=all done, 1=pending, 2=blocked | Via `eia_kanban_check_completion.py` |
 | **Assignment Notification** | AI Maestro message | Agent receives work assignment | When issue assigned |
 | **GraphQL Query Results** | JSON object | Raw board data from GitHub API | Via reference queries |
 | **Blocker Report** | JSON object | All blocked items with reasons | When querying blocked items |

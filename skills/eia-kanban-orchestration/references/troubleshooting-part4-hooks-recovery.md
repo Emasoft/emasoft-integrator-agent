@@ -22,7 +22,7 @@
 **Diagnosis:**
 ```bash
 # Check what stop hook sees
-python3 scripts/kanban_check_completion.py OWNER REPO PROJECT_NUMBER
+python3 scripts/eia_kanban_check_completion.py OWNER REPO PROJECT_NUMBER
 ```
 
 **Cause:**

@@ -116,7 +116,7 @@ gh pr checks PR_NUMBER
 Run kanban sync regularly:
 
 ```bash
-python scripts/kanban_sync.py --owner OWNER --repo REPO --project NUMBER
+python scripts/eia_kanban_sync.py --owner OWNER --repo REPO --project NUMBER
 ```
 
 ### Respond to Blocked Items Promptly

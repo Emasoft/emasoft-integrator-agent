@@ -695,7 +695,7 @@ Recommendation: {suggested_next_step}
 
 ### 1.7.1 CI log analysis scripts
 
-**Script:** `atlas_diagnose_ci_failure.py`
+**Script:** `eia_diagnose_ci_failure.py`
 
 **Purpose:** Automated pattern detection in CI logs.
 
@@ -703,13 +703,13 @@ Recommendation: {suggested_next_step}
 
 ```bash
 # Basic analysis
-python scripts/atlas_diagnose_ci_failure.py --log-file /path/to/ci.log
+python scripts/eia_diagnose_ci_failure.py --log-file /path/to/ci.log
 
 # JSON output for structured analysis
-python scripts/atlas_diagnose_ci_failure.py --log-file /path/to/ci.log --json
+python scripts/eia_diagnose_ci_failure.py --log-file /path/to/ci.log --json
 
 # Specify runner OS for platform-specific checks
-python scripts/atlas_diagnose_ci_failure.py --log-file ci.log --os windows
+python scripts/eia_diagnose_ci_failure.py --log-file ci.log --os windows
 ```
 
 **Output interpretation:**
@@ -733,7 +733,7 @@ python scripts/atlas_diagnose_ci_failure.py --log-file ci.log --os windows
 
 ### 1.7.2 Platform issue detection scripts
 
-**Script:** `atlas_detect_platform_issue.py`
+**Script:** `eia_detect_platform_issue.py`
 
 **Purpose:** Scan codebase for potential platform-specific issues before CI runs.
 
@@ -741,13 +741,13 @@ python scripts/atlas_diagnose_ci_failure.py --log-file ci.log --os windows
 
 ```bash
 # Scan entire project
-python scripts/atlas_detect_platform_issue.py --path /path/to/project
+python scripts/eia_detect_platform_issue.py --path /path/to/project
 
 # Scan specific file
-python scripts/atlas_detect_platform_issue.py --path /path/to/file.py
+python scripts/eia_detect_platform_issue.py --path /path/to/file.py
 
 # Output as JSON
-python scripts/atlas_detect_platform_issue.py --path project/ --json
+python scripts/eia_detect_platform_issue.py --path project/ --json
 ```
 
 **Detection patterns:**
@@ -857,7 +857,7 @@ python scripts/atlas_detect_platform_issue.py --path project/ --json
 
 3. **Use automated analysis:**
    ```bash
-   python scripts/atlas_diagnose_ci_failure.py --log-file ci.log --json
+   python scripts/eia_diagnose_ci_failure.py --log-file ci.log --json
    ```
    The script scans the log and extracts relevant patterns automatically.
 

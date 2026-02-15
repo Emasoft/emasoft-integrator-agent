@@ -21,7 +21,7 @@
 - [Checklist for Proactive Monitoring](#checklist-for-proactive-monitoring)
 - [Related Operations](#related-operations)
 
-> **Note**: The `kanban_poll_changes.py` script referenced in this document is not yet implemented. Use `kanban_get_board_state.py` with periodic polling as a workaround.
+> **Note**: The `kanban_poll_changes.py` script referenced in this document is not yet implemented. Use `eia_kanban_get_board_state.py` with periodic polling as a workaround.
 
 ## Metadata
 

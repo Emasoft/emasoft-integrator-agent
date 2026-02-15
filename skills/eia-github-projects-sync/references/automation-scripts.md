@@ -18,7 +18,7 @@ github-projects-sync/
 ├── scripts/
 │   ├── sync_tasks.py           # Bulk issue creation
 │   ├── ci_webhook_handler.py   # Webhook receiver
-│   └── kanban_sync.py          # CI status sync
+│   └── eia_kanban_sync.py          # CI status sync
 └── ../shared/
     ├── thresholds.py           # Shared thresholds
     └── aimaestro_notify.py     # AI Maestro CLI wrapper
@@ -194,7 +194,7 @@ python scripts/ci_webhook_handler.py --test /tmp/test_payload.json
 
 See [ci-notification-setup.md](./ci-notification-setup.md) for complete setup instructions.
 
-## kanban_sync.py
+## eia_kanban_sync.py
 
 Synchronize all project issues with current CI/PR state.
 
@@ -209,7 +209,7 @@ Synchronize all project issues with current CI/PR state.
 ### Usage
 
 ```bash
-python scripts/kanban_sync.py --owner OWNER --repo REPO --project NUMBER
+python scripts/eia_kanban_sync.py --owner OWNER --repo REPO --project NUMBER
 ```
 
 ### Options
@@ -237,7 +237,7 @@ python scripts/kanban_sync.py --owner OWNER --repo REPO --project NUMBER
 ### Example Run
 
 ```bash
-python scripts/kanban_sync.py \
+python scripts/eia_kanban_sync.py \
   --owner myorg \
   --repo myrepo \
   --project 5 \

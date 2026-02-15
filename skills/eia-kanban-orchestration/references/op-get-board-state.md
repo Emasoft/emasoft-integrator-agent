@@ -54,7 +54,7 @@ Get the complete state of a GitHub Projects V2 board, including all items groupe
 ## Command
 
 ```bash
-python3 scripts/kanban_get_board_state.py OWNER REPO PROJECT_NUMBER
+python3 scripts/eia_kanban_get_board_state.py OWNER REPO PROJECT_NUMBER
 ```
 
 ## GraphQL Query

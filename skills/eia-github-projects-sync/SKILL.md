@@ -281,7 +281,7 @@ Read this when using the included Python automation scripts.
 - 11.1 When using skill automation scripts
 - 11.2 When bulk creating issues from task lists (sync_tasks.py)
 - 11.3 When receiving GitHub webhook events (ci_webhook_handler.py)
-- 11.4 When synchronizing project with CI status (kanban_sync.py)
+- 11.4 When synchronizing project with CI status (eia_kanban_sync.py)
 - 11.5 When configuring shared thresholds
 
 ---
@@ -379,7 +379,7 @@ github-projects-sync/
 ├── scripts/
 │   ├── sync_tasks.py                 # Bulk issue creation
 │   ├── ci_webhook_handler.py         # Webhook receiver
-│   └── kanban_sync.py                # CI status sync
+│   └── eia_kanban_sync.py                # CI status sync
 ├── references/
 │   ├── core-operations.md            # Day-to-day operations
 │   ├── graphql-queries-index.md      # GraphQL library index

@@ -54,7 +54,7 @@ Check if all items on the project board are complete (in Done column), used by s
 ## Command
 
 ```bash
-python3 scripts/kanban_check_completion.py OWNER REPO PROJECT_NUMBER
+python3 scripts/eia_kanban_check_completion.py OWNER REPO PROJECT_NUMBER
 ```
 
 ## Output
