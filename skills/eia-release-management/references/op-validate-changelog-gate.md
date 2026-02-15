@@ -194,13 +194,13 @@ Step 4: If changelog valid, create annotated git tag
 Step 5: Tag push triggers downstream release workflow
 ```
 
-The validation script (see `scripts/eia_validate_changelog.py`) can be called from any CI/CD system:
+Changelog validation is handled by the CPV plugin validator. Run it from the plugin root:
 
 ```bash
-python3 scripts/eia_validate_changelog.py "$VERSION"
+uv run --with pyyaml python scripts/validate_plugin.py . --verbose
 ```
 
-Exit code 0 means the changelog is valid. Exit code 1 means the changelog entry is missing. The script prints the extracted release notes on success, or a fix-instructions error message on failure.
+For standalone changelog extraction in a CI/CD pipeline, use the AWK command from section 2 above. Exit code 0 means the changelog is valid. Exit code 1 means the changelog entry is missing.
 
 ## 6. Troubleshooting Changelog Validation Failures
 
@@ -226,4 +226,4 @@ Exit code 0 means the changelog is valid. Exit code 1 means the changelog entry 
 
 **Cause**: Minimal container images may not include AWK.
 
-**Solution**: Use the Python validation script (`eia_validate_changelog.py`) instead, which has no external dependencies. Alternatively, install `gawk` or `mawk` in your container.
+**Solution**: Use the CPV plugin validator (`uv run --with pyyaml python scripts/validate_plugin.py . --verbose`) or install `gawk` or `mawk` in your container.

@@ -199,7 +199,7 @@ gh pr edit $PR_NUMBER --add-label "eia/changelog-passed"
 
 ### 5.2 Automated enforcement reference
 
-For automated CI enforcement, see the `eia-release-management` skill's `references/op-validate-changelog-gate.md`, which describes the `eia_validate_changelog.py` script. That script can be added as a required CI check.
+For automated CI enforcement, see the `eia-release-management` skill's `references/op-validate-changelog-gate.md`, which describes the changelog validation procedure. For plugin-level validation (including changelog checks), use the CPV plugin validator: `uv run --with pyyaml python scripts/validate_plugin.py . --verbose`.
 
 ---
 

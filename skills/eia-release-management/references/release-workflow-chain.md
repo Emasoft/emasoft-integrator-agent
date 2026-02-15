@@ -132,7 +132,10 @@ Before creating the tag, validate that CHANGELOG.md contains an entry for the ve
   if: steps.check.outputs.should_release == 'true'
   run: |
     VERSION="${{ steps.version.outputs.version }}"
-    python3 scripts/eia_validate_changelog.py "$VERSION"
+    # Changelog validation is handled by the CPV plugin validator.
+    # Use: uv run --with pyyaml python scripts/validate_plugin.py . --verbose
+    # For inline changelog extraction, see the AWK command in op-validate-changelog-gate.md section 2.
+    uv run --with pyyaml python scripts/validate_plugin.py . --verbose
 ```
 
 ### 2.4. Tag Creation to Trigger the Downstream Workflow
