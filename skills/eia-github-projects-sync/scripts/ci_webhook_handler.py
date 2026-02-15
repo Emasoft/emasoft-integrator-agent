@@ -12,28 +12,83 @@ Handles:
 - push (commits to watched branches)
 """
 
-import sys
-import os
-import json
-import hmac
 import hashlib
+import hmac
+import json
+import os
+import subprocess
+import tempfile
+from datetime import datetime, timezone
+from http.server import HTTPServer, BaseHTTPRequestHandler
 from pathlib import Path
 from typing import Any
-from http.server import HTTPServer, BaseHTTPRequestHandler
 
-SKILLS_DIR = Path(__file__).parent.parent.parent
-sys.path.insert(0, str(SKILLS_DIR / "shared"))
-from cross_platform import atomic_write_json, get_atlas_dir  # type: ignore[import-not-found]  # noqa: E402
-from aimaestro_notify import (  # type: ignore[import-not-found]  # noqa: E402
-    handle_github_webhook,
-    notify_ci_failure,
-    notify_task_blocked,
-)
 
 # Configuration
 WEBHOOK_SECRET = os.environ.get("GITHUB_WEBHOOK_SECRET", "")
 WATCHED_BRANCHES = {"main", "master", "develop"}
-LOG_DIR = get_atlas_dir() / "webhook_logs"
+EMASOFT_DIR = Path.cwd() / ".emasoft"
+LOG_DIR = EMASOFT_DIR / "webhook_logs"
+AIMAESTRO_API = os.environ.get("AIMAESTRO_API", "http://localhost:23000")
+
+
+def atomic_write_json(data: Any, path: Path) -> None:
+    """Write JSON atomically using a temp file and rename."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fd, tmp = tempfile.mkstemp(dir=str(path.parent), suffix=".tmp")
+    try:
+        with os.fdopen(fd, "w") as f:
+            json.dump(data, f, indent=2)
+        os.replace(tmp, str(path))
+    except BaseException:
+        os.unlink(tmp)
+        raise
+
+
+def _send_maestro_message(subject: str, message: str, priority: str = "normal") -> None:
+    """Send a notification via the AI Maestro REST API."""
+    payload = json.dumps({
+        "subject": subject,
+        "priority": priority,
+        "content": {"type": "notification", "message": message},
+    })
+    try:
+        subprocess.run(
+            ["curl", "-s", "-X", "POST", f"{AIMAESTRO_API}/api/messages",
+             "-H", "Content-Type: application/json", "-d", payload],
+            capture_output=True, timeout=10,
+        )
+    except (subprocess.TimeoutExpired, FileNotFoundError):
+        pass
+
+
+def handle_github_webhook(event_type: str, payload: dict[str, Any]) -> tuple[bool, str]:
+    """Process a GitHub webhook event and send AI Maestro notification."""
+    action = payload.get("action", "")
+    repo = payload.get("repository", {}).get("full_name", "unknown")
+    summary = f"{event_type}"
+    if action:
+        summary += f".{action}"
+    summary += f" on {repo}"
+    _send_maestro_message(f"GitHub: {event_type}", summary)
+    return True, summary
+
+
+def notify_ci_failure(workflow: str, run_id: str, branch: str, error_summary: str) -> None:
+    """Notify AI Maestro about a CI failure."""
+    _send_maestro_message(
+        f"CI Failure: {workflow}",
+        f"Workflow '{workflow}' (run {run_id}) failed on {branch}: {error_summary}",
+        priority="high",
+    )
+
+
+def notify_task_blocked(task_id: str, reason: str, issue_number: int | None = None) -> None:
+    """Notify AI Maestro about a blocked task."""
+    msg = f"Task {task_id} blocked: {reason}"
+    if issue_number:
+        msg += f" (issue #{issue_number})"
+    _send_maestro_message(f"Blocked: {task_id}", msg, priority="high")
 
 
 def verify_signature(payload: bytes, signature: str, secret: str) -> bool:
@@ -52,9 +107,7 @@ def log_webhook(event_type: str, payload: dict[str, Any], result: str) -> None:
     """Log webhook event for debugging."""
     LOG_DIR.mkdir(parents=True, exist_ok=True)
 
-    from datetime import datetime
-
-    timestamp = datetime.utcnow().strftime("%Y%m%d_%H%M%S")
+    timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
     log_file = LOG_DIR / f"{timestamp}_{event_type}.json"
 
     atomic_write_json(
@@ -99,7 +152,7 @@ class WebhookHandler(BaseHTTPRequestHandler):
             return
 
         # Handle event
-        success, message = handle_github_webhook(event_type, payload)
+        _, message = handle_github_webhook(event_type, payload)
 
         # Additional handling for specific events
         self._handle_additional_events(event_type, payload)
@@ -154,25 +207,15 @@ class WebhookHandler(BaseHTTPRequestHandler):
                 # Notify of push to watched branch
                 commits = payload.get("commits", [])
                 if commits:
-                    from aimaestro_notify import send_notification, Notification
-
-                    send_notification(
-                        Notification(
-                            type="ci_success",  # Using as generic notification
-                            priority="low",
-                            subject=f"Push to {branch}",
-                            message=f"{len(commits)} commit(s) pushed to {branch}",
-                            metadata={
-                                "branch": branch,
-                                "commits": [c.get("id")[:8] for c in commits[:5]],
-                                "pusher": payload.get("pusher", {}).get("name"),
-                            },
-                        )
+                    pusher = payload.get("pusher", {}).get("name", "unknown")
+                    _send_maestro_message(
+                        f"Push to {branch}",
+                        f"{len(commits)} commit(s) pushed to {branch} by {pusher}",
+                        priority="low",
                     )
 
-    def log_message(self, format: str, *args: object) -> None:
-        """Suppress default logging."""
-        pass
+    def log_message(self, format: str, *args: object) -> None:  # noqa: A002
+        """Suppress default logging — intentionally ignores all parameters."""
 
 
 def run_server(port: int = 9000) -> None:
